@@ -1,0 +1,68 @@
+C251 COMPILER V5.60.0,  test                                                               21/11/25  22:30:35  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE test
+OBJECT MODULE PLACED IN .\out_file\test.obj
+COMPILER INVOKED BY: D:\keil_5\C251\BIN\C251.EXE ..\user\test.c LARGE NOALIAS FLOAT64 WARNINGLEVEL(3) OPTIMIZE(0,SIZE) B
+                    -ROWSE INCDIR(..\..\libraries\zf_common;..\..\libraries\zf_components;..\..\libraries\zf_device;..\..\libraries\zf_driver
+                    -;..\user;..\code) DEBUG PRINT(.\out_file\test.lst) OBJECT(.\out_file\test.obj) 
+
+stmt  level    source
+
+    1          #include "zf_common_headfile.h"
+    2          float test_speed = 0;
+    3          void test(void)
+    4          {
+    5   1              static int test_time = 0;
+    6   1              test_time++;
+    7   1              Encoder_get();
+    8   1              if (test_time >= 4000)
+    9   1              {
+   10   2                      test_speed = 60;
+   11   2                      test_time = 0;
+   12   2              }
+   13   1              else if (test_time >= 3000)
+   14   1              {
+   15   2                      test_speed = -40;
+   16   2              }
+   17   1              else if (test_time >= 2000)
+   18   1              {
+   19   2                      test_speed = 18;
+   20   2              }
+   21   1              else if (test_time >= 1000)
+   22   1              {
+   23   2                      test_speed = 15;
+   24   2              }
+   25   1              else if (test_time >= 500)
+   26   1              {
+   27   2                      test_speed = 20;
+   28   2              }
+   29   1              left_motor = (int)PID_Calculate(&motors_pid.left_PID, test_speed, speed_l); // 速度最大值为110
+   30   1              right_motor = (int)PID_Calculate(&motors_pid.right_PID, test_speed, speed_r);
+   31   1              motor_output(left_motor, right_motor);
+   32   1      //      motor_output(-1000, -5000);
+   33   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       308     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =         6     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        16     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

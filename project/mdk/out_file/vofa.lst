@@ -1,0 +1,294 @@
+C251 COMPILER V5.60.0,  vofa                                                               21/11/25  22:32:01  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE vofa
+OBJECT MODULE PLACED IN .\out_file\vofa.obj
+COMPILER INVOKED BY: D:\keil_5\C251\BIN\C251.EXE ..\user\vofa.c LARGE NOALIAS FLOAT64 WARNINGLEVEL(3) OPTIMIZE(0,SIZE) B
+                    -ROWSE INCDIR(..\..\libraries\zf_common;..\..\libraries\zf_components;..\..\libraries\zf_device;..\..\libraries\zf_driver
+                    -;..\user;..\code) DEBUG PRINT(.\out_file\vofa.lst) OBJECT(.\out_file\vofa.obj) 
+
+stmt  level    source
+
+    1          #include "zf_common_headfile.h"
+    2          #include "vofa.h"
+    3          #include <stdlib.h>
+    4          
+    5          // VOFA 数据对象
+    6          static vofa_data_struct vofa_data;
+    7          
+    8          // 内部函数声明
+    9          static void vofa_parse_byte(uint8 dat);
+   10          
+   11          //-------------------------------------------------------------------------------------------------------
+             -------------
+   12          // 函数简介     VOFA+ 初始化
+   13          // 参数说明     void
+   14          // 返回参数     void
+   15          // 使用示例     vofa_init();
+   16          // 备注信息     初始化 VOFA 数据结构（无需额外操作，使用系统自带 FIFO）
+   17          //-------------------------------------------------------------------------------------------------------
+             -------------
+   18          void vofa_init(void)
+   19          {
+   20   1          uint8 i;
+   21   1      
+   22   1          // 清空缓冲区
+   23   1          for (i = 0; i < VOFA_BUFFER_SIZE; i++)
+   24   1          {
+   25   2              vofa_data.buffer[i] = 0;
+   26   2          }
+   27   1      
+   28   1          for (i = 0; i < VOFA_MAX_CMD_LEN; i++)
+   29   1          {
+   30   2              vofa_data.cmd_buffer[i] = 0;
+   31   2          }
+   32   1      
+   33   1          vofa_data.index = 0;
+   34   1          vofa_data.cmd_len = 0;
+   35   1          vofa_data.state = VOFA_PARSE_IDLE;
+   36   1      }
+   37          
+   38          //-------------------------------------------------------------------------------------------------------
+             -------------
+   39          // 函数简介     VOFA+ FireWater 协议从 FIFO 读取并解析数据
+   40          // 参数说明     void
+   41          // 返回参数     void
+   42          // 使用示例     vofa_parse_from_fifo();  // 在主循环中调用
+   43          // 备注信息     FireWater 协议: 以 '!' (0x21) 作为帧尾标识
+   44          //              直接使用 wireless_uart_read_buffer() 从 FIFO 读取数据
+   45          //-------------------------------------------------------------------------------------------------------
+             -------------
+   46          void vofa_parse_from_fifo(void)
+   47          {
+   48   1          uint8 dat;
+   49   1      
+   50   1          // 从 FIFO 读取数据（使用系统自带函数）
+   51   1          while (wireless_uart_read_buffer(&dat, 1) > 0)
+   52   1          {
+   53   2              vofa_parse_byte(dat);
+C251 COMPILER V5.60.0,  vofa                                                               21/11/25  22:32:01  PAGE 2   
+
+   54   2          }
+   55   1      }
+   56          
+   57          //-------------------------------------------------------------------------------------------------------
+             -------------
+   58          // 函数简介     VOFA+ FireWater 协议解析单个字节（内部函数）
+   59          // 参数说明     dat             接收到的字节数据
+   60          // 返回参数     void
+   61          // 使用示例     vofa_parse_byte(0x50);
+   62          // 备注信息     FireWater 协议: 以 '!' (0x21) 作为帧尾标识
+   63          //              例如: "PR=2.32!" 会被解析为完整命令
+   64          //-------------------------------------------------------------------------------------------------------
+             -------------
+   65          static void vofa_parse_byte(uint8 dat)
+   66          {
+   67   1          // 检测到帧尾标识 '!' (ASCII: 0x21 即十进制 33)
+   68   1          if (dat == '!' || dat == 0x21)
+   69   1          {
+   70   2              if (vofa_data.index > 0)
+   71   2              {
+   72   3                  // 添加字符串结束符
+   73   3                  vofa_data.buffer[vofa_data.index] = '\0';
+   74   3      
+   75   3                  // 复制到命令缓冲区
+   76   3                  memcpy(vofa_data.cmd_buffer, vofa_data.buffer, vofa_data.index + 1);
+   77   3                  vofa_data.cmd_len = vofa_data.index;
+   78   3      
+   79   3                  // 标记解析完成
+   80   3                  vofa_data.state = VOFA_PARSE_COMPLETE;
+   81   3      
+   82   3                  // 重置索引
+   83   3                  vofa_data.index = 0;
+   84   3              }
+   85   2          }
+   86   1          else
+   87   1          {
+   88   2              // 接收数据
+   89   2              if (vofa_data.index < VOFA_BUFFER_SIZE - 1)
+   90   2              {
+   91   3                  vofa_data.buffer[vofa_data.index++] = dat;
+   92   3                  vofa_data.state = VOFA_PARSE_RECEIVING;
+   93   3              }
+   94   2              else
+   95   2              {
+   96   3                  // 缓冲区溢出，重置
+   97   3                  vofa_data.index = 0;
+   98   3                  vofa_data.state = VOFA_PARSE_IDLE;
+   99   3              }
+  100   2          }
+  101   1      }
+  102          
+  103          //-------------------------------------------------------------------------------------------------------
+             -------------
+  104          // 函数简介     获取 VOFA+ 接收到的完整命令
+  105          // 参数说明     cmd_out         输出命令字符串的缓冲区
+  106          // 参数说明     max_len         缓冲区最大长度
+  107          // 返回参数     uint8           1-有新命令 0-无新命令
+  108          // 使用示例     char cmd[32];
+  109          //              if(vofa_get_command(cmd, 32)) {
+  110          //                  // 处理命令
+  111          //              }
+  112          // 备注信息     获取命令后会自动清除完成标志
+  113          //-------------------------------------------------------------------------------------------------------
+             -------------
+  114          uint8 vofa_get_command(char *cmd_out, uint8 max_len)
+  115          {
+C251 COMPILER V5.60.0,  vofa                                                               21/11/25  22:32:01  PAGE 3   
+
+  116   1          uint8 result = 0;
+  117   1      
+  118   1          if (vofa_data.state == VOFA_PARSE_COMPLETE)
+  119   1          {
+  120   2              // 复制命令
+  121   2              if (vofa_data.cmd_len < max_len)
+  122   2              {
+  123   3                  memcpy(cmd_out, vofa_data.cmd_buffer, vofa_data.cmd_len + 1);
+  124   3                  result = 1;
+  125   3              }
+  126   2      
+  127   2              // 清除完成标志
+  128   2              vofa_data.state = VOFA_PARSE_IDLE;
+  129   2              vofa_data.cmd_len = 0;
+  130   2          }
+  131   1      
+  132   1          return result;
+  133   1      }
+  134          
+  135          //-------------------------------------------------------------------------------------------------------
+             -------------
+  136          // 函数简介     清空 VOFA 接收缓冲区
+  137          // 参数说明     void
+  138          // 返回参数     void
+  139          // 使用示例     vofa_clear_buffer();
+  140          // 备注信息     在出现接收错误时可以调用此函数清空缓冲区
+  141          //-------------------------------------------------------------------------------------------------------
+             -------------
+  142          void vofa_clear_buffer(void)
+  143          {
+  144   1          vofa_data.index = 0;
+  145   1          vofa_data.cmd_len = 0;
+  146   1          vofa_data.state = VOFA_PARSE_IDLE;
+  147   1      }
+  148          
+  149          //-------------------------------------------------------------------------------------------------------
+             -------------
+  150          // 函数简介     VOFA+ FireWater 协议命令解析示例
+  151          // 参数说明     cmd             接收到的命令字符串
+  152          // 返回参数     void
+  153          // 使用示例     vofa_parse_command("PR=2.32");
+  154          // 备注信息     示例函数，展示如何解析不同格式的命令
+  155          //              格式1: "PR=2.32"  - 解析参数名和浮点数值
+  156          //              格式2: "SPEED=100" - 解析参数名和整数值
+  157          //              格式3: "START" - 单独的命令
+  158          //-------------------------------------------------------------------------------------------------------
+             -------------
+  159          void vofa_parse_command(char *cmd)
+  160          {
+  161   1          char *eq_pos;
+  162   1          char param_name[16];
+  163   1          float param_value;
+  164   1          uint8 name_len;
+  165   1          uint8 i;
+  166   1      
+  167   1          // 初始化变量
+  168   1          for (i = 0; i < 16; i++)
+  169   1          {
+  170   2              param_name[i] = 0;
+  171   2          }
+  172   1          param_value = 0.0;
+  173   1      
+  174   1          // 查找等号位置
+  175   1          eq_pos = strchr(cmd, '=');
+  176   1      
+  177   1          if (eq_pos != NULL)
+C251 COMPILER V5.60.0,  vofa                                                               21/11/25  22:32:01  PAGE 4   
+
+  178   1          {
+  179   2              // 有等号，说明是参数设置命令
+  180   2              name_len = (uint8)(eq_pos - cmd);
+  181   2      
+  182   2              if (name_len < 16)
+  183   2              {
+  184   3                  // 提取参数名
+  185   3                  memcpy(param_name, cmd, name_len);
+  186   3                  param_name[name_len] = '\0';
+  187   3      
+  188   3                  // 提取参数值
+  189   3                  param_value = atof(eq_pos + 1);
+  190   3      
+  191   3                  // 根据参数名执行不同操作
+  192   3                  if (strcmp(param_name, "PR") == 0)
+  193   3                  {
+  194   4                      // 处理 PR 参数
+  195   4                      printf("Received PR = %.2f\n", param_value);
+  196   4                      // 在这里添加你的处理代码
+  197   4                  }
+  198   3                  else if (strcmp(param_name, "SPEED") == 0)
+  199   3                  {
+  200   4                      // 处理 SPEED 参数
+  201   4                      printf("Received SPEED = %.2f\n", param_value);
+  202   4                  }
+  203   3                  else if (strcmp(param_name, "KP") == 0)
+  204   3                  {
+  205   4                      // 处理 KP 参数（PID参数）
+  206   4                      printf("Received KP = %.2f\n", param_value);
+  207   4                  }
+  208   3                  else if (strcmp(param_name, "KI") == 0)
+  209   3                  {
+  210   4                      // 处理 KI 参数
+  211   4                      printf("Received KI = %.2f\n", param_value);
+  212   4                  }
+  213   3                  else if (strcmp(param_name, "KD") == 0)
+  214   3                  {
+  215   4                      // 处理 KD 参数
+  216   4                      printf("Received KD = %.2f\n", param_value);
+  217   4                  }
+  218   3              }
+  219   2          }
+  220   1          else
+  221   1          {
+  222   2              // 无等号，说明是单独的命令
+  223   2              if (strcmp(cmd, "START") == 0)
+  224   2              {
+  225   3                  printf("Received START command\n");
+  226   3                  // 执行启动操作
+  227   3              }
+  228   2              else if (strcmp(cmd, "STOP") == 0)
+  229   2              {
+  230   3                  printf("Received STOP command\n");
+  231   3                  // 执行停止操作
+  232   3              }
+  233   2              else if (strcmp(cmd, "RESET") == 0)
+  234   2              {
+  235   3                  printf("Received RESET command\n");
+  236   3                  // 执行复位操作
+  237   3              }
+  238   2          }
+  239   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =      1176     ------
+C251 COMPILER V5.60.0,  vofa                                                               21/11/25  22:32:01  PAGE 5   
+
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =       139     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =       209     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

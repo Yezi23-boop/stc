@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "zf_common_headfile.h": "c",
+        "AI8051u_32bit.h": "c"
+    },
+    "files.exclude": {
+        "**/seekfree.uvproj": true,
+        "**/seekfree.uvopt": true,
+        "**/seekfree.uvgui.TWO": true,
+        "**/seekfree.uvgui.ye": true,
+        "**/MDK删除临时文件.bat": true
+    }
+}

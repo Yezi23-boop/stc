@@ -1,0 +1,204 @@
+C251 COMPILER V5.60.0,  ADC                                                                21/11/25  22:30:34  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE ADC
+OBJECT MODULE PLACED IN .\out_file\ADC.obj
+COMPILER INVOKED BY: D:\keil_5\C251\BIN\C251.EXE ..\user\ADC.c LARGE NOALIAS FLOAT64 WARNINGLEVEL(3) OPTIMIZE(0,SIZE) BR
+                    -OWSE INCDIR(..\..\libraries\zf_common;..\..\libraries\zf_components;..\..\libraries\zf_device;..\..\libraries\zf_driver;
+                    -..\user;..\code) DEBUG PRINT(.\out_file\ADC.lst) OBJECT(.\out_file\ADC.obj) 
+
+stmt  level    source
+
+    1          #include "zf_common_headfile.h"
+    2          #include "math.h"
+    3          #define AD_VAL_MAX 4000 // µç¸Ð×î´óÖµÉÏÏÞ
+    4          #define NUM 4           // µç¸ÐÊýÁ¿4
+    5          #define SORT_LENGTH 4   // ÅÅÐòÊý×é³¤¶È
+    6          
+    7          /*********************************************
+    8                       µç¸ÐÅÅ²¼
+    9                        Îåµç¸Ð
+   10          
+   11              ¡ª     l       l     ¡ª
+   12          
+   13             ad1   ad2     ad3   ad4
+   14          
+   15           *********************************************/
+   16          float AD_value[NUM][SORT_LENGTH] = {{0}};                                      // ´æ´¢µç¸ÐÔ­Ê¼ÖµµÄ¶þÎ¬Êý×
+             -é
+   17          float adtemp;                                                                  // ÅÅÐòÁÙÊ±±äÁ¿
+   18          float ad_sum[NUM] = {0};                                                       // µç¸ÐÖµÇóºÍ
+   19          float ad_ave[NUM] = {0};                                                       // µç¸ÐÖµÆ½¾ùÖµ
+   20          float AD_V[NUM], AD_last[NUM] = {0};                                           // µç¸ÐÖµ´¦ÀíºóµÄ½á¹û
+   21          float RAW[NUM];                                                                // µç¸ÐÔ­Ê¼Öµ
+   22          float ad1 = 0;                                                                 // µÚ1¸öµç¸ÐÖµ£¨¹éÒ»»¯ºó£©
+   23          float ad2 = 0;                                                                 // µÚ2¸öµç¸ÐÖµ£¨¹éÒ»»¯ºó£©
+   24          float ad3 = 0;                                                                 // µÚ6¸öµç¸ÐÖµ£¨¹éÒ»»¯ºó£©
+   25          float ad4 = 0;                                                                 // µÚ7¸öµç¸ÐÖµ£¨¹éÒ»»¯ºó£©
+   26          float MAX[NUM] = {AD_VAL_MAX, AD_VAL_MAX, AD_VAL_MAX, AD_VAL_MAX}; // ¸÷µç¸Ð×î´óÖµ
+   27          float MA[NUM] = {0};                                                           // É¨Ãè¼ÇÂ¼µÄ×î´óÖµ
+   28          int Err = 0;                                                                 // µ±Ç°Æ«²îÖµ
+   29          float Err_tow = 0;                                                             // Ë«µç¸ÐÆ«²îÖµ
+   30          int limit = 100;                                                               // Æ«²îÏÞ·ù
+   31          float left = 0;                                                                // ×ó²àµç¸ÐºÍ
+   32          float right = 0;                                                               // ÓÒ²àµç¸ÐºÍ
+   33          float diff = 1;                                                                // ×óÓÒµç¸Ð²îÒìÏµÊý
+   34          void dispose(void)
+   35          {
+   36   1          // ·½Ê½Ò»
+   37   1      //    diff = func_abs((ad2 - ad3) / Err_diff) + 1;
+   38   1          Err = (int)(diff * limit * (sqrt(ad1 * ad1 + ad2 * ad2) - sqrt(ad4 * ad4 + ad3 * ad3)) / (sqrt(ad1 * 
+             -ad1 + ad2 * ad2) + sqrt(ad4 * ad4 + ad3 * ad3)));
+   39   1      
+   40   1          // ·½Ê½¶þ
+   41   1          // left = Err_diff * ad1 + (1 - Err_diff) * ad2;
+   42   1          // right = Err_diff * ad4 + (1 - Err_diff) * ad3;
+   43   1          // Err_tow = limit * (left - right) / (left + right);
+   44   1          Err_tow = limit * (A_1 * (ad1 - ad4) + B_1 * (ad2 - ad3)) / (A_1 * (ad1 + ad4) + C_l * func_abs(ad2 -
+             - ad3));
+   45   1      }
+   46          
+   47          /**
+   48           * @brief É¨ÃèÈüµÀ»ñÈ¡µç¸Ð×î´óÖµ
+   49           * @details »ñÈ¡¸÷¸öµç¸ÐµÄµ±Ç°Öµ£¬²¢¸üÐÂ¼ÇÂ¼µÄ×î´óÖµ
+   50           * @note ÓÃÓÚµç¸Ð±ê¶¨ºÍ¹éÒ»»¯¼ÆËãµÄ²Î¿¼Öµ
+   51           */
+   52          void scan_track_max_value(void)
+   53          {
+   54   1          int i = 0;
+C251 COMPILER V5.60.0,  ADC                                                                21/11/25  22:30:34  PAGE 2   
+
+   55   1          RAW[0] = adc_convert(ADC_CH1_P11);  // ¶ÁÈ¡µÚ1¸öµç¸ÐADÖµ
+   56   1          RAW[1] = adc_convert(ADC_CH0_P10);  // ¶ÁÈ¡µÚ2¸öµç¸ÐADÖµ
+   57   1          RAW[2] = adc_convert(ADC_CH8_P00);  // ¶ÁÈ¡µÚ6¸öµç¸ÐADÖµ
+   58   1          RAW[3] = adc_convert(ADC_CH9_P01); // ¶ÁÈ¡µÚ7¸öµç¸ÐADÖµ
+   59   1      
+   60   1          for (i = 0; i < NUM; i++)
+   61   1          {
+   62   2              // Èç¹ûµ±Ç°Öµ´óÓÚ¼ÇÂ¼µÄ×î´óÖµ£¬Ôò¸üÐÂ×î´óÖµ
+   63   2              if (RAW[i] > MA[i])
+   64   2              {
+   65   3                  MA[i] = RAW[i];
+   66   3              }
+   67   2          }
+   68   1      }
+   69          
+   70          /**
+   71           * @brief ¶ÁÈ¡²¢´¦Àíµç¸ÐÊý¾Ý
+   72           * @details ¶à´Î²ÉÑù²¢ÅÅÐòÂË²¨£¬¶Ôµç¸ÐÖµ½øÐÐ¹éÒ»»¯´¦Àí²¢¼ÆËãÆ«²î
+   73           * @note ºËÐÄµç¸Ð´¦Àíº¯Êý£¬ÓÃÓÚÈüµÀÊ¶±ðºÍÑ­¼£¿ØÖÆ
+   74           */
+   75          void read_AD(void)
+   76          {
+   77   1          int i, j, k;
+   78   1          float AD_ONE[NUM] = {0.0}; // ¹éÒ»»¯ºóµÄµç¸ÐÖµ£¨0-100£©
+   79   1          int min_idx = 0;
+   80   1      
+   81   1          // 1. ¶à´Î²ÉÑùµç¸ÐÖµ
+   82   1          for (i = 0; i < SORT_LENGTH; i++)
+   83   1          {
+   84   2              AD_value[0][i] = adc_convert(ADC_CH1_P11);  // ²É¼¯µÚ1¸öµç¸Ð
+   85   2              AD_value[1][i] = adc_convert(ADC_CH0_P10);  // ²É¼¯µÚ2¸öµç¸Ð
+   86   2              AD_value[2][i] = adc_convert(ADC_CH8_P00);  // ²É¼¯µÚ6¸öµç¸Ð
+   87   2              AD_value[3][i] = adc_convert(ADC_CH9_P01); // ²É¼¯µÚ7¸öµç¸Ð
+   88   2          }
+   89   1      
+   90   1          // 2. ¶ÔÃ¿¸öµç¸ÐµÄ²ÉÑùÖµ½øÐÐÅÅÐò£¨Ñ¡ÔñÅÅÐòËã·¨£©
+   91   1          for (i = 0; i < NUM; i++)
+   92   1          {
+   93   2              for (j = 0; j < SORT_LENGTH - 1; j++)
+   94   2              {
+   95   3                  min_idx = j;
+   96   3                  for (k = j + 1; k < SORT_LENGTH; k++)
+   97   3                  {
+   98   4                      if (AD_value[i][k] < AD_value[i][min_idx])
+   99   4                      {
+  100   5                          min_idx = k;
+  101   5                      }
+  102   4                  }
+  103   3                  if (min_idx != j)
+  104   3                  {
+  105   4                      adtemp = AD_value[i][j];
+  106   4                      AD_value[i][j] = AD_value[i][min_idx];
+  107   4                      AD_value[i][min_idx] = adtemp;
+  108   4                  }
+  109   3              }
+  110   2      
+  111   2              // 3. ÖÐÖµ¼ÆËã - ÓÉÓÚÊý×é³¤¶ÈÎª4£¬È¡ÖÐ¼äÁ½¸öÖµ(ÏÂ±ê1ºÍ2)µÄÆ½¾ùÖµ
+  112   2              ad_sum[i] = AD_value[i][1] + AD_value[i][2];
+  113   2              ad_ave[i] = ad_sum[i] / 2;
+  114   2              AD_value[i][SORT_LENGTH - 1] = ad_ave[i];
+  115   2          }
+  116   1      
+  117   1          memset(ad_sum, 0, sizeof(ad_sum));
+  118   1      
+  119   1          // 4. ¼ÆËãÃ¿¸öµç¸ÐµÄ×îÖÕÖµ²¢ÏÞ·ù
+  120   1          for (i = 0; i < NUM; i++)
+C251 COMPILER V5.60.0,  ADC                                                                21/11/25  22:30:34  PAGE 3   
+
+  121   1          {
+  122   2              for (j = 0; j < SORT_LENGTH; j++)
+  123   2              {
+  124   3                  ad_sum[i] += AD_value[i][j];
+  125   3              }
+  126   2              AD_V[i] = ad_sum[i] / SORT_LENGTH; // ÇóÆ½¾ùÖµ
+  127   2              RAW[i] = AD_V[i];                  // ±£´æÔ­Ê¼ADÖµ
+  128   2              if (AD_V[i] > MAX[i])              // ÏÞ·ù´¦Àí
+  129   2              {
+  130   3                  AD_V[i] = MAX[i];
+  131   3              }
+  132   2          }
+  133   1      
+  134   1          // 5. ¹éÒ»»¯´¦Àí£¨×ª»»Îª0-100·¶Î§£©
+  135   1          for (i = 0; i < NUM; i++)
+  136   1          {
+  137   2              AD_ONE[i] = (100 * AD_V[i] / MAX[i]);
+  138   2          }
+  139   1      
+  140   1          // 6. ½«´¦ÀíºóµÄÖµ¸³¸ø¸÷¸öµç¸Ð±äÁ¿
+  141   1          ad1 = AD_ONE[0];
+  142   1          ad2 = AD_ONE[1];
+  143   1          ad3 = AD_ONE[2];
+  144   1          ad4 = AD_ONE[3];
+  145   1          dispose(); // ´¦Àíµç¸ÐÊý¾Ý£¬¼ÆËãÆ«²îÖµ
+  146   1      }
+  147          float dianya=0;
+  148          void dianya_adc(void)
+  149          {
+  150   1      static int32 dianya_count=0;
+  151   1      dianya=adc_convert(ADC_CH13_P05)* 0.0092;
+  152   1      pwm_set_duty(PWMA_CH4N_P07, 0);
+  153   1      if(dianya<7.6)
+  154   1      {
+  155   2      dianya_count++;
+  156   2      }
+  157   1      if(dianya_count> 2000)
+  158   1      {
+  159   2              dianya_count=0;
+  160   2              pwm_set_duty(PWMA_CH4N_P07, 3000);
+  161   2      }
+  162   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =      2614     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =       250     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =       294     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,309 @@
+C251 COMPILER V5.60.0,  zf_device_ble6a20                                                  21/11/25  20:49:00  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE zf_device_ble6a20
+OBJECT MODULE PLACED IN .\out_file\zf_device_ble6a20.obj
+COMPILER INVOKED BY: D:\keil_5\C251\BIN\C251.EXE ..\..\libraries\zf_device\zf_device_ble6a20.c LARGE NOALIAS FLOAT64 WAR
+                    -NINGLEVEL(3) OPTIMIZE(0,SIZE) BROWSE INCDIR(..\..\libraries\zf_common;..\..\libraries\zf_components;..\..\libraries\zf_d
+                    -evice;..\..\libraries\zf_driver;..\user;..\code) DEBUG PRINT(.\out_file\zf_device_ble6a20.lst) OBJECT(.\out_file\zf_devi
+                    -ce_ble6a20.obj) 
+
+stmt  level    source
+
+    1          /********************************************************************************************************
+             -*************
+    2          * AI8051U Opensourec Library ¼´£¨AI8051U ¿ªÔ´¿â£©ÊÇÒ»¸ö»ùÓÚ¹Ù·½ SDK ½Ó¿ÚµÄµÚÈý·½¿ªÔ´¿â
+    3          * Copyright (c) 2022 SEEKFREE Öð·É¿Æ¼¼
+    4          *
+    5          * ±¾ÎÄ¼þÊÇSTC ¿ªÔ´¿âµÄÒ»²¿·Ö
+    6          *
+    7          * AI8051U ¿ªÔ´¿â ÊÇÃâ·ÑÈí¼þ
+    8          * Äú¿ÉÒÔ¸ù¾Ý×ÔÓÉÈí¼þ»ù½ð»á·¢²¼µÄ GPL£¨GNU General Public License£¬¼´ GNUÍ¨ÓÃ¹«¹²Ðí¿ÉÖ¤£©µÄÌõ¿î
+    9          * ¼´ GPL µÄµÚ3°æ£¨¼´ GPL3.0£©»ò£¨ÄúÑ¡ÔñµÄ£©ÈÎºÎºóÀ´µÄ°æ±¾£¬ÖØÐÂ·¢²¼ºÍ/»òÐÞ¸ÄËü
+   10          *
+   11          * ±¾¿ªÔ´¿âµÄ·¢²¼ÊÇÏ£ÍûËüÄÜ·¢»Ó×÷ÓÃ£¬µ«²¢Î´¶ÔÆä×÷ÈÎºÎµÄ±£Ö¤
+   12          * ÉõÖÁÃ»ÓÐÒþº¬µÄÊÊÏúÐÔ»òÊÊºÏÌØ¶¨ÓÃÍ¾µÄ±£Ö¤
+   13          * ¸ü¶àÏ¸½ÚÇë²Î¼û GPL
+   14          *
+   15          * ÄúÓ¦¸ÃÔÚÊÕµ½±¾¿ªÔ´¿âµÄÍ¬Ê±ÊÕµ½Ò»·Ý GPL µÄ¸±±¾
+   16          * Èç¹ûÃ»ÓÐ£¬Çë²ÎÔÄ<https://www.gnu.org/licenses/>
+   17          *
+   18          * ¶îÍâ×¢Ã÷£º
+   19          * ±¾¿ªÔ´¿âÊ¹ÓÃ GPL3.0 ¿ªÔ´Ðí¿ÉÖ¤Ð­Òé ÒÔÉÏÐí¿ÉÉêÃ÷ÎªÒëÎÄ°æ±¾
+   20          * Ðí¿ÉÉêÃ÷Ó¢ÎÄ°æÔÚ libraries/doc ÎÄ¼þ¼ÐÏÂµÄ GPL3_permission_statement.txt ÎÄ¼þÖÐ
+   21          * Ðí¿ÉÖ¤¸±±¾ÔÚ libraries ÎÄ¼þ¼ÐÏÂ ¼´¸ÃÎÄ¼þ¼ÐÏÂµÄ LICENSE ÎÄ¼þ
+   22          * »¶Ó­¸÷Î»Ê¹ÓÃ²¢´«²¥±¾³ÌÐò µ«ÐÞ¸ÄÄÚÈÝÊ±±ØÐë±£ÁôÖð·É¿Æ¼¼µÄ°æÈ¨ÉùÃ÷£¨¼´±¾ÉùÃ÷£©
+   23          *
+   24          * ÎÄ¼þÃû³Æ          
+   25          * ¹«Ë¾Ãû³Æ          ³É¶¼Öð·É¿Æ¼¼ÓÐÏÞ¹«Ë¾
+   26          * °æ±¾ÐÅÏ¢          ²é¿´ libraries/doc ÎÄ¼þ¼ÐÄÚ version ÎÄ¼þ °æ±¾ËµÃ÷
+   27          * ¿ª·¢»·¾³          MDK FOR C251
+   28          * ÊÊÓÃÆ½Ì¨          AI8051U
+   29          * µêÆÌÁ´½Ó          https://seekfree.taobao.com/
+   30          *
+   31          * ÐÞ¸Ä¼ÇÂ¼
+   32          * ÈÕÆÚ              ×÷Õß           ±¸×¢
+   33          * 2024-08-01        ´óW            first version
+   34          *********************************************************************************************************
+             -***********/
+   35          /********************************************************************************************************
+             -*************
+   36          * ½ÓÏß¶¨Òå£º
+   37          *                   ------------------------------------
+   38          *                   Ä£¿é¹Ü½Å            µ¥Æ¬»ú¹Ü½Å
+   39          *                   RX                  ²é¿´ zf_device_wireless_ble6a20.h ÖÐ BLE6A20_RX_PIN  ºê¶¨Òå
+   40          *                   TX                  ²é¿´ zf_device_wireless_ble6a20.h ÖÐ BLE6A20_TX_PIN  ºê¶¨Òå
+   41          *                   RTS                 ²é¿´ zf_device_wireless_ble6a20.h ÖÐ BLE6A20_RTS_PIN ºê¶¨Òå
+   42          *                   VCC                 3.3VµçÔ´
+   43          *                   GND                 µçÔ´µØ
+   44          *                   ÆäÓàÒý½ÅÐü¿Õ
+   45          *                   ------------------------------------
+   46          *********************************************************************************************************
+             -************/
+   47          
+   48          #include "zf_device_ble6a20.h"
+   49          #include "zf_common_clock.h"
+   50          #include "zf_common_debug.h"
+   51          #include "zf_common_fifo.h"
+   52          #include "zf_driver_delay.h"
+C251 COMPILER V5.60.0,  zf_device_ble6a20                                                  21/11/25  20:49:00  PAGE 2   
+
+   53          #include "zf_driver_gpio.h"
+   54          #include "zf_driver_uart.h"
+   55          #include "zf_device_type.h"
+   56          
+   57          #pragma warning disable = 183
+   58          #pragma warning disable = 177
+   59          
+   60          static  fifo_struct                                     ble6a20_fifo;
+   61          static  uint8                                           ble6a20_buffer[BLE6A20_BUFFER_SIZE];
+   62          
+   63          
+   64          
+   65          
+   66          //-------------------------------------------------------------------------------------------------------
+             -------------
+   67          // º¯Êý¼ò½é     À¶ÑÀ×ª´®¿ÚÄ£¿é ·¢ËÍÊý¾Ý
+   68          // ²ÎÊýËµÃ÷     data            8bit Êý¾Ý
+   69          // ·µ»Ø²ÎÊý     uint32          Ê£Óà·¢ËÍ³¤¶È 0-·¢ËÍÍê±Ï 1-Î´·¢ËÍÍê³É
+   70          // Ê¹ÓÃÊ¾Àý     ble6a20_send_byte(data);
+   71          // ±¸×¢ÐÅÏ¢
+   72          //-------------------------------------------------------------------------------------------------------
+             -------------
+   73          uint32 ble6a20_send_byte (const uint8 dat)
+   74          {
+   75   1          uint16 time_count = BLE6A20_TIMEOUT_COUNT;
+   76   1          
+   77   1          while(time_count)
+   78   1          {
+   79   2              if(!gpio_get_level(BLE6A20_RTS_PIN))
+   80   2              {
+   81   3                  uart_write_byte(BLE6A20_INDEX, dat);                         // ·¢ËÍÊý¾Ý
+   82   3                  break;
+   83   3              }
+   84   2              
+   85   2              time_count --;
+   86   2              system_delay_ms(1);
+   87   2          }
+   88   1          
+   89   1          return (0 == time_count);
+   90   1      }
+   91          
+   92          //-------------------------------------------------------------------------------------------------------
+             -------------
+   93          // º¯Êý¼ò½é     À¶ÑÀ×ª´®¿ÚÄ£¿é ·¢ËÍÊý¾Ý¿é
+   94          // ²ÎÊýËµÃ÷     *buff           ·¢ËÍ»º³åÇø
+   95          // ²ÎÊýËµÃ÷     len             ·¢ËÍÊý¾Ý³¤¶È
+   96          // ·µ»Ø²ÎÊý     uint32          Ê£Óà·¢ËÍ³¤¶È
+   97          // Ê¹ÓÃÊ¾Àý     ble6a20_send_buffer(buff, 64);
+   98          // ±¸×¢ÐÅÏ¢
+   99          //-------------------------------------------------------------------------------------------------------
+             -------------
+  100          uint32 ble6a20_send_buffer (const uint8 *buff, uint32 len)
+  101          {
+  102   1          uint16 time_count = 0;
+  103   1          //zf_assert(NULL != buff);
+  104   1          
+  105   1          while(0 != len)
+  106   1          {
+  107   2              if(!gpio_get_level(BLE6A20_RTS_PIN))                              // Èç¹ûRTSÎªµÍµçÆ½ Ôò¼ÌÐø·¢ËÍÊý
+             -¾Ý
+  108   2              {
+  109   3                  if(30 <= len)                                                       // Êý¾Ý·Ö 30byte Ã¿°ü·¢ËÍ
+  110   3                  {
+  111   4                      uart_write_buffer(BLE6A20_INDEX, buff, 30);               // ·¢ËÍÊý¾Ý
+  112   4                      buff += 30;                                                     // µØÖ·Æ«ÒÆ
+  113   4                      len -= 30;                                                      // ÊýÁ¿
+C251 COMPILER V5.60.0,  zf_device_ble6a20                                                  21/11/25  20:49:00  PAGE 3   
+
+  114   4                      time_count = 0;
+  115   4                  }
+  116   3                  else                                                                // ²»×ã 30byte µÄÊý¾ÝÒ»´Î
+             -ÐÔ·¢ËÍÍê±Ï
+  117   3                  {
+  118   4                      uart_write_buffer(BLE6A20_INDEX, buff, (uint16)len);              // ·¢ËÍÊý¾Ý
+  119   4                      len = 0;
+  120   4                      break;
+  121   4                  }
+  122   3              }
+  123   2              else                                                                    // Èç¹ûRTSÎª¸ßµçÆ½ ÔòÄ£¿é
+             -Ã¦
+  124   2              {
+  125   3                  if(BLE6A20_TIMEOUT_COUNT <= (++ time_count))                  // ³¬³öÁË×î´óµÈ´ýÊ±¼ä
+  126   3                  {
+  127   4                      break;                                                          // ÍË³ö·¢ËÍ
+  128   4                  }
+  129   3                  
+  130   3                  system_delay_ms(1);
+  131   3              }
+  132   2          }
+  133   1          
+  134   1          return len;
+  135   1      }
+  136          
+  137          //-------------------------------------------------------------------------------------------------------
+             -------------
+  138          // º¯Êý¼ò½é     À¶ÑÀ×ª´®¿ÚÄ£¿é ·¢ËÍ×Ö·û´®
+  139          // ²ÎÊýËµÃ÷     *str            Òª·¢ËÍµÄ×Ö·û´®µØÖ·
+  140          // ·µ»Ø²ÎÊý     uint32          Ê£Óà·¢ËÍ³¤¶È
+  141          // Ê¹ÓÃÊ¾Àý     ble6a20_send_string("Believe in yourself.");
+  142          // ±¸×¢ÐÅÏ¢
+  143          //-------------------------------------------------------------------------------------------------------
+             -------------
+  144          uint32 ble6a20_send_string (const char *str)
+  145          {
+  146   1          uint16 time_count = 0;
+  147   1          uint32 len = strlen(str);
+  148   1          uint8 temp[128] = {0};
+  149   1          //zf_assert(NULL != str);
+  150   1          
+  151   1          while(0 != len)
+  152   1          {
+  153   2              if(!gpio_get_level(BLE6A20_RTS_PIN))                              // Èç¹ûRTSÎªµÍµçÆ½ Ôò¼ÌÐø·¢ËÍÊý
+             -¾Ý
+  154   2              {
+  155   3                  if(128 <= len)                                                       // Êý¾Ý·Ö 128byte Ã¿°ü·¢
+             -ËÍ
+  156   3                  {
+  157   4                      memcpy(temp, str, 128);
+  158   4                      uart_write_buffer(BLE6A20_INDEX, temp, 128); // ·¢ËÍÊý¾Ý
+  159   4                      str += 128;                                                      // µØÖ·Æ«ÒÆ
+  160   4                      len -= 128;                                                      // ÊýÁ¿
+  161   4                      time_count = 0;
+  162   4                  }
+  163   3                  else                                                                // ²»×ã 128byte µÄÊý¾ÝÒ»´
+             -ÎÐÔ·¢ËÍÍê±Ï
+  164   3                  {
+  165   4                      memcpy(temp, str, (uint16)len);
+  166   4                      uart_write_buffer(BLE6A20_INDEX, temp, (uint16)len);// ·¢ËÍÊý¾Ý
+  167   4                      len = 0;
+  168   4                      break;
+  169   4                  }
+  170   3              }
+  171   2              else                                                                    // Èç¹ûRTSÎª¸ßµçÆ½ ÔòÄ£¿é
+             -Ã¦
+C251 COMPILER V5.60.0,  zf_device_ble6a20                                                  21/11/25  20:49:00  PAGE 4   
+
+  172   2              {
+  173   3                  if(BLE6A20_TIMEOUT_COUNT <= (++ time_count))                  // ³¬³öÁË×î´óµÈ´ýÊ±¼ä
+  174   3                  {
+  175   4                      break;                                                          // ÍË³ö·¢ËÍ
+  176   4                  }
+  177   3                  
+  178   3                  system_delay_ms(1);
+  179   3              }
+  180   2          }
+  181   1          
+  182   1          return len;
+  183   1      }
+  184          
+  185          
+  186          //-------------------------------------------------------------------------------------------------------
+             -------------
+  187          // º¯Êý¼ò½é     À¶ÑÀ×ª´®¿ÚÄ£¿é ¶ÁÈ¡»º³å
+  188          // ²ÎÊýËµÃ÷     *buff           ½ÓÊÕ»º³åÇø
+  189          // ²ÎÊýËµÃ÷     len             ¶ÁÈ¡Êý¾Ý³¤¶È
+  190          // ·µ»Ø²ÎÊý     uint32          Êµ¼Ê¶ÁÈ¡Êý¾Ý³¤¶È
+  191          // Ê¹ÓÃÊ¾Àý     ble6a20_read_buffer(buff, 32);
+  192          // ±¸×¢ÐÅÏ¢
+  193          //-------------------------------------------------------------------------------------------------------
+             -------------
+  194          uint32 ble6a20_read_buffer (uint8 *buff, uint32 len)
+  195          {
+  196   1          uint32 data_len = len;
+  197   1          //zf_assert(NULL != buff);
+  198   1          fifo_read_buffer(&ble6a20_fifo, buff, &data_len, FIFO_READ_AND_CLEAN);
+  199   1          return data_len;
+  200   1      }
+  201          
+  202          //-------------------------------------------------------------------------------------------------------
+             -------------
+  203          // º¯Êý¼ò½é     À¶ÑÀ×ª´®¿ÚÄ£¿é ´®¿ÚÖÐ¶Ï»Øµ÷º¯Êý
+  204          // ²ÎÊýËµÃ÷     void
+  205          // ·µ»Ø²ÎÊý     void
+  206          // Ê¹ÓÃÊ¾Àý     ble6a20_callback();
+  207          // ±¸×¢ÐÅÏ¢     ¸Ãº¯ÊýÔÚ ISR ÎÄ¼þ ´®¿ÚÖÐ¶Ï³ÌÐò±»µ÷ÓÃ
+  208          //              ÓÉ´®¿ÚÖÐ¶Ï·þÎñº¯Êýµ÷ÓÃ wireless_module_uart_handler() º¯Êý
+  209          //              ÔÙÓÉ wireless_module_uart_handler() º¯Êýµ÷ÓÃ±¾º¯Êý
+  210          //-------------------------------------------------------------------------------------------------------
+             -------------
+  211          void ble6a20_callback (uint8 uart_dat)
+  212          {
+  213   1      //    uart_query_byte(BLE6A20_INDEX, &ble6a20_data);
+  214   1          fifo_write_buffer(&ble6a20_fifo, &uart_dat, 1);
+  215   1      }
+  216          
+  217          //-------------------------------------------------------------------------------------------------------
+             -------------
+  218          // º¯Êý¼ò½é     À¶ÑÀ×ª´®¿ÚÄ£¿é ³õÊ¼»¯
+  219          // ²ÎÊýËµÃ÷     void
+  220          // ·µ»Ø²ÎÊý     void
+  221          // Ê¹ÓÃÊ¾Àý     ble6a20_init();
+  222          // ±¸×¢ÐÅÏ¢
+  223          //-------------------------------------------------------------------------------------------------------
+             -------------
+  224          uint8 ble6a20_init (void)
+  225          {
+  226   1          uint8 return_state = 0;
+  227   1          
+  228   1          // µÈ´ýÄ£¿é³õÊ¼»¯
+  229   1          system_delay_ms(50);
+  230   1          
+  231   1          set_wireless_type(BLE6A20, BLE6A20_INDEX, ble6a20_callback);
+C251 COMPILER V5.60.0,  zf_device_ble6a20                                                  21/11/25  20:49:00  PAGE 5   
+
+  232   1          
+  233   1          fifo_init(&ble6a20_fifo, FIFO_DATA_8BIT, ble6a20_buffer, BLE6A20_BUFFER_SIZE);
+  234   1          gpio_init(BLE6A20_RTS_PIN, GPIO, GPIO_HIGH, GPIO_NO_PULL);
+  235   1          
+  236   1          // ±¾º¯ÊýÊ¹ÓÃµÄ²¨ÌØÂÊÎª115200 ÎªÀ¶ÑÀ×ª´®¿ÚÄ£¿éµÄÄ¬ÈÏ²¨ÌØÂÊ ÈçÐèÆäËû²¨ÌØÂÊÇë×ÔÐÐÅäÖÃÄ£¿é²¢ÐÞ¸Ä´®¿ÚµÄ²¨
+             -ÌØÂÊ
+  237   1          uart_init (BLE6A20_INDEX, BLE6A20_BUAD_RATE, BLE6A20_RX_PIN, BLE6A20_TX_PIN);   // ³õÊ¼»¯´®¿Ú
+  238   1          uart_rx_interrupt(BLE6A20_INDEX, 1);
+  239   1          
+  240   1          return return_state;
+  241   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       940     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =       252     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =       128     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
