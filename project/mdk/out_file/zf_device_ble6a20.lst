@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  zf_device_ble6a20                                                  21/11/25  20:49:00  PAGE 1   
+C251 COMPILER V5.60.0,  zf_device_ble6a20                                                  22/11/25  18:30:56  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE zf_device_ble6a20
@@ -66,7 +66,7 @@ stmt  level    source
    50          #include "zf_common_debug.h"
    51          #include "zf_common_fifo.h"
    52          #include "zf_driver_delay.h"
-C251 COMPILER V5.60.0,  zf_device_ble6a20                                                  21/11/25  20:49:00  PAGE 2   
+C251 COMPILER V5.60.0,  zf_device_ble6a20                                                  22/11/25  18:30:56  PAGE 2   
 
    53          #include "zf_driver_gpio.h"
    54          #include "zf_driver_uart.h"
@@ -134,7 +134,7 @@ stmt  level    source
   111   4                      uart_write_buffer(BLE6A20_INDEX, buff, 30);               // 发送数据
   112   4                      buff += 30;                                                     // 地址偏移
   113   4                      len -= 30;                                                      // 数量
-C251 COMPILER V5.60.0,  zf_device_ble6a20                                                  21/11/25  20:49:00  PAGE 3   
+C251 COMPILER V5.60.0,  zf_device_ble6a20                                                  22/11/25  18:30:56  PAGE 3   
 
   114   4                      time_count = 0;
   115   4                  }
@@ -202,7 +202,7 @@ stmt  level    source
   170   3              }
   171   2              else                                                                    // 如果RTS为高电平 则模块
              -忙
-C251 COMPILER V5.60.0,  zf_device_ble6a20                                                  21/11/25  20:49:00  PAGE 4   
+C251 COMPILER V5.60.0,  zf_device_ble6a20                                                  22/11/25  18:30:56  PAGE 4   
 
   172   2              {
   173   3                  if(BLE6A20_TIMEOUT_COUNT <= (++ time_count))                  // 超出了最大等待时间
@@ -270,7 +270,7 @@ stmt  level    source
   229   1          system_delay_ms(50);
   230   1          
   231   1          set_wireless_type(BLE6A20, BLE6A20_INDEX, ble6a20_callback);
-C251 COMPILER V5.60.0,  zf_device_ble6a20                                                  21/11/25  20:49:00  PAGE 5   
+C251 COMPILER V5.60.0,  zf_device_ble6a20                                                  22/11/25  18:30:56  PAGE 5   
 
   232   1          
   233   1          fifo_init(&ble6a20_fifo, FIFO_DATA_8BIT, ble6a20_buffer, BLE6A20_BUFFER_SIZE);

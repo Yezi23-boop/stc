@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  zf_device_ips114                                                   21/11/25  20:48:59  PAGE 1   
+C251 COMPILER V5.60.0,  zf_device_ips114                                                   22/11/25  20:48:48  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE zf_device_ips114
@@ -66,7 +66,7 @@ stmt  level    source
    52          #if IPS114_USE_SOFT_SPI
                static soft_spi_info_struct             ips114_spi;
                #define ips114_write_8bit_data(dat)    soft_spi_write_8bit(&ips114_spi, dat)
-C251 COMPILER V5.60.0,  zf_device_ips114                                                   21/11/25  20:48:59  PAGE 2   
+C251 COMPILER V5.60.0,  zf_device_ips114                                                   22/11/25  20:48:48  PAGE 2   
 
                #define ips114_write_16bit_data(dat)   soft_spi_write_16bit(&ips114_spi, dat)
                #else
@@ -134,7 +134,7 @@ stmt  level    source
   114   1          {
   115   2              ips114_write_index(0x2a);                                               // 列地址设置
   116   2              ips114_write_16bit_data(x1+40);
-C251 COMPILER V5.60.0,  zf_device_ips114                                                   21/11/25  20:48:59  PAGE 3   
+C251 COMPILER V5.60.0,  zf_device_ips114                                                   22/11/25  20:48:48  PAGE 3   
 
   117   2              ips114_write_16bit_data(x2+40);
   118   2              ips114_write_index(0x2b);                                               // 行地址设置
@@ -202,7 +202,7 @@ stmt  level    source
   174   1      }
   175          
   176          //-------------------------------------------------------------------------------------------------------
-C251 COMPILER V5.60.0,  zf_device_ips114                                                   21/11/25  20:48:59  PAGE 4   
+C251 COMPILER V5.60.0,  zf_device_ips114                                                   22/11/25  20:48:48  PAGE 4   
 
              -------------
   177          // @brief       设置显示颜色
@@ -270,7 +270,7 @@ stmt  level    source
   229   3                      ips114_write_16bit_data(ips114_pencolor);
   230   3                  else
   231   3                      ips114_write_16bit_data(ips114_bgcolor);
-C251 COMPILER V5.60.0,  zf_device_ips114                                                   21/11/25  20:48:59  PAGE 5   
+C251 COMPILER V5.60.0,  zf_device_ips114                                                   22/11/25  20:48:48  PAGE 5   
 
   232   3                  temp>>=1;
   233   3              }
@@ -338,7 +338,7 @@ stmt  level    source
   291          
   292          //-------------------------------------------------------------------------------------------------------
              -------------
-C251 COMPILER V5.60.0,  zf_device_ips114                                                   21/11/25  20:48:59  PAGE 6   
+C251 COMPILER V5.60.0,  zf_device_ips114                                                   22/11/25  20:48:48  PAGE 6   
 
   293          // @brief       液晶显示8位无符号
   294          // @param       x               坐标x方向的起点 参数范围 [0, ips114_x_max-1]
@@ -406,7 +406,7 @@ stmt  level    source
   353   2              i++;
   354   2          }
   355   1      }
-C251 COMPILER V5.60.0,  zf_device_ips114                                                   21/11/25  20:48:59  PAGE 7   
+C251 COMPILER V5.60.0,  zf_device_ips114                                                   22/11/25  20:48:48  PAGE 7   
 
   356          
   357          //-------------------------------------------------------------------------------------------------------
@@ -474,7 +474,7 @@ stmt  level    source
   414   2          }
   415   1          while(length < num)
   416   1          {
-C251 COMPILER V5.60.0,  zf_device_ips114                                                   21/11/25  20:48:59  PAGE 8   
+C251 COMPILER V5.60.0,  zf_device_ips114                                                   22/11/25  20:48:48  PAGE 8   
 
   417   2              buff[length] = ' ';
   418   2              length++;
@@ -542,7 +542,7 @@ stmt  level    source
   473   1      }
   474          
   475          
-C251 COMPILER V5.60.0,  zf_device_ips114                                                   21/11/25  20:48:59  PAGE 9   
+C251 COMPILER V5.60.0,  zf_device_ips114                                                   22/11/25  20:48:48  PAGE 9   
 
   476          //-------------------------------------------------------------------------------------------------------
              -------------
@@ -610,7 +610,7 @@ stmt  level    source
   530   1          int i, j, k; 
   531   1          uint8 temp, temp1, temp2;
   532   1          const uint8 *p_data;
-C251 COMPILER V5.60.0,  zf_device_ips114                                                   21/11/25  20:48:59  PAGE 10  
+C251 COMPILER V5.60.0,  zf_device_ips114                                                   22/11/25  20:48:48  PAGE 10  
 
   533   1          
   534   1          temp2 = siz/8;
@@ -678,7 +678,7 @@ stmt  level    source
   592   1          else if (ips114_display_dir==2) ips114_write_8bit_data(0x70);
   593   1          else                            ips114_write_8bit_data(0xA0);
   594   1      
-C251 COMPILER V5.60.0,  zf_device_ips114                                                   21/11/25  20:48:59  PAGE 11  
+C251 COMPILER V5.60.0,  zf_device_ips114                                                   22/11/25  20:48:48  PAGE 11  
 
   595   1          ips114_write_index(0x3A);
   596   1          ips114_write_8bit_data(0x05);
@@ -746,7 +746,7 @@ stmt  level    source
   658   1          ips114_write_8bit_data(0x1F);
   659   1          ips114_write_8bit_data(0x20);
   660   1          ips114_write_8bit_data(0x23);
-C251 COMPILER V5.60.0,  zf_device_ips114                                                   21/11/25  20:48:59  PAGE 12  
+C251 COMPILER V5.60.0,  zf_device_ips114                                                   22/11/25  20:48:48  PAGE 12  
 
   661   1      
   662   1          ips114_write_index(0x21);

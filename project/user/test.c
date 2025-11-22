@@ -4,7 +4,7 @@ void test(void)
 {
 	static int test_time = 0;
 	test_time++;
-	Encoder_get();
+    Encoder_get(&PID.left_speed, &PID.right_speed);
 	if (test_time >= 4000)
 	{
 		test_speed = 60;
@@ -26,8 +26,9 @@ void test(void)
 	{
 		test_speed = 20;
 	}
-	left_motor = (int)PID_Calculate(&motors_pid.left_PID, test_speed, speed_l); // 速度最大值为110
-	right_motor = (int)PID_Calculate(&motors_pid.right_PID, test_speed, speed_r);
-	motor_output(left_motor, right_motor);
-//	motor_output(-1000, -5000);
+	// ??????????????ú?? pid->output ??????
+	pid_speed_update(&PID.left_speed, test_speed, speed_l);	// ????????????
+	pid_speed_update(&PID.right_speed, test_speed, speed_r); // ????????????
+	motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
+	//	motor_output(-1000, -5000);
 }

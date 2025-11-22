@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  zf_device_wireless_uart                                            21/11/25  20:49:00  PAGE 1   
+C251 COMPILER V5.60.0,  zf_device_wireless_uart                                            22/11/25  20:48:49  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE zf_device_wireless_uart
@@ -66,7 +66,7 @@ stmt  level    source
    50          #include "zf_common_fifo.h"
    51          #include "zf_driver_delay.h"
    52          #include "zf_driver_gpio.h"
-C251 COMPILER V5.60.0,  zf_device_wireless_uart                                            21/11/25  20:49:00  PAGE 2   
+C251 COMPILER V5.60.0,  zf_device_wireless_uart                                            22/11/25  20:48:49  PAGE 2   
 
    53          #include "zf_driver_uart.h"
    54          #include "zf_device_wireless_uart.h"
@@ -134,7 +134,7 @@ stmt  level    source
   111   2              if(!gpio_get_level(WIRELESS_UART_RTS_PIN))                              // 如果RTS为低电平 则继续
              -发送数据
   112   2              {
-C251 COMPILER V5.60.0,  zf_device_wireless_uart                                            21/11/25  20:49:00  PAGE 3   
+C251 COMPILER V5.60.0,  zf_device_wireless_uart                                            22/11/25  20:48:49  PAGE 3   
 
   113   3                  if(30 <= len)                                                       // 数据分 30byte 每包发送
   114   3                  {
@@ -202,7 +202,7 @@ stmt  level    source
   170   4                      uart_write_buffer(WIRELESS_UART_INDEX, temp, (uint16)len);// 发送数据
   171   4                      len = 0;
   172   4                      break;
-C251 COMPILER V5.60.0,  zf_device_wireless_uart                                            21/11/25  20:49:00  PAGE 4   
+C251 COMPILER V5.60.0,  zf_device_wireless_uart                                            22/11/25  20:48:49  PAGE 4   
 
   173   4                  }
   174   3              }
@@ -270,7 +270,7 @@ stmt  level    source
   229   1      }
   230          
   231          //-------------------------------------------------------------------------------------------------------
-C251 COMPILER V5.60.0,  zf_device_wireless_uart                                            21/11/25  20:49:00  PAGE 5   
+C251 COMPILER V5.60.0,  zf_device_wireless_uart                                            22/11/25  20:48:49  PAGE 5   
 
              -------------
   232          // 函数简介     无线转串口模块 初始化
@@ -338,7 +338,7 @@ stmt  level    source
                        time_count = 0;
                        
                        if( 0xa5 != wireless_auto_baud_data[0] &&                               // 检验自动波特率是否正确
-C251 COMPILER V5.60.0,  zf_device_wireless_uart                                            21/11/25  20:49:00  PAGE 6   
+C251 COMPILER V5.60.0,  zf_device_wireless_uart                                            22/11/25  20:48:49  PAGE 6   
 
                                0xff != wireless_auto_baud_data[1] &&                               // 检验自动波特率是否
              -正确

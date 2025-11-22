@@ -88,25 +88,25 @@ void Menu_Start_Process(void);
 
 
 /**
- * @brief PID速度参数菜单显示函数
+ * @brief PID_Direction速度参数菜单显示函数
  */
 void Menu_Speed_Show(uint8 control_line);
 
 
 /**
- * @brief PID速度参数菜单处理函数
+ * @brief PID_Direction速度参数菜单处理函数
  */
 void Menu_Speed_Process(void);
 
 
 /**
- * @brief PID角度参数菜单显示函数
+ * @brief PID_Direction角度参数菜单显示函数
  */
 void Menu_Angle_Show(uint8 control_line);
 
 
 /**
- * @brief PID角度参数菜单处理函数
+ * @brief PID_Direction角度参数菜单处理函数
  */
 void Menu_Angle_Process(void);
 

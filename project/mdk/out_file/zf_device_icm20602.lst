@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  zf_device_icm20602                                                 21/11/25  20:49:00  PAGE 1   
+C251 COMPILER V5.60.0,  zf_device_icm20602                                                 22/11/25  18:29:18  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE zf_device_icm20602
@@ -66,7 +66,7 @@ stmt  level    source
    51          *                   GND                 电源地
    52          *                   ------------------------------------
    53          *********************************************************************************************************
-C251 COMPILER V5.60.0,  zf_device_icm20602                                                 21/11/25  20:49:00  PAGE 2   
+C251 COMPILER V5.60.0,  zf_device_icm20602                                                 22/11/25  18:29:18  PAGE 2   
 
              -***********/
    54          
@@ -134,7 +134,7 @@ stmt  level    source
   104          // 函数简介     ICM20602 写寄存器
   105          // 参数说明     reg             寄存器地址
   106          // 参数说明     dat            数据
-C251 COMPILER V5.60.0,  zf_device_icm20602                                                 21/11/25  20:49:00  PAGE 3   
+C251 COMPILER V5.60.0,  zf_device_icm20602                                                 22/11/25  18:29:18  PAGE 3   
 
   107          // 返回参数     void
   108          // 使用示例     icm20602_write_register(ICM20602_PWR_MGMT_1, 0x80);
@@ -202,7 +202,7 @@ stmt  level    source
   163   1          while(0x12 != dat)                                                          // 判断 ID 是否正确
   164   1          {
   165   2              if(ICM20602_TIMEOUT_COUNT < timeout_count ++)
-C251 COMPILER V5.60.0,  zf_device_icm20602                                                 21/11/25  20:49:00  PAGE 4   
+C251 COMPILER V5.60.0,  zf_device_icm20602                                                 22/11/25  18:29:18  PAGE 4   
 
   166   2              {
   167   3                  return_state =  1;
@@ -270,7 +270,7 @@ stmt  level    source
   221   1          uint8 val = 0x0, return_state = 0;
   222   1          uint16 timeout_count = 0;
   223   1          
-C251 COMPILER V5.60.0,  zf_device_icm20602                                                 21/11/25  20:49:00  PAGE 5   
+C251 COMPILER V5.60.0,  zf_device_icm20602                                                 22/11/25  18:29:18  PAGE 5   
 
   224   1          system_delay_ms(10);                                                        // 上电延时
   225   1          
@@ -338,7 +338,7 @@ stmt  level    source
   280   2              switch(ICM20602_ACC_SAMPLE_DEFAULT)
   281   2              {
   282   3                  default:
-C251 COMPILER V5.60.0,  zf_device_icm20602                                                 21/11/25  20:49:00  PAGE 6   
+C251 COMPILER V5.60.0,  zf_device_icm20602                                                 22/11/25  18:29:18  PAGE 6   
 
   283   3                  {
   284   4                      printf( "ICM20602_ACC_SAMPLE_DEFAULT set error.\r\n");
@@ -406,7 +406,7 @@ stmt  level    source
   342   3                  break;
   343   3                  
   344   3                  case ICM20602_GYRO_SAMPLE_SGN_500DPS:
-C251 COMPILER V5.60.0,  zf_device_icm20602                                                 21/11/25  20:49:00  PAGE 7   
+C251 COMPILER V5.60.0,  zf_device_icm20602                                                 22/11/25  18:29:18  PAGE 7   
 
   345   3                  {
   346   4                      icm20602_write_register(ICM20602_GYRO_CONFIG, 0x08);

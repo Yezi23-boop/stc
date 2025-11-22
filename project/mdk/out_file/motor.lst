@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  motor                                                              21/11/25  22:30:35  PAGE 1   
+C251 COMPILER V5.60.0,  motor                                                              22/11/25  23:09:30  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE motor
@@ -66,7 +66,7 @@ stmt  level    source
    55   1              {
    56   2              count_stop=0;
    57   2              count=0;
-C251 COMPILER V5.60.0,  motor                                                              21/11/25  22:30:35  PAGE 2   
+C251 COMPILER V5.60.0,  motor                                                              22/11/25  23:09:30  PAGE 2   
 
    58   2              count_flat=0;
    59   2              }
@@ -75,7 +75,7 @@ stmt  level    source
 
 Module Information          Static   Overlayable
 ------------------------------------------------
-  code size            =       508     ------
+  code size            =       480     ------
   ecode size           =    ------     ------
   data size            =    ------     ------
   idata size           =    ------     ------

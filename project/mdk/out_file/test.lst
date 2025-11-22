@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  test                                                               21/11/25  22:30:35  PAGE 1   
+C251 COMPILER V5.60.0,  test                                                               22/11/25  23:09:31  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE test
@@ -15,7 +15,7 @@ stmt  level    source
     4          {
     5   1              static int test_time = 0;
     6   1              test_time++;
-    7   1              Encoder_get();
+    7   1          Encoder_get(&PID.left_speed, &PID.right_speed);
     8   1              if (test_time >= 4000)
     9   1              {
    10   2                      test_speed = 60;
@@ -37,16 +37,17 @@ stmt  level    source
    26   1              {
    27   2                      test_speed = 20;
    28   2              }
-   29   1              left_motor = (int)PID_Calculate(&motors_pid.left_PID, test_speed, speed_l); // 速度最大值为110
-   30   1              right_motor = (int)PID_Calculate(&motors_pid.right_PID, test_speed, speed_r);
-   31   1              motor_output(left_motor, right_motor);
-   32   1      //      motor_output(-1000, -5000);
-   33   1      }
+   29   1              // ??????????????ú?? pid->output ??????
+   30   1              pid_speed_update(&PID.left_speed, test_speed, speed_l); // ????????????
+   31   1              pid_speed_update(&PID.right_speed, test_speed, speed_r); // ????????????
+   32   1              motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
+   33   1              //      motor_output(-1000, -5000);
+   34   1      }
 
 
 Module Information          Static   Overlayable
 ------------------------------------------------
-  code size            =       308     ------
+  code size            =       326     ------
   ecode size           =    ------     ------
   data size            =    ------     ------
   idata size           =    ------     ------

@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  imu                                                                21/11/25  22:30:34  PAGE 1   
+C251 COMPILER V5.60.0,  imu                                                                22/11/25  23:09:30  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE imu
@@ -66,7 +66,7 @@ stmt  level    source
    55   1      }
    56          
    57          // 传感器数据预处理：读取原始 IMU 数据，做单位转换与零偏校正
-C251 COMPILER V5.60.0,  imu                                                                21/11/25  22:30:34  PAGE 2   
+C251 COMPILER V5.60.0,  imu                                                                22/11/25  23:09:30  PAGE 2   
 
    58          // 依赖外部 API：imu660ra_get_acc / imu660ra_get_gyro / *_transition()
    59          // 依赖外部常量：Gyro_offset_x/y/z、DegtoRad
@@ -134,7 +134,7 @@ stmt  level    source
   121   1          exInt += ex * Ki;
   122   1          eyInt += ey * Ki;
   123   1          ezInt += ez * Ki;
-C251 COMPILER V5.60.0,  imu                                                                21/11/25  22:30:34  PAGE 3   
+C251 COMPILER V5.60.0,  imu                                                                22/11/25  23:09:30  PAGE 3   
 
   124   1      
   125   1          // 5) 将比例 + 积分误差反馈到陀螺，形成 PI 闭环
@@ -164,9 +164,9 @@ stmt  level    source
   149   1      
   150   1          // 8) 四元数转欧拉角（Z-Y-X，航向-俯仰-横滚）
   151   1          // 角度转换为“度”
-  152   1      //    Att_Angle->rol = (float)(my_atan2(2 * (q0 * q1 + q2 * q3), 1 - 2 * (q1 * q1 + q2 * q2)) * RadtoDeg)
-             -;
-  153   1      //    Att_Angle->pit = (float)(asin(2 * (q0 * q2 - q1 * q3)) * RadtoDeg);
+  152   1          //    Att_Angle->rol = (float)(my_atan2(2 * (q0 * q1 + q2 * q3), 1 - 2 * (q1 * q1 + q2 * q2)) * Radto
+             -Deg);
+  153   1          //    Att_Angle->pit = (float)(asin(2 * (q0 * q2 - q1 * q3)) * RadtoDeg);
   154   1          // 航向（yaw）若无磁力计参与，可直接用陀螺积分近似更新（对漂移较敏感）
   155   1          // 这里做了小阈值抑制：角速度过小认为是噪声，不更新 yaw
   156   1          if ((Gyr_rad->Z * RadtoDeg > 1.0f) || (Gyr_rad->Z * RadtoDeg < -1.0f))
@@ -202,7 +202,7 @@ stmt  level    source
   186   1          //   i  = 0x5f375a86 - ( i >> 1 );  //Lomont
   187   1          y = *(float *)&i;
   188   1          y = y * (f - (x * y * y));
-C251 COMPILER V5.60.0,  imu                                                                21/11/25  22:30:34  PAGE 4   
+C251 COMPILER V5.60.0,  imu                                                                22/11/25  23:09:30  PAGE 4   
 
   189   1          y = y * (f - (x * y * y));
   190   1          return number * y;

@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  eeprom                                                             21/11/25  22:30:33  PAGE 1   
+C251 COMPILER V5.60.0,  eeprom                                                             22/11/25  23:09:29  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE eeprom
@@ -12,34 +12,34 @@ stmt  level    source
     1          #include "zf_common_headfile.h"
     2          
     3          /*********************************************
-    4           * EEPROMç³»ç»ŸåŸºç¡€å˜é‡å®šä¹‰
+    4           * EEPROMÏµÍ³»ù´¡±äÁ¿¶¨Òå
     5           *********************************************/
-    6          uint8 date_buff[400]; // eepromæ•°æ®æ•°ç»„
+    6          uint8 date_buff[400]; // eepromÊı¾İÊı×é
     7          uint8 eeprom_init_time = 0;
     8          
     9          /*********************************************
-   10           * éœ€è¦è¢«ä¿®æ”¹çš„å‚æ•°
+   10           * ĞèÒª±»ĞŞ¸ÄµÄ²ÎÊı
    11           *********************************************/
-   12          // å¯åŠ¨é…ç½®å‚æ•°
+   12          // Æô¶¯ÅäÖÃ²ÎÊı
    13          int16 start_flag = 0;
    14          int16 circle_flags = 0;
-   15          // PIDé€Ÿåº¦æ§åˆ¶å‚æ•°
-   16          float kp_Err = 0.15f;      // 4.40f//
+   15          // PIDËÙ¶È¿ØÖÆ²ÎÊı
+   16          float kp_Err = 0.15f;     // 4.40f//
    17          float kd_Err = 3.0f;      // 7.30f//
    18          float speed_run = 25.0;   // 55//
    19          float kd_gyro = 0.0;      // 270.0//
    20          float fuya_xili = 2000.0; // 60.0//
    21          float pwm_filter = 0.7;   // 0.90//
    22          
-   23          // PIDè§’åº¦æ§åˆ¶å‚æ•°
+   23          // PID½Ç¶È¿ØÖÆ²ÎÊı
    24          float kp_Angle = 0.8;          // 0.5//
    25          float kd_Angle = 2.6;          // 2.2//
    26          float limiting_Angle = 130.0f; //
    27          float A_1 = 0.50f;             // 1.00f
    28          float B_1 = 0.20f;             // 0.60f
-   29          float C_l = 1.00f;        // 0.005f
+   29          float C_l = 1.00f;             // 0.005f
    30          
-   31          // åœ†ç¯æ§åˆ¶å‚æ•°
+   31          // Ô²»·¿ØÖÆ²ÎÊı
    32          float ring_encoder = 15;           // 15
    33          float pre_ring_Gyro_set = 210;     // 200
    34          float in_ring_Gyroz = 220;         // 230
@@ -47,149 +47,148 @@ stmt  level    source
    36          float pre_out_ring_Gyroz = 350;    // 350
    37          float pre_out_ring_encoder = 30;   // 30
    38          /*********************************************
-   39           * EEPROMåˆå§‹åŒ–å‡½æ•°
+   39           * EEPROM³õÊ¼»¯º¯Êı
    40           *********************************************/
    41          void eeprom_init()
    42          {
-   43   1          iap_init(); // åˆå§‹åŒ–EEPROM
+   43   1          iap_init(); // ³õÊ¼»¯EEPROM
    44   1      
-   45   1          iap_read_buff(0x00, date_buff, 400); // ä»EEPROMä¸­è¯»å–æ•°æ®
+   45   1          iap_read_buff(0x00, date_buff, 400); // ´ÓEEPROMÖĞ¶ÁÈ¡Êı¾İ
    46   1      
-   47   1          eeprom_init_time = read_int(0); // eepromæ²¡æœ‰è¢«å¡«å……ï¼Œåˆ™ä¼šè¯»åˆ°åƒåœ¾å€¼
+   47   1          eeprom_init_time = read_int(0); // eepromÃ»ÓĞ±»Ìî³ä£¬Ôò»á¶Áµ½À¬»øÖµ
    48   1      
-   49   1          if (eeprom_init_time != 1) // åˆæ¬¡å¯åŠ¨ï¼Œeeprom_init_timeä¸ºåƒåœ¾å€¼ï¼Œifæˆç«‹
+   49   1          if (eeprom_init_time != 1) // ³õ´ÎÆô¶¯£¬eeprom_init_timeÎªÀ¬»øÖµ£¬if³ÉÁ¢
    50   1          {
    51   2              eeprom_init_time = 1;
-   52   2              save_int(eeprom_init_time, 0); // å¡«å……eeprom_init_timeçš„å€¼åˆ°eeprom
+   52   2              save_int(eeprom_init_time, 0); // Ìî³äeeprom_init_timeµÄÖµµ½eeprom
    53   2      
-   54   2              eeprom_flash(); // å¡«å……æºç å˜é‡åˆå§‹åŒ–çš„å€¼åˆ°eeprom
+   54   2              eeprom_flash(); // Ìî³äÔ´Âë±äÁ¿³õÊ¼»¯µÄÖµµ½eeprom
    55   2          }
-   56   1          else // éåˆæ¬¡å¯åŠ¨ï¼Œè¯»å–eepromç”¨äºèµ‹å€¼å˜é‡
+   56   1          else // ·Ç³õ´ÎÆô¶¯£¬¶ÁÈ¡eepromÓÃÓÚ¸³Öµ±äÁ¿
    57   1          {
-C251 COMPILER V5.60.0,  eeprom                                                             21/11/25  22:30:33  PAGE 2   
+C251 COMPILER V5.60.0,  eeprom                                                             22/11/25  23:09:29  PAGE 2   
 
-   58   2              // å¯åŠ¨é…ç½®å‚æ•°
+   58   2              // Æô¶¯ÅäÖÃ²ÎÊı
    59   2              start_flag = read_int(1);
    60   2              circle_flags = read_int(2);
-   61   2      
-   62   2              // PIDé€Ÿåº¦æ§åˆ¶å‚æ•°
-   63   2              kp_Err = read_float(4);
-   64   2              fuya_xili = read_float(5);
-   65   2              kd_Err = read_float(6);
-   66   2              pwm_filter = read_float(7);
-   67   2              speed_run = read_float(8);
-   68   2              kd_gyro = read_float(9);
-   69   2      
-   70   2              // PIDè§’åº¦æ§åˆ¶å‚æ•°
-   71   2              kp_Angle = read_float(10);
-   72   2              kd_Angle = read_float(11);
-   73   2              limiting_Angle = read_float(12);
-   74   2              B_1 = read_float(13);
-   75   2              C_l = read_float(14);
-   76   2              A_1 = read_float(15);
-   77   2      
-   78   2              // åœ†ç¯æ§åˆ¶å‚æ•°
-   79   2              ring_encoder = read_float(16);
-   80   2              pre_ring_Gyro_set = read_float(17);
-   81   2              in_ring_Gyroz = read_float(18);
-   82   2              pre_out_ring_Gyro_set = read_float(19);
-   83   2              pre_out_ring_Gyroz = read_float(20);
-   84   2              pre_out_ring_encoder = read_float(21);
-   85   2          }
-   86   1      }
-   87          
-   88          /*********************************************
-   89           * åˆ·å†™ä¿å­˜æ•°æ®åˆ°eeprom
-   90           *********************************************/
-   91          void eeprom_flash()
-   92          {
-   93   1          // å¯åŠ¨é…ç½®å‚æ•°
-   94   1          save_int(start_flag, 1);
-   95   1          save_int(circle_flags, 2);
-   96   1      
-   97   1          // PIDé€Ÿåº¦æ§åˆ¶å‚æ•°
-   98   1          save_float(kp_Err, 4);
-   99   1          save_float(fuya_xili, 5);
-  100   1          save_float(kd_Err, 6);
-  101   1          save_float(pwm_filter, 7);
-  102   1          save_float(speed_run, 8);
-  103   1          save_float(kd_gyro, 9);
-  104   1      
-  105   1          // PIDè§’åº¦æ§åˆ¶å‚æ•°
-  106   1          save_float(kp_Angle, 10);
-  107   1          save_float(kd_Angle, 11);
-  108   1          save_float(limiting_Angle, 12);
-  109   1          save_float(B_1, 13);
-  110   1          save_float(C_l, 14);
-  111   1          save_float(A_1, 15);
-  112   1      
-  113   1          // åœ†ç¯æ§åˆ¶å‚æ•°
-  114   1          save_float(ring_encoder, 16);
-  115   1          save_float(pre_ring_Gyro_set, 17);
-  116   1          save_float(in_ring_Gyroz, 18);
-  117   1          save_float(pre_out_ring_Gyro_set, 19);
-  118   1          save_float(pre_out_ring_Gyroz, 20);
-  119   1          save_float(pre_out_ring_encoder, 21);
-  120   1      }
-  121          
-  122          /*********************************************
-  123           * EEPROMåº•å±‚è¯»å†™å‡½æ•°
-C251 COMPILER V5.60.0,  eeprom                                                             21/11/25  22:30:33  PAGE 3   
+   61   2              // PIDËÙ¶È¿ØÖÆ²ÎÊı
+   62   2              kp_Err = read_float(4);
+   63   2              fuya_xili = read_float(5);
+   64   2              kd_Err = read_float(6);
+   65   2              pwm_filter = read_float(7);
+   66   2              speed_run = read_float(8);
+   67   2              kd_gyro = read_float(9);
+   68   2      
+   69   2              // PID½Ç¶È¿ØÖÆ²ÎÊı
+   70   2              kp_Angle = read_float(10);
+   71   2              kd_Angle = read_float(11);
+   72   2              limiting_Angle = read_float(12);
+   73   2              B_1 = read_float(13);
+   74   2              C_l = read_float(14);
+   75   2              A_1 = read_float(15);
+   76   2      
+   77   2              // Ô²»·¿ØÖÆ²ÎÊı
+   78   2              ring_encoder = read_float(16);
+   79   2              pre_ring_Gyro_set = read_float(17);
+   80   2              in_ring_Gyroz = read_float(18);
+   81   2              pre_out_ring_Gyro_set = read_float(19);
+   82   2              pre_out_ring_Gyroz = read_float(20);
+   83   2              pre_out_ring_encoder = read_float(21);
+   84   2          }
+   85   1      }
+   86          
+   87          /*********************************************
+   88           * Ë¢Ğ´±£´æÊı¾İµ½eeprom
+   89           *********************************************/
+   90          void eeprom_flash()
+   91          {
+   92   1          // Æô¶¯ÅäÖÃ²ÎÊı
+   93   1          save_int(start_flag, 1);
+   94   1          save_int(circle_flags, 2);
+   95   1      
+   96   1          // PIDËÙ¶È¿ØÖÆ²ÎÊı
+   97   1          save_float(kp_Err, 4);
+   98   1          save_float(fuya_xili, 5);
+   99   1          save_float(kd_Err, 6);
+  100   1          save_float(pwm_filter, 7);
+  101   1          save_float(speed_run, 8);
+  102   1          save_float(kd_gyro, 9);
+  103   1      
+  104   1          // PID½Ç¶È¿ØÖÆ²ÎÊı
+  105   1          save_float(kp_Angle, 10);
+  106   1          save_float(kd_Angle, 11);
+  107   1          save_float(limiting_Angle, 12);
+  108   1          save_float(B_1, 13);
+  109   1          save_float(C_l, 14);
+  110   1          save_float(A_1, 15);
+  111   1      
+  112   1          // Ô²»·¿ØÖÆ²ÎÊı
+  113   1          save_float(ring_encoder, 16);
+  114   1          save_float(pre_ring_Gyro_set, 17);
+  115   1          save_float(in_ring_Gyroz, 18);
+  116   1          save_float(pre_out_ring_Gyro_set, 19);
+  117   1          save_float(pre_out_ring_Gyroz, 20);
+  118   1          save_float(pre_out_ring_encoder, 21);
+  119   1      }
+  120          
+  121          /*********************************************
+  122           * EEPROMµ×²ã¶ÁĞ´º¯Êı
+  123           *********************************************/
+C251 COMPILER V5.60.0,  eeprom                                                             22/11/25  23:09:29  PAGE 3   
 
-  124           *********************************************/
-  125          void save_int(int32 input, uint8 value_bit)
-  126          {
-  127   1          uint8 i;
-  128   1          uint8 begin = value_bit * 4;
-  129   1          uint8 *p = (uint8 *)&input;
-  130   1      
-  131   1          for (i = 0; i < 4; i++)
-  132   1          {
-  133   2              date_buff[begin++] = *(p + i);
-  134   2          }
-  135   1          extern_iap_write_buff(0x00, date_buff, 400);
-  136   1      }
-  137          
-  138          int32 read_int(uint8 value_bit)
-  139          {
-  140   1          uint8 i;
-  141   1          uint8 begin = value_bit * 4;
-  142   1          int32 output;
-  143   1          uint8 *p = (uint8 *)&output;
-  144   1      
-  145   1          for (i = 0; i < 4; i++)
-  146   1          {
-  147   2              *(p + i) = date_buff[begin++];
-  148   2          }
-  149   1          return output;
-  150   1      }
-  151          
-  152          void save_float(float input, uint8 value_bit)
-  153          {
-  154   1          uint8 i;
-  155   1          uint8 begin = value_bit * 4;
-  156   1          uint8 *p = (uint8 *)&input;
-  157   1      
-  158   1          for (i = 0; i < 4; i++)
-  159   1          {
-  160   2              date_buff[begin++] = *(p + i);
-  161   2          }
-  162   1          extern_iap_write_buff(0x00, date_buff, 400);
-  163   1      }
-  164          
-  165          float read_float(uint8 value_bit)
-  166          {
-  167   1          uint8 i;
-  168   1          uint8 begin = value_bit * 4;
-  169   1          float output;
-  170   1          uint8 *p = (uint8 *)&output;
-  171   1      
-  172   1          for (i = 0; i < 4; i++)
-  173   1          {
-  174   2              *(p + i) = date_buff[begin++];
-  175   2          }
-  176   1          return output;
-  177   1      }
+  124          void save_int(int32 input, uint8 value_bit)
+  125          {
+  126   1          uint8 i;
+  127   1          uint8 begin = value_bit * 4;
+  128   1          uint8 *p = (uint8 *)&input;
+  129   1      
+  130   1          for (i = 0; i < 4; i++)
+  131   1          {
+  132   2              date_buff[begin++] = *(p + i);
+  133   2          }
+  134   1          extern_iap_write_buff(0x00, date_buff, 400);
+  135   1      }
+  136          
+  137          int32 read_int(uint8 value_bit)
+  138          {
+  139   1          uint8 i;
+  140   1          uint8 begin = value_bit * 4;
+  141   1          int32 output;
+  142   1          uint8 *p = (uint8 *)&output;
+  143   1      
+  144   1          for (i = 0; i < 4; i++)
+  145   1          {
+  146   2              *(p + i) = date_buff[begin++];
+  147   2          }
+  148   1          return output;
+  149   1      }
+  150          
+  151          void save_float(float input, uint8 value_bit)
+  152          {
+  153   1          uint8 i;
+  154   1          uint8 begin = value_bit * 4;
+  155   1          uint8 *p = (uint8 *)&input;
+  156   1      
+  157   1          for (i = 0; i < 4; i++)
+  158   1          {
+  159   2              date_buff[begin++] = *(p + i);
+  160   2          }
+  161   1          extern_iap_write_buff(0x00, date_buff, 400);
+  162   1      }
+  163          
+  164          float read_float(uint8 value_bit)
+  165          {
+  166   1          uint8 i;
+  167   1          uint8 begin = value_bit * 4;
+  168   1          float output;
+  169   1          uint8 *p = (uint8 *)&output;
+  170   1      
+  171   1          for (i = 0; i < 4; i++)
+  172   1          {
+  173   2              *(p + i) = date_buff[begin++];
+  174   2          }
+  175   1          return output;
+  176   1      }
 
 
 Module Information          Static   Overlayable
@@ -203,9 +202,9 @@ Module Information          Static   Overlayable
   xdata-const size     =    ------     ------
   edata size           =    ------     ------
   bit size             =    ------     ------
-C251 COMPILER V5.60.0,  eeprom                                                             21/11/25  22:30:33  PAGE 4   
-
   ebit size            =    ------     ------
+C251 COMPILER V5.60.0,  eeprom                                                             22/11/25  23:09:29  PAGE 4   
+
   bitaddressable size  =    ------     ------
   ebitaddressable size =    ------     ------
   far data size        =    ------     ------

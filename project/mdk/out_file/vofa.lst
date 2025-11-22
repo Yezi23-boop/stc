@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  vofa                                                               21/11/25  22:32:01  PAGE 1   
+C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE vofa
@@ -13,273 +13,470 @@ stmt  level    source
     2          #include "vofa.h"
     3          #include <stdlib.h>
     4          
-    5          // VOFA æ•°æ®å¯¹è±¡
+    5          // VOFA Êı¾İ¶ÔÏó
     6          static vofa_data_struct vofa_data;
     7          
-    8          // å†…éƒ¨å‡½æ•°å£°æ˜
+    8          // ÄÚ²¿º¯ÊıÉùÃ÷
     9          static void vofa_parse_byte(uint8 dat);
    10          
    11          //-------------------------------------------------------------------------------------------------------
              -------------
-   12          // å‡½æ•°ç®€ä»‹     VOFA+ åˆå§‹åŒ–
-   13          // å‚æ•°è¯´æ˜     void
-   14          // è¿”å›å‚æ•°     void
-   15          // ä½¿ç”¨ç¤ºä¾‹     vofa_init();
-   16          // å¤‡æ³¨ä¿¡æ¯     åˆå§‹åŒ– VOFA æ•°æ®ç»“æ„ï¼ˆæ— éœ€é¢å¤–æ“ä½œï¼Œä½¿ç”¨ç³»ç»Ÿè‡ªå¸¦ FIFOï¼‰
+   12          // º¯Êı¼ò½é     VOFA+ ³õÊ¼»¯
+   13          // ²ÎÊıËµÃ÷     void
+   14          // ·µ»Ø²ÎÊı     void
+   15          // Ê¹ÓÃÊ¾Àı     vofa_init();
+   16          // ±¸×¢ĞÅÏ¢     ³õÊ¼»¯ VOFA Êı¾İ½á¹¹£¨ÎŞĞè¶îÍâ²Ù×÷£¬Ê¹ÓÃÏµÍ³×Ô´ø FIFO£©
    17          //-------------------------------------------------------------------------------------------------------
              -------------
    18          void vofa_init(void)
    19          {
-   20   1          uint8 i;
+   20   1              uint8 i;
    21   1      
-   22   1          // æ¸…ç©ºç¼“å†²åŒº
-   23   1          for (i = 0; i < VOFA_BUFFER_SIZE; i++)
-   24   1          {
-   25   2              vofa_data.buffer[i] = 0;
-   26   2          }
+   22   1              // Çå¿Õ»º³åÇø
+   23   1              for (i = 0; i < VOFA_BUFFER_SIZE; i++)
+   24   1              {
+   25   2                      vofa_data.buffer[i] = 0;
+   26   2              }
    27   1      
-   28   1          for (i = 0; i < VOFA_MAX_CMD_LEN; i++)
-   29   1          {
-   30   2              vofa_data.cmd_buffer[i] = 0;
-   31   2          }
+   28   1              for (i = 0; i < VOFA_MAX_CMD_LEN; i++)
+   29   1              {
+   30   2                      vofa_data.cmd_buffer[i] = 0;
+   31   2              }
    32   1      
-   33   1          vofa_data.index = 0;
-   34   1          vofa_data.cmd_len = 0;
-   35   1          vofa_data.state = VOFA_PARSE_IDLE;
+   33   1              vofa_data.index = 0;
+   34   1              vofa_data.cmd_len = 0;
+   35   1              vofa_data.state = VOFA_PARSE_IDLE;
    36   1      }
    37          
    38          //-------------------------------------------------------------------------------------------------------
              -------------
-   39          // å‡½æ•°ç®€ä»‹     VOFA+ FireWater åè®®ä» FIFO è¯»å–å¹¶è§£ææ•°æ®
-   40          // å‚æ•°è¯´æ˜     void
-   41          // è¿”å›å‚æ•°     void
-   42          // ä½¿ç”¨ç¤ºä¾‹     vofa_parse_from_fifo();  // åœ¨ä¸»å¾ªç¯ä¸­è°ƒç”¨
-   43          // å¤‡æ³¨ä¿¡æ¯     FireWater åè®®: ä»¥ '!' (0x21) ä½œä¸ºå¸§å°¾æ ‡è¯†
-   44          //              ç›´æ¥ä½¿ç”¨ wireless_uart_read_buffer() ä» FIFO è¯»å–æ•°æ®
+   39          // º¯Êı¼ò½é     VOFA+ FireWater Ğ­Òé´Ó FIFO ¶ÁÈ¡²¢½âÎöÊı¾İ
+   40          // ²ÎÊıËµÃ÷     void
+   41          // ·µ»Ø²ÎÊı     void
+   42          // Ê¹ÓÃÊ¾Àı     vofa_parse_from_fifo();  // ÔÚÖ÷Ñ­»·ÖĞµ÷ÓÃ
+   43          // ±¸×¢ĞÅÏ¢     FireWater Ğ­Òé: ÒÔ '!' (0x21) ×÷ÎªÖ¡Î²±êÊ¶
+   44          //              Ö±½ÓÊ¹ÓÃ wireless_uart_read_buffer() ´Ó FIFO ¶ÁÈ¡Êı¾İ
    45          //-------------------------------------------------------------------------------------------------------
              -------------
    46          void vofa_parse_from_fifo(void)
    47          {
-   48   1          uint8 dat;
+   48   1              uint8 dat;
    49   1      
-   50   1          // ä» FIFO è¯»å–æ•°æ®ï¼ˆä½¿ç”¨ç³»ç»Ÿè‡ªå¸¦å‡½æ•°ï¼‰
-   51   1          while (wireless_uart_read_buffer(&dat, 1) > 0)
-   52   1          {
-   53   2              vofa_parse_byte(dat);
-C251 COMPILER V5.60.0,  vofa                                                               21/11/25  22:32:01  PAGE 2   
+   50   1              // ´Ó FIFO ¶ÁÈ¡Êı¾İ£¨Ê¹ÓÃÏµÍ³×Ô´øº¯Êı£©
+   51   1              while (wireless_uart_read_buffer(&dat, 1) > 0)
+   52   1              {
+   53   2                      vofa_parse_byte(dat);
+C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 2   
 
-   54   2          }
+   54   2              }
    55   1      }
    56          
    57          //-------------------------------------------------------------------------------------------------------
              -------------
-   58          // å‡½æ•°ç®€ä»‹     VOFA+ FireWater åè®®è§£æå•ä¸ªå­—èŠ‚ï¼ˆå†…éƒ¨å‡½æ•°ï¼‰
-   59          // å‚æ•°è¯´æ˜     dat             æ¥æ”¶åˆ°çš„å­—èŠ‚æ•°æ®
-   60          // è¿”å›å‚æ•°     void
-   61          // ä½¿ç”¨ç¤ºä¾‹     vofa_parse_byte(0x50);
-   62          // å¤‡æ³¨ä¿¡æ¯     FireWater åè®®: ä»¥ '!' (0x21) ä½œä¸ºå¸§å°¾æ ‡è¯†
-   63          //              ä¾‹å¦‚: "PR=2.32!" ä¼šè¢«è§£æä¸ºå®Œæ•´å‘½ä»¤
+   58          // º¯Êı¼ò½é     VOFA+ FireWater Ğ­Òé½âÎöµ¥¸ö×Ö½Ú£¨ÄÚ²¿º¯Êı£©
+   59          // ²ÎÊıËµÃ÷     dat             ½ÓÊÕµ½µÄ×Ö½ÚÊı¾İ
+   60          // ·µ»Ø²ÎÊı     void
+   61          // Ê¹ÓÃÊ¾Àı     vofa_parse_byte(0x50);
+   62          // ±¸×¢ĞÅÏ¢     FireWater Ğ­Òé: ÒÔ '!' (0x21) ×÷ÎªÖ¡Î²±êÊ¶
+   63          //              ÀıÈç: "PR=2.32!" »á±»½âÎöÎªÍêÕûÃüÁî
    64          //-------------------------------------------------------------------------------------------------------
              -------------
    65          static void vofa_parse_byte(uint8 dat)
    66          {
-   67   1          // æ£€æµ‹åˆ°å¸§å°¾æ ‡è¯† '!' (ASCII: 0x21 å³åè¿›åˆ¶ 33)
-   68   1          if (dat == '!' || dat == 0x21)
-   69   1          {
-   70   2              if (vofa_data.index > 0)
-   71   2              {
-   72   3                  // æ·»åŠ å­—ç¬¦ä¸²ç»“æŸç¬¦
-   73   3                  vofa_data.buffer[vofa_data.index] = '\0';
+   67   1              // ¼ì²âµ½Ö¡Î²±êÊ¶ '!' (ASCII: 0x21 ¼´Ê®½øÖÆ 33)
+   68   1              if (dat == '!' || dat == 0x21)
+   69   1              {
+   70   2                      if (vofa_data.index > 0)
+   71   2                      {
+   72   3                              // Ìí¼Ó×Ö·û´®½áÊø·û
+   73   3                              vofa_data.buffer[vofa_data.index] = '\0';
    74   3      
-   75   3                  // å¤åˆ¶åˆ°å‘½ä»¤ç¼“å†²åŒº
-   76   3                  memcpy(vofa_data.cmd_buffer, vofa_data.buffer, vofa_data.index + 1);
-   77   3                  vofa_data.cmd_len = vofa_data.index;
+   75   3                              // ¸´ÖÆµ½ÃüÁî»º³åÇø
+   76   3                              memcpy(vofa_data.cmd_buffer, vofa_data.buffer, vofa_data.index + 1);
+   77   3                              vofa_data.cmd_len = vofa_data.index;
    78   3      
-   79   3                  // æ ‡è®°è§£æå®Œæˆ
-   80   3                  vofa_data.state = VOFA_PARSE_COMPLETE;
+   79   3                              // ±ê¼Ç½âÎöÍê³É
+   80   3                              vofa_data.state = VOFA_PARSE_COMPLETE;
    81   3      
-   82   3                  // é‡ç½®ç´¢å¼•
-   83   3                  vofa_data.index = 0;
-   84   3              }
-   85   2          }
-   86   1          else
-   87   1          {
-   88   2              // æ¥æ”¶æ•°æ®
-   89   2              if (vofa_data.index < VOFA_BUFFER_SIZE - 1)
-   90   2              {
-   91   3                  vofa_data.buffer[vofa_data.index++] = dat;
-   92   3                  vofa_data.state = VOFA_PARSE_RECEIVING;
-   93   3              }
-   94   2              else
-   95   2              {
-   96   3                  // ç¼“å†²åŒºæº¢å‡ºï¼Œé‡ç½®
-   97   3                  vofa_data.index = 0;
-   98   3                  vofa_data.state = VOFA_PARSE_IDLE;
-   99   3              }
-  100   2          }
+   82   3                              // ÖØÖÃË÷Òı
+   83   3                              vofa_data.index = 0;
+   84   3                      }
+   85   2              }
+   86   1              else
+   87   1              {
+   88   2                      // ½ÓÊÕÊı¾İ
+   89   2                      if (vofa_data.index < VOFA_BUFFER_SIZE - 1)
+   90   2                      {
+   91   3                              vofa_data.buffer[vofa_data.index++] = dat;
+   92   3                              vofa_data.state = VOFA_PARSE_RECEIVING;
+   93   3                      }
+   94   2                      else
+   95   2                      {
+   96   3                              // »º³åÇøÒç³ö£¬ÖØÖÃ
+   97   3                              vofa_data.index = 0;
+   98   3                              vofa_data.state = VOFA_PARSE_IDLE;
+   99   3                      }
+  100   2              }
   101   1      }
   102          
   103          //-------------------------------------------------------------------------------------------------------
              -------------
-  104          // å‡½æ•°ç®€ä»‹     è·å– VOFA+ æ¥æ”¶åˆ°çš„å®Œæ•´å‘½ä»¤
-  105          // å‚æ•°è¯´æ˜     cmd_out         è¾“å‡ºå‘½ä»¤å­—ç¬¦ä¸²çš„ç¼“å†²åŒº
-  106          // å‚æ•°è¯´æ˜     max_len         ç¼“å†²åŒºæœ€å¤§é•¿åº¦
-  107          // è¿”å›å‚æ•°     uint8           1-æœ‰æ–°å‘½ä»¤ 0-æ— æ–°å‘½ä»¤
-  108          // ä½¿ç”¨ç¤ºä¾‹     char cmd[32];
+  104          // º¯Êı¼ò½é     »ñÈ¡ VOFA+ ½ÓÊÕµ½µÄÍêÕûÃüÁî
+  105          // ²ÎÊıËµÃ÷     cmd_out         Êä³öÃüÁî×Ö·û´®µÄ»º³åÇø
+  106          // ²ÎÊıËµÃ÷     max_len         »º³åÇø×î´ó³¤¶È
+  107          // ·µ»Ø²ÎÊı     uint8           1-ÓĞĞÂÃüÁî 0-ÎŞĞÂÃüÁî
+  108          // Ê¹ÓÃÊ¾Àı     char cmd[32];
   109          //              if(vofa_get_command(cmd, 32)) {
-  110          //                  // å¤„ç†å‘½ä»¤
+  110          //                  // ´¦ÀíÃüÁî
   111          //              }
-  112          // å¤‡æ³¨ä¿¡æ¯     è·å–å‘½ä»¤åä¼šè‡ªåŠ¨æ¸…é™¤å®Œæˆæ ‡å¿—
+  112          // ±¸×¢ĞÅÏ¢     »ñÈ¡ÃüÁîºó»á×Ô¶¯Çå³ıÍê³É±êÖ¾
   113          //-------------------------------------------------------------------------------------------------------
              -------------
   114          uint8 vofa_get_command(char *cmd_out, uint8 max_len)
   115          {
-C251 COMPILER V5.60.0,  vofa                                                               21/11/25  22:32:01  PAGE 3   
+C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 3   
 
-  116   1          uint8 result = 0;
+  116   1              uint8 result = 0;
   117   1      
-  118   1          if (vofa_data.state == VOFA_PARSE_COMPLETE)
-  119   1          {
-  120   2              // å¤åˆ¶å‘½ä»¤
-  121   2              if (vofa_data.cmd_len < max_len)
-  122   2              {
-  123   3                  memcpy(cmd_out, vofa_data.cmd_buffer, vofa_data.cmd_len + 1);
-  124   3                  result = 1;
-  125   3              }
+  118   1              if (vofa_data.state == VOFA_PARSE_COMPLETE)
+  119   1              {
+  120   2                      // ¸´ÖÆÃüÁî
+  121   2                      if (vofa_data.cmd_len < max_len)
+  122   2                      {
+  123   3                              memcpy(cmd_out, vofa_data.cmd_buffer, vofa_data.cmd_len + 1);
+  124   3                              result = 1;
+  125   3                      }
   126   2      
-  127   2              // æ¸…é™¤å®Œæˆæ ‡å¿—
-  128   2              vofa_data.state = VOFA_PARSE_IDLE;
-  129   2              vofa_data.cmd_len = 0;
-  130   2          }
+  127   2                      // Çå³ıÍê³É±êÖ¾
+  128   2                      vofa_data.state = VOFA_PARSE_IDLE;
+  129   2                      vofa_data.cmd_len = 0;
+  130   2              }
   131   1      
-  132   1          return result;
+  132   1              return result;
   133   1      }
   134          
   135          //-------------------------------------------------------------------------------------------------------
              -------------
-  136          // å‡½æ•°ç®€ä»‹     æ¸…ç©º VOFA æ¥æ”¶ç¼“å†²åŒº
-  137          // å‚æ•°è¯´æ˜     void
-  138          // è¿”å›å‚æ•°     void
-  139          // ä½¿ç”¨ç¤ºä¾‹     vofa_clear_buffer();
-  140          // å¤‡æ³¨ä¿¡æ¯     åœ¨å‡ºç°æ¥æ”¶é”™è¯¯æ—¶å¯ä»¥è°ƒç”¨æ­¤å‡½æ•°æ¸…ç©ºç¼“å†²åŒº
+  136          // º¯Êı¼ò½é     Çå¿Õ VOFA ½ÓÊÕ»º³åÇø
+  137          // ²ÎÊıËµÃ÷     void
+  138          // ·µ»Ø²ÎÊı     void
+  139          // Ê¹ÓÃÊ¾Àı     vofa_clear_buffer();
+  140          // ±¸×¢ĞÅÏ¢     ÔÚ³öÏÖ½ÓÊÕ´íÎóÊ±¿ÉÒÔµ÷ÓÃ´Ëº¯ÊıÇå¿Õ»º³åÇø
   141          //-------------------------------------------------------------------------------------------------------
              -------------
   142          void vofa_clear_buffer(void)
   143          {
-  144   1          vofa_data.index = 0;
-  145   1          vofa_data.cmd_len = 0;
-  146   1          vofa_data.state = VOFA_PARSE_IDLE;
+  144   1              vofa_data.index = 0;
+  145   1              vofa_data.cmd_len = 0;
+  146   1              vofa_data.state = VOFA_PARSE_IDLE;
   147   1      }
   148          
   149          //-------------------------------------------------------------------------------------------------------
              -------------
-  150          // å‡½æ•°ç®€ä»‹     VOFA+ FireWater åè®®å‘½ä»¤è§£æç¤ºä¾‹
-  151          // å‚æ•°è¯´æ˜     cmd             æ¥æ”¶åˆ°çš„å‘½ä»¤å­—ç¬¦ä¸²
-  152          // è¿”å›å‚æ•°     void
-  153          // ä½¿ç”¨ç¤ºä¾‹     vofa_parse_command("PR=2.32");
-  154          // å¤‡æ³¨ä¿¡æ¯     ç¤ºä¾‹å‡½æ•°ï¼Œå±•ç¤ºå¦‚ä½•è§£æä¸åŒæ ¼å¼çš„å‘½ä»¤
-  155          //              æ ¼å¼1: "PR=2.32"  - è§£æå‚æ•°åå’Œæµ®ç‚¹æ•°å€¼
-  156          //              æ ¼å¼2: "SPEED=100" - è§£æå‚æ•°åå’Œæ•´æ•°å€¼
-  157          //              æ ¼å¼3: "START" - å•ç‹¬çš„å‘½ä»¤
+  150          // º¯Êı¼ò½é     VOFA+ FireWater Ğ­ÒéÃüÁî½âÎöÊ¾Àı
+  151          // ²ÎÊıËµÃ÷     cmd             ½ÓÊÕµ½µÄÃüÁî×Ö·û´®
+  152          // ·µ»Ø²ÎÊı     void
+  153          // Ê¹ÓÃÊ¾Àı     vofa_parse_command("PR=2.32");
+  154          // ±¸×¢ĞÅÏ¢     Ê¾Àıº¯Êı£¬Õ¹Ê¾ÈçºÎ½âÎö²»Í¬¸ñÊ½µÄÃüÁî
+  155          //              ¸ñÊ½1: "PR=2.32"  - ½âÎö²ÎÊıÃûºÍ¸¡µãÊıÖµ
+  156          //              ¸ñÊ½2: "SPEED=100" - ½âÎö²ÎÊıÃûºÍÕûÊıÖµ
+  157          //              ¸ñÊ½3: "START" - µ¥¶ÀµÄÃüÁî
   158          //-------------------------------------------------------------------------------------------------------
              -------------
   159          void vofa_parse_command(char *cmd)
   160          {
-  161   1          char *eq_pos;
-  162   1          char param_name[16];
-  163   1          float param_value;
-  164   1          uint8 name_len;
-  165   1          uint8 i;
+  161   1              char *eq_pos;
+  162   1              char param_name[16];
+  163   1              float param_value;
+  164   1              uint8 name_len;
+  165   1              uint8 i;
   166   1      
-  167   1          // åˆå§‹åŒ–å˜é‡
-  168   1          for (i = 0; i < 16; i++)
-  169   1          {
-  170   2              param_name[i] = 0;
-  171   2          }
-  172   1          param_value = 0.0;
+  167   1              // ³õÊ¼»¯±äÁ¿
+  168   1              for (i = 0; i < 16; i++)
+  169   1              {
+  170   2                      param_name[i] = 0;
+  171   2              }
+  172   1              param_value = 0.0;
   173   1      
-  174   1          // æŸ¥æ‰¾ç­‰å·ä½ç½®
-  175   1          eq_pos = strchr(cmd, '=');
+  174   1              // ²éÕÒµÈºÅÎ»ÖÃ
+  175   1              eq_pos = strchr(cmd, '=');
   176   1      
-  177   1          if (eq_pos != NULL)
-C251 COMPILER V5.60.0,  vofa                                                               21/11/25  22:32:01  PAGE 4   
+  177   1              if (eq_pos != NULL)
+C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 4   
 
-  178   1          {
-  179   2              // æœ‰ç­‰å·ï¼Œè¯´æ˜æ˜¯å‚æ•°è®¾ç½®å‘½ä»¤
-  180   2              name_len = (uint8)(eq_pos - cmd);
+  178   1              {
+  179   2                      // ÓĞµÈºÅ£¬ËµÃ÷ÊÇ²ÎÊıÉèÖÃÃüÁî
+  180   2                      name_len = (uint8)(eq_pos - cmd);
   181   2      
-  182   2              if (name_len < 16)
-  183   2              {
-  184   3                  // æå–å‚æ•°å
-  185   3                  memcpy(param_name, cmd, name_len);
-  186   3                  param_name[name_len] = '\0';
+  182   2                      if (name_len < 16)
+  183   2                      {
+  184   3                              // ÌáÈ¡²ÎÊıÃû
+  185   3                              memcpy(param_name, cmd, name_len);
+  186   3                              param_name[name_len] = '\0';
   187   3      
-  188   3                  // æå–å‚æ•°å€¼
-  189   3                  param_value = atof(eq_pos + 1);
+  188   3                              // ÌáÈ¡²ÎÊıÖµ
+  189   3                              param_value = atof(eq_pos + 1);
   190   3      
-  191   3                  // æ ¹æ®å‚æ•°åæ‰§è¡Œä¸åŒæ“ä½œ
-  192   3                  if (strcmp(param_name, "PR") == 0)
-  193   3                  {
-  194   4                      // å¤„ç† PR å‚æ•°
-  195   4                      printf("Received PR = %.2f\n", param_value);
-  196   4                      // åœ¨è¿™é‡Œæ·»åŠ ä½ çš„å¤„ç†ä»£ç 
-  197   4                  }
-  198   3                  else if (strcmp(param_name, "SPEED") == 0)
-  199   3                  {
-  200   4                      // å¤„ç† SPEED å‚æ•°
-  201   4                      printf("Received SPEED = %.2f\n", param_value);
-  202   4                  }
-  203   3                  else if (strcmp(param_name, "KP") == 0)
-  204   3                  {
-  205   4                      // å¤„ç† KP å‚æ•°ï¼ˆPIDå‚æ•°ï¼‰
-  206   4                      printf("Received KP = %.2f\n", param_value);
-  207   4                  }
-  208   3                  else if (strcmp(param_name, "KI") == 0)
-  209   3                  {
-  210   4                      // å¤„ç† KI å‚æ•°
-  211   4                      printf("Received KI = %.2f\n", param_value);
-  212   4                  }
-  213   3                  else if (strcmp(param_name, "KD") == 0)
-  214   3                  {
-  215   4                      // å¤„ç† KD å‚æ•°
-  216   4                      printf("Received KD = %.2f\n", param_value);
-  217   4                  }
-  218   3              }
-  219   2          }
-  220   1          else
-  221   1          {
-  222   2              // æ— ç­‰å·ï¼Œè¯´æ˜æ˜¯å•ç‹¬çš„å‘½ä»¤
-  223   2              if (strcmp(cmd, "START") == 0)
-  224   2              {
-  225   3                  printf("Received START command\n");
-  226   3                  // æ‰§è¡Œå¯åŠ¨æ“ä½œ
-  227   3              }
-  228   2              else if (strcmp(cmd, "STOP") == 0)
-  229   2              {
-  230   3                  printf("Received STOP command\n");
-  231   3                  // æ‰§è¡Œåœæ­¢æ“ä½œ
-  232   3              }
-  233   2              else if (strcmp(cmd, "RESET") == 0)
-  234   2              {
-  235   3                  printf("Received RESET command\n");
-  236   3                  // æ‰§è¡Œå¤ä½æ“ä½œ
-  237   3              }
-  238   2          }
+  191   3                              // ¸ù¾İ²ÎÊıÃûÖ´ĞĞ²»Í¬²Ù×÷
+  192   3                              if (strcmp(param_name, "PR") == 0)
+  193   3                              {
+  194   4                                      // ´¦Àí PR ²ÎÊı
+  195   4                                      printf("Received PR = %.2f\n", param_value);
+  196   4                                      // ÔÚÕâÀïÌí¼ÓÄãµÄ´¦Àí´úÂë
+  197   4                              }
+  198   3                              else if (strcmp(param_name, "SPEED") == 0)
+  199   3                              {
+  200   4                                      // ´¦Àí SPEED ²ÎÊı
+  201   4                                      printf("Received SPEED = %.2f\n", param_value);
+  202   4                              }
+  203   3                              else if (strcmp(param_name, "KP") == 0)
+  204   3                              {
+  205   4                                      // ´¦Àí KP ²ÎÊı£¨PID_Direction²ÎÊı£©
+  206   4                                      printf("Received KP = %.2f\n", param_value);
+  207   4                              }
+  208   3                              else if (strcmp(param_name, "KI") == 0)
+  209   3                              {
+  210   4                                      // ´¦Àí KI ²ÎÊı
+  211   4                                      printf("Received KI = %.2f\n", param_value);
+  212   4                              }
+  213   3                              else if (strcmp(param_name, "KD") == 0)
+  214   3                              {
+  215   4                                      // ´¦Àí KD ²ÎÊı
+  216   4                                      printf("Received KD = %.2f\n", param_value);
+  217   4                              }
+  218   3                      }
+  219   2              }
+  220   1              else
+  221   1              {
+  222   2                      // ÎŞµÈºÅ£¬ËµÃ÷ÊÇµ¥¶ÀµÄÃüÁî
+  223   2                      if (strcmp(cmd, "START") == 0)
+  224   2                      {
+  225   3                              printf("Received START command\n");
+  226   3                              // Ö´ĞĞÆô¶¯²Ù×÷
+  227   3                      }
+  228   2                      else if (strcmp(cmd, "STOP") == 0)
+  229   2                      {
+  230   3                              printf("Received STOP command\n");
+  231   3                              // Ö´ĞĞÍ£Ö¹²Ù×÷
+  232   3                      }
+  233   2                      else if (strcmp(cmd, "RESET") == 0)
+  234   2                      {
+  235   3                              printf("Received RESET command\n");
+  236   3                              // Ö´ĞĞ¸´Î»²Ù×÷
+  237   3                      }
+  238   2              }
   239   1      }
+  240          
+  241          //-------------------------------------------------------------------------------------------------------
+             -------------
+  242          // º¯Êı¹¦ÄÜ     ´¦Àí VOFA+ ½ÓÊÕµ½µÄÃüÁî
+C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 5   
+
+  243          // ²ÎÊıËµÃ÷     cmd         ½ÓÊÕµ½µÄÃüÁî×Ö·û´®
+  244          // ·µ»Ø²ÎÊı     void
+  245          // Ê¹ÓÃÊ¾Àı     handle_vofa_command("KP=1.5");
+  246          //-------------------------------------------------------------------------------------------------------
+             -------------
+  247          void handle_vofa_command(char *cmd)
+  248          {
+  249   1              char *eq_pos;
+  250   1              char param_name[16];
+  251   1              uint8 name_len;
+  252   1              float value;
+  253   1              uint8 i;
+  254   1      
+  255   1              // ³õÊ¼»¯ÁÙÊ±±äÁ¿
+  256   1              for (i = 0; i < 16; i++)
+  257   1              {
+  258   2                      param_name[i] = 0;
+  259   2              }
+  260   1      
+  261   1              eq_pos = strchr(cmd, '=');
+  262   1      
+  263   1              if (eq_pos != NULL)
+  264   1              {
+  265   2                      // ========== ´¦Àí´ø²ÎÊıµÄÃüÁî ==========
+  266   2                      name_len = (uint8)(eq_pos - cmd);
+  267   2      
+  268   2                      if (name_len < 16)
+  269   2                      {
+  270   3                              // ¶ÁÈ¡²ÎÊıÃû
+  271   3                              memcpy(param_name, cmd, name_len);
+  272   3                              param_name[name_len] = '\0';
+  273   3      
+  274   3                              // ¶ÁÈ¡²ÎÊıÖµ
+  275   3                              value = atof(eq_pos + 1);
+  276   3      
+  277   3                              // ========== ×óÂÖËÙ¶È»· PID_Direction ²ÎÊı ==========
+  278   3                              if (strcmp(param_name, "L_KP") == 0)
+  279   3                              {
+  280   4                                      PID.left_speed.Kp = value;
+  281   4                                      printf("Left Kp = %.2f\n", value);
+  282   4                                      ips114_show_float(1 * 24, 18 * 0, value, 3, 2);
+  283   4                              }
+  284   3                              else if (strcmp(param_name, "L_KI") == 0)
+  285   3                              {
+  286   4                                      PID.left_speed.Ki = value;
+  287   4                                      printf("Left Ki = %.2f\n", value);
+  288   4                              }
+  289   3                              else if (strcmp(param_name, "L_KD") == 0)
+  290   3                              {
+  291   4                                      PID.left_speed.Kd = value;
+  292   4                                      printf("Left Kd = %.2f\n", value);
+  293   4                              }
+  294   3      
+  295   3                              // ========== ÓÒÂÖËÙ¶È»· PID_Direction ²ÎÊı ==========
+  296   3                              else if (strcmp(param_name, "R_KP") == 0)
+  297   3                              {
+  298   4                                      PID.right_speed.Kp = value;
+  299   4                                      printf("Right Kp = %.2f\n", value);
+  300   4                              }
+  301   3                              else if (strcmp(param_name, "R_KI") == 0)
+  302   3                              {
+  303   4                                      PID.right_speed.Ki = value;
+  304   4                                      printf("Right Ki = %.2f\n", value);
+  305   4                              }
+  306   3                              else if (strcmp(param_name, "R_KD") == 0)
+  307   3                              {
+C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 6   
+
+  308   4                                      PID.right_speed.Kd = value;
+  309   4                                      printf("Right Kd = %.2f\n", value);
+  310   4                              }
+  311   3      
+  312   3                              // ========== ×ªÏò»·£¨Î»ÖÃÊ½£©PID_Direction ²ÎÊı ==========
+  313   3                              else if (strcmp(param_name, "P_KP") == 0)
+  314   3                              {
+  315   4                                      PID.steer.Kp = value;
+  316   4                                      kp_Err = value; // Í¬²½µ½Î»ÖÃÎó²î Kp£¨ÓÃÓÚ²Ëµ¥ÏÔÊ¾£©
+  317   4                                      printf("Position Kp = %.2f\n", value);
+  318   4                              }
+  319   3                              else if (strcmp(param_name, "P_KI") == 0)
+  320   3                              {
+  321   4                                      // ¼æÈİ¾ÉÃüÁî£º½«Î»ÖÃÊ½µÄ Ki Ó³ÉäÎª kd_gyro
+  322   4                                      kd_gyro = value;
+  323   4                                      PID.steer.kd_gyro = value;
+  324   4                                      printf("Position kd_gyro (from Ki) = %.2f\n", value);
+  325   4                              }
+  326   3                              else if (strcmp(param_name, "P_KD") == 0)
+  327   3                              {
+  328   4                                      PID.steer.Kd = value;
+  329   4                                      kd_Err = value; // Í¬²½µ½Î»ÖÃÎó²î Kd£¨ÓÃÓÚ²Ëµ¥ÏÔÊ¾£©
+  330   4                                      printf("Position Kd = %.2f\n", value);
+  331   4                              }
+  332   3                              else if (strcmp(param_name, "KD_GYRO") == 0)
+  333   3                              {
+  334   4                                      kd_gyro = value;
+  335   4                                      PID.steer.kd_gyro = value; // ½ÇËÙ¶ÈÎ¢·ÖÈ¨ÖØÏµÊı
+  336   4                                      printf("Kd Gyro = %.2f\n", value);
+  337   4                              }
+  338   3      
+  339   3                              // ========== ËÙ¶È¿ØÖÆ ==========
+  340   3                              else if (strcmp(param_name, "SPEED") == 0)
+  341   3                              {
+  342   4                                      test_speed = value;
+  343   4                                      printf("Target Speed = %.2f\n", value);
+  344   4                              }
+  345   3                              else if (strcmp(param_name, "RP") == 0)
+  346   3                              {
+  347   4                                      // RP ÎªÕ¼Î»ÃüÁî£¬¿É°´ÒµÎñĞèÒªĞŞ¸ÄÓ³Éä
+  348   4                                      test_speed = value; // Ê¾Àı£º½«ÆäÓ³ÉäÎª²âÊÔËÙ¶È
+  349   4                                      printf("RP = %.2f\n", value);
+  350   4                              }
+  351   3                              else if (strcmp(param_name, "MOTOR") == 0)
+  352   3                              {
+  353   4                                      // ÏÔÊ¾/µ÷ÊÔÓÃÍ¾£ºÓ³Éäµ½Î»ÖÃÊ½ PID_Direction Êä³ö
+  354   4                                      PID.steer.output = value;
+  355   4                                      printf("Motor = %.2f\n", value);
+  356   4                              }
+  357   3                              else if (strcmp(param_name, "SPEED_RUN") == 0)
+  358   3                              {
+  359   4                                      speed_run = value;
+  360   4                                      printf("Speed Run = %.2f\n", value);
+  361   4                              }
+  362   3      
+  363   3                              // ========== Îó²î£¨¼æÈİÍâ²¿×¢Èë£© ==========
+  364   3                              else if (strcmp(param_name, "ERR") == 0)
+  365   3                              {
+  366   4                                      Err = value;
+  367   4                                      printf("Error = %.2f\n", value);
+  368   4                              }
+  369   3                              else
+  370   3                              {
+  371   4                                      printf("Unknown parameter: %s = %.2f\n", param_name, value);
+  372   4                              }
+  373   3                      }
+C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 7   
+
+  374   2              }
+  375   1              else
+  376   1              {
+  377   2                      // ========== ´¦ÀíÎŞ²ÎÊıµÄÃüÁî ==========
+  378   2                      if (strcmp(cmd, "START") == 0)
+  379   2                      {
+  380   3                              // Æô¶¯µç»ú
+  381   3                              printf("Motor START\n");
+  382   3                              // ¿ÉÔÚ´ËÉèÖÃÔËĞĞ±êÖ¾Î»
+  383   3                      }
+  384   2                      else if (strcmp(cmd, "STOP") == 0)
+  385   2                      {
+  386   3                              // Í£Ö¹µç»ú£ºÇåÁã×ªÏò»·Êä³öÓëÔËĞĞËÙ¶È
+  387   3                              PID.steer.output = 0;
+  388   3                              speed_run = 0;
+  389   3                              test_speed = 0;
+  390   3                              printf("Motor STOP\n");
+  391   3                      }
+  392   2                      else if (strcmp(cmd, "RESET") == 0)
+  393   2                      {
+  394   3                              // Èí¸´Î»ÏµÍ³
+  395   3                              IAP_CONTR = 0x60; // ´¥·¢Èí¸´Î»
+  396   3                      }
+  397   2                      else if (strcmp(cmd, "SAVE") == 0)
+  398   2                      {
+  399   3                              // ±£´æ²ÎÊıµ½ EEPROM
+  400   3                              eeprom_flash();
+  401   3                              printf("Parameters saved\n");
+  402   3                      }
+  403   2                      else if (strcmp(cmd, "LOAD") == 0)
+  404   2                      {
+  405   3                              // ´Ó EEPROM ¼ÓÔØ²ÎÊı
+  406   3                              eeprom_init();
+  407   3                              printf("Parameters loaded\n");
+  408   3                      }
+  409   2                      else if (strcmp(cmd, "INFO") == 0)
+  410   2                      {
+  411   3                              // ´òÓ¡µ±Ç°²ÎÊıĞÅÏ¢
+  412   3                              printf("=== Current Parameters ===\n");
+  413   3                              printf("Left PID_Direction: %.2f, %.2f, %.2f\n",
+  414   3                                         PID.left_speed.Kp,
+  415   3                                         PID.left_speed.Ki,
+  416   3                                         PID.left_speed.Kd);
+  417   3                              printf("Right PID_Direction: %.2f, %.2f, %.2f\n",
+  418   3                                         PID.right_speed.Kp,
+  419   3                                         PID.right_speed.Ki,
+  420   3                                         PID.right_speed.Kd);
+  421   3                              printf("Speed: %.2f\n", test_speed);
+  422   3                      }
+  423   2                      else
+  424   2                      {
+  425   3                              printf("Unknown command: %s\n", cmd);
+  426   3                      }
+  427   2              }
+  428   1      }
 
 
 Module Information          Static   Overlayable
 ------------------------------------------------
-  code size            =      1176     ------
-C251 COMPILER V5.60.0,  vofa                                                               21/11/25  22:32:01  PAGE 5   
-
+  code size            =      3486     ------
   ecode size           =    ------     ------
   data size            =    ------     ------
   idata size           =    ------     ------
   pdata size           =    ------     ------
-  xdata size           =       139     ------
+  xdata size           =       169     ------
   xdata-const size     =    ------     ------
   edata size           =    ------     ------
+C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 8   
+
   bit size             =    ------     ------
   ebit size            =    ------     ------
   bitaddressable size  =    ------     ------
@@ -287,7 +484,7 @@ Module Information          Static   Overlayable
   far data size        =    ------     ------
   huge data size       =    ------     ------
   const size           =    ------     ------
-  hconst size          =       209     ------
+  hconst size          =       799     ------
 End of Module Information.
 
 

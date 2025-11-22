@@ -149,8 +149,8 @@ void IMUupdate(FLOAT_XYZ *Gyr_rad, FLOAT_XYZ *Acc_filt, FLOAT_ANGLE *Att_Angle)
 
     // 8) 四元数转欧拉角（Z-Y-X，航向-俯仰-横滚）
     // 角度转换为“度”
-//    Att_Angle->rol = (float)(my_atan2(2 * (q0 * q1 + q2 * q3), 1 - 2 * (q1 * q1 + q2 * q2)) * RadtoDeg);
-//    Att_Angle->pit = (float)(asin(2 * (q0 * q2 - q1 * q3)) * RadtoDeg);
+    //    Att_Angle->rol = (float)(my_atan2(2 * (q0 * q1 + q2 * q3), 1 - 2 * (q1 * q1 + q2 * q2)) * RadtoDeg);
+    //    Att_Angle->pit = (float)(asin(2 * (q0 * q2 - q1 * q3)) * RadtoDeg);
     // 航向（yaw）若无磁力计参与，可直接用陀螺积分近似更新（对漂移较敏感）
     // 这里做了小阈值抑制：角速度过小认为是噪声，不更新 yaw
     if ((Gyr_rad->Z * RadtoDeg > 1.0f) || (Gyr_rad->Z * RadtoDeg < -1.0f))

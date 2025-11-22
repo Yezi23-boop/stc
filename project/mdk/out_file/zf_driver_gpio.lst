@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  zf_driver_gpio                                                     21/11/25  20:48:58  PAGE 1   
+C251 COMPILER V5.60.0,  zf_driver_gpio                                                     22/11/25  20:48:47  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE zf_driver_gpio
@@ -66,7 +66,7 @@ stmt  level    source
    52   1          {
    53   2              PXPU(pin) &= ~(1 << (pin & 0x0F));
    54   2              PXPD(pin) &= ~(1 << (pin & 0x0F));
-C251 COMPILER V5.60.0,  zf_driver_gpio                                                     21/11/25  20:48:58  PAGE 2   
+C251 COMPILER V5.60.0,  zf_driver_gpio                                                     22/11/25  20:48:47  PAGE 2   
 
    55   2          }
    56   1          else if(GPI_PULL_DOWN == mode)
@@ -134,7 +134,7 @@ stmt  level    source
   118   2                      // 参数不匹配
   119   2              }
   120   1      }
-C251 COMPILER V5.60.0,  zf_driver_gpio                                                     21/11/25  20:48:58  PAGE 3   
+C251 COMPILER V5.60.0,  zf_driver_gpio                                                     22/11/25  20:48:47  PAGE 3   
 
   121          
   122          // 内部使用，用户无需关心。
@@ -202,7 +202,7 @@ stmt  level    source
   184   3                  {
   185   4                                      P3SR &= ~(1<<(pin & 0x0F));
   186   4                  }
-C251 COMPILER V5.60.0,  zf_driver_gpio                                                     21/11/25  20:48:58  PAGE 4   
+C251 COMPILER V5.60.0,  zf_driver_gpio                                                     22/11/25  20:48:47  PAGE 4   
 
   187   3                  else if(GPIO_SPEED_LOW == speed)
   188   3                  {
@@ -270,7 +270,7 @@ stmt  level    source
   250   2              {
   251   3                  if(GPIO == dir)
   252   3                  {
-C251 COMPILER V5.60.0,  zf_driver_gpio                                                     21/11/25  20:48:58  PAGE 5   
+C251 COMPILER V5.60.0,  zf_driver_gpio                                                     22/11/25  20:48:47  PAGE 5   
 
   253   4                      P0M1 &= ~(1 << (pin & 0xF));
   254   4                      P0M0 &= ~(1 << (pin & 0xF));
@@ -338,7 +338,7 @@ stmt  level    source
   316   3                  else if(GPI == dir)
   317   3                  {
   318   4                      P2M1 |= (1 << (pin & 0xF));
-C251 COMPILER V5.60.0,  zf_driver_gpio                                                     21/11/25  20:48:58  PAGE 6   
+C251 COMPILER V5.60.0,  zf_driver_gpio                                                     22/11/25  20:48:47  PAGE 6   
 
   319   4                      P2M0 &= ~(1 << (pin & 0xF));
   320   4                  }
@@ -406,7 +406,7 @@ stmt  level    source
   382   3      //            {
   383   3      //                P5M1 |= (1 << (pin & 0xF));
   384   3      //                P5M0 |= (1 << (pin & 0xF));
-C251 COMPILER V5.60.0,  zf_driver_gpio                                                     21/11/25  20:48:58  PAGE 7   
+C251 COMPILER V5.60.0,  zf_driver_gpio                                                     22/11/25  20:48:47  PAGE 7   
 
   385   3      //            }
   386   3                  else if(GPO == dir)
@@ -474,7 +474,7 @@ stmt  level    source
   446   3              }
   447   2              break;
   448   2              
-C251 COMPILER V5.60.0,  zf_driver_gpio                                                     21/11/25  20:48:58  PAGE 8   
+C251 COMPILER V5.60.0,  zf_driver_gpio                                                     22/11/25  20:48:47  PAGE 8   
 
   449   2              case IO_P50:
   450   2              {
@@ -542,7 +542,7 @@ stmt  level    source
   510   4                                      P2 &= ~(1 << (pin & 0x0F));
   511   4                              }
   512   3              }
-C251 COMPILER V5.60.0,  zf_driver_gpio                                                     21/11/25  20:48:58  PAGE 9   
+C251 COMPILER V5.60.0,  zf_driver_gpio                                                     22/11/25  20:48:47  PAGE 9   
 
   513   2              break;
   514   2              
@@ -610,7 +610,7 @@ stmt  level    source
   574   2              }
   575   1              else
   576   1              {
-C251 COMPILER V5.60.0,  zf_driver_gpio                                                     21/11/25  20:48:58  PAGE 10  
+C251 COMPILER V5.60.0,  zf_driver_gpio                                                     22/11/25  20:48:47  PAGE 10  
 
   577   2                      gpio_high(pin);
   578   2              }
@@ -678,7 +678,7 @@ stmt  level    source
   638   2          }
   639   1      }
   640          
-C251 COMPILER V5.60.0,  zf_driver_gpio                                                     21/11/25  20:48:58  PAGE 11  
+C251 COMPILER V5.60.0,  zf_driver_gpio                                                     22/11/25  20:48:47  PAGE 11  
 
   641          //-------------------------------------------------------------------------------------------------------
              -------------
@@ -747,7 +747,7 @@ Module Information          Static   Overlayable
   ebitaddressable size =    ------     ------
   far data size        =    ------     ------
   huge data size       =    ------     ------
-C251 COMPILER V5.60.0,  zf_driver_gpio                                                     21/11/25  20:48:58  PAGE 12  
+C251 COMPILER V5.60.0,  zf_driver_gpio                                                     22/11/25  20:48:47  PAGE 12  
 
   const size           =    ------     ------
   hconst size          =    ------     ------

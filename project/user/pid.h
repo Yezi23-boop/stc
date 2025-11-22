@@ -1,6 +1,7 @@
 #ifndef __PID_H__
 #define __PID_H__
 #include "zf_common_headfile.h"
+// 速度环 PID_Direction（增量式），命名简洁清晰
 typedef struct
 {
   float Kp;          // 比例系数
@@ -12,20 +13,35 @@ typedef struct
   float output;      // 当前输出值
   float max_output;  // 输出限幅值
   float min_output;  // 输出限幅值
-  float integral;    // 积分项累积值（用于位置式PID）
-} PID;
-
+  float speed;       // 当前速度
+} PID_Speed;
+// 转向环 PID_Direction（位置式），命名简洁清晰
 typedef struct
 {
-  PID left_PID;
-  PID right_PID;
-  PID Positional_PID;
-} PID_struct;
+  float Kp;         // 比例系数
+  float Kd;         // 微分系数
+  float kd_gyro;    // 陀螺仪微分系数（陀螺项权重）
+  float error;      // 当前误差
+  float prev_error; // 上一次误差
+  float output;     // 当前输出值
+  float max_output; // 输出限幅值
+  float min_output; // 输出限幅值
+} PID_Steer;
+// 控制器聚合：左右速度环 + 转向环
+typedef struct
+{
+  PID_Speed left_speed;  // 左轮速度环
+  PID_Speed right_speed; // 右轮速度环
+  PID_Steer steer;       // 转向（位置式）环
+} PID_Controllers;
 
-void PID_Init(PID *pid, float Kp, float Ki, float Kd, float max_output, float min_output);
-void Encoder_get(void);
-float PID_Calculate(PID *pid, float setpoint, float actual);
-float PID_Positional_Calculate(PID *pid, float actual, float imu);
+// 初始化函数：分别用于增量式与方向（位置式）PID_Direction
+void pid_speed_init(PID_Speed *pid, float kp, float ki, float kd, float max_out, float min_out);
+void pid_steer_init(PID_Steer *pid, float kp, float kd, float kd_gyro, float max_out, float min_out);
+void Encoder_get(PID_Speed *pid_l, PID_Speed *pid_r);
+void pid_speed_update(PID_Speed *pid, float target, float actual);
+void pid_steer_update(PID_Steer *pid, float error, float gyro);
 extern float speed_l, speed_r;
-extern PID_struct motors_pid;
+extern PID_Controllers PID;
+
 #endif

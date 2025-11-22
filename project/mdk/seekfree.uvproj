@@ -565,16 +565,6 @@
               <FilePath>..\..\libraries\zf_device\zf_device_type.h</FilePath>
             </File>
             <File>
-              <FileName>zf_device_tft180.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_tft180.c</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_tft180.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_tft180.h</FilePath>
-            </File>
-            <File>
               <FileName>zf_device_ips114.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\zf_device\zf_device_ips114.c</FilePath>
@@ -583,36 +573,6 @@
               <FileName>zf_device_ips114.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\libraries\zf_device\zf_device_ips114.h</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_ips200.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_ips200.c</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_ips200.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_ips200.h</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_dl1a.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_dl1a.c</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_dl1a.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_dl1a.h</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_ble6a20.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_ble6a20.c</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_ble6a20.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_ble6a20.h</FilePath>
             </File>
             <File>
               <FileName>zf_device_wireless_uart.c</FileName>
@@ -625,26 +585,6 @@
               <FilePath>..\..\libraries\zf_device\zf_device_wireless_uart.h</FilePath>
             </File>
             <File>
-              <FileName>zf_device_mpu6050.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_mpu6050.c</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_mpu6050.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_mpu6050.h</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_icm20602.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_icm20602.c</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_icm20602.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_icm20602.h</FilePath>
-            </File>
-            <File>
               <FileName>zf_device_imu660ra.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\zf_device\zf_device_imu660ra.c</FilePath>
@@ -653,61 +593,6 @@
               <FileName>zf_device_imu660ra.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\libraries\zf_device\zf_device_imu660ra.h</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_imu963ra.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_imu963ra.c</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_imu963ra.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_imu963ra.h</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_gps_tau1201.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_gps_tau1201.c</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_gps_tau1201.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_gps_tau1201.h</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_tsl1401.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_tsl1401.c</FilePath>
-            </File>
-            <File>
-              <FileName>zf_device_tsl1401.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\libraries\zf_device\zf_device_tsl1401.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>zf_components</GroupName>
-          <Files>
-            <File>
-              <FileName>seekfree_assistant.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\zf_components\seekfree_assistant.c</FilePath>
-            </File>
-            <File>
-              <FileName>seekfree_assistant.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\libraries\zf_components\seekfree_assistant.h</FilePath>
-            </File>
-            <File>
-              <FileName>seekfree_assistant_interface.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\libraries\zf_components\seekfree_assistant_interface.c</FilePath>
-            </File>
-            <File>
-              <FileName>seekfree_assistant_interface.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\libraries\zf_components\seekfree_assistant_interface.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -748,11 +633,6 @@
               <FileName>menu.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\user\menu.h</FilePath>
-            </File>
-            <File>
-              <FileName>stc_usb_cdc_32g.LIB</FileName>
-              <FileType>4</FileType>
-              <FilePath>.\stc_usb_cdc_32g.LIB</FilePath>
             </File>
             <File>
               <FileName>ADC.c</FileName>
@@ -853,6 +733,21 @@
               <FileName>vofa.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\user\vofa.h</FilePath>
+            </File>
+            <File>
+              <FileName>stc_usb_cdc_32g.LIB</FileName>
+              <FileType>4</FileType>
+              <FilePath>.\stc_usb_cdc_32g.LIB</FilePath>
+            </File>
+            <File>
+              <FileName>AI8051U_32_MDU32.LIB</FileName>
+              <FileType>4</FileType>
+              <FilePath>.\AI8051U_32_MDU32.LIB</FilePath>
+            </File>
+            <File>
+              <FileName>AI8051U_32_TFPU.LIB</FileName>
+              <FileType>4</FileType>
+              <FilePath>.\AI8051U_32_TFPU.LIB</FilePath>
             </File>
           </Files>
         </Group>

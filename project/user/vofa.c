@@ -2,238 +2,427 @@
 #include "vofa.h"
 #include <stdlib.h>
 
-// VOFA æ•°æ®å¯¹è±¡
+// VOFA Êı¾İ¶ÔÏó
 static vofa_data_struct vofa_data;
 
-// å†…éƒ¨å‡½æ•°å£°æ˜
+// ÄÚ²¿º¯ÊıÉùÃ÷
 static void vofa_parse_byte(uint8 dat);
 
 //-------------------------------------------------------------------------------------------------------------------
-// å‡½æ•°ç®€ä»‹     VOFA+ åˆå§‹åŒ–
-// å‚æ•°è¯´æ˜     void
-// è¿”å›å‚æ•°     void
-// ä½¿ç”¨ç¤ºä¾‹     vofa_init();
-// å¤‡æ³¨ä¿¡æ¯     åˆå§‹åŒ– VOFA æ•°æ®ç»“æ„ï¼ˆæ— éœ€é¢å¤–æ“ä½œï¼Œä½¿ç”¨ç³»ç»Ÿè‡ªå¸¦ FIFOï¼‰
+// º¯Êı¼ò½é     VOFA+ ³õÊ¼»¯
+// ²ÎÊıËµÃ÷     void
+// ·µ»Ø²ÎÊı     void
+// Ê¹ÓÃÊ¾Àı     vofa_init();
+// ±¸×¢ĞÅÏ¢     ³õÊ¼»¯ VOFA Êı¾İ½á¹¹£¨ÎŞĞè¶îÍâ²Ù×÷£¬Ê¹ÓÃÏµÍ³×Ô´ø FIFO£©
 //-------------------------------------------------------------------------------------------------------------------
 void vofa_init(void)
 {
-    uint8 i;
+	uint8 i;
 
-    // æ¸…ç©ºç¼“å†²åŒº
-    for (i = 0; i < VOFA_BUFFER_SIZE; i++)
-    {
-        vofa_data.buffer[i] = 0;
-    }
+	// Çå¿Õ»º³åÇø
+	for (i = 0; i < VOFA_BUFFER_SIZE; i++)
+	{
+		vofa_data.buffer[i] = 0;
+	}
 
-    for (i = 0; i < VOFA_MAX_CMD_LEN; i++)
-    {
-        vofa_data.cmd_buffer[i] = 0;
-    }
+	for (i = 0; i < VOFA_MAX_CMD_LEN; i++)
+	{
+		vofa_data.cmd_buffer[i] = 0;
+	}
 
-    vofa_data.index = 0;
-    vofa_data.cmd_len = 0;
-    vofa_data.state = VOFA_PARSE_IDLE;
+	vofa_data.index = 0;
+	vofa_data.cmd_len = 0;
+	vofa_data.state = VOFA_PARSE_IDLE;
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// å‡½æ•°ç®€ä»‹     VOFA+ FireWater åè®®ä» FIFO è¯»å–å¹¶è§£ææ•°æ®
-// å‚æ•°è¯´æ˜     void
-// è¿”å›å‚æ•°     void
-// ä½¿ç”¨ç¤ºä¾‹     vofa_parse_from_fifo();  // åœ¨ä¸»å¾ªç¯ä¸­è°ƒç”¨
-// å¤‡æ³¨ä¿¡æ¯     FireWater åè®®: ä»¥ '!' (0x21) ä½œä¸ºå¸§å°¾æ ‡è¯†
-//              ç›´æ¥ä½¿ç”¨ wireless_uart_read_buffer() ä» FIFO è¯»å–æ•°æ®
+// º¯Êı¼ò½é     VOFA+ FireWater Ğ­Òé´Ó FIFO ¶ÁÈ¡²¢½âÎöÊı¾İ
+// ²ÎÊıËµÃ÷     void
+// ·µ»Ø²ÎÊı     void
+// Ê¹ÓÃÊ¾Àı     vofa_parse_from_fifo();  // ÔÚÖ÷Ñ­»·ÖĞµ÷ÓÃ
+// ±¸×¢ĞÅÏ¢     FireWater Ğ­Òé: ÒÔ '!' (0x21) ×÷ÎªÖ¡Î²±êÊ¶
+//              Ö±½ÓÊ¹ÓÃ wireless_uart_read_buffer() ´Ó FIFO ¶ÁÈ¡Êı¾İ
 //-------------------------------------------------------------------------------------------------------------------
 void vofa_parse_from_fifo(void)
 {
-    uint8 dat;
+	uint8 dat;
 
-    // ä» FIFO è¯»å–æ•°æ®ï¼ˆä½¿ç”¨ç³»ç»Ÿè‡ªå¸¦å‡½æ•°ï¼‰
-    while (wireless_uart_read_buffer(&dat, 1) > 0)
-    {
-        vofa_parse_byte(dat);
-    }
+	// ´Ó FIFO ¶ÁÈ¡Êı¾İ£¨Ê¹ÓÃÏµÍ³×Ô´øº¯Êı£©
+	while (wireless_uart_read_buffer(&dat, 1) > 0)
+	{
+		vofa_parse_byte(dat);
+	}
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// å‡½æ•°ç®€ä»‹     VOFA+ FireWater åè®®è§£æå•ä¸ªå­—èŠ‚ï¼ˆå†…éƒ¨å‡½æ•°ï¼‰
-// å‚æ•°è¯´æ˜     dat             æ¥æ”¶åˆ°çš„å­—èŠ‚æ•°æ®
-// è¿”å›å‚æ•°     void
-// ä½¿ç”¨ç¤ºä¾‹     vofa_parse_byte(0x50);
-// å¤‡æ³¨ä¿¡æ¯     FireWater åè®®: ä»¥ '!' (0x21) ä½œä¸ºå¸§å°¾æ ‡è¯†
-//              ä¾‹å¦‚: "PR=2.32!" ä¼šè¢«è§£æä¸ºå®Œæ•´å‘½ä»¤
+// º¯Êı¼ò½é     VOFA+ FireWater Ğ­Òé½âÎöµ¥¸ö×Ö½Ú£¨ÄÚ²¿º¯Êı£©
+// ²ÎÊıËµÃ÷     dat             ½ÓÊÕµ½µÄ×Ö½ÚÊı¾İ
+// ·µ»Ø²ÎÊı     void
+// Ê¹ÓÃÊ¾Àı     vofa_parse_byte(0x50);
+// ±¸×¢ĞÅÏ¢     FireWater Ğ­Òé: ÒÔ '!' (0x21) ×÷ÎªÖ¡Î²±êÊ¶
+//              ÀıÈç: "PR=2.32!" »á±»½âÎöÎªÍêÕûÃüÁî
 //-------------------------------------------------------------------------------------------------------------------
 static void vofa_parse_byte(uint8 dat)
 {
-    // æ£€æµ‹åˆ°å¸§å°¾æ ‡è¯† '!' (ASCII: 0x21 å³åè¿›åˆ¶ 33)
-    if (dat == '!' || dat == 0x21)
-    {
-        if (vofa_data.index > 0)
-        {
-            // æ·»åŠ å­—ç¬¦ä¸²ç»“æŸç¬¦
-            vofa_data.buffer[vofa_data.index] = '\0';
+	// ¼ì²âµ½Ö¡Î²±êÊ¶ '!' (ASCII: 0x21 ¼´Ê®½øÖÆ 33)
+	if (dat == '!' || dat == 0x21)
+	{
+		if (vofa_data.index > 0)
+		{
+			// Ìí¼Ó×Ö·û´®½áÊø·û
+			vofa_data.buffer[vofa_data.index] = '\0';
 
-            // å¤åˆ¶åˆ°å‘½ä»¤ç¼“å†²åŒº
-            memcpy(vofa_data.cmd_buffer, vofa_data.buffer, vofa_data.index + 1);
-            vofa_data.cmd_len = vofa_data.index;
+			// ¸´ÖÆµ½ÃüÁî»º³åÇø
+			memcpy(vofa_data.cmd_buffer, vofa_data.buffer, vofa_data.index + 1);
+			vofa_data.cmd_len = vofa_data.index;
 
-            // æ ‡è®°è§£æå®Œæˆ
-            vofa_data.state = VOFA_PARSE_COMPLETE;
+			// ±ê¼Ç½âÎöÍê³É
+			vofa_data.state = VOFA_PARSE_COMPLETE;
 
-            // é‡ç½®ç´¢å¼•
-            vofa_data.index = 0;
-        }
-    }
-    else
-    {
-        // æ¥æ”¶æ•°æ®
-        if (vofa_data.index < VOFA_BUFFER_SIZE - 1)
-        {
-            vofa_data.buffer[vofa_data.index++] = dat;
-            vofa_data.state = VOFA_PARSE_RECEIVING;
-        }
-        else
-        {
-            // ç¼“å†²åŒºæº¢å‡ºï¼Œé‡ç½®
-            vofa_data.index = 0;
-            vofa_data.state = VOFA_PARSE_IDLE;
-        }
-    }
+			// ÖØÖÃË÷Òı
+			vofa_data.index = 0;
+		}
+	}
+	else
+	{
+		// ½ÓÊÕÊı¾İ
+		if (vofa_data.index < VOFA_BUFFER_SIZE - 1)
+		{
+			vofa_data.buffer[vofa_data.index++] = dat;
+			vofa_data.state = VOFA_PARSE_RECEIVING;
+		}
+		else
+		{
+			// »º³åÇøÒç³ö£¬ÖØÖÃ
+			vofa_data.index = 0;
+			vofa_data.state = VOFA_PARSE_IDLE;
+		}
+	}
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// å‡½æ•°ç®€ä»‹     è·å– VOFA+ æ¥æ”¶åˆ°çš„å®Œæ•´å‘½ä»¤
-// å‚æ•°è¯´æ˜     cmd_out         è¾“å‡ºå‘½ä»¤å­—ç¬¦ä¸²çš„ç¼“å†²åŒº
-// å‚æ•°è¯´æ˜     max_len         ç¼“å†²åŒºæœ€å¤§é•¿åº¦
-// è¿”å›å‚æ•°     uint8           1-æœ‰æ–°å‘½ä»¤ 0-æ— æ–°å‘½ä»¤
-// ä½¿ç”¨ç¤ºä¾‹     char cmd[32];
+// º¯Êı¼ò½é     »ñÈ¡ VOFA+ ½ÓÊÕµ½µÄÍêÕûÃüÁî
+// ²ÎÊıËµÃ÷     cmd_out         Êä³öÃüÁî×Ö·û´®µÄ»º³åÇø
+// ²ÎÊıËµÃ÷     max_len         »º³åÇø×î´ó³¤¶È
+// ·µ»Ø²ÎÊı     uint8           1-ÓĞĞÂÃüÁî 0-ÎŞĞÂÃüÁî
+// Ê¹ÓÃÊ¾Àı     char cmd[32];
 //              if(vofa_get_command(cmd, 32)) {
-//                  // å¤„ç†å‘½ä»¤
+//                  // ´¦ÀíÃüÁî
 //              }
-// å¤‡æ³¨ä¿¡æ¯     è·å–å‘½ä»¤åä¼šè‡ªåŠ¨æ¸…é™¤å®Œæˆæ ‡å¿—
+// ±¸×¢ĞÅÏ¢     »ñÈ¡ÃüÁîºó»á×Ô¶¯Çå³ıÍê³É±êÖ¾
 //-------------------------------------------------------------------------------------------------------------------
 uint8 vofa_get_command(char *cmd_out, uint8 max_len)
 {
-    uint8 result = 0;
+	uint8 result = 0;
 
-    if (vofa_data.state == VOFA_PARSE_COMPLETE)
-    {
-        // å¤åˆ¶å‘½ä»¤
-        if (vofa_data.cmd_len < max_len)
-        {
-            memcpy(cmd_out, vofa_data.cmd_buffer, vofa_data.cmd_len + 1);
-            result = 1;
-        }
+	if (vofa_data.state == VOFA_PARSE_COMPLETE)
+	{
+		// ¸´ÖÆÃüÁî
+		if (vofa_data.cmd_len < max_len)
+		{
+			memcpy(cmd_out, vofa_data.cmd_buffer, vofa_data.cmd_len + 1);
+			result = 1;
+		}
 
-        // æ¸…é™¤å®Œæˆæ ‡å¿—
-        vofa_data.state = VOFA_PARSE_IDLE;
-        vofa_data.cmd_len = 0;
-    }
+		// Çå³ıÍê³É±êÖ¾
+		vofa_data.state = VOFA_PARSE_IDLE;
+		vofa_data.cmd_len = 0;
+	}
 
-    return result;
+	return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// å‡½æ•°ç®€ä»‹     æ¸…ç©º VOFA æ¥æ”¶ç¼“å†²åŒº
-// å‚æ•°è¯´æ˜     void
-// è¿”å›å‚æ•°     void
-// ä½¿ç”¨ç¤ºä¾‹     vofa_clear_buffer();
-// å¤‡æ³¨ä¿¡æ¯     åœ¨å‡ºç°æ¥æ”¶é”™è¯¯æ—¶å¯ä»¥è°ƒç”¨æ­¤å‡½æ•°æ¸…ç©ºç¼“å†²åŒº
+// º¯Êı¼ò½é     Çå¿Õ VOFA ½ÓÊÕ»º³åÇø
+// ²ÎÊıËµÃ÷     void
+// ·µ»Ø²ÎÊı     void
+// Ê¹ÓÃÊ¾Àı     vofa_clear_buffer();
+// ±¸×¢ĞÅÏ¢     ÔÚ³öÏÖ½ÓÊÕ´íÎóÊ±¿ÉÒÔµ÷ÓÃ´Ëº¯ÊıÇå¿Õ»º³åÇø
 //-------------------------------------------------------------------------------------------------------------------
 void vofa_clear_buffer(void)
 {
-    vofa_data.index = 0;
-    vofa_data.cmd_len = 0;
-    vofa_data.state = VOFA_PARSE_IDLE;
+	vofa_data.index = 0;
+	vofa_data.cmd_len = 0;
+	vofa_data.state = VOFA_PARSE_IDLE;
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// å‡½æ•°ç®€ä»‹     VOFA+ FireWater åè®®å‘½ä»¤è§£æç¤ºä¾‹
-// å‚æ•°è¯´æ˜     cmd             æ¥æ”¶åˆ°çš„å‘½ä»¤å­—ç¬¦ä¸²
-// è¿”å›å‚æ•°     void
-// ä½¿ç”¨ç¤ºä¾‹     vofa_parse_command("PR=2.32");
-// å¤‡æ³¨ä¿¡æ¯     ç¤ºä¾‹å‡½æ•°ï¼Œå±•ç¤ºå¦‚ä½•è§£æä¸åŒæ ¼å¼çš„å‘½ä»¤
-//              æ ¼å¼1: "PR=2.32"  - è§£æå‚æ•°åå’Œæµ®ç‚¹æ•°å€¼
-//              æ ¼å¼2: "SPEED=100" - è§£æå‚æ•°åå’Œæ•´æ•°å€¼
-//              æ ¼å¼3: "START" - å•ç‹¬çš„å‘½ä»¤
+// º¯Êı¼ò½é     VOFA+ FireWater Ğ­ÒéÃüÁî½âÎöÊ¾Àı
+// ²ÎÊıËµÃ÷     cmd             ½ÓÊÕµ½µÄÃüÁî×Ö·û´®
+// ·µ»Ø²ÎÊı     void
+// Ê¹ÓÃÊ¾Àı     vofa_parse_command("PR=2.32");
+// ±¸×¢ĞÅÏ¢     Ê¾Àıº¯Êı£¬Õ¹Ê¾ÈçºÎ½âÎö²»Í¬¸ñÊ½µÄÃüÁî
+//              ¸ñÊ½1: "PR=2.32"  - ½âÎö²ÎÊıÃûºÍ¸¡µãÊıÖµ
+//              ¸ñÊ½2: "SPEED=100" - ½âÎö²ÎÊıÃûºÍÕûÊıÖµ
+//              ¸ñÊ½3: "START" - µ¥¶ÀµÄÃüÁî
 //-------------------------------------------------------------------------------------------------------------------
 void vofa_parse_command(char *cmd)
 {
-    char *eq_pos;
-    char param_name[16];
-    float param_value;
-    uint8 name_len;
-    uint8 i;
+	char *eq_pos;
+	char param_name[16];
+	float param_value;
+	uint8 name_len;
+	uint8 i;
 
-    // åˆå§‹åŒ–å˜é‡
-    for (i = 0; i < 16; i++)
-    {
-        param_name[i] = 0;
-    }
-    param_value = 0.0;
+	// ³õÊ¼»¯±äÁ¿
+	for (i = 0; i < 16; i++)
+	{
+		param_name[i] = 0;
+	}
+	param_value = 0.0;
 
-    // æŸ¥æ‰¾ç­‰å·ä½ç½®
-    eq_pos = strchr(cmd, '=');
+	// ²éÕÒµÈºÅÎ»ÖÃ
+	eq_pos = strchr(cmd, '=');
 
-    if (eq_pos != NULL)
-    {
-        // æœ‰ç­‰å·ï¼Œè¯´æ˜æ˜¯å‚æ•°è®¾ç½®å‘½ä»¤
-        name_len = (uint8)(eq_pos - cmd);
+	if (eq_pos != NULL)
+	{
+		// ÓĞµÈºÅ£¬ËµÃ÷ÊÇ²ÎÊıÉèÖÃÃüÁî
+		name_len = (uint8)(eq_pos - cmd);
 
-        if (name_len < 16)
-        {
-            // æå–å‚æ•°å
-            memcpy(param_name, cmd, name_len);
-            param_name[name_len] = '\0';
+		if (name_len < 16)
+		{
+			// ÌáÈ¡²ÎÊıÃû
+			memcpy(param_name, cmd, name_len);
+			param_name[name_len] = '\0';
 
-            // æå–å‚æ•°å€¼
-            param_value = atof(eq_pos + 1);
+			// ÌáÈ¡²ÎÊıÖµ
+			param_value = atof(eq_pos + 1);
 
-            // æ ¹æ®å‚æ•°åæ‰§è¡Œä¸åŒæ“ä½œ
-            if (strcmp(param_name, "PR") == 0)
-            {
-                // å¤„ç† PR å‚æ•°
-                printf("Received PR = %.2f\n", param_value);
-                // åœ¨è¿™é‡Œæ·»åŠ ä½ çš„å¤„ç†ä»£ç 
-            }
-            else if (strcmp(param_name, "SPEED") == 0)
-            {
-                // å¤„ç† SPEED å‚æ•°
-                printf("Received SPEED = %.2f\n", param_value);
-            }
-            else if (strcmp(param_name, "KP") == 0)
-            {
-                // å¤„ç† KP å‚æ•°ï¼ˆPIDå‚æ•°ï¼‰
-                printf("Received KP = %.2f\n", param_value);
-            }
-            else if (strcmp(param_name, "KI") == 0)
-            {
-                // å¤„ç† KI å‚æ•°
-                printf("Received KI = %.2f\n", param_value);
-            }
-            else if (strcmp(param_name, "KD") == 0)
-            {
-                // å¤„ç† KD å‚æ•°
-                printf("Received KD = %.2f\n", param_value);
-            }
-        }
-    }
-    else
-    {
-        // æ— ç­‰å·ï¼Œè¯´æ˜æ˜¯å•ç‹¬çš„å‘½ä»¤
-        if (strcmp(cmd, "START") == 0)
-        {
-            printf("Received START command\n");
-            // æ‰§è¡Œå¯åŠ¨æ“ä½œ
-        }
-        else if (strcmp(cmd, "STOP") == 0)
-        {
-            printf("Received STOP command\n");
-            // æ‰§è¡Œåœæ­¢æ“ä½œ
-        }
-        else if (strcmp(cmd, "RESET") == 0)
-        {
-            printf("Received RESET command\n");
-            // æ‰§è¡Œå¤ä½æ“ä½œ
-        }
-    }
+			// ¸ù¾İ²ÎÊıÃûÖ´ĞĞ²»Í¬²Ù×÷
+			if (strcmp(param_name, "PR") == 0)
+			{
+				// ´¦Àí PR ²ÎÊı
+				printf("Received PR = %.2f\n", param_value);
+				// ÔÚÕâÀïÌí¼ÓÄãµÄ´¦Àí´úÂë
+			}
+			else if (strcmp(param_name, "SPEED") == 0)
+			{
+				// ´¦Àí SPEED ²ÎÊı
+				printf("Received SPEED = %.2f\n", param_value);
+			}
+			else if (strcmp(param_name, "KP") == 0)
+			{
+				// ´¦Àí KP ²ÎÊı£¨PID_Direction²ÎÊı£©
+				printf("Received KP = %.2f\n", param_value);
+			}
+			else if (strcmp(param_name, "KI") == 0)
+			{
+				// ´¦Àí KI ²ÎÊı
+				printf("Received KI = %.2f\n", param_value);
+			}
+			else if (strcmp(param_name, "KD") == 0)
+			{
+				// ´¦Àí KD ²ÎÊı
+				printf("Received KD = %.2f\n", param_value);
+			}
+		}
+	}
+	else
+	{
+		// ÎŞµÈºÅ£¬ËµÃ÷ÊÇµ¥¶ÀµÄÃüÁî
+		if (strcmp(cmd, "START") == 0)
+		{
+			printf("Received START command\n");
+			// Ö´ĞĞÆô¶¯²Ù×÷
+		}
+		else if (strcmp(cmd, "STOP") == 0)
+		{
+			printf("Received STOP command\n");
+			// Ö´ĞĞÍ£Ö¹²Ù×÷
+		}
+		else if (strcmp(cmd, "RESET") == 0)
+		{
+			printf("Received RESET command\n");
+			// Ö´ĞĞ¸´Î»²Ù×÷
+		}
+	}
+}
+
+//-------------------------------------------------------------------------------------------------------------------
+// º¯Êı¹¦ÄÜ     ´¦Àí VOFA+ ½ÓÊÕµ½µÄÃüÁî
+// ²ÎÊıËµÃ÷     cmd         ½ÓÊÕµ½µÄÃüÁî×Ö·û´®
+// ·µ»Ø²ÎÊı     void
+// Ê¹ÓÃÊ¾Àı     handle_vofa_command("KP=1.5");
+//-------------------------------------------------------------------------------------------------------------------
+void handle_vofa_command(char *cmd)
+{
+	char *eq_pos;
+	char param_name[16];
+	uint8 name_len;
+	float value;
+	uint8 i;
+
+	// ³õÊ¼»¯ÁÙÊ±±äÁ¿
+	for (i = 0; i < 16; i++)
+	{
+		param_name[i] = 0;
+	}
+
+	eq_pos = strchr(cmd, '=');
+
+	if (eq_pos != NULL)
+	{
+		// ========== ´¦Àí´ø²ÎÊıµÄÃüÁî ==========
+		name_len = (uint8)(eq_pos - cmd);
+
+		if (name_len < 16)
+		{
+			// ¶ÁÈ¡²ÎÊıÃû
+			memcpy(param_name, cmd, name_len);
+			param_name[name_len] = '\0';
+
+			// ¶ÁÈ¡²ÎÊıÖµ
+			value = atof(eq_pos + 1);
+
+			// ========== ×óÂÖËÙ¶È»· PID_Direction ²ÎÊı ==========
+			if (strcmp(param_name, "L_KP") == 0)
+			{
+				PID.left_speed.Kp = value;
+				printf("Left Kp = %.2f\n", value);
+				ips114_show_float(1 * 24, 18 * 0, value, 3, 2);
+			}
+			else if (strcmp(param_name, "L_KI") == 0)
+			{
+				PID.left_speed.Ki = value;
+				printf("Left Ki = %.2f\n", value);
+			}
+			else if (strcmp(param_name, "L_KD") == 0)
+			{
+				PID.left_speed.Kd = value;
+				printf("Left Kd = %.2f\n", value);
+			}
+
+			// ========== ÓÒÂÖËÙ¶È»· PID_Direction ²ÎÊı ==========
+			else if (strcmp(param_name, "R_KP") == 0)
+			{
+				PID.right_speed.Kp = value;
+				printf("Right Kp = %.2f\n", value);
+			}
+			else if (strcmp(param_name, "R_KI") == 0)
+			{
+				PID.right_speed.Ki = value;
+				printf("Right Ki = %.2f\n", value);
+			}
+			else if (strcmp(param_name, "R_KD") == 0)
+			{
+				PID.right_speed.Kd = value;
+				printf("Right Kd = %.2f\n", value);
+			}
+
+			// ========== ×ªÏò»·£¨Î»ÖÃÊ½£©PID_Direction ²ÎÊı ==========
+			else if (strcmp(param_name, "P_KP") == 0)
+			{
+				PID.steer.Kp = value;
+				kp_Err = value; // Í¬²½µ½Î»ÖÃÎó²î Kp£¨ÓÃÓÚ²Ëµ¥ÏÔÊ¾£©
+				printf("Position Kp = %.2f\n", value);
+			}
+			else if (strcmp(param_name, "P_KI") == 0)
+			{
+				// ¼æÈİ¾ÉÃüÁî£º½«Î»ÖÃÊ½µÄ Ki Ó³ÉäÎª kd_gyro
+				kd_gyro = value;
+				PID.steer.kd_gyro = value;
+				printf("Position kd_gyro (from Ki) = %.2f\n", value);
+			}
+			else if (strcmp(param_name, "P_KD") == 0)
+			{
+				PID.steer.Kd = value;
+				kd_Err = value; // Í¬²½µ½Î»ÖÃÎó²î Kd£¨ÓÃÓÚ²Ëµ¥ÏÔÊ¾£©
+				printf("Position Kd = %.2f\n", value);
+			}
+			else if (strcmp(param_name, "KD_GYRO") == 0)
+			{
+				kd_gyro = value;
+				PID.steer.kd_gyro = value; // ½ÇËÙ¶ÈÎ¢·ÖÈ¨ÖØÏµÊı
+				printf("Kd Gyro = %.2f\n", value);
+			}
+
+			// ========== ËÙ¶È¿ØÖÆ ==========
+			else if (strcmp(param_name, "SPEED") == 0)
+			{
+				test_speed = value;
+				printf("Target Speed = %.2f\n", value);
+			}
+			else if (strcmp(param_name, "RP") == 0)
+			{
+				// RP ÎªÕ¼Î»ÃüÁî£¬¿É°´ÒµÎñĞèÒªĞŞ¸ÄÓ³Éä
+				test_speed = value; // Ê¾Àı£º½«ÆäÓ³ÉäÎª²âÊÔËÙ¶È
+				printf("RP = %.2f\n", value);
+			}
+			else if (strcmp(param_name, "MOTOR") == 0)
+			{
+				// ÏÔÊ¾/µ÷ÊÔÓÃÍ¾£ºÓ³Éäµ½Î»ÖÃÊ½ PID_Direction Êä³ö
+				PID.steer.output = value;
+				printf("Motor = %.2f\n", value);
+			}
+			else if (strcmp(param_name, "SPEED_RUN") == 0)
+			{
+				speed_run = value;
+				printf("Speed Run = %.2f\n", value);
+			}
+
+			// ========== Îó²î£¨¼æÈİÍâ²¿×¢Èë£© ==========
+			else if (strcmp(param_name, "ERR") == 0)
+			{
+				Err = value;
+				printf("Error = %.2f\n", value);
+			}
+			else
+			{
+				printf("Unknown parameter: %s = %.2f\n", param_name, value);
+			}
+		}
+	}
+	else
+	{
+		// ========== ´¦ÀíÎŞ²ÎÊıµÄÃüÁî ==========
+		if (strcmp(cmd, "START") == 0)
+		{
+			// Æô¶¯µç»ú
+			printf("Motor START\n");
+			// ¿ÉÔÚ´ËÉèÖÃÔËĞĞ±êÖ¾Î»
+		}
+		else if (strcmp(cmd, "STOP") == 0)
+		{
+			// Í£Ö¹µç»ú£ºÇåÁã×ªÏò»·Êä³öÓëÔËĞĞËÙ¶È
+			PID.steer.output = 0;
+			speed_run = 0;
+			test_speed = 0;
+			printf("Motor STOP\n");
+		}
+		else if (strcmp(cmd, "RESET") == 0)
+		{
+			// Èí¸´Î»ÏµÍ³
+			IAP_CONTR = 0x60; // ´¥·¢Èí¸´Î»
+		}
+		else if (strcmp(cmd, "SAVE") == 0)
+		{
+			// ±£´æ²ÎÊıµ½ EEPROM
+			eeprom_flash();
+			printf("Parameters saved\n");
+		}
+		else if (strcmp(cmd, "LOAD") == 0)
+		{
+			// ´Ó EEPROM ¼ÓÔØ²ÎÊı
+			eeprom_init();
+			printf("Parameters loaded\n");
+		}
+		else if (strcmp(cmd, "INFO") == 0)
+		{
+			// ´òÓ¡µ±Ç°²ÎÊıĞÅÏ¢
+			printf("=== Current Parameters ===\n");
+			printf("Left PID_Direction: %.2f, %.2f, %.2f\n",
+				   PID.left_speed.Kp,
+				   PID.left_speed.Ki,
+				   PID.left_speed.Kd);
+			printf("Right PID_Direction: %.2f, %.2f, %.2f\n",
+				   PID.right_speed.Kp,
+				   PID.right_speed.Ki,
+				   PID.right_speed.Kd);
+			printf("Speed: %.2f\n", test_speed);
+		}
+		else
+		{
+			printf("Unknown command: %s\n", cmd);
+		}
+	}
 }

@@ -21,25 +21,13 @@
 ".\out_file\zf_driver_uart.obj",
 ".\out_file\zf_device_config.obj",
 ".\out_file\zf_device_type.obj",
-".\out_file\zf_device_tft180.obj",
 ".\out_file\zf_device_ips114.obj",
-".\out_file\zf_device_ips200.obj",
-".\out_file\zf_device_dl1a.obj",
-".\out_file\zf_device_ble6a20.obj",
 ".\out_file\zf_device_wireless_uart.obj",
-".\out_file\zf_device_mpu6050.obj",
-".\out_file\zf_device_icm20602.obj",
 ".\out_file\zf_device_imu660ra.obj",
-".\out_file\zf_device_imu963ra.obj",
-".\out_file\zf_device_gps_tau1201.obj",
-".\out_file\zf_device_tsl1401.obj",
-".\out_file\seekfree_assistant.obj",
-".\out_file\seekfree_assistant_interface.obj",
 ".\out_file\isr.obj",
 ".\out_file\main.obj",
 ".\out_file\eeprom.obj",
 ".\out_file\menu.obj",
-".\stc_usb_cdc_32g.LIB",
 ".\out_file\ADC.obj",
 ".\out_file\filter.obj",
 ".\out_file\FUYA.obj",
@@ -49,7 +37,10 @@
 ".\out_file\motor.obj",
 ".\out_file\pid.obj",
 ".\out_file\test.obj",
-".\out_file\vofa.obj" 
+".\out_file\vofa.obj",
+".\stc_usb_cdc_32g.LIB",
+".\AI8051U_32_MDU32.LIB",
+".\AI8051U_32_TFPU.LIB" 
 TO ".\out_file\SEEKFREE" 
 PRINT(".\out_file\SEEKFREE.map") CASE DISABLEWARNING (57,16) 
 REMOVEUNUSED 

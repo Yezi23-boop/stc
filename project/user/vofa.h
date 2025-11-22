@@ -31,5 +31,5 @@ void vofa_parse_from_fifo(void); // 从 FIFO 读取并解析数据（主循环�
 uint8 vofa_get_command(char *cmd_out, uint8 max_len);
 void vofa_clear_buffer(void);
 void vofa_parse_command(char *cmd); // 命令解析示例函数
-
+void handle_vofa_command(char *cmd);
 #endif

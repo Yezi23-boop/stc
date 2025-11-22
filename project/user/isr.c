@@ -34,7 +34,6 @@
  ********************************************************************************************************************/
 
 #include "zf_common_headfile.h"
-#include "FUYA.h"
 void DMA_UART1_IRQHandler(void) interrupt 4
 {
     static vuint8 dwon_count = 0;
@@ -146,28 +145,28 @@ void DMA_UART4_IRQHandler(void) interrupt 18
 }
 
 uint32 time_0 = 0; // 时间计数器
-int left_motor = 0, right_motor = 0;
-float motor = 0;
 static int test_time = 0;
 int flat_statr = 0;
 static int flat_statr_date = 0;
 void TM0_IRQHandler() interrupt 1
 {
     TIM0_CLEAR_FLAG;
-	if(!P32)IAP_CONTR=0x60;//判断快速烧录
-	scan_track_max_value(); //获取电感最大值
-	read_AD();              // 读取并处理电感数据
-    Encoder_get();
-	Prepare_Data();
-	lost_lines();
-    motor = PID_Positional_Calculate(&motors_pid.Positional_PID, Err, -imu660ra_gyro_z * 0.01);
-    left_motor = (int)PID_Calculate(&motors_pid.left_PID, speed_run - motor, speed_l); // 速度最大值为110
-    right_motor = (int)PID_Calculate(&motors_pid.right_PID, speed_run + motor, speed_r);
-	if (flat_statr >= 2&&lost_spto==0)
-	{
-		motor_output(left_motor, right_motor);
-	}
-//    test();
+    if (!P32)
+        IAP_CONTR = 0x60;   // 判断快速烧录
+    scan_track_max_value(); // 获取电感最大值
+    read_AD();              // 读取并处理电感数据
+    Encoder_get(&PID.left_speed, &PID.right_speed);
+    Prepare_Data();
+    lost_lines();
+    // 结构体成员为主：调用后从 pid->output 读取结果
+    pid_steer_update(&PID.steer, Err, -imu660ra_gyro_z * 0.01);                              // 更新转向（位置式）PID_Direction
+    pid_speed_update(&PID.left_speed, speed_run - PID.steer.output, PID.left_speed.speed);   // 更新左轮速度环
+    pid_speed_update(&PID.right_speed, speed_run + PID.steer.output, PID.right_speed.speed); // 更新右轮速度环
+    if (flat_statr >= 2 && lost_spto == 0)
+    {
+        motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
+    }
+    //    test();
     if (tim0_irq_handler != NULL)
     {
         tim0_irq_handler();
@@ -177,17 +176,17 @@ void TM1_IRQHandler() interrupt 3
 {
     TIM1_CLEAR_FLAG;
     IMUupdate(&Gyr_filt, &Acc_filt, &Att_Angle);
-	dianya_adc();
-	flat_statr_date++;
-	if (P35 == 0&&flat_statr_date>50)
-	{
-		flat_statr++;
-		flat_statr_date = 0;
-	}
-	if (flat_statr >= 1&&lost_spto==0&&start_flag==1)
-	{
-		fuya_update_simple();
-	}
+    dianya_adc();
+    flat_statr_date++;
+    if (P35 == 0 && flat_statr_date > 50)
+    {
+        flat_statr++;
+        flat_statr_date = 0;
+    }
+    if (flat_statr >= 1 && lost_spto == 0 && start_flag == 1)
+    {
+        fuya_update_simple();
+    }
     if (tim1_irq_handler != NULL)
     {
         tim1_irq_handler();

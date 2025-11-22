@@ -1,24 +1,25 @@
 #ifndef __ADC_H__
 #define __ADC_H__
 
-// 定义电感数量
+// ADC 采样相关常量
 #define NUM 4
-// 五路电感的归一化数值（0-100范围）
-extern float ad1; // 最左侧电感
-extern float ad2; // 左侧电感
-extern float ad3; // 右侧电感
-extern float ad4; // 最右侧电感
 
-extern int Err;     // 电感偏差值
-extern float Err_tow; // 双电感偏差值
+// 赛道电感归一化值（0-100，使用整数显示更高效）
+extern uint16 ad1; // 左前电感（0-100）
+extern uint16 ad2; // 左后电感（0-100）
+extern uint16 ad3; // 右前电感（0-100）
+extern uint16 ad4; // 右后电感（0-100）
 
-// 全局变量声明
-extern float MA[NUM];  // 电感最大值数组（用于标定）
-extern float RAW[NUM]; // 电感原始值数组
-extern float Err_tow;  // 双电感偏差值
-extern float dianya;
-// 函数声明
-void scan_track_max_value(void); // 扫描赛道获取电感最大值
-void read_AD(void);              // 读取并处理电感数据
-void dianya_adc(void);
+extern float Err; // 误差值（整数，用于位置式 PID_Direction）
+
+// 全局采样与标定数据（均为整数，降低 8051 浮点开销）
+extern uint16 MA[NUM];  // 标定最大值
+extern uint16 RAW[NUM]; // 原始 ADC 值
+extern uint16 dianya;   // 电源电压（mV）
+
+// 采样与处理函数声明
+void scan_track_max_value(void); // 扫描赛道，采集并更新最大值
+void read_AD(void);              // 读取 ADC，更新 RAW/MA/ad1..ad4/Err
+void dianya_adc(void);           // 采样电源电压，更新 dianya（mV）
+
 #endif

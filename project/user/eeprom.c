@@ -1,34 +1,34 @@
 #include "zf_common_headfile.h"
 
 /*********************************************
- * EEPROMç³»ç»ŸåŸºç¡€å˜é‡å®šä¹‰
+ * EEPROMÏµÍ³»ù´¡±äÁ¿¶¨Òå
  *********************************************/
-uint8 date_buff[400]; // eepromæ•°æ®æ•°ç»„
+uint8 date_buff[400]; // eepromÊı¾İÊı×é
 uint8 eeprom_init_time = 0;
 
 /*********************************************
- * éœ€è¦è¢«ä¿®æ”¹çš„å‚æ•°
+ * ĞèÒª±»ĞŞ¸ÄµÄ²ÎÊı
  *********************************************/
-// å¯åŠ¨é…ç½®å‚æ•°
+// Æô¶¯ÅäÖÃ²ÎÊı
 int16 start_flag = 0;
 int16 circle_flags = 0;
-// PIDé€Ÿåº¦æ§åˆ¶å‚æ•°
-float kp_Err = 0.15f;      // 4.40f//
+// PIDËÙ¶È¿ØÖÆ²ÎÊı
+float kp_Err = 0.15f;     // 4.40f//
 float kd_Err = 3.0f;      // 7.30f//
 float speed_run = 25.0;   // 55//
 float kd_gyro = 0.0;      // 270.0//
 float fuya_xili = 2000.0; // 60.0//
 float pwm_filter = 0.7;   // 0.90//
 
-// PIDè§’åº¦æ§åˆ¶å‚æ•°
+// PID½Ç¶È¿ØÖÆ²ÎÊı
 float kp_Angle = 0.8;          // 0.5//
 float kd_Angle = 2.6;          // 2.2//
 float limiting_Angle = 130.0f; //
 float A_1 = 0.50f;             // 1.00f
 float B_1 = 0.20f;             // 0.60f
-float C_l = 1.00f;        // 0.005f
+float C_l = 1.00f;             // 0.005f
 
-// åœ†ç¯æ§åˆ¶å‚æ•°
+// Ô²»·¿ØÖÆ²ÎÊı
 float ring_encoder = 15;           // 15
 float pre_ring_Gyro_set = 210;     // 200
 float in_ring_Gyroz = 220;         // 230
@@ -36,30 +36,29 @@ float pre_out_ring_Gyro_set = 170; // 150
 float pre_out_ring_Gyroz = 350;    // 350
 float pre_out_ring_encoder = 30;   // 30
 /*********************************************
- * EEPROMåˆå§‹åŒ–å‡½æ•°
+ * EEPROM³õÊ¼»¯º¯Êı
  *********************************************/
 void eeprom_init()
 {
-    iap_init(); // åˆå§‹åŒ–EEPROM
+    iap_init(); // ³õÊ¼»¯EEPROM
 
-    iap_read_buff(0x00, date_buff, 400); // ä»EEPROMä¸­è¯»å–æ•°æ®
+    iap_read_buff(0x00, date_buff, 400); // ´ÓEEPROMÖĞ¶ÁÈ¡Êı¾İ
 
-    eeprom_init_time = read_int(0); // eepromæ²¡æœ‰è¢«å¡«å……ï¼Œåˆ™ä¼šè¯»åˆ°åƒåœ¾å€¼
+    eeprom_init_time = read_int(0); // eepromÃ»ÓĞ±»Ìî³ä£¬Ôò»á¶Áµ½À¬»øÖµ
 
-    if (eeprom_init_time != 1) // åˆæ¬¡å¯åŠ¨ï¼Œeeprom_init_timeä¸ºåƒåœ¾å€¼ï¼Œifæˆç«‹
+    if (eeprom_init_time != 1) // ³õ´ÎÆô¶¯£¬eeprom_init_timeÎªÀ¬»øÖµ£¬if³ÉÁ¢
     {
         eeprom_init_time = 1;
-        save_int(eeprom_init_time, 0); // å¡«å……eeprom_init_timeçš„å€¼åˆ°eeprom
+        save_int(eeprom_init_time, 0); // Ìî³äeeprom_init_timeµÄÖµµ½eeprom
 
-        eeprom_flash(); // å¡«å……æºç å˜é‡åˆå§‹åŒ–çš„å€¼åˆ°eeprom
+        eeprom_flash(); // Ìî³äÔ´Âë±äÁ¿³õÊ¼»¯µÄÖµµ½eeprom
     }
-    else // éåˆæ¬¡å¯åŠ¨ï¼Œè¯»å–eepromç”¨äºèµ‹å€¼å˜é‡
+    else // ·Ç³õ´ÎÆô¶¯£¬¶ÁÈ¡eepromÓÃÓÚ¸³Öµ±äÁ¿
     {
-        // å¯åŠ¨é…ç½®å‚æ•°
+        // Æô¶¯ÅäÖÃ²ÎÊı
         start_flag = read_int(1);
         circle_flags = read_int(2);
-
-        // PIDé€Ÿåº¦æ§åˆ¶å‚æ•°
+        // PIDËÙ¶È¿ØÖÆ²ÎÊı
         kp_Err = read_float(4);
         fuya_xili = read_float(5);
         kd_Err = read_float(6);
@@ -67,7 +66,7 @@ void eeprom_init()
         speed_run = read_float(8);
         kd_gyro = read_float(9);
 
-        // PIDè§’åº¦æ§åˆ¶å‚æ•°
+        // PID½Ç¶È¿ØÖÆ²ÎÊı
         kp_Angle = read_float(10);
         kd_Angle = read_float(11);
         limiting_Angle = read_float(12);
@@ -75,7 +74,7 @@ void eeprom_init()
         C_l = read_float(14);
         A_1 = read_float(15);
 
-        // åœ†ç¯æ§åˆ¶å‚æ•°
+        // Ô²»·¿ØÖÆ²ÎÊı
         ring_encoder = read_float(16);
         pre_ring_Gyro_set = read_float(17);
         in_ring_Gyroz = read_float(18);
@@ -86,15 +85,15 @@ void eeprom_init()
 }
 
 /*********************************************
- * åˆ·å†™ä¿å­˜æ•°æ®åˆ°eeprom
+ * Ë¢Ğ´±£´æÊı¾İµ½eeprom
  *********************************************/
 void eeprom_flash()
 {
-    // å¯åŠ¨é…ç½®å‚æ•°
+    // Æô¶¯ÅäÖÃ²ÎÊı
     save_int(start_flag, 1);
     save_int(circle_flags, 2);
 
-    // PIDé€Ÿåº¦æ§åˆ¶å‚æ•°
+    // PIDËÙ¶È¿ØÖÆ²ÎÊı
     save_float(kp_Err, 4);
     save_float(fuya_xili, 5);
     save_float(kd_Err, 6);
@@ -102,7 +101,7 @@ void eeprom_flash()
     save_float(speed_run, 8);
     save_float(kd_gyro, 9);
 
-    // PIDè§’åº¦æ§åˆ¶å‚æ•°
+    // PID½Ç¶È¿ØÖÆ²ÎÊı
     save_float(kp_Angle, 10);
     save_float(kd_Angle, 11);
     save_float(limiting_Angle, 12);
@@ -110,7 +109,7 @@ void eeprom_flash()
     save_float(C_l, 14);
     save_float(A_1, 15);
 
-    // åœ†ç¯æ§åˆ¶å‚æ•°
+    // Ô²»·¿ØÖÆ²ÎÊı
     save_float(ring_encoder, 16);
     save_float(pre_ring_Gyro_set, 17);
     save_float(in_ring_Gyroz, 18);
@@ -120,7 +119,7 @@ void eeprom_flash()
 }
 
 /*********************************************
- * EEPROMåº•å±‚è¯»å†™å‡½æ•°
+ * EEPROMµ×²ã¶ÁĞ´º¯Êı
  *********************************************/
 void save_int(int32 input, uint8 value_bit)
 {

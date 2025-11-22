@@ -1,46 +1,56 @@
 #include "pid.h"
-PID_struct motors_pid;
+PID_Controllers PID; // 聚合控制器：左右速度环 + 转向环
 LowPassFilter_t encoder_l;
 LowPassFilter_t encoder_r;
 float delta_output = 0, speed_l = 0, speed_r = 0, max_integral = 0;
-void PID_Init(PID *pid, float Kp, float Ki, float Kd, float max_output,float min_output)
+// 速度环初始化（增量式），命名简洁
+void pid_speed_init(PID_Speed *pid, float kp, float ki, float kd, float max_out, float min_out)
 {
-    pid->Kp = Kp;
-    pid->Ki = Ki;
-    pid->Kd = Kd;
+    pid->Kp = kp;
+    pid->Ki = ki;
+    pid->Kd = kd;
     pid->error = 0.0f;
     pid->prev_error = 0.0f;
     pid->prev2_error = 0.0f;
     pid->output = 0.0f;
-    pid->integral = 0.0f;
-    pid->max_output = max_output;
-	pid->min_output = min_output;
+    pid->max_output = max_out;
+    pid->min_output = min_out;
+}
+// 转向环初始化（位置式），命名简洁
+void pid_steer_init(PID_Steer *pid, float kp, float kd, float kd_gyro, float max_out, float min_out)
+{
+    pid->Kp = kp;
+    pid->Kd = kd;
+    pid->kd_gyro = kd_gyro;
+    pid->error = 0.0f;
+    pid->prev_error = 0.0f;
+    pid->output = 0.0f;
+    pid->max_output = max_out;
+    pid->min_output = min_out;
 }
 // 编码器读取
-void Encoder_get(void)
+void Encoder_get(PID_Speed *pid_l, PID_Speed *pid_r)
 {
     // 读取编码器计数值并转换为速度（乘以系数0.2调整单位）
-    speed_l = encoder_get_count(TIM4_ENCOEDER) * 0.2f;  // 左轮速度
-    speed_r = -encoder_get_count(TIM3_ENCOEDER) * 0.2f; // 右轮速度（负号用于方向调整）
-    low_pass_filter_mt(&encoder_l, &speed_l, 0.8);
-    low_pass_filter_mt(&encoder_r, &speed_r, 0.8);
+    pid_l->speed = encoder_get_count(TIM4_ENCOEDER) * 0.2f;  // 左轮速度
+    pid_r->speed = -encoder_get_count(TIM3_ENCOEDER) * 0.2f; // 右轮速度（负号用于方向调整）
+    low_pass_filter_mt(&encoder_l, &pid_l->speed, 0.8);
+    low_pass_filter_mt(&encoder_r, &pid_r->speed, 0.8);
     // 清除编码器计数，准备下一次计数
     encoder_clear_count(TIM3_ENCOEDER);
     encoder_clear_count(TIM4_ENCOEDER);
 }
-// 增量式PID
-float PID_Calculate(PID *pid, float setpoint, float actual)
+// 速度环更新（增量式）
+void pid_speed_update(PID_Speed *pid, float target, float actual)
 {
-    // 计算当前误差
-    pid->error = setpoint - actual;
+    // 计算当前误差（直接使用结构体成员）
+    pid->error = target - actual;
 
-    // 计算增量输出
+    // 增量式 PID_Direction：使用结构体成员计算差分与输出增量
     delta_output = pid->Kp * (pid->error - pid->prev_error) + pid->Ki * pid->error + pid->Kd * (pid->error - 2.0f * pid->prev_error + pid->prev2_error);
 
-    // 更新输出值
+    // 更新输出并限幅
     pid->output += delta_output;
-
-    // 输出限幅
     if (pid->output > pid->max_output)
     {
         pid->output = pid->max_output;
@@ -53,27 +63,16 @@ float PID_Calculate(PID *pid, float setpoint, float actual)
     // 更新误差历史
     pid->prev2_error = pid->prev_error;
     pid->prev_error = pid->error;
-
-    return pid->output;
 }
 
-// 位置式PID计算
-float PID_Positional_Calculate(PID *pid, float actual, float imu)
+// 转向环更新（位置式）
+void pid_steer_update(PID_Steer *pid, float error, float gyro)
 {
-    // 计算当前误差
-    pid->error = actual;
+    // 计算当前误差（直接写入结构体成员）
+    pid->error = error;
 
-    // 更新积分项（抗积分饱和处理）
-//    pid->integral += pid->error;
-
-//    //    // 限制积分项，防止积分饱和
-//    if (pid->integral = pid->max_output)
-//    {
-//        pid->integral = 0;
-//    }
-
-    // 计算位置式PID输出
-    pid->output = pid->Kp * pid->error + pid->Ki * imu + pid->Kd * (pid->error - pid->prev_error);
+    // 位置式 PID_Direction：kd_gyro 以陀螺输入项参与
+    pid->output = pid->Kp * pid->error + pid->kd_gyro * gyro + pid->Kd * (pid->error - pid->prev_error);
 
     // 输出限幅
     if (pid->output > pid->max_output)
@@ -87,6 +86,4 @@ float PID_Positional_Calculate(PID *pid, float actual, float imu)
 
     // 更新误差历史
     pid->prev_error = pid->error;
-
-    return pid->output;
 }
