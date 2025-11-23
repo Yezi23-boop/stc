@@ -155,10 +155,9 @@ void TM0_IRQHandler() interrupt 1
         IAP_CONTR = 0x60;   // 判断快速烧录
     scan_track_max_value(); // 获取电感最大值
     read_AD();              // 读取并处理电感数据
-    Encoder_get(&PID.left_speed, &PID.right_speed);
     Prepare_Data();
     lost_lines();
-    // 结构体成员为主：调用后从 pid->output 读取结果
+    Encoder_get(&PID.left_speed, &PID.right_speed);
     pid_steer_update(&PID.steer, Err, -imu660ra_gyro_z * 0.01);                              // 更新转向（位置式）PID_Direction
     pid_speed_update(&PID.left_speed, speed_run - PID.steer.output, PID.left_speed.speed);   // 更新左轮速度环
     pid_speed_update(&PID.right_speed, speed_run + PID.steer.output, PID.right_speed.speed); // 更新右轮速度环

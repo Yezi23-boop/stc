@@ -2,7 +2,9 @@
     "files.associations": {
         "zf_common_headfile.h": "c",
         "AI8051u_32bit.h": "c",
-        "pid.h": "c"
+        "pid.h": "c",
+        "zf_device_ips114.h": "c",
+        "vofa.h": "c"
     },
     // 固定文件编码为 GBK（GB2312 的超集），避免中文注释乱码
     "files.encoding": "gbk",

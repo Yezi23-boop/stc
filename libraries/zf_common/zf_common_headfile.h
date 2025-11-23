@@ -70,23 +70,16 @@
 #include "zf_device_config.h"
 #include "zf_device_type.h"
 
-
 #include "zf_device_imu660ra.h"
-
-
 
 #include "zf_device_ips114.h"
 
-
-//#include "zf_device_dl1a.h"
-//#include "zf_device_dl1b.h"
-
+// #include "zf_device_dl1a.h"
+// #include "zf_device_dl1b.h"
 
 #include "zf_device_wireless_uart.h"
 
-
 //------逐飞科技产品组件层文件
-
 
 // 自己的
 #include "fuya.h"

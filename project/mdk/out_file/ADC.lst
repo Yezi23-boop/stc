@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  ADC                                                                22/11/25  23:09:29  PAGE 1   
+C251 COMPILER V5.60.0,  ADC                                                                23/11/25  21:54:33  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE ADC
@@ -66,7 +66,7 @@ stmt  level    source
    45   1          RAW[0] = adc_convert(ADC_CH1_P11); // 读取第1个电感AD值
    46   1          RAW[1] = adc_convert(ADC_CH0_P10); // 读取第2个电感AD值
    47   1          RAW[2] = adc_convert(ADC_CH8_P00); // 读取第3个电感AD值
-C251 COMPILER V5.60.0,  ADC                                                                22/11/25  23:09:29  PAGE 2   
+C251 COMPILER V5.60.0,  ADC                                                                23/11/25  21:54:33  PAGE 2   
 
    48   1          RAW[3] = adc_convert(ADC_CH9_P01); // 读取第4个电感AD值
    49   1      
@@ -134,7 +134,7 @@ stmt  level    source
   111   1          {
   112   2              for (j = 0; j < SORT_LENGTH; j++)
   113   2              {
-C251 COMPILER V5.60.0,  ADC                                                                22/11/25  23:09:29  PAGE 3   
+C251 COMPILER V5.60.0,  ADC                                                                23/11/25  21:54:33  PAGE 3   
 
   114   3                  ad_sum[i] += (uint32)AD_value[i][j];
   115   3              }
@@ -204,7 +204,7 @@ Module Information          Static   Overlayable
   hconst size          =       201     ------
 End of Module Information.
 
-C251 COMPILER V5.60.0,  ADC                                                                22/11/25  23:09:29  PAGE 4   
+C251 COMPILER V5.60.0,  ADC                                                                23/11/25  21:54:33  PAGE 4   
 
 
 C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

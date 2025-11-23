@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  test                                                               22/11/25  23:09:31  PAGE 1   
+C251 COMPILER V5.60.0,  test                                                               23/11/25  21:54:34  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE test
@@ -10,39 +10,44 @@ COMPILER INVOKED BY: D:\keil_5\C251\BIN\C251.EXE ..\user\test.c LARGE NOALIAS FL
 stmt  level    source
 
     1          #include "zf_common_headfile.h"
-    2          float test_speed = 0;
-    3          void test(void)
-    4          {
-    5   1              static int test_time = 0;
-    6   1              test_time++;
-    7   1          Encoder_get(&PID.left_speed, &PID.right_speed);
-    8   1              if (test_time >= 4000)
-    9   1              {
-   10   2                      test_speed = 60;
-   11   2                      test_time = 0;
-   12   2              }
-   13   1              else if (test_time >= 3000)
+    2          /*
+    3           * 测试速度阶跃序列
+    4           * 0–500: 20，500–1000: 15，1000–2000: 18，2000–3000: -40，>=3000: 60
+    5           * 定期调用以验证速度环与电机输出。
+    6           */
+    7          float test_speed = 0;
+    8          void test(void)
+    9          {
+   10   1              static int test_time = 0;
+   11   1              test_time++;
+   12   1              Encoder_get(&PID.left_speed, &PID.right_speed);
+   13   1              if (test_time >= 4000)
    14   1              {
-   15   2                      test_speed = -40;
-   16   2              }
-   17   1              else if (test_time >= 2000)
-   18   1              {
-   19   2                      test_speed = 18;
-   20   2              }
-   21   1              else if (test_time >= 1000)
-   22   1              {
-   23   2                      test_speed = 15;
-   24   2              }
-   25   1              else if (test_time >= 500)
-   26   1              {
-   27   2                      test_speed = 20;
-   28   2              }
-   29   1              // ??????????????ú?? pid->output ??????
-   30   1              pid_speed_update(&PID.left_speed, test_speed, speed_l); // ????????????
-   31   1              pid_speed_update(&PID.right_speed, test_speed, speed_r); // ????????????
-   32   1              motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
-   33   1              //      motor_output(-1000, -5000);
-   34   1      }
+   15   2                      test_speed = 60;
+   16   2                      test_time = 0;
+   17   2              }
+   18   1              else if (test_time >= 3000)
+   19   1              {
+   20   2                      test_speed = -40;
+   21   2              }
+   22   1              else if (test_time >= 2000)
+   23   1              {
+   24   2                      test_speed = 18;
+   25   2              }
+   26   1              else if (test_time >= 1000)
+   27   1              {
+   28   2                      test_speed = 15;
+   29   2              }
+   30   1              else if (test_time >= 500)
+   31   1              {
+   32   2                      test_speed = 20;
+   33   2              }
+   34   1              // 更新速度环 PID 并将输出用于电机控制
+   35   1              pid_speed_update(&PID.left_speed, test_speed, speed_l);  // 左轮速度环
+   36   1              pid_speed_update(&PID.right_speed, test_speed, speed_r); // 右轮速度环
+   37   1              motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
+   38   1              //  motor_output(-1000, -5000);
+   39   1      }
 
 
 Module Information          Static   Overlayable
@@ -62,6 +67,8 @@ Module Information          Static   Overlayable
   far data size        =    ------     ------
   huge data size       =    ------     ------
   const size           =    ------     ------
+C251 COMPILER V5.60.0,  test                                                               23/11/25  21:54:34  PAGE 2   
+
   hconst size          =        16     ------
 End of Module Information.
 

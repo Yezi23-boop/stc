@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  imu                                                                22/11/25  23:09:30  PAGE 1   
+C251 COMPILER V5.60.0,  imu                                                                23/11/25  21:54:33  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE imu
@@ -66,7 +66,7 @@ stmt  level    source
    55   1      }
    56          
    57          // 传感器数据预处理：读取原始 IMU 数据，做单位转换与零偏校正
-C251 COMPILER V5.60.0,  imu                                                                22/11/25  23:09:30  PAGE 2   
+C251 COMPILER V5.60.0,  imu                                                                23/11/25  21:54:33  PAGE 2   
 
    58          // 依赖外部 API：imu660ra_get_acc / imu660ra_get_gyro / *_transition()
    59          // 依赖外部常量：Gyro_offset_x/y/z、DegtoRad
@@ -134,7 +134,7 @@ stmt  level    source
   121   1          exInt += ex * Ki;
   122   1          eyInt += ey * Ki;
   123   1          ezInt += ez * Ki;
-C251 COMPILER V5.60.0,  imu                                                                22/11/25  23:09:30  PAGE 3   
+C251 COMPILER V5.60.0,  imu                                                                23/11/25  21:54:33  PAGE 3   
 
   124   1      
   125   1          // 5) 将比例 + 积分误差反馈到陀螺，形成 PI 闭环
@@ -202,7 +202,7 @@ stmt  level    source
   186   1          //   i  = 0x5f375a86 - ( i >> 1 );  //Lomont
   187   1          y = *(float *)&i;
   188   1          y = y * (f - (x * y * y));
-C251 COMPILER V5.60.0,  imu                                                                22/11/25  23:09:30  PAGE 4   
+C251 COMPILER V5.60.0,  imu                                                                23/11/25  21:54:33  PAGE 4   
 
   189   1          y = y * (f - (x * y * y));
   190   1          return number * y;

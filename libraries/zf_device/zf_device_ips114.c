@@ -1,34 +1,44 @@
 /*********************************************************************************************************************
-* COPYRIGHT NOTICE
-* Copyright (c) 2019,é€é£ç§‘æŠ€
-* All rights reserved.
-*
-* ä»¥ä¸‹æ‰€æœ‰å†…å®¹ç‰ˆæƒå‡å±é€é£ç§‘æŠ€æ‰€æœ‰ï¼Œæœªç»å…è®¸ä¸å¾—ç”¨äºå•†ä¸šç”¨é€”ï¼Œ
-* æ¬¢è¿å„ä½ä½¿ç”¨å¹¶ä¼ æ’­æœ¬ç¨‹åºï¼Œä¿®æ”¹å†…å®¹æ—¶å¿…é¡»ä¿ç•™é€é£ç§‘æŠ€çš„ç‰ˆæƒå£°æ˜ã€‚
-*
-* @file             zf_device_ips114
-* @company          æˆéƒ½é€é£ç§‘æŠ€æœ‰é™å…¬å¸
-* @author           é€é£ç§‘æŠ€(QQ790875685)
-* @version          æŸ¥çœ‹docå†…versionæ–‡ä»¶ ç‰ˆæœ¬è¯´æ˜
-* @Software         MounRiver Studio V1.51
-* @Target core      CH32V307VCT6
-* @Taobao           https://seekfree.taobao.com/
-* @date             2021-11-25
-* @note             æ¥çº¿å®šä¹‰ï¼š
-*                   ------------------------------------
-*                   æ¨¡å—ç®¡è„š                                       å•ç‰‡æœºç®¡è„š
-*                   SCL                 æŸ¥çœ‹ zf_device_ips114.h ä¸­ IPS114_SCL_PIN å®å®šä¹‰
-*                   SDA                 æŸ¥çœ‹ zf_device_ips114.h ä¸­ IPS114_SDA_PIN å®å®šä¹‰
-*                   RST                 æŸ¥çœ‹ zf_device_ips114.h ä¸­ IPS114_RST_PIN å®å®šä¹‰
-*                   DC                  æŸ¥çœ‹ zf_device_ips114.h ä¸­ IPS114_DC_PIN å®å®šä¹‰
-*                   CS                  æŸ¥çœ‹ zf_device_ips114.h ä¸­ IPS114_CS_PIN å®å®šä¹‰
-*                   BLK                 æŸ¥çœ‹ zf_device_ips114.h ä¸­ IPS114_BLK_PIN å®å®šä¹‰
-*                   ç”µæºå¼•è„š
-*                   VCC                 3.3Vç”µæº
-*                   GND                 ç”µæºåœ°
-*                   æœ€å¤§åˆ†è¾¨ç‡135*240
-*                   ------------------------------------
-********************************************************************************************************************/
+ * AI8051U Opensource Library ¼´£¨AI8051U ¿ªÔ´¿â£©ÊÇÒ»¸ö»ùÓÚ¹Ù·½ SDK ½Ó¿ÚµÄµÚÈı·½¿ªÔ´¿â
+ * Copyright (c) 2022 SEEKFREE Öğ·É¿Æ¼¼
+ *
+ * ±¾ÎÄ¼şÊÇ STC ¿ªÔ´¿âµÄÒ»²¿·Ö
+ *
+ * AI8051U ¿ªÔ´¿â ÎªÃâ·ÑÈí¼ş
+ * Äú¿ÉÒÔ¸ù¾İ×ÔÓÉÈí¼ş»ù½ğ»á·¢²¼µÄ GPL£¨GNU General Public License£©Ìõ¿î
+ * ¼´ GPL3.0 »ò£¨ÄúÑ¡ÔñµÄ£©ÈÎºÎºóÀ´µÄ°æ±¾£¬ÖØĞÂ·¢²¼ºÍ/»òĞŞ¸ÄËü
+ *
+ * ±¾¿ªÔ´¿âµÄ·¢²¼ÊÇÏ£ÍûËüÄÜ·¢»Ó×÷ÓÃ£¬µ«²¢Î´¶ÔÆä×÷ÈÎºÎ±£Ö¤
+ * ÉõÖÁÃ»ÓĞÒşº¬µÄÊÊÏúĞÔ»òÊÊºÏÌØ¶¨ÓÃÍ¾µÄ±£Ö¤
+ * ¸ü¶àÏ¸½ÚÇë²Î¼û GPL
+ * Ğí¿ÉÖ¤¸±±¾Î»ÓÚ libraries Ä¿Â¼ÏÂµÄ LICENSE ÎÄ¼ş
+ *
+ * ÎÄ¼şÃû³Æ        zf_device_ips114.c
+ * ¹«Ë¾Ãû³Æ        ³É¶¼Öğ·É¿Æ¼¼ÓĞÏŞ¹«Ë¾
+ * °æ±¾ĞÅÏ¢        ²é¿´ libraries/doc Ä¿Â¼ÄÚ version.txt
+ * ¿ª·¢»·¾³        MDK FOR C251
+ * ÊÊÓÃÆ½Ì¨        AI8051U
+ * µêÆÌÁ´½Ó        https://seekfree.taobao.com/
+ *
+ * ĞŞ¸Ä¼ÇÂ¼
+ * ÈÕÆÚ            ×÷Õß           ±¸×¢
+ * 2024-08-01      ´óW            Í³Ò»ÎÄ¼şÍ·×¢ÊÍ£¬ĞŞ¸´ÖĞÎÄÂÒÂë
+ ********************************************************************************************************************/
+/*********************************************************************************************************************
+ * ½ÓÏß¶¨Òå£º
+ *                   ------------------------------------
+ *                   Ä£¿é¹Ü½Å             µ¥Æ¬»ú¹Ü½Å
+ *                   SCL                  ²é¿´ zf_device_ips114.h ÖĞ IPS114_SCL_PIN ºê¶¨Òå
+ *                   SDA                  ²é¿´ zf_device_ips114.h ÖĞ IPS114_SDA_PIN ºê¶¨Òå
+ *                   RST                  ²é¿´ zf_device_ips114.h ÖĞ IPS114_RST_PIN ºê¶¨Òå
+ *                   DC                   ²é¿´ zf_device_ips114.h ÖĞ IPS114_DC_PIN  ºê¶¨Òå
+ *                   CS                   ²é¿´ zf_device_ips114.h ÖĞ IPS114_CS_PIN  ºê¶¨Òå
+ *                   BLK                  ²é¿´ zf_device_ips114.h ÖĞ IPS114_BLK_PIN ºê¶¨Òå
+ *                   VCC                 3.3VµçÔ´
+ *                   GND                 µçÔ´µØ
+ *                   ×î´ó·Ö±æÂÊ 135 * 240
+ *                   ------------------------------------
+ ********************************************************************************************************************/
 
 #include "zf_common_clock.h"
 #include "zf_common_debug.h"
@@ -39,7 +49,7 @@
 
 #include "zf_device_ips114.h"
 
-#define IPS_LEN   240
+#define IPS_LEN 240
 #define IPS_WIGHT 135
 
 uint16 ips114_pencolor = IPS114_DEFAULT_PENCOLOR;
@@ -50,20 +60,20 @@ uint8 ips114_x_max = IPS_LEN;
 uint8 ips114_y_max = IPS_WIGHT;
 
 #if IPS114_USE_SOFT_SPI
-static soft_spi_info_struct             ips114_spi;
-#define ips114_write_8bit_data(dat)    soft_spi_write_8bit(&ips114_spi, dat)
-#define ips114_write_16bit_data(dat)   soft_spi_write_16bit(&ips114_spi, dat)
+static soft_spi_info_struct ips114_spi;
+#define ips114_write_8bit_data(dat) soft_spi_write_8bit(&ips114_spi, dat)
+#define ips114_write_16bit_data(dat) soft_spi_write_16bit(&ips114_spi, dat)
 #else
-#define ips114_write_8bit_data(dat)    spi_write_8bit(IPS114_SPI, dat)
-#define ips114_write_16bit_data(dat)   spi_write_16bit(IPS114_SPI, dat)
+#define ips114_write_8bit_data(dat) spi_write_8bit(IPS114_SPI, dat)
+#define ips114_write_16bit_data(dat) spi_write_16bit(IPS114_SPI, dat)
 
 #endif
 
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       å†™å‘½ä»¤ å†…éƒ¨è°ƒç”¨
-// @note        å†…éƒ¨è°ƒç”¨ ç”¨æˆ·æ— éœ€å…³å¿ƒ
+// @brief       Ğ´ÃüÁî ÄÚ²¿µ÷ÓÃ
+// @note        ÄÚ²¿µ÷ÓÃ ÓÃ»§ÎŞĞè¹ØĞÄ
 //-------------------------------------------------------------------------------------------------------------------
-static void ips114_write_index (uint8 dat)
+static void ips114_write_index(uint8 dat)
 {
     IPS114_CS(1);
     IPS114_CS(0);
@@ -75,93 +85,93 @@ static void ips114_write_index (uint8 dat)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       è®¾ç½®æ˜¾ç¤ºåŒºåŸŸ å†…éƒ¨è°ƒç”¨
-// @param       x1              èµ·å§‹xè½´åæ ‡
-// @param       y1              èµ·å§‹yè½´åæ ‡
-// @param       x2              ç»“æŸxè½´åæ ‡
-// @param       y2              ç»“æŸyè½´åæ ‡
+// @brief       ÉèÖÃÏÔÊ¾ÇøÓò ÄÚ²¿µ÷ÓÃ
+// @param       x1              ÆğÊ¼xÖá×ø±ê
+// @param       y1              ÆğÊ¼yÖá×ø±ê
+// @param       x2              ½áÊøxÖá×ø±ê
+// @param       y2              ½áÊøyÖá×ø±ê
 // @return      void
-// @note        å†…éƒ¨è°ƒç”¨ ç”¨æˆ·æ— éœ€å…³å¿ƒ
+// @note        ÄÚ²¿µ÷ÓÃ ÓÃ»§ÎŞĞè¹ØĞÄ
 //-------------------------------------------------------------------------------------------------------------------
-static void ips114_set_region (uint16 x1, uint16 y1, uint16 x2, uint16 y2)
+static void ips114_set_region(uint16 x1, uint16 y1, uint16 x2, uint16 y2)
 {
-    //zf_assert(x1 < ips114_x_max);
-    //zf_assert(y1 < ips114_y_max);
-    //zf_assert(x2 < ips114_x_max);
-    //zf_assert(y2 < ips114_y_max);
+    // zf_assert(x1 < ips114_x_max);
+    // zf_assert(y1 < ips114_y_max);
+    // zf_assert(x2 < ips114_x_max);
+    // zf_assert(y2 < ips114_y_max);
 
-    if(ips114_display_dir==IPS114_PORTAIT)
+    if (ips114_display_dir == IPS114_PORTAIT)
     {
-        ips114_write_index(0x2a);                                               // åˆ—åœ°å€è®¾ç½®
-        ips114_write_16bit_data(x1+52);
-        ips114_write_16bit_data(x2+52);
-        ips114_write_index(0x2b);                                               // è¡Œåœ°å€è®¾ç½®
-        ips114_write_16bit_data(y1+40);
-        ips114_write_16bit_data(y2+40);
-        ips114_write_index(0x2c);                                               // å‚¨å­˜å™¨å†™
+        ips114_write_index(0x2a); // ÁĞµØÖ·ÉèÖÃ
+        ips114_write_16bit_data(x1 + 52);
+        ips114_write_16bit_data(x2 + 52);
+        ips114_write_index(0x2b); // ĞĞµØÖ·ÉèÖÃ
+        ips114_write_16bit_data(y1 + 40);
+        ips114_write_16bit_data(y2 + 40);
+        ips114_write_index(0x2c); // ´¢´æÆ÷Ğ´
     }
-    else if(ips114_display_dir==IPS114_PORTAIT_180)
+    else if (ips114_display_dir == IPS114_PORTAIT_180)
     {
-        ips114_write_index(0x2a);                                               // åˆ—åœ°å€è®¾ç½®
-        ips114_write_16bit_data(x1+53);
-        ips114_write_16bit_data(x2+53);
-        ips114_write_index(0x2b);                                               // è¡Œåœ°å€è®¾ç½®
-        ips114_write_16bit_data(y1+40);
-        ips114_write_16bit_data(y2+40);
-        ips114_write_index(0x2c);                                               // å‚¨å­˜å™¨å†™
+        ips114_write_index(0x2a); // ÁĞµØÖ·ÉèÖÃ
+        ips114_write_16bit_data(x1 + 53);
+        ips114_write_16bit_data(x2 + 53);
+        ips114_write_index(0x2b); // ĞĞµØÖ·ÉèÖÃ
+        ips114_write_16bit_data(y1 + 40);
+        ips114_write_16bit_data(y2 + 40);
+        ips114_write_index(0x2c); // ´¢´æÆ÷Ğ´
     }
-    else if(ips114_display_dir==IPS114_CROSSWISE)
+    else if (ips114_display_dir == IPS114_CROSSWISE)
     {
-        ips114_write_index(0x2a);                                               // åˆ—åœ°å€è®¾ç½®
-        ips114_write_16bit_data(x1+40);
-        ips114_write_16bit_data(x2+40);
-        ips114_write_index(0x2b);                                               // è¡Œåœ°å€è®¾ç½®
-        ips114_write_16bit_data(y1+53);
-        ips114_write_16bit_data(y2+53);
-        ips114_write_index(0x2c);                                               // å‚¨å­˜å™¨å†™
+        ips114_write_index(0x2a); // ÁĞµØÖ·ÉèÖÃ
+        ips114_write_16bit_data(x1 + 40);
+        ips114_write_16bit_data(x2 + 40);
+        ips114_write_index(0x2b); // ĞĞµØÖ·ÉèÖÃ
+        ips114_write_16bit_data(y1 + 53);
+        ips114_write_16bit_data(y2 + 53);
+        ips114_write_index(0x2c); // ´¢´æÆ÷Ğ´
     }
     else
     {
-        ips114_write_index(0x2a);                                               // åˆ—åœ°å€è®¾ç½®
-        ips114_write_16bit_data(x1+40);
-        ips114_write_16bit_data(x2+40);
-        ips114_write_index(0x2b);                                               // è¡Œåœ°å€è®¾ç½®
-        ips114_write_16bit_data(y1+52);
-        ips114_write_16bit_data(y2+52);
-        ips114_write_index(0x2c);                                               // å‚¨å­˜å™¨å†™
+        ips114_write_index(0x2a); // ÁĞµØÖ·ÉèÖÃ
+        ips114_write_16bit_data(x1 + 40);
+        ips114_write_16bit_data(x2 + 40);
+        ips114_write_index(0x2b); // ĞĞµØÖ·ÉèÖÃ
+        ips114_write_16bit_data(y1 + 52);
+        ips114_write_16bit_data(y2 + 52);
+        ips114_write_index(0x2c); // ´¢´æÆ÷Ğ´
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       æ¶²æ™¶æ¸…å±å‡½æ•°
-// @param       color           é¢œè‰²æ ¼å¼ RGB565 æˆ–è€…å¯ä»¥ä½¿ç”¨ zf_common_font.h å†…å¸¸ç”¨é¢œè‰²å®å®šä¹‰
+// @brief       Òº¾§ÇåÆÁº¯Êı
+// @param       color           ÑÕÉ«¸ñÊ½ RGB565 »òÕß¿ÉÒÔÊ¹ÓÃ zf_common_font.h ÄÚ³£ÓÃÑÕÉ«ºê¶¨Òå
 // @return      void
 // Sample usage:                ips114_clear(YELLOW);
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_clear (uint16 color)
+void ips114_clear(uint16 color)
 {
     uint16 i, j;
     ips114_set_region(0, 0, ips114_x_max - 1, ips114_y_max - 1);
-	
-	for(i = 0; i < ips114_x_max; i ++)
+
+    for (i = 0; i < ips114_x_max; i++)
     {
-        for (j = 0; j < ips114_y_max; j ++)
+        for (j = 0; j < ips114_y_max; j++)
         {
-            ips114_write_16bit_data(color);              
+            ips114_write_16bit_data(color);
         }
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       è®¾ç½®æ˜¾ç¤ºæ–¹å‘ è¿™ä¸ªå‡½æ•°åªæœ‰åœ¨åˆå§‹åŒ–å±å¹•ä¹‹å‰è°ƒç”¨æ‰ç”Ÿæ•ˆ
-// @param       dir             æ˜¾ç¤ºæ–¹å‘  å‚ç…§ zf_device_ips114.h å†… ips114_dir_enum æšä¸¾ä½“å®šä¹‰
+// @brief       ÉèÖÃÏÔÊ¾·½Ïò Õâ¸öº¯ÊıÖ»ÓĞÔÚ³õÊ¼»¯ÆÁÄ»Ö®Ç°µ÷ÓÃ²ÅÉúĞ§
+// @param       dir             ÏÔÊ¾·½Ïò  ²ÎÕÕ zf_device_ips114.h ÄÚ ips114_dir_enum Ã¶¾ÙÌå¶¨Òå
 // @return      void
 // Sample usage:                ips114_set_dir(IPS114_CROSSWISE);
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_set_dir (ips114_dir_enum dir)
+void ips114_set_dir(ips114_dir_enum dir)
 {
     ips114_display_dir = dir;
-    if(dir < 2)
+    if (dir < 2)
     {
         ips114_x_max = IPS_WIGHT;
         ips114_y_max = IPS_LEN;
@@ -174,407 +184,415 @@ void ips114_set_dir (ips114_dir_enum dir)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       è®¾ç½®æ˜¾ç¤ºé¢œè‰²
-// @param       pen             é¢œè‰²æ ¼å¼ RGB565 æˆ–è€…å¯ä»¥ä½¿ç”¨ zf_common_font.h å†…å¸¸ç”¨é¢œè‰²å®å®šä¹‰
-// @param       bgcolor         é¢œè‰²æ ¼å¼ RGB565 æˆ–è€…å¯ä»¥ä½¿ç”¨ zf_common_font.h å†…å¸¸ç”¨é¢œè‰²å®å®šä¹‰
+// @brief       ÉèÖÃÏÔÊ¾ÑÕÉ«
+// @param       pen             ÑÕÉ«¸ñÊ½ RGB565 »òÕß¿ÉÒÔÊ¹ÓÃ zf_common_font.h ÄÚ³£ÓÃÑÕÉ«ºê¶¨Òå
+// @param       bgcolor         ÑÕÉ«¸ñÊ½ RGB565 »òÕß¿ÉÒÔÊ¹ÓÃ zf_common_font.h ÄÚ³£ÓÃÑÕÉ«ºê¶¨Òå
 // @return      void
 // Sample usage:                ips114_set_color(WHITE,BLACK);
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_set_color (uint16 pen, uint16 bgcolor)
+void ips114_set_color(uint16 pen, uint16 bgcolor)
 {
     ips114_pencolor = pen;
     ips114_bgcolor = bgcolor;
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       æ¶²æ™¶ç”»ç‚¹
-// @param       x               åæ ‡xæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_x_max-1]
-// @param       y               åæ ‡yæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_y_max-1]
-// @param       dat             éœ€è¦æ˜¾ç¤ºçš„é¢œè‰²
+// @brief       Òº¾§»­µã
+// @param       x               ×ø±êx·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_x_max-1]
+// @param       y               ×ø±êy·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_y_max-1]
+// @param       dat             ĞèÒªÏÔÊ¾µÄÑÕÉ«
 // @return      void
-// Sample usage:                ips114_draw_point(0,0,RED);                     // åæ ‡ 0,0 ç”»ä¸€ä¸ªçº¢è‰²çš„ç‚¹
+// Sample usage:                ips114_draw_point(0,0,RED);                     // ×ø±ê 0,0 »­Ò»¸öºìÉ«µÄµã
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_draw_point (uint16 x,uint16 y,uint16 color)
+void ips114_draw_point(uint16 x, uint16 y, uint16 color)
 {
-    //zf_assert(x < ips114_x_max);
-    //zf_assert(y < ips114_y_max);
+    // zf_assert(x < ips114_x_max);
+    // zf_assert(y < ips114_y_max);
 
-    ips114_set_region(x,y,x,y);
+    ips114_set_region(x, y, x, y);
     ips114_write_16bit_data(color);
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       æ¶²æ™¶æ˜¾ç¤ºå­—ç¬¦
-// @param       x               åæ ‡xæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_x_max-1]
-// @param       y               åæ ‡yæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_y_max-1]
-// @param       dat             éœ€è¦æ˜¾ç¤ºçš„å­—ç¬¦
+// @brief       Òº¾§ÏÔÊ¾×Ö·û
+// @param       x               ×ø±êx·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_x_max-1]
+// @param       y               ×ø±êy·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_y_max-1]
+// @param       dat             ĞèÒªÏÔÊ¾µÄ×Ö·û
 // @return      void
-// Sample usage:                ips114_show_char(0,0,'x');                      // åæ ‡ 0,0 å†™ä¸€ä¸ªå­—ç¬¦ x
+// Sample usage:                ips114_show_char(0,0,'x');                      // ×ø±ê 0,0 Ğ´Ò»¸ö×Ö·û x
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_show_char (uint16 x,uint16 y,const char dat)
+void ips114_show_char(uint16 x, uint16 y, const char dat)
 {
-    //zf_assert(x < ips114_x_max);
-    //zf_assert(y < ips114_y_max);
+    // zf_assert(x < ips114_x_max);
+    // zf_assert(y < ips114_y_max);
 
-    uint8 i,j;
+    uint8 i, j;
     uint8 temp;
 
-    for(i=0; i<16; i++)
+    for (i = 0; i < 16; i++)
     {
-        ips114_set_region(x,y+i,x+7,y+i);
-        temp = tft_ascii[dat-32][i];                                            //å‡ 32 å› ä¸ºæ˜¯å–æ¨¡æ˜¯ä»ç©ºæ ¼å¼€å§‹å–å¾— ç©ºæ ¼åœ¨ ascii ä¸­åºå·æ˜¯ 32
-        for(j=0; j<8; j++)
+        ips114_set_region(x, y + i, x + 7, y + i);
+        temp = tft_ascii[dat - 32][i]; // ¼õ 32 ÒòÎªÊÇÈ¡Ä£ÊÇ´Ó¿Õ¸ñ¿ªÊ¼È¡µÃ ¿Õ¸ñÔÚ ascii ÖĞĞòºÅÊÇ 32
+        for (j = 0; j < 8; j++)
         {
-            if(temp&0x01)   
+            if (temp & 0x01)
                 ips114_write_16bit_data(ips114_pencolor);
             else
                 ips114_write_16bit_data(ips114_bgcolor);
-            temp>>=1;
+            temp >>= 1;
         }
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       æ¶²æ™¶æ˜¾ç¤ºå­—ç¬¦ä¸²
-// @param       x               åæ ‡xæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_x_max-1]
-// @param       y               åæ ‡yæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_y_max-1]
-// @param       dat             éœ€è¦æ˜¾ç¤ºçš„å­—ç¬¦ä¸²
+// @brief       Òº¾§ÏÔÊ¾×Ö·û´®
+// @param       x               ×ø±êx·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_x_max-1]
+// @param       y               ×ø±êy·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_y_max-1]
+// @param       dat             ĞèÒªÏÔÊ¾µÄ×Ö·û´®
 // @return      void
 // Sample usage:                ips114_show_string(0,0,"seekfree");
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_show_string (uint16 x,uint16 y,const char dat[])
+void ips114_show_string(uint16 x, uint16 y, const char dat[])
 {
-    //zf_assert(x < ips114_x_max);
-    //zf_assert(y < ips114_y_max);
-    
+    // zf_assert(x < ips114_x_max);
+    // zf_assert(y < ips114_y_max);
+
     uint16 j = 0;
-    while(dat[j] != '\0')
+    while (dat[j] != '\0')
     {
-        ips114_show_char(x+8*j,y,dat[j]);
+        ips114_show_char(x + 8 * j, y, dat[j]);
         j++;
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-//  @brief      æ¶²æ™¶æ˜¾ç¤º8ä½æœ‰ç¬¦å·
-// @param       x               åæ ‡xæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_x_max-1]
-// @param       y               åæ ‡yæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_y_max-1]
-//  @param      dat             éœ€è¦æ˜¾ç¤ºçš„å˜é‡ï¼Œæ•°æ®ç±»å‹int8
+//  @brief      Òº¾§ÏÔÊ¾8Î»ÓĞ·ûºÅ
+// @param       x               ×ø±êx·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_x_max-1]
+// @param       y               ×ø±êy·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_y_max-1]
+//  @param      dat             ĞèÒªÏÔÊ¾µÄ±äÁ¿£¬Êı¾İÀàĞÍint8
 //  @return     void
-//  Sample usage:               ips114_show_int8(0,0,x);                        // xä¸º int8 ç±»å‹
+//  Sample usage:               ips114_show_int8(0,0,x);                        // xÎª int8 ÀàĞÍ
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_show_int8(uint16 x,uint16 y,int8 dat)
+void ips114_show_int8(uint16 x, uint16 y, int8 dat)
 {
-    //zf_assert(x < ips114_x_max);
-    //zf_assert(y < ips114_y_max);
+    // zf_assert(x < ips114_x_max);
+    // zf_assert(y < ips114_y_max);
 
     uint8 a[3];
     uint8 i;
-    if(dat<0)
+    if (dat < 0)
     {
-        ips114_show_char(x,y,'-');
+        ips114_show_char(x, y, '-');
         dat = -dat;
     }
     else
-        ips114_show_char(x,y,' ');
-    
-    a[0] = dat/100;
-    a[1] = dat/10%10;
-    a[2] = dat%10;
+        ips114_show_char(x, y, ' ');
+
+    a[0] = dat / 100;
+    a[1] = dat / 10 % 10;
+    a[2] = dat % 10;
     i = 0;
-    while(i<3)
+    while (i < 3)
     {
-        ips114_show_char(x+(8*(i+1)),y,(uint8)('0' + a[i]));
+        ips114_show_char(x + (8 * (i + 1)), y, (uint8)('0' + a[i]));
         i++;
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       æ¶²æ™¶æ˜¾ç¤º8ä½æ— ç¬¦å·
-// @param       x               åæ ‡xæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_x_max-1]
-// @param       y               åæ ‡yæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_y_max-1]
-// @param       dat             éœ€è¦æ˜¾ç¤ºçš„å˜é‡ æ•°æ®ç±»å‹uint8
+// @brief       Òº¾§ÏÔÊ¾8Î»ÎŞ·ûºÅ
+// @param       x               ×ø±êx·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_x_max-1]
+// @param       y               ×ø±êy·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_y_max-1]
+// @param       dat             ĞèÒªÏÔÊ¾µÄ±äÁ¿ Êı¾İÀàĞÍuint8
 // @return      void
-// Sample usage:                ips114_show_uint8(0,0,x);                       // x ä¸º uint8 ç±»å‹
+// Sample usage:                ips114_show_uint8(0,0,x);                       // x Îª uint8 ÀàĞÍ
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_show_uint8(uint16 x,uint16 y,uint8 dat)
+void ips114_show_uint8(uint16 x, uint16 y, uint8 dat)
 {
-    //zf_assert(x < ips114_x_max);
-    //zf_assert(y < ips114_y_max);
+    // zf_assert(x < ips114_x_max);
+    // zf_assert(y < ips114_y_max);
 
     uint8 a[3];
     uint8 i;
-    
-    a[0] = dat/100;
-    a[1] = dat/10%10;
-    a[2] = dat%10;
+
+    a[0] = dat / 100;
+    a[1] = dat / 10 % 10;
+    a[2] = dat % 10;
     i = 0;
-    while(i<3)
+    while (i < 3)
     {
-        ips114_show_char(x+(8*i),y,(uint8)('0' + a[i]));
+        ips114_show_char(x + (8 * i), y, (uint8)('0' + a[i]));
         i++;
     }
-    
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       æ¶²æ™¶æ˜¾ç¤º16ä½æœ‰ç¬¦å·
-// @param       x               åæ ‡xæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_x_max-1]
-// @param       y               åæ ‡yæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_y_max-1]
-// @param       dat             éœ€è¦æ˜¾ç¤ºçš„å˜é‡ æ•°æ®ç±»å‹int16
+// @brief       Òº¾§ÏÔÊ¾16Î»ÓĞ·ûºÅ
+// @param       x               ×ø±êx·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_x_max-1]
+// @param       y               ×ø±êy·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_y_max-1]
+// @param       dat             ĞèÒªÏÔÊ¾µÄ±äÁ¿ Êı¾İÀàĞÍint16
 // @return      void
-// Sample usage:                ips114_show_int16(0,0,x);                       // x ä¸º int16 ç±»å‹
+// Sample usage:                ips114_show_int16(0,0,x);                       // x Îª int16 ÀàĞÍ
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_show_int16(uint16 x,uint16 y,int16 dat)
+void ips114_show_int16(uint16 x, uint16 y, int16 dat)
 {
-    //zf_assert(x < ips114_x_max);
-    //zf_assert(y < ips114_y_max);
+    // zf_assert(x < ips114_x_max);
+    // zf_assert(y < ips114_y_max);
 
     uint8 a[5];
     uint8 i;
 
-    if(dat<0)
+    if (dat < 0)
     {
-        ips114_show_char(x,y,'-');
+        ips114_show_char(x, y, '-');
         dat = -dat;
     }
-    else    ips114_show_char(x,y,' ');
+    else
+        ips114_show_char(x, y, ' ');
 
-    a[0] = dat/10000;
-    a[1] = dat/1000%10;
-    a[2] = dat/100%10;
-    a[3] = dat/10%10;
-    a[4] = dat%10;
-    
+    a[0] = dat / 10000;
+    a[1] = dat / 1000 % 10;
+    a[2] = dat / 100 % 10;
+    a[3] = dat / 10 % 10;
+    a[4] = dat % 10;
+
     i = 0;
-    while(i<5)
+    while (i < 5)
     {
-        ips114_show_char(x+(8*(i+1)),y,(uint8)('0' + a[i]));
+        ips114_show_char(x + (8 * (i + 1)), y, (uint8)('0' + a[i]));
         i++;
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       æ¶²æ™¶æ˜¾ç¤º16ä½æ— ç¬¦å·
-// @param       x               åæ ‡xæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_x_max-1]
-// @param       y               åæ ‡yæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_y_max-1]
-// @param       dat             éœ€è¦æ˜¾ç¤ºçš„å˜é‡ï¼Œæ•°æ®ç±»å‹uint16
+// @brief       Òº¾§ÏÔÊ¾16Î»ÎŞ·ûºÅ
+// @param       x               ×ø±êx·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_x_max-1]
+// @param       y               ×ø±êy·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_y_max-1]
+// @param       dat             ĞèÒªÏÔÊ¾µÄ±äÁ¿£¬Êı¾İÀàĞÍuint16
 // @return      void
-// Sample usage:                ips114_show_uint16(0,0,x);                      // x ä¸º uint16 ç±»å‹
+// Sample usage:                ips114_show_uint16(0,0,x);                      // x Îª uint16 ÀàĞÍ
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_show_uint16(uint16 x,uint16 y,uint16 dat)
+void ips114_show_uint16(uint16 x, uint16 y, uint16 dat)
 {
-    //zf_assert(x < ips114_x_max);
-    //zf_assert(y < ips114_y_max);
+    // zf_assert(x < ips114_x_max);
+    // zf_assert(y < ips114_y_max);
 
     uint8 a[5];
     uint8 i;
 
-    a[0] = dat/10000;
-    a[1] = dat/1000%10;
-    a[2] = dat/100%10;
-    a[3] = dat/10%10;
-    a[4] = dat%10;
-    
+    a[0] = dat / 10000;
+    a[1] = dat / 1000 % 10;
+    a[2] = dat / 100 % 10;
+    a[3] = dat / 10 % 10;
+    a[4] = dat % 10;
+
     i = 0;
-    while(i<5)
+    while (i < 5)
     {
-        ips114_show_char(x+(8*i),y,(uint8)('0' + a[i]));
+        ips114_show_char(x + (8 * i), y, (uint8)('0' + a[i]));
         i++;
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       æ¶²æ™¶æ˜¾ç¤º32ä½æœ‰ç¬¦å·(å»é™¤æ•´æ•°éƒ¨åˆ†æ— æ•ˆçš„0)
-// @param       x               åæ ‡xæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_x_max-1]
-// @param       y               åæ ‡yæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_y_max-1]
-// @param       dat             éœ€è¦æ˜¾ç¤ºçš„å˜é‡ï¼Œæ•°æ®ç±»å‹uint32
-// @param       num             éœ€è¦æ˜¾ç¤ºçš„ä½æ•° æœ€é«˜10ä½  ä¸åŒ…å«æ­£è´Ÿå·
+// @brief       Òº¾§ÏÔÊ¾32Î»ÓĞ·ûºÅ(È¥³ıÕûÊı²¿·ÖÎŞĞ§µÄ0)
+// @param       x               ×ø±êx·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_x_max-1]
+// @param       y               ×ø±êy·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_y_max-1]
+// @param       dat             ĞèÒªÏÔÊ¾µÄ±äÁ¿£¬Êı¾İÀàĞÍuint32
+// @param       num             ĞèÒªÏÔÊ¾µÄÎ»Êı ×î¸ß10Î»  ²»°üº¬Õı¸ººÅ
 // @return      void
-// Sample usage:                ips114_show_int32(0,0,x,3);                     // x å¯ä»¥ä¸º int32 uint16 int16 uint8 int8 ç±»å‹
-// note:                        è´Ÿæ•°ä¼šæ˜¾ç¤ºä¸€ä¸ª â€˜-â€™å·   æ­£æ•°æ˜¾ç¤ºä¸€ä¸ªç©ºæ ¼
+// Sample usage:                ips114_show_int32(0,0,x,3);                     // x ¿ÉÒÔÎª int32 uint16 int16 uint8 int8 ÀàĞÍ
+// note:                        ¸ºÊı»áÏÔÊ¾Ò»¸ö ¡®-¡¯ºÅ   ÕıÊıÏÔÊ¾Ò»¸ö¿Õ¸ñ
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_show_int32(uint16 x,uint16 y,int32 dat,uint8 num)
+void ips114_show_int32(uint16 x, uint16 y, int32 dat, uint8 num)
 {
-    //zf_assert(x < ips114_x_max);
-    //zf_assert(y < ips114_y_max);
+    // zf_assert(x < ips114_x_max);
+    // zf_assert(y < ips114_y_max);
 
-    int8    buff[34];
-    uint8   length;
-    
-    if(10<num)      num = 10;
-    
+    int8 buff[34];
+    uint8 length;
+
+    if (10 < num)
+        num = 10;
+
     num++;
-    if(0>dat)   length = zf_sprintf( &buff[0],(const int8 *)"%d",dat);        // è´Ÿæ•°
+    if (0 > dat)
+        length = zf_sprintf(&buff[0], (const int8 *)"%d", dat); // ¸ºÊı
     else
     {
         buff[0] = ' ';
-        length = zf_sprintf( &buff[1],(const int8 *)"%d",dat);
+        length = zf_sprintf(&buff[1], (const int8 *)"%d", dat);
         length++;
     }
-    while(length < num)
+    while (length < num)
     {
         buff[length] = ' ';
         length++;
     }
     buff[num] = '\0';
 
-    ips114_show_string(x, y, (const char *)buff);                               // æ˜¾ç¤ºæ•°å­—
+    ips114_show_string(x, y, (const char *)buff); // ÏÔÊ¾Êı×Ö
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       æ¶²æ™¶æ˜¾ç¤ºæµ®ç‚¹æ•°(å»é™¤æ•´æ•°éƒ¨åˆ†æ— æ•ˆçš„0)
-// @param       x               åæ ‡xæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_x_max-1]
-// @param       y               åæ ‡yæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_y_max-1]
-// @param       dat             éœ€è¦æ˜¾ç¤ºçš„å˜é‡ï¼Œæ•°æ®ç±»å‹floatæˆ–double
-// @param       num             æ•´æ•°ä½æ˜¾ç¤ºé•¿åº¦   æœ€é«˜10ä½
-// @param       pointnum        å°æ•°ä½æ˜¾ç¤ºé•¿åº¦   æœ€é«˜6ä½
+// @brief       Òº¾§ÏÔÊ¾¸¡µãÊı(È¥³ıÕûÊı²¿·ÖÎŞĞ§µÄ0)
+// @param       x               ×ø±êx·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_x_max-1]
+// @param       y               ×ø±êy·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_y_max-1]
+// @param       dat             ĞèÒªÏÔÊ¾µÄ±äÁ¿£¬Êı¾İÀàĞÍfloat»òdouble
+// @param       num             ÕûÊıÎ»ÏÔÊ¾³¤¶È   ×î¸ß10Î»
+// @param       pointnum        Ğ¡ÊıÎ»ÏÔÊ¾³¤¶È   ×î¸ß6Î»
 // @return      void
-// Sample usage:                ips114_show_float(0,0,x,2,3);                    // æ˜¾ç¤ºæµ®ç‚¹æ•°   æ•´æ•°æ˜¾ç¤º2ä½   å°æ•°æ˜¾ç¤ºä¸‰ä½
-// @note                        ç‰¹åˆ«æ³¨æ„å½“å‘ç°å°æ•°éƒ¨åˆ†æ˜¾ç¤ºçš„å€¼ä¸ä½ å†™å…¥çš„å€¼ä¸ä¸€æ ·çš„æ—¶å€™ï¼Œ
-//                              å¯èƒ½æ˜¯ç”±äºæµ®ç‚¹æ•°ç²¾åº¦ä¸¢å¤±é—®é¢˜å¯¼è‡´çš„ï¼Œè¿™å¹¶ä¸æ˜¯æ˜¾ç¤ºå‡½æ•°çš„é—®é¢˜ï¼Œ
-//                              æœ‰å…³é—®é¢˜çš„è¯¦æƒ…ï¼Œè¯·è‡ªè¡Œç™¾åº¦å­¦ä¹    æµ®ç‚¹æ•°ç²¾åº¦ä¸¢å¤±é—®é¢˜ã€‚
-//                              è´Ÿæ•°ä¼šæ˜¾ç¤ºä¸€ä¸ª â€˜-â€™å·   æ­£æ•°æ˜¾ç¤ºä¸€ä¸ªç©ºæ ¼
+// Sample usage:                ips114_show_float(0,0,x,2,3);                    // ÏÔÊ¾¸¡µãÊı   ÕûÊıÏÔÊ¾2Î»   Ğ¡ÊıÏÔÊ¾ÈıÎ»
+// @note                        ÌØ±ğ×¢Òâµ±·¢ÏÖĞ¡Êı²¿·ÖÏÔÊ¾µÄÖµÓëÄãĞ´ÈëµÄÖµ²»Ò»ÑùµÄÊ±ºò£¬
+//                              ¿ÉÄÜÊÇÓÉÓÚ¸¡µãÊı¾«¶È¶ªÊ§ÎÊÌâµ¼ÖÂµÄ£¬Õâ²¢²»ÊÇÏÔÊ¾º¯ÊıµÄÎÊÌâ£¬
+//                              ÓĞ¹ØÎÊÌâµÄÏêÇé£¬Çë×ÔĞĞ°Ù¶ÈÑ§Ï°   ¸¡µãÊı¾«¶È¶ªÊ§ÎÊÌâ¡£
+//                              ¸ºÊı»áÏÔÊ¾Ò»¸ö ¡®-¡¯ºÅ   ÕıÊıÏÔÊ¾Ò»¸ö¿Õ¸ñ
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_show_float(uint16 x,uint16 y,double dat,uint8 num,uint8 pointnum)
+void ips114_show_float(uint16 x, uint16 y, double dat, uint8 num, uint8 pointnum)
 {
-    //zf_assert(x < ips114_x_max);
-    //zf_assert(y < ips114_y_max);
+    // zf_assert(x < ips114_x_max);
+    // zf_assert(y < ips114_y_max);
 
-    uint8   length;
-    int8    buff[34];
-    int8    start,end,point;
+    uint8 length;
+    int8 buff[34];
+    int8 start, end, point;
 
-    if(6<pointnum)  pointnum = 6;
-    if(10<num)      num = 10;
-        
-    if(0>dat)   length = zf_sprintf( &buff[0],(const int8 *)"%f",dat);        // è´Ÿæ•°
+    if (6 < pointnum)
+        pointnum = 6;
+    if (10 < num)
+        num = 10;
+
+    if (0 > dat)
+        length = zf_sprintf(&buff[0], (const int8 *)"%f", dat); // ¸ºÊı
     else
     {
-        length = zf_sprintf( &buff[1],(const int8 *)"%f",dat);
+        length = zf_sprintf(&buff[1], (const int8 *)"%f", dat);
         length++;
     }
-    point = length - 7;                                                         // è®¡ç®—å°æ•°ç‚¹ä½ç½®
-    start = point - num - 1;                                                    // è®¡ç®—èµ·å§‹ä½
-    end = point + pointnum + 1;                                                 // è®¡ç®—ç»“æŸä½
-    while(0>start)                                                              // æ•´æ•°ä½ä¸å¤Ÿ  æœ«å°¾åº”è¯¥å¡«å……ç©ºæ ¼
+    point = length - 7;         // ¼ÆËãĞ¡ÊıµãÎ»ÖÃ
+    start = point - num - 1;    // ¼ÆËãÆğÊ¼Î»
+    end = point + pointnum + 1; // ¼ÆËã½áÊøÎ»
+    while (0 > start)           // ÕûÊıÎ»²»¹»  Ä©Î²Ó¦¸ÃÌî³ä¿Õ¸ñ
     {
         buff[end] = ' ';
         end++;
         start++;
     }
-    
-    if(0>dat)   buff[start] = '-';
-    else        buff[start] = ' ';
-    
+
+    if (0 > dat)
+        buff[start] = '-';
+    else
+        buff[start] = ' ';
+
     buff[end] = '\0';
 
-    ips114_show_string(x, y, (const char *)buff);                               // æ˜¾ç¤ºæ•°å­—
+    ips114_show_string(x, y, (const char *)buff); // ÏÔÊ¾Êı×Ö
 }
 
-
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       IPS114 æ˜¾ç¤ºæ³¢å½¢
-// @param       x               åæ ‡xæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_x_max-1]
-// @param       y               åæ ‡yæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_y_max-1]
-// @param       *p              æ³¢å½¢æ•°ç»„æŒ‡é’ˆ
-// @param       width           æ³¢å½¢å®é™…å®½åº¦
-// @param       value_max       æ³¢å½¢å®é™…æœ€å¤§å€¼
-// @param       dis_width       æ³¢å½¢æ˜¾ç¤ºå®½åº¦ å‚æ•°èŒƒå›´ [0, ips114_x_max]
-// @param       dis_value_max   æ³¢å½¢æ˜¾ç¤ºæœ€å¤§å€¼ å‚æ•°èŒƒå›´ [0, ips114_y_max]
+// @brief       IPS114 ÏÔÊ¾²¨ĞÎ
+// @param       x               ×ø±êx·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_x_max-1]
+// @param       y               ×ø±êy·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_y_max-1]
+// @param       *p              ²¨ĞÎÊı×éÖ¸Õë
+// @param       width           ²¨ĞÎÊµ¼Ê¿í¶È
+// @param       value_max       ²¨ĞÎÊµ¼Ê×î´óÖµ
+// @param       dis_width       ²¨ĞÎÏÔÊ¾¿í¶È ²ÎÊı·¶Î§ [0, ips114_x_max]
+// @param       dis_value_max   ²¨ĞÎÏÔÊ¾×î´óÖµ ²ÎÊı·¶Î§ [0, ips114_y_max]
 // @return      void
 // Sample usage:                ips114_show_gray_image(0,0,camera_buffer_addr,MT9V03X_W,MT9V03X_H,240,135,128);
 //-------------------------------------------------------------------------------------------------------------------
 void ips114_show_wave(uint16 x, uint16 y, uint8 *p, uint16 width, uint16 value_max, uint16 dis_width, uint16 dis_value_max)
 {
-    //zf_assert(x < ips114_x_max);
-    //zf_assert(y < ips114_y_max);
+    // zf_assert(x < ips114_x_max);
+    // zf_assert(y < ips114_y_max);
 
     uint32 i = 0, j = 0;
     uint32 width_index, value_max_index;
 
-    ips114_set_region(x, y, x+dis_width-1, y+dis_value_max-1);                  // è®¾ç½®æ˜¾ç¤ºåŒºåŸŸ
-    for(i=0;i<dis_value_max;i++)
+    ips114_set_region(x, y, x + dis_width - 1, y + dis_value_max - 1); // ÉèÖÃÏÔÊ¾ÇøÓò
+    for (i = 0; i < dis_value_max; i++)
     {
-        for(j=0;j<dis_width;j++)
+        for (j = 0; j < dis_width; j++)
         {
-            ips114_write_16bit_data(ips114_bgcolor); 
+            ips114_write_16bit_data(ips114_bgcolor);
         }
     }
 
-    for(i=0;i<dis_width;i++)
+    for (i = 0; i < dis_width; i++)
     {
-        width_index = i*width/dis_width;
-        value_max_index = *(p+width_index)*(dis_value_max-1)/value_max;
-        ips114_draw_point(i+x, (dis_value_max-1)-value_max_index+y, ips114_pencolor);
+        width_index = i * width / dis_width;
+        value_max_index = *(p + width_index) * (dis_value_max - 1) / value_max;
+        ips114_draw_point(i + x, (dis_value_max - 1) - value_max_index + y, ips114_pencolor);
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       æ±‰å­—æ˜¾ç¤º
-// @param       x               åæ ‡xæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_x_max-1]
-// @param       y               åæ ‡yæ–¹å‘çš„èµ·ç‚¹ å‚æ•°èŒƒå›´ [0, ips114_y_max-1]
-// @param       siz            å–æ¨¡çš„æ—¶å€™è®¾ç½®çš„æ±‰å­—å­—ä½“å¤§å° ä¹Ÿå°±æ˜¯ä¸€ä¸ªæ±‰å­—å ç”¨çš„ç‚¹é˜µé•¿å®½ä¸ºå¤šå°‘ä¸ªç‚¹ å–æ¨¡çš„æ—¶å€™éœ€è¦é•¿å®½æ˜¯ä¸€æ ·çš„
-// @param       *p              éœ€è¦æ˜¾ç¤ºçš„æ±‰å­—æ•°ç»„
-// @param       number          éœ€è¦æ˜¾ç¤ºå¤šå°‘ä½
-// @param       color           æ˜¾ç¤ºé¢œè‰²
+// @brief       ºº×ÖÏÔÊ¾
+// @param       x               ×ø±êx·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_x_max-1]
+// @param       y               ×ø±êy·½ÏòµÄÆğµã ²ÎÊı·¶Î§ [0, ips114_y_max-1]
+// @param       siz            È¡Ä£µÄÊ±ºòÉèÖÃµÄºº×Ö×ÖÌå´óĞ¡ Ò²¾ÍÊÇÒ»¸öºº×ÖÕ¼ÓÃµÄµãÕó³¤¿íÎª¶àÉÙ¸öµã È¡Ä£µÄÊ±ºòĞèÒª³¤¿íÊÇÒ»ÑùµÄ
+// @param       *p              ĞèÒªÏÔÊ¾µÄºº×ÖÊı×é
+// @param       number          ĞèÒªÏÔÊ¾¶àÉÙÎ»
+// @param       color           ÏÔÊ¾ÑÕÉ«
 // @return      void
-// Sample usage:                ips114_show_chinese(0,0,16,chinese_test[0],4,RED);//æ˜¾ç¤ºfontæ–‡ä»¶é‡Œé¢çš„ ç¤ºä¾‹
-// @Note                        ä½¿ç”¨PCtoLCD2002è½¯ä»¶å–æ¨¡           é˜´ç ã€é€è¡Œå¼ã€é¡ºå‘   16*16
+// Sample usage:                ips114_show_chinese(0,0,16,chinese_test[0],4,RED);//ÏÔÊ¾fontÎÄ¼şÀïÃæµÄ Ê¾Àı
+// @Note                        Ê¹ÓÃPCtoLCD2002Èí¼şÈ¡Ä£           ÒõÂë¡¢ÖğĞĞÊ½¡¢Ë³Ïò   16*16
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_show_chinese (uint16 x, uint16 y, uint8 siz, const uint8 *p, uint8 number, uint16 color)
+void ips114_show_chinese(uint16 x, uint16 y, uint8 siz, const uint8 *p, uint8 number, uint16 color)
 {
-    //zf_assert(x < ips114_x_max);
-    //zf_assert(y < ips114_y_max);
+    // zf_assert(x < ips114_x_max);
+    // zf_assert(y < ips114_y_max);
 
-    int i, j, k; 
+    int i, j, k;
     uint8 temp, temp1, temp2;
     const uint8 *p_data;
-    
-    temp2 = siz/8;
-    
-    ips114_set_region(x,y,number*siz-1+x,y+siz-1);
-    
-    for(i=0;i<siz;i++)
+
+    temp2 = siz / 8;
+
+    ips114_set_region(x, y, number * siz - 1 + x, y + siz - 1);
+
+    for (i = 0; i < siz; i++)
     {
         temp1 = number;
-        p_data = p+i*temp2;
-        while(temp1--)
+        p_data = p + i * temp2;
+        while (temp1--)
         {
-            for(k=0;k<temp2;k++)
+            for (k = 0; k < temp2; k++)
             {
-                for(j=8;j>0;j--)
+                for (j = 8; j > 0; j--)
                 {
-                    temp = (*p_data>>(j-1)) & 0x01;
-                    if(temp)    ips114_write_16bit_data(color);
-                    else        ips114_write_16bit_data(ips114_bgcolor);
+                    temp = (*p_data >> (j - 1)) & 0x01;
+                    if (temp)
+                        ips114_write_16bit_data(color);
+                    else
+                        ips114_write_16bit_data(ips114_bgcolor);
                 }
                 p_data++;
             }
-            p_data = p_data - temp2 + temp2*siz;
-        }   
+            p_data = p_data - temp2 + temp2 * siz;
+        }
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// @brief       1.14å¯¸ IPSæ¶²æ™¶åˆå§‹åŒ–
+// @brief       1.14´ç IPSÒº¾§³õÊ¼»¯
 // @return      void
 // Sample usage:                ips114_init();
 //-------------------------------------------------------------------------------------------------------------------
-void ips114_init (void)
+void ips114_init(void)
 {
 #if IPS114_USE_SOFT_SPI
     soft_spi_init(&ips114_spi, 0, IPS114_SOFT_SPI_DELAY, IPS114_SCL_PIN, IPS114_SDA_PIN, SOFT_SPI_PIN_NULL, SOFT_SPI_PIN_NULL);
 #else
-    //zf_assert(IPS114_SPI != (IPS114_SCL_PIN&0xF000>>12));
-    //zf_assert(IPS114_SPI != (IPS114_SDA_PIN&0xF000>>12));
+    // zf_assert(IPS114_SPI != (IPS114_SCL_PIN&0xF000>>12));
+    // zf_assert(IPS114_SPI != (IPS114_SDA_PIN&0xF000>>12));
     spi_init(IPS114_SPI, SPI_MODE0, IPS114_SPI_SPEED, IPS114_SCL_PIN, IPS114_SDA_PIN, SPI_MISO_NULL, SPI_CS_NULL);
 #endif
 
-//    gpio_init(IPS114_DC_PIN, GPO, GPIO_LOW, GPO_PUSH_PULL);
-//    gpio_init(IPS114_RST_PIN, GPO, GPIO_LOW, GPO_PUSH_PULL);
-//    gpio_init(IPS114_CS_PIN, GPO, GPIO_LOW, GPO_PUSH_PULL);
-//    gpio_init(IPS114_BLK_PIN, GPO, GPIO_HIGH, GPO_PUSH_PULL);
+    //    gpio_init(IPS114_DC_PIN, GPO, GPIO_LOW, GPO_PUSH_PULL);
+    //    gpio_init(IPS114_RST_PIN, GPO, GPIO_LOW, GPO_PUSH_PULL);
+    //    gpio_init(IPS114_CS_PIN, GPO, GPIO_LOW, GPO_PUSH_PULL);
+    //    gpio_init(IPS114_BLK_PIN, GPO, GPIO_HIGH, GPO_PUSH_PULL);
 
     ips114_set_dir(ips114_display_dir);
     ips114_set_color(ips114_pencolor, ips114_bgcolor);
@@ -587,10 +605,14 @@ void ips114_init (void)
 
     ips114_write_index(0x36);
     system_delay_ms(100);
-    if      (ips114_display_dir==0) ips114_write_8bit_data(0x00);
-    else if (ips114_display_dir==1) ips114_write_8bit_data(0xC0);
-    else if (ips114_display_dir==2) ips114_write_8bit_data(0x70);
-    else                            ips114_write_8bit_data(0xA0);
+    if (ips114_display_dir == 0)
+        ips114_write_8bit_data(0x00);
+    else if (ips114_display_dir == 1)
+        ips114_write_8bit_data(0xC0);
+    else if (ips114_display_dir == 2)
+        ips114_write_8bit_data(0x70);
+    else
+        ips114_write_8bit_data(0xA0);
 
     ips114_write_index(0x3A);
     ips114_write_8bit_data(0x05);

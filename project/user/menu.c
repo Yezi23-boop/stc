@@ -348,8 +348,7 @@ void Keystroke_Menu_HOME(void)
         ips114_show_string(7 * 15, 3 * 18, "phase");
         ips114_show_string(7 * 15, 4 * 18, "dianya");
         ips114_show_string(7 * 15, 5 * 18, "fuya_date");
-        //        // 显示实时数值（整数显示以减少浮点格式化开销）
-        ips114_show_int32(8 * 23, 1 * 18, Err, 3);
+        ips114_show_float(8 * 23, 1 * 18, Err, 3,2);
         // 显示位置式 PID_Direction 输出作为 motor
         ips114_show_float(8 * 23, 2 * 18, PID.steer.output, 3, 1);
         ips114_show_float(8 * 23, 3 * 18, phase, 3, 1);

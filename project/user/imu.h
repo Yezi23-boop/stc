@@ -2,37 +2,37 @@
 #define _IMU_H_
 
 /*
- * æ¨¡å—è¯´æ˜Ž
- * - æä¾› IMU å§¿æ€è§£ç®—ç›¸å…³çš„ç±»åž‹ã€å¸¸é‡ä¸ŽæŽ¥å£å£°æ˜Žã€?
- * - ä¸Žå®žçŽ°æ–‡ä»? imu.c é…å?ä½¿ç”¨ï¼šå…ˆè°ƒç”¨ Prepare_Data() è¯»å–/é¢„å?ç†ä¼ æ„Ÿå™¨ï¼?
- *   å†è°ƒç”? IMUupdate() è¿›è?ä¸€æ¬¡å§¿æ€æ›´æ–°ï¼Œè¾“å‡ºæ¬§æ‹‰è§? Att_Angleã€?
+ * Ä£¿éËµÃ÷
+ * - Ìá¹© IMU ×ËÌ¬½âËãÏà¹ØµÄÀàÐÍ¡¢³£Á¿Óë½Ó¿ÚÉùÃ÷£»
+ * - ÓëÊµÏÖÎÄ¼þ imu.c ÅäºÏÊ¹ÓÃ£ºÏÈµ÷ÓÃ Prepare_Data() ¶ÁÈ¡/Ô¤´¦Àí´«¸ÐÆ÷£¬
+ *   ÔÙµ÷ÓÃ IMUupdate() Íê³ÉÒ»´Î×ËÌ¬¸üÐÂ£¬Êä³ö¹ö¸©Æ« Att_Angle¡£
  *
- * åæ ‡/å•ä½çº¦å®š
- * - è§’åº¦ï¼šæ?æ‹‰è?å•ä½ä¸ºâ€œåº¦â€ã€?
- * - è§’é€Ÿåº¦ï¼šGyr_* ä½¿ç”¨â€œå¼§åº?/ç§’â€ï¼ˆrad/sï¼‰ï¼›è‹¥ä¸ºâ€œåº¦/ç§’â€ï¼Œè¯·å…ˆä¹˜ä»¥ DegtoRadã€?
- * - åŠ é€Ÿåº¦ï¼šå•ä½ç”±åº•å±‚é©±åŠ¨è½?¢å‡½æ•° imu660ra_acc_transition å†³å®šï¼ˆg æˆ? m/s^2ï¼‰ï¼Œ
- *   å§¿æ€è§£ç®—ä»…ä½¿ç”¨å…¶æ–¹å‘ï¼Œå†…éƒ¨ä¼šå½’ä¸€åŒ–ã€?
+ * ×ø±ê/µ¥Î»Ô¼¶¨
+ * - ½Ç¶È£ºÊä³öµ¥Î»Îª¡°¶È¡±¡£
+ * - ½ÇËÙ¶È£ºGyr_* Ê¹ÓÃ¡°»¡¶È/Ãë¡±£¨rad/s£©£»ÈôÎª¡°¶È/Ãë¡±£¬ÇëÏÈ³ËÒÔ DegtoRad¡£
+ * - ¼ÓËÙ¶È£ºµ¥Î»ÓÉµ×²ã×ª»»º¯Êý imu660ra_acc_transition ¾ö¶¨£¨g »ò m/s^2£©£¬
+ *   ×ËÌ¬½âËã½öÊ¹ÓÃ·½Ïò£¬ÄÚ²¿»á×ö¹éÒ»»¯¡£
  */
 
-/* è§’åº¦/å¼§åº¦æ¢ç®—å¸¸é‡
- * RadtoDegï¼šå¼§åº? -> åº? çš„æ¯”ä¾‹ç³»æ•°ï¼ˆé€šå¸¸çº? 57.29578fï¼›æ?å¤„æŒ‰é¡¹ç›®å®šä¹‰ä¿æŒä¸æ”¹ï¼?
- * DegtoRadï¼šåº¦   -> å¼§åº¦ çš„æ¯”ä¾‹ç³»æ•°ï¼ˆçº? 0.0174533fï¼?
+/* ½Ç¶È/»¡¶È×ª»»³£Á¿
+ * RadtoDeg£º»¡¶È -> ¶È µÄ±ÈÀýÏµÊý£¨ÏîÄ¿ÖÐÔ¼¶¨Îª 57.324841f£©
+ * DegtoRad£º¶È   -> »¡¶È µÄ±ÈÀýÏµÊý£¨Ô¼ 0.0174533f£©
  */
 #define RadtoDeg 57.324841f
 #define DegtoRad 0.0174533f
 
-/* ä¸‰è½´å‘é‡ï¼ˆé€šç”¨ XYZï¼? */
+/* ÈýÖá¸¡µã£¨Í¨ÓÃ XYZ£© */
 typedef struct
 {
-    float X; // X è½´åˆ†é‡?
-    float Y; // Y è½´åˆ†é‡?
-    float Z; // Z è½´åˆ†é‡?
+    float X; // X Öá·ÖÁ¿
+    float Y; // Y Öá·ÖÁ¿
+    float Z; // Z Öá·ÖÁ¿
 } FLOAT_XYZ;
 
-/* æ¬§æ‹‰è§’ï¼ˆå•ä½ï¼šåº¦ï¼?
- * rolï¼šæ¨ªæ»šï¼ˆRollï¼Œç»• X è½´ï¼‰
- * pitï¼šä¿¯ä»°ï¼ˆPitchï¼Œç»• Y è½´ï¼‰
- * yawï¼šèˆªå‘ï¼ˆYawï¼Œç»• Z è½´ï¼‰
+/* ×ËÌ¬½Ç£¨µ¥Î»£º¶È£©
+ * rol£ººá¹ö£¨Roll£¬¶ÔÓ¦ X Öá£©
+ * pit£º¸©Ñö£¨Pitch£¬¶ÔÓ¦ Y Öá£©
+ * yaw£ºÆ«º½£¨Yaw£¬¶ÔÓ¦ Z Öá£©
  */
 typedef struct
 {
@@ -41,61 +41,61 @@ typedef struct
     float yaw;
 } FLOAT_ANGLE;
 
-/* å››å…ƒæ•°ï¼ˆå…¨å±€ï¼Œimu.c å†…éƒ¨ç»´æŠ¤ï¼?
- * - q0 ä¸ºæ ‡é‡éƒ¨ï¼Œq1~q3 ä¸ºå‘é‡éƒ¨
- * - ç”? IMUupdate() æ›´æ–°ï¼Œå?éƒ¨å¯å??ã€?
+/* ËÄÔªÊý£¨È«¾Ö£¬ÓÉ imu.c ÄÚ²¿¹ÜÀí£©
+ * - q0 Îª±êÁ¿²¿£¬q1~q3 ÎªÏòÁ¿²¿£»
+ * - ÓÉ IMUupdate() ¸üÐÂ£¬Íâ²¿¿ÉÖ»¶ÁÊ¹ÓÃ¡£
  */
 extern float q0, q1, q2, q3;
 
-/* å…¨å±€å§¿æ€è?è¾“å‡ºï¼ˆåº¦ï¼? */
+/* È«¾Ö×ËÌ¬½ÇÊä³ö£¨¶È£© */
 extern FLOAT_ANGLE Att_Angle;
 
-/* ä¸?—´é‡ï¼ˆæ–¹å‘ä½™å¼¦ä¼°è?ä¸Žè?å·?¡¹ç­‰ï¼‰ï¼Œä¸»è¦ä¾›è°ƒè¯•æŸ¥çœ‹
- * - vx,vy,vzï¼šå½“å‰å››å…ƒæ•°ä¼°è?çš„é‡åŠ›æ–¹å‘ï¼ˆæœºä½“ç³»ä¸‹ï¼?
- * - ex,ey,ezï¼šé‡åŠ›æ–¹å‘çš„å‰ç§¯è¯?·®
- * - norm    ï¼šå½’ä¸€åŒ–ä¸­é—´ç»“æž?
+/* ÖÐ¼äÁ¿£¨·½ÏòÓàÏÒ¾ØÕóÓëÎó²îµÈ£¬±ãÓÚµ÷ÊÔ²é¿´£©
+ * - vx,vy,vz£ºµ±Ç°ËÄÔªÊý¶ÔÓ¦µÄÖØÁ¦·½Ïò£¨»úÌå×ø±êÏµÏÂ£©
+ * - ex,ey,ez£ºÖØÁ¦·½ÏòµÄÆ«²îÎó²î
+ * - norm    £º¹éÒ»»¯ÖÐ¼ä½á¹û
  */
 extern float vx, vy, vz, ex, ey, ez, norm;
 
-/* é¢„å?ç†åŽçš„ä¼ æ„Ÿå™¨é‡?
- * - Acc_filtï¼šæ»¤æ³¢åŽçš„åŠ é€Ÿåº¦ï¼ˆä»…æ–¹å‘ç”¨äºŽå§¿æ€æ ¡æ­£ï¼‰
- * - Gyr_filtï¼šæ»¤æ³¢åŽçš„è?é€Ÿåº¦ï¼ˆå•ä½ï¼šrad/sï¼?
+/* Ô¤´¦ÀíºóµÄ´«¸ÐÆ÷Á¿
+ * - Acc_filt£ºÂË²¨ºóµÄ¼ÓËÙ¶È£¨½ö·½ÏòÓÃÓÚ×ËÌ¬Ð£Õý£©
+ * - Gyr_filt£ºÂË²¨ºóµÄ½ÇËÙ¶È£¨µ¥Î»£ºrad/s£©
  */
 extern FLOAT_XYZ Acc_filt, Gyr_filt;
 
-/* å¿?€? 1/sqrt(x)
- * - è¿‘ä¼¼ç®—æ³•ï¼Œé€Ÿåº¦å¿?¼Œç²¾åº¦å¯¹å§¿æ€è§£ç®—å·²è¶³å?ã€?
- * - è‹¥åœ¨å…¶ä»–æ¨¡å—è°ƒç”¨è¯·æ³¨æ„å…¶è¿‘ä¼¼ç‰¹æ€§ï¼›é¡¹ç›®ä¸?€šå¸¸å?œ¨ imu.c å†…éƒ¨ä½¿ç”¨ã€?
+/* ¿ìËÙ 1/sqrt(x)
+ * - ½üËÆËã·¨£ºËÙ¶È¿ì£¬¾«¶È¶Ô×ËÌ¬½âËãÒÑ×ã¹»£»
+ * - ÈôÔÚÆäËüÄ£¿éµ÷ÓÃÇë¹Ø×¢Æä½üËÆÌØÐÔ£»ÏîÄ¿ÖÐÒ»°ãÖ»ÔÚ imu.c ÄÚ²¿Ê¹ÓÃ¡£
  */
 float invSqrt(float x);
 
-/* å¿?€Ÿsqrt(x)
- * - è¿‘ä¼¼ç®—æ³•ï¼Œé€Ÿåº¦å¿?¼Œç²¾åº¦å¯¹å§¿æ€è§£ç®—å·²è¶³å?ã€?
- * - è‹¥åœ¨å…¶ä»–æ¨¡å—è°ƒç”¨è¯·æ³¨æ„å…¶è¿‘ä¼¼ç‰¹æ€§ï¼›é¡¹ç›®ä¸?€šå¸¸å?œ¨ imu.c å†…éƒ¨ä½¿ç”¨ã€?
+/* ¿ìËÙ sqrt(x)
+ * - ½üËÆËã·¨£ºËÙ¶È¿ì£¬¾«¶È¶Ô×ËÌ¬½âËãÒÑ×ã¹»£»
+ * - ÈôÔÚÆäËüÄ£¿éµ÷ÓÃÇë¹Ø×¢Æä½üËÆÌØÐÔ£»ÏîÄ¿ÖÐÒ»°ãÖ»ÔÚ imu.c ÄÚ²¿Ê¹ÓÃ¡£
  */
 float SquareRootFloat(float number);
 
-/* ä¼ æ„Ÿå™¨æ•°æ??å¤„ç†
- * åŠŸèƒ½ï¼?
- * - è°ƒç”¨åº•å±‚é©±åŠ¨è¯»å–ä¸€æ¬? IMU åŽŸå?æ•°æ®ï¼?
- * - å®Œæˆå•ä½è½?¢ä¸Žé›¶åæ ¡æ­£ï¼›
- * - æ›´æ–°å…¨å±€ Acc_filtã€Gyr_filtã€?
- * å…ˆå†³æ¡ä»¶ï¼?
- * - å·²æ?ç¡?ˆå§‹åŒ– IMU ç¡?»¶ä¸Žé©±åŠ?¼›
- * - æä¾› Gyro_offset_x/y/zï¼ˆé›¶åï¼‰ä¸? DegtoRad å¸¸é‡ã€?
+/* ´«¸ÐÆ÷Êý¾ÝÔ¤´¦Àí
+ * ¹¦ÄÜ£º
+ * - µ÷ÓÃµ×²ãÇý¶¯¶ÁÈ¡Ò»Ö¡ IMU Ô­Ê¼Êý¾Ý£»
+ * - Íê³Éµ¥Î»×ª»»ÓëÁãÆ«Ð£Õý£»
+ * - ¸üÐÂÈ«¾Ö Acc_filt¡¢Gyr_filt£»
+ * ÏÈ¾öÌõ¼þ£º
+ * - ÒÑÕýÈ·³õÊ¼»¯ IMU Ó²¼þÓëÇý¶¯£»
+ * - Ìá¹© Gyro_offset_x/y/z£¨ÁãÆ«£©Óë DegtoRad ³£Á¿£»
  */
 void Prepare_Data(void);
 
-/* å§¿æ€æ›´æ–°ï¼ˆå•æ?ï¼?
- * å‚æ•°ï¼?
- * - Gyr_rad  ï¼šæŒ‡å‘è?é€Ÿåº¦ï¼ˆä¸‰è½´ï¼‰ï¼Œå•ä½? rad/sã€?
- * - Acc_filt ï¼šæŒ‡å‘åŠ é€Ÿåº¦ï¼ˆä¸‰è½´ï¼‰ï¼Œä»…ä½¿ç”¨æ–¹å‘ï¼Œå†…éƒ¨å…ˆå½’ä¸€åŒ–ã€?
- * - Att_Angleï¼šè¾“å‡ºæ?æ‹‰è?ï¼ˆåº¦ï¼‰ã€?
- * è¡Œä¸ºï¼?
- * - åŸºäºŽå››å…ƒæ•°çš„ PI åé?èžåˆï¼ˆåŠ é€Ÿåº¦ä½œä¸ºé‡åŠ›æ–¹å‘è§‚æµ‹ï¼‰ï¼›
- * - å†…éƒ¨ç»´æŠ¤å››å…ƒæ•? q0~q3ï¼Œå¹¶å°†å…¶è½?¢ä¸ºæ?æ‹‰è?è¾“å‡ºã€?
- * è°ƒç”¨é¢‘çŽ‡ä¸Žæ?é•¿ï¼š
- * - åº”ä¸Žå®žé™…é‡‡æ ·å‘¨æœŸåŒ¹é…ï¼ˆimu.c å†…çš„ halfT/ç§?ˆ†æ­¥é•¿éœ€å¯¹åº”å®žé™… Tsï¼‰ã€?
+/* ×ËÌ¬¸üÐÂ£¨Ö÷º¯Êý£©
+ * ²ÎÊý£º
+ * - Gyr_rad  £º½ÇËÙ¶È£¨ÈýÖá£¬µ¥Î» rad/s£©
+ * - Acc_filt £º¼ÓËÙ¶È£¨ÈýÖá£¬½ö·½Ïò£¬ÄÚ²¿ÏÈ¹éÒ»»¯£©
+ * - Att_Angle£ºÊä³ö×ËÌ¬½Ç£¨¶È£©
+ * Ô­Àí£º
+ * - »ùÓÚËÄÔªÊýµÄ PI »¥²¹ÈÚºÏ£¨¼ÓËÙ¶È×÷ÎªÖØÁ¦·½ÏòÐ£Õý£©£»
+ * - ÄÚ²¿¹ÜÀíËÄÔªÊý q0~q3£¬²¢×ª»»Êä³ö¹ö¸©Æ«½Ç¶È£»
+ * µ÷ÓÃÆµÂÊÓë²½³¤£º
+ * - ÐèÓëÊµ¼Ê²ÉÑùÖÜÆÚÆ¥Åä£¨imu.c ÖÐµÄ halfT/·ÖÆµ²½³¤Ó¦¶ÔÓ¦Êµ¼Ê Ts£©¡£
  */
 void IMUupdate(FLOAT_XYZ *Gyr_rad, FLOAT_XYZ *Acc_filt, FLOAT_ANGLE *Att_Angle);
 

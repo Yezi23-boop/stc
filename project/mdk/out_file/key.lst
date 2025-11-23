@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  key                                                                22/11/25  23:09:30  PAGE 1   
+C251 COMPILER V5.60.0,  key                                                                23/11/25  21:54:34  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE key
@@ -66,7 +66,7 @@ stmt  level    source
    55   5                          keystroke_label = i + 5; // 长按对应值为5-8
    56   5                          break;                   // 检测到长按后立即退出循环
    57   5                      }
-C251 COMPILER V5.60.0,  key                                                                22/11/25  23:09:30  PAGE 2   
+C251 COMPILER V5.60.0,  key                                                                23/11/25  21:54:34  PAGE 2   
 
    58   4                  }
    59   3              }

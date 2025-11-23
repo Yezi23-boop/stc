@@ -10,7 +10,7 @@ void printf_speed_test();
 
 void main()
 {
-	// char vofa_cmd[32]; // VOFA 命令缓存
+	char vofa_cmd[32]; // VOFA 命令缓存
 
 	clock_init(SYSTEM_CLOCK_40M); // 时钟初始化
 	debug_init();				  // 调试接口初始化
@@ -18,30 +18,30 @@ void main()
 
 	// 初始化（wireless_uart_init 已在 int_user 中完成）
 	int_user();
-	// vofa_init(); // 初始化 VOFA 通信（可选）
+	vofa_init(); // 初始化 VOFA 通信（可选）
 
 	while (1)
 	{
 		// ========== 处理 VOFA 命令 ==========
 		// 从 FIFO 读取串口数据，使用系统提供的 wireless_uart_read_buffer
-		//      vofa_parse_from_fifo();
+		vofa_parse_from_fifo();
 
 		//      // 检查是否解析到完整命令
-		//      if (vofa_get_command(vofa_cmd, 32))
-		//      {
-		//          handle_vofa_command(vofa_cmd);
-		//      }
+		if (vofa_get_command(vofa_cmd, 32))
+		{
+			handle_vofa_command(vofa_cmd);
+		}
 
 		// ========== 数据发送到 VOFA+ ==========
 		// 使用 FireWater 协议发送数据
 		// printf("%f,%f,%f,%f\n", speed_l, speed_r, test_speed, PID.steer.output);
 
 		// ========== 显示调试功能（按需选择） ==========
-		printf_date();
-		printf_adc();
-		printf_imu();
-		printf_speed_test();
-		Keystroke_Menu();
+		// printf_date();
+		// printf_adc();
+		// printf_imu();
+		// printf_speed_test();
+//		 Keystroke_Menu();
 	}
 }
 

@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  eeprom                                                             22/11/25  23:09:29  PAGE 1   
+C251 COMPILER V5.60.0,  eeprom                                                             23/11/25  21:54:33  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE eeprom
@@ -66,7 +66,7 @@ stmt  level    source
    55   2          }
    56   1          else // 非初次启动，读取eeprom用于赋值变量
    57   1          {
-C251 COMPILER V5.60.0,  eeprom                                                             22/11/25  23:09:29  PAGE 2   
+C251 COMPILER V5.60.0,  eeprom                                                             23/11/25  21:54:33  PAGE 2   
 
    58   2              // 启动配置参数
    59   2              start_flag = read_int(1);
@@ -134,7 +134,7 @@ stmt  level    source
   121          /*********************************************
   122           * EEPROM底层读写函数
   123           *********************************************/
-C251 COMPILER V5.60.0,  eeprom                                                             22/11/25  23:09:29  PAGE 3   
+C251 COMPILER V5.60.0,  eeprom                                                             23/11/25  21:54:33  PAGE 3   
 
   124          void save_int(int32 input, uint8 value_bit)
   125          {
@@ -203,7 +203,7 @@ Module Information          Static   Overlayable
   edata size           =    ------     ------
   bit size             =    ------     ------
   ebit size            =    ------     ------
-C251 COMPILER V5.60.0,  eeprom                                                             22/11/25  23:09:29  PAGE 4   
+C251 COMPILER V5.60.0,  eeprom                                                             23/11/25  21:54:33  PAGE 4   
 
   bitaddressable size  =    ------     ------
   ebitaddressable size =    ------     ------

@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 1   
+C251 COMPILER V5.60.0,  vofa                                                               23/11/25  21:54:34  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE vofa
@@ -66,7 +66,7 @@ stmt  level    source
    51   1              while (wireless_uart_read_buffer(&dat, 1) > 0)
    52   1              {
    53   2                      vofa_parse_byte(dat);
-C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 2   
+C251 COMPILER V5.60.0,  vofa                                                               23/11/25  21:54:34  PAGE 2   
 
    54   2              }
    55   1      }
@@ -134,7 +134,7 @@ stmt  level    source
              -------------
   114          uint8 vofa_get_command(char *cmd_out, uint8 max_len)
   115          {
-C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 3   
+C251 COMPILER V5.60.0,  vofa                                                               23/11/25  21:54:34  PAGE 3   
 
   116   1              uint8 result = 0;
   117   1      
@@ -202,7 +202,7 @@ stmt  level    source
   175   1              eq_pos = strchr(cmd, '=');
   176   1      
   177   1              if (eq_pos != NULL)
-C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 4   
+C251 COMPILER V5.60.0,  vofa                                                               23/11/25  21:54:34  PAGE 4   
 
   178   1              {
   179   2                      // 有等号，说明是参数设置命令
@@ -270,7 +270,7 @@ stmt  level    source
   241          //-------------------------------------------------------------------------------------------------------
              -------------
   242          // 函数功能     处理 VOFA+ 接收到的命令
-C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 5   
+C251 COMPILER V5.60.0,  vofa                                                               23/11/25  21:54:34  PAGE 5   
 
   243          // 参数说明     cmd         接收到的命令字符串
   244          // 返回参数     void
@@ -338,7 +338,7 @@ stmt  level    source
   305   4                              }
   306   3                              else if (strcmp(param_name, "R_KD") == 0)
   307   3                              {
-C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 6   
+C251 COMPILER V5.60.0,  vofa                                                               23/11/25  21:54:34  PAGE 6   
 
   308   4                                      PID.right_speed.Kd = value;
   309   4                                      printf("Right Kd = %.2f\n", value);
@@ -406,7 +406,7 @@ stmt  level    source
   371   4                                      printf("Unknown parameter: %s = %.2f\n", param_name, value);
   372   4                              }
   373   3                      }
-C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 7   
+C251 COMPILER V5.60.0,  vofa                                                               23/11/25  21:54:34  PAGE 7   
 
   374   2              }
   375   1              else
@@ -475,7 +475,7 @@ Module Information          Static   Overlayable
   xdata size           =       169     ------
   xdata-const size     =    ------     ------
   edata size           =    ------     ------
-C251 COMPILER V5.60.0,  vofa                                                               22/11/25  23:09:31  PAGE 8   
+C251 COMPILER V5.60.0,  vofa                                                               23/11/25  21:54:34  PAGE 8   
 
   bit size             =    ------     ------
   ebit size            =    ------     ------
