@@ -1,0 +1,109 @@
+C251 COMPILER V5.60.0,  seekfree_assistant_interface                                       22/11/25  18:26:39  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE seekfree_assistant_interface
+OBJECT MODULE PLACED IN .\out_file\seekfree_assistant_interface.obj
+COMPILER INVOKED BY: D:\keil_5\C251\BIN\C251.EXE ..\..\libraries\zf_components\seekfree_assistant_interface.c LARGE NOAL
+                    -IAS FLOAT64 WARNINGLEVEL(3) OPTIMIZE(0,SIZE) BROWSE INCDIR(..\..\libraries\zf_common;..\..\libraries\zf_components;..\..
+                    -\libraries\zf_device;..\..\libraries\zf_driver;..\user;..\code) DEBUG PRINT(.\out_file\seekfree_assistant_interface.lst)
+                    - OBJECT(.\out_file\seekfree_assistant_interface.obj) 
+
+stmt  level    source
+
+    1          #include "seekfree_assistant.h"
+    2          
+    3          
+    4          
+    5          
+    6          //-------------------------------------------------------------------------------------------------------
+             -------------
+    7          // º¯Êý¼ò½é     Öð·ÉÖúÊÖ·¢ËÍº¯Êý
+    8          // ²ÎÊýËµÃ÷     *buff           ÐèÒª·¢ËÍµÄÊý¾ÝµØÖ·
+    9          // ²ÎÊýËµÃ÷     length          ÐèÒª·¢ËÍµÄ³¤¶È
+   10          // ·µ»Ø²ÎÊý     uint32          Ê£ÓàÎ´·¢ËÍÊý¾Ý³¤¶È
+   11          // Ê¹ÓÃÊ¾Àý
+   12          //-------------------------------------------------------------------------------------------------------
+             -------------
+   13          uint32 (*seekfree_assistant_transfer_callback)   (const uint8 *buff, uint32 length);
+   14          
+   15          
+   16          //-------------------------------------------------------------------------------------------------------
+             -------------
+   17          // º¯Êý¼ò½é     Öð·ÉÖúÊÖ½ÓÊÕÊý¾Ýº¯Êý
+   18          // ²ÎÊýËµÃ÷     *buff           ÐèÒª½ÓÊÕµÄÊý¾ÝµØÖ·
+   19          // ²ÎÊýËµÃ÷     length          Òª½ÓÊÕµÄÊý¾Ý×î´ó³¤¶È
+   20          // ·µ»Ø²ÎÊý     uint32          ½ÓÊÕµ½µÄÊý¾Ý³¤¶È
+   21          // Ê¹ÓÃÊ¾Àý
+   22          //-------------------------------------------------------------------------------------------------------
+             -------------
+   23          uint32 (*seekfree_assistant_receive_callback)    (uint8 *buff, uint32 length);
+   24          
+   25          
+   26          //-------------------------------------------------------------------------------------------------------
+             -------------
+   27          // º¯Êý¼ò½é     Öð·ÉÖúÊÖ½Ó¿Ú ³õÊ¼»¯
+   28          // ²ÎÊýËµÃ÷
+   29          // ·µ»Ø²ÎÊý     void
+   30          // Ê¹ÓÃÊ¾Àý     seekfree_assistant_interface_init(SEEKFREE_ASSISTANT_WIFI_SPI); Ê¹ÓÃ¸ßËÙWIFI SPIÄ£¿é½øÐÐÊ
+             -ý¾ÝÊÕ·¢
+   31          // ±¸×¢         ÐèÒª×ÔÐÐµ÷ÓÃÉè±¸µÄ³õÊ¼»¯£¬ÀýÈçÊ¹ÓÃÎÞÏß×ª´®¿Ú½øÐÐÊý¾ÝµÄÊÕ·¢£¬ÔòÐèÒª×ÔÐÐµ÷ÓÃÎÞÏß×ª´®¿ÚµÄ³õÊ
+             -¼»¯£¬È»ºóÔÙµ÷ÓÃseekfree_assistant_interface_initÍê³ÉÖð·ÉÖúÊÖµÄ½Ó¿Ú³õÊ¼»¯
+   32          //-------------------------------------------------------------------------------------------------------
+             -------------
+   33          void seekfree_assistant_interface_init (seekfree_assistant_transfer_device_enum transfer_device)
+*** ERROR C25 IN LINE 33 OF ..\..\libraries\zf_components\seekfree_assistant_interface.c: syntax error near 'transfer_de
+             -vice'
+   34          {
+*** WARNING C35 IN LINE 34 OF ..\..\libraries\zf_components\seekfree_assistant_interface.c: 'seekfree_assistant_interfac
+             -e_init': uses old-style declarator
+   35   1          switch(transfer_device)
+*** ERROR C67 IN LINE 35 OF ..\..\libraries\zf_components\seekfree_assistant_interface.c: 'transfer_device': undefined i
+             -dentifier
+   36   1          {
+   37   2              case SEEKFREE_ASSISTANT_DEBUG_UART:
+*** ERROR C67 IN LINE 37 OF ..\..\libraries\zf_components\seekfree_assistant_interface.c: 'SEEKFREE_ASSISTANT_DEBUG_UART
+             -': undefined identifier
+   38   2              {
+   39   3                  seekfree_assistant_transfer_callback = debug_send_buffer;
+   40   3                  seekfree_assistant_receive_callback = debug_read_buffer;
+C251 COMPILER V5.60.0,  seekfree_assistant_interface                                       22/11/25  18:26:39  PAGE 2   
+
+   41   3              }break;
+   42   2              
+   43   2              case SEEKFREE_ASSISTANT_WIRELESS_UART:
+*** ERROR C67 IN LINE 43 OF ..\..\libraries\zf_components\seekfree_assistant_interface.c: 'SEEKFREE_ASSISTANT_WIRELESS_U
+             -ART': undefined identifier
+   44   2              {
+   45   3                  seekfree_assistant_transfer_callback = wireless_uart_send_buffer;
+   46   3                  seekfree_assistant_receive_callback = wireless_uart_read_buffer;
+   47   3              }break;
+   48   2              
+   49   2      
+   50   2              case SEEKFREE_ASSISTANT_BLE6A20:
+*** ERROR C67 IN LINE 50 OF ..\..\libraries\zf_components\seekfree_assistant_interface.c: 'SEEKFREE_ASSISTANT_BLE6A20': 
+             -undefined identifier
+   51   2              {
+   52   3                  seekfree_assistant_transfer_callback = ble6a20_send_buffer;
+*** ERROR C67 IN LINE 52 OF ..\..\libraries\zf_components\seekfree_assistant_interface.c: 'ble6a20_send_buffer': undefin
+             -ed identifier
+   53   3                  seekfree_assistant_receive_callback = ble6a20_read_buffer;
+*** ERROR C67 IN LINE 53 OF ..\..\libraries\zf_components\seekfree_assistant_interface.c: 'ble6a20_read_buffer': undefin
+             -ed identifier
+   54   3              }break;
+   55   2      
+   56   2              case SEEKFREE_ASSISTANT_CUSTOM:
+*** ERROR C67 IN LINE 56 OF ..\..\libraries\zf_components\seekfree_assistant_interface.c: 'SEEKFREE_ASSISTANT_CUSTOM': u
+             -ndefined identifier
+   57   2              {         
+   58   3                  // ¸ù¾Ý×Ô¼ºµÄÐèÇó ×ÔÐÐÊµÏÖseekfree_assistant_transferÓëseekfree_assistant_receiveº¯Êý£¬Íê³ÉÊý
+             -¾ÝµÄÊÕ·¢
+   59   3                  
+   60   3              }break;
+   61   2          }
+   62   1      }
+*** WARNING C47 IN LINE 33 OF ..\..\libraries\zf_components\seekfree_assistant_interface.c: 'seekfree_assistant_transfer
+             -_device_enum': unreferenced parameter
+   63          
+   64          
+
+C251 COMPILATION COMPLETE.  2 WARNING(S),  8 ERROR(S)

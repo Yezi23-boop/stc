@@ -1,0 +1,109 @@
+C251 COMPILER V5.60.0,  int_user                                                           23/11/25  21:54:34  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE int_user
+OBJECT MODULE PLACED IN .\out_file\int_user.obj
+COMPILER INVOKED BY: D:\keil_5\C251\BIN\C251.EXE ..\user\int_user.c LARGE NOALIAS FLOAT64 WARNINGLEVEL(3) OPTIMIZE(0,SIZ
+                    -E) BROWSE INCDIR(..\..\libraries\zf_common;..\..\libraries\zf_components;..\..\libraries\zf_device;..\..\libraries\zf_dr
+                    -iver;..\user;..\code) DEBUG PRINT(.\out_file\int_user.lst) OBJECT(.\out_file\int_user.obj) 
+
+stmt  level    source
+
+    1          #include "zf_common_headfile.h"
+    2          #define TIME_0 5  // 定时器0中断周期(ms)
+    3          #define TIME_1 20 // 定时器1中断周期(ms)
+    4          void int_user(void)
+    5          {
+    6   1          // 系统初始化：传感器/存储/定时器/编码器/ADC/电机/无线
+    7   1          imu660ra_init(); // 初始化 IMU660RA
+    8   1          eeprom_init();
+    9   1          pit_ms_init(TIM0_PIT, TIME_0);
+   10   1          pit_ms_init(TIM1_PIT, TIME_1);
+   11   1          encoder_dir_init(TIM3_ENCOEDER, IO_P46, TIM3_ENCOEDER_P04); // 编码器初始化
+   12   1          encoder_dir_init(TIM4_ENCOEDER, IO_P42, TIM4_ENCOEDER_P06); // 编码器初始化
+   13   1          adc_init(ADC_CH13_P05, ADC_8BIT);
+   14   1          adc_init(ADC_CH0_P10, ADC_12BIT);
+   15   1          adc_init(ADC_CH1_P11, ADC_12BIT);
+   16   1          adc_init(ADC_CH8_P00, ADC_12BIT);
+   17   1          adc_init(ADC_CH9_P01, ADC_12BIT);
+   18   1          motor_Init();         // 电机初始化
+   19   1          fuya_Init();          // 负压系统初始化
+   20   1          wireless_uart_init(); // 无线串口初始化
+   21   1          // 速度环 PID 初始化（误差限幅与输出限幅）
+   22   1          pid_speed_init(&PID.left_speed, 100, 40, 0, 8000, 8000);
+   23   1          pid_speed_init(&PID.right_speed, 100, 40, 0, 8000, 8000);
+   24   1          // 方向环 PID 初始化（误差KP/KD与陀螺KD分离）
+   25   1          pid_steer_init(&PID.steer, kp_Err, kd_Err, kd_gyro, 45, 45); // 方向环
+   26   1          ips114_init();
+   27   1      }
+   28          
+   29          /*********************************************
+   30           * 传感器零偏标定
+   31           * 函数: offset_init()
+   32           * 作用: 采样多次取平均，得到陀螺仪与加速度零偏
+   33           * 日期: 2024/11/26
+   34           * 备注: 调用前确保 IMU 已上电稳定
+   35           *********************************************/
+   36          float Gyrox = 0;
+   37          float Gyroy = 0;
+   38          float Gyroz = 0;
+   39          float acc_x = 0;
+   40          float acc_y = 0;
+   41          float acc_z = 0;
+   42          float Gyro_offset_x = 0;
+   43          float Gyro_offset_y = 0;
+   44          float Gyro_offset_z = 0;
+   45          float acc_offset_x = 0;
+   46          float acc_offset_y = 0;
+   47          float acc_offset_z = 0;
+   48          void offset_init(void)
+   49          {
+   50   1          int rt = 50;
+   51   1          int i;
+   52   1          imu660ra_init();     // 初始化 IMU
+   53   1          system_delay_init(); // 初始化延时模块
+   54   1          for (i = 0; i < rt; i++)
+   55   1          {
+   56   2              imu660ra_get_gyro();
+   57   2              imu660ra_get_acc();
+C251 COMPILER V5.60.0,  int_user                                                           23/11/25  21:54:34  PAGE 2   
+
+   58   2              Gyro_offset_x += imu660ra_gyro_transition(imu660ra_gyro_x);
+   59   2              Gyro_offset_y += imu660ra_gyro_transition(imu660ra_gyro_y);
+   60   2              Gyro_offset_z += imu660ra_gyro_transition(imu660ra_gyro_z);
+   61   2              acc_offset_x += (imu660ra_acc_transition(imu660ra_acc_x));
+   62   2              acc_offset_y += (imu660ra_acc_transition(imu660ra_acc_y));
+   63   2              acc_offset_z += (imu660ra_acc_transition(imu660ra_acc_z));
+   64   2              system_delay_ms(5);
+   65   2          }
+   66   1          Gyro_offset_x = Gyro_offset_x / rt;
+   67   1          Gyro_offset_y = Gyro_offset_y / rt;
+   68   1          Gyro_offset_z = Gyro_offset_z / rt;
+   69   1          acc_offset_x = acc_offset_x / rt;
+   70   1          acc_offset_y = acc_offset_y / rt;
+   71   1          acc_offset_z = acc_offset_z / rt;
+   72   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       980     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =        52     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =       108     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
