@@ -21,7 +21,7 @@ void task100ms(void)
 	// 从 FIFO 读取串口数据，使用系统提供的 wireless_uart_read_buffer
 	vofa_parse_from_fifo();
 
-	//      // 检查是否解析到完整命令
+	//       检查是否解析到完整命令
 	if (vofa_get_command(vofa_cmd, 32))
 	{
 		handle_vofa_command(vofa_cmd);
