@@ -1,0 +1,340 @@
+C251 COMPILER V5.60.0,  isr                                                                26/11/25  15:19:33  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE isr
+OBJECT MODULE PLACED IN .\out_file\isr.obj
+COMPILER INVOKED BY: D:\Keil_v5\C251\BIN\C251.EXE ..\user\isr.c LARGE NOALIAS FLOAT64 WARNINGLEVEL(3) OPTIMIZE(0,SIZE) B
+                    -ROWSE INCDIR(..\..\libraries\zf_common;..\..\libraries\zf_components;..\..\libraries\zf_device;..\..\libraries\zf_driver
+                    -;..\user;..\code) DEBUG PRINT(.\out_file\isr.lst) TABS(2) OBJECT(.\out_file\isr.obj) 
+
+stmt  level    source
+
+    1          /********************************************************************************************************
+             -*************
+    2           * AI8051U Opensourec Library ¼´£¨AI8051U ¿ªÔ´¿â£©ÊÇÒ»¸ö»ùÓÚ¹Ù·½ SDK ½Ó¿ÚµÄµÚÈý·½¿ªÔ´¿â
+    3           * Copyright (c) 2022 SEEKFREE Öð·É¿Æ¼¼
+    4           *
+    5           * ±¾ÎÄ¼þÊÇSTC ¿ªÔ´¿âµÄÒ»²¿·Ö
+    6           *
+    7           * AI8051U ¿ªÔ´¿â ÊÇÃâ·ÑÈí¼þ
+    8           * Äú¿ÉÒÔ¸ù¾Ý×ÔÓÉÈí¼þ»ù½ð»á·¢²¼µÄ GPL£¨GNU General Public License£¬¼´ GNUÍ¨ÓÃ¹«¹²Ðí¿ÉÖ¤£©µÄÌõ¿î
+    9           * ¼´ GPL µÄµÚ3°æ£¨¼´ GPL3.0£©»ò£¨ÄúÑ¡ÔñµÄ£©ÈÎºÎºóÀ´µÄ°æ±¾£¬ÖØÐÂ·¢²¼ºÍ/»òÐÞ¸ÄËü
+   10           *
+   11           * ±¾¿ªÔ´¿âµÄ·¢²¼ÊÇÏ£ÍûËüÄÜ·¢»Ó×÷ÓÃ£¬µ«²¢Î´¶ÔÆä×÷ÈÎºÎµÄ±£Ö¤
+   12           * ÉõÖÁÃ»ÓÐÒþº¬µÄÊÊÏúÐÔ»òÊÊºÏÌØ¶¨ÓÃÍ¾µÄ±£Ö¤
+   13           * ¸ü¶àÏ¸½ÚÇë²Î¼û GPL
+   14           *
+   15           * ÄúÓ¦¸ÃÔÚÊÕµ½±¾¿ªÔ´¿âµÄÍ¬Ê±ÊÕµ½Ò»·Ý GPL µÄ¸±±¾
+   16           * Èç¹ûÃ»ÓÐ£¬Çë²ÎÔÄ<https://www.gnu.org/licenses/>
+   17           *
+   18           * ¶îÍâ×¢Ã÷£º
+   19           * ±¾¿ªÔ´¿âÊ¹ÓÃ GPL3.0 ¿ªÔ´Ðí¿ÉÖ¤Ð­Òé ÒÔÉÏÐí¿ÉÉêÃ÷ÎªÒëÎÄ°æ±¾
+   20           * Ðí¿ÉÉêÃ÷Ó¢ÎÄ°æÔÚ libraries/doc ÎÄ¼þ¼ÐÏÂµÄ GPL3_permission_statement.txt ÎÄ¼þÖÐ
+   21           * Ðí¿ÉÖ¤¸±±¾ÔÚ libraries ÎÄ¼þ¼ÐÏÂ ¼´¸ÃÎÄ¼þ¼ÐÏÂµÄ LICENSE ÎÄ¼þ
+   22           * »¶Ó­¸÷Î»Ê¹ÓÃ²¢´«²¥±¾³ÌÐò µ«ÐÞ¸ÄÄÚÈÝÊ±±ØÐë±£ÁôÖð·É¿Æ¼¼µÄ°æÈ¨ÉùÃ÷£¨¼´±¾ÉùÃ÷£©
+   23           *
+   24           * ÎÄ¼þÃû³Æ
+   25           * ¹«Ë¾Ãû³Æ          ³É¶¼Öð·É¿Æ¼¼ÓÐÏÞ¹«Ë¾
+   26           * °æ±¾ÐÅÏ¢          ²é¿´ libraries/doc ÎÄ¼þ¼ÐÄÚ version ÎÄ¼þ °æ±¾ËµÃ÷
+   27           * ¿ª·¢»·¾³          MDK FOR C251
+   28           * ÊÊÓÃÆ½Ì¨          AI8051U
+   29           * µêÆÌÁ´½Ó          https://seekfree.taobao.com/
+   30           *
+   31           * ÐÞ¸Ä¼ÇÂ¼
+   32           * ÈÕÆÚ              ×÷Õß           ±¸×¢
+   33           * 2024-08-01        ´óW            first version
+   34           ********************************************************************************************************
+             -************/
+   35          
+   36          #include "zf_common_headfile.h"
+   37          #include <type.h>
+   38          void DMA_UART1_IRQHandler(void) interrupt 4
+   39          {
+   40   1          static vuint8 dwon_count = 0;
+   41   1          if (DMA_UR1R_STA & 0x01) // ½ÓÊÕÍê³É
+   42   1          {
+   43   2              DMA_UR1R_STA &= ~0x01;      // Çå±êÖ¾Î»
+   44   2              uart_rx_start_buff(UART_1); // ÉèÖÃÏÂÒ»´Î½ÓÊÕ£¬Îñ±Ø±£Áô
+   45   2      
+   46   2              // ³ÌÐò×Ô¶¯ÏÂÔØ
+   47   2              if (uart_rx_buff[UART_1][0] == 0x7F)
+   48   2              {
+   49   3                  if (dwon_count++ > 20)
+   50   3                  {
+   51   4                      IAP_CONTR = 0x60;
+   52   4                  }
+   53   3              }
+   54   2              else
+   55   2              {
+C251 COMPILER V5.60.0,  isr                                                                26/11/25  15:19:33  PAGE 2   
+
+   56   3                  dwon_count = 0;
+   57   3              }
+   58   2      
+   59   2              if (uart1_irq_handler != NULL)
+   60   2              {
+   61   3                  uart1_irq_handler(uart_rx_buff[UART_1][0]);
+   62   3              }
+   63   2          }
+   64   1      
+   65   1          if (DMA_UR1R_STA & 0x02) // Êý¾Ý¶ªÆú
+   66   1          {
+   67   2              DMA_UR1R_STA &= ~0x02;      // Çå±êÖ¾Î»
+   68   2              uart_rx_start_buff(UART_1); // ÉèÖÃÏÂÒ»´Î½ÓÊÕ£¬Îñ±Ø±£Áô
+   69   2              // Èç¹û½øÈëÁËÕâ¸öÖÐ¶Ï£¬Ôò´ú±íUARTµÄÊý¾ÝÔÚÃ»ÓÐÈ¡×ßÖ®Ç°±»¸²¸Ç!
+   70   2              // Èç¹û½øÈëÁËÕâ¸öÖÐ¶Ï£¬Ôò´ú±íUARTµÄÊý¾ÝÔÚÃ»ÓÐÈ¡×ßÖ®Ç°±»¸²¸Ç!
+   71   2              // Èç¹û½øÈëÁËÕâ¸öÖÐ¶Ï£¬Ôò´ú±íUARTµÄÊý¾ÝÔÚÃ»ÓÐÈ¡×ßÖ®Ç°±»¸²¸Ç!
+   72   2          }
+   73   1      }
+   74          
+   75          void DMA_UART2_IRQHandler(void) interrupt 8
+   76          {
+   77   1      
+   78   1          if (DMA_UR2R_STA & 0x01) // ½ÓÊÕÍê³É
+   79   1          {
+   80   2              DMA_UR2R_STA &= ~0x01;      // Çå±êÖ¾Î»
+   81   2              uart_rx_start_buff(UART_2); // ÉèÖÃÏÂÒ»´Î½ÓÊÕ£¬Îñ±Ø±£Áô
+   82   2      
+   83   2              if (uart2_irq_handler != NULL)
+   84   2              {
+   85   3                  uart2_irq_handler(uart_rx_buff[UART_2][0]);
+   86   3              }
+   87   2          }
+   88   1      
+   89   1          if (DMA_UR2R_STA & 0x02) // Êý¾Ý¶ªÆú
+   90   1          {
+   91   2              DMA_UR2R_STA &= ~0x02;      // Çå±êÖ¾Î»
+   92   2              uart_rx_start_buff(UART_2); // ÉèÖÃÏÂÒ»´Î½ÓÊÕ£¬Îñ±Ø±£Áô
+   93   2              // Èç¹û½øÈëÁËÕâ¸öÖÐ¶Ï£¬Ôò´ú±íUARTµÄÊý¾ÝÔÚÃ»ÓÐÈ¡×ßÖ®Ç°±»¸²¸Ç!
+   94   2              // Èç¹û½øÈëÁËÕâ¸öÖÐ¶Ï£¬Ôò´ú±íUARTµÄÊý¾ÝÔÚÃ»ÓÐÈ¡×ßÖ®Ç°±»¸²¸Ç!
+   95   2              // Èç¹û½øÈëÁËÕâ¸öÖÐ¶Ï£¬Ôò´ú±íUARTµÄÊý¾ÝÔÚÃ»ÓÐÈ¡×ßÖ®Ç°±»¸²¸Ç!
+   96   2          }
+   97   1      }
+   98          
+   99          void DMA_UART3_IRQHandler(void) interrupt 17
+  100          {
+  101   1      
+  102   1          if (DMA_UR3R_STA & 0x01) // ½ÓÊÕÍê³É
+  103   1          {
+  104   2              DMA_UR3R_STA &= ~0x01;      // Çå±êÖ¾Î»
+  105   2              uart_rx_start_buff(UART_3); // ÉèÖÃÏÂÒ»´Î½ÓÊÕ£¬Îñ±Ø±£Áô
+  106   2      
+  107   2              if (uart3_irq_handler != NULL)
+  108   2              {
+  109   3      
+  110   3                  uart3_irq_handler(uart_rx_buff[UART_3][0]);
+  111   3              }
+  112   2          }
+  113   1      
+  114   1          if (DMA_UR3R_STA & 0x02) // Êý¾Ý¶ªÆú
+  115   1          {
+  116   2              DMA_UR3R_STA &= ~0x02;      // Çå±êÖ¾Î»
+  117   2              uart_rx_start_buff(UART_3); // ÉèÖÃÏÂÒ»´Î½ÓÊÕ£¬Îñ±Ø±£Áô
+  118   2              // Èç¹û½øÈëÁËÕâ¸öÖÐ¶Ï£¬Ôò´ú±íUARTµÄÊý¾ÝÔÚÃ»ÓÐÈ¡×ßÖ®Ç°±»¸²¸Ç!
+  119   2              // Èç¹û½øÈëÁËÕâ¸öÖÐ¶Ï£¬Ôò´ú±íUARTµÄÊý¾ÝÔÚÃ»ÓÐÈ¡×ßÖ®Ç°±»¸²¸Ç!
+  120   2              // Èç¹û½øÈëÁËÕâ¸öÖÐ¶Ï£¬Ôò´ú±íUARTµÄÊý¾ÝÔÚÃ»ÓÐÈ¡×ßÖ®Ç°±»¸²¸Ç!
+  121   2          }
+C251 COMPILER V5.60.0,  isr                                                                26/11/25  15:19:33  PAGE 3   
+
+  122   1      }
+  123          
+  124          void DMA_UART4_IRQHandler(void) interrupt 18
+  125          {
+  126   1      
+  127   1          if (DMA_UR4R_STA & 0x01) // ½ÓÊÕÍê³É
+  128   1          {
+  129   2              DMA_UR4R_STA &= ~0x01;      // Çå±êÖ¾Î»
+  130   2              uart_rx_start_buff(UART_4); // ÉèÖÃÏÂÒ»´Î½ÓÊÕ£¬Îñ±Ø±£Áô
+  131   2      
+  132   2              if (uart4_irq_handler != NULL)
+  133   2              {
+  134   3                  uart4_irq_handler(uart_rx_buff[UART_4][0]);
+  135   3              }
+  136   2          }
+  137   1      
+  138   1          if (DMA_UR4R_STA & 0x02) // Êý¾Ý¶ªÆú
+  139   1          {
+  140   2              DMA_UR4R_STA &= ~0x02;      // Çå±êÖ¾Î»
+  141   2              uart_rx_start_buff(UART_4); // ÉèÖÃÏÂÒ»´Î½ÓÊÕ£¬Îñ±Ø±£Áô
+  142   2              // Èç¹û½øÈëÁËÕâ¸öÖÐ¶Ï£¬Ôò´ú±íUARTµÄÊý¾ÝÔÚÃ»ÓÐÈ¡×ßÖ®Ç°±»¸²¸Ç!
+  143   2              // Èç¹û½øÈëÁËÕâ¸öÖÐ¶Ï£¬Ôò´ú±íUARTµÄÊý¾ÝÔÚÃ»ÓÐÈ¡×ßÖ®Ç°±»¸²¸Ç!
+  144   2              // Èç¹û½øÈëÁËÕâ¸öÖÐ¶Ï£¬Ôò´ú±íUARTµÄÊý¾ÝÔÚÃ»ÓÐÈ¡×ßÖ®Ç°±»¸²¸Ç!
+  145   2          }
+  146   1      }
+  147          
+  148          uint32 time_0 = 0; // Ê±¼ä¼ÆÊýÆ÷
+  149          static int test_time = 0;
+  150          int flat_statr = 0;
+  151          static int flat_statr_date = 0;
+  152          void TM0_IRQHandler() interrupt 1
+  153          {
+  154   1          TIM0_CLEAR_FLAG;
+  155   1          if (!P32)
+  156   1              IAP_CONTR = 0x60;   // ÅÐ¶Ï¿ìËÙÉÕÂ¼
+  157   1          scan_track_max_value(); // »ñÈ¡µç¸Ð×î´óÖµ
+  158   1          read_AD();              // ¶ÁÈ¡²¢´¦Àíµç¸ÐÊý¾Ý
+  159   1          Prepare_Data();
+  160   1          lost_lines();
+  161   1          Encoder_get(&PID.left_speed, &PID.right_speed);
+  162   1          pid_steer_update(&PID.steer, Err, -imu660ra_gyro_z * 0.01);                              // ¸üÐÂ×ªÏò£
+             -¨Î»ÖÃÊ½£©PID_Direction
+  163   1          pid_speed_update(&PID.left_speed, speed_run - PID.steer.output, PID.left_speed.speed);   // ¸üÐÂ×óÂÖË
+             -Ù¶È»·
+  164   1          pid_speed_update(&PID.right_speed, speed_run + PID.steer.output, PID.right_speed.speed); // ¸üÐÂÓÒÂÖË
+             -Ù¶È»·
+  165   1          if (flat_statr >= 2 && lost_spto == 0)
+  166   1          {
+  167   2              motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
+  168   2          }
+  169   1          //    test();
+  170   1          if (tim0_irq_handler != NULL)
+  171   1          {
+  172   2              tim0_irq_handler();
+  173   2          }
+  174   1      }
+  175          void TM1_IRQHandler() interrupt 3
+  176          {
+  177   1          TIM1_CLEAR_FLAG;
+  178   1          IMUupdate(&Gyr_filt, &Acc_filt, &Att_Angle);
+  179   1          dianya_adc();
+  180   1          flat_statr_date++;
+  181   1          if (P35 == 0 && flat_statr_date > 50)
+  182   1          {
+  183   2              flat_statr++;
+  184   2              flat_statr_date = 0;
+C251 COMPILER V5.60.0,  isr                                                                26/11/25  15:19:33  PAGE 4   
+
+  185   2          }
+  186   1          if (flat_statr >= 1 && lost_spto == 0 && start_flag == 1)
+  187   1          {
+  188   2              fuya_update_simple();
+  189   2          }
+  190   1          if (tim1_irq_handler != NULL)
+  191   1          {
+  192   2              tim1_irq_handler();
+  193   2          }
+  194   1      }
+  195          extern VOL_U8  gTaskStick;
+  196          void TM2_IRQHandler() interrupt 12
+  197          {
+  198   1          TIM2_CLEAR_FLAG;
+  199   1      
+  200   1          if (tim2_irq_handler != NULL)
+  201   1          {
+  202   2              tim2_irq_handler();
+  203   2              gTaskStick++;
+  204   2          }
+  205   1      }
+  206          void TM3_IRQHandler() interrupt 19
+  207          {
+  208   1          TIM3_CLEAR_FLAG;
+  209   1      
+  210   1          if (tim3_irq_handler != NULL)
+  211   1          {
+  212   2              tim3_irq_handler();
+  213   2          }
+  214   1      }
+  215          
+  216          void TM4_IRQHandler() interrupt 20
+  217          {
+  218   1          TIM4_CLEAR_FLAG;
+  219   1      
+  220   1          if (tim4_irq_handler != NULL)
+  221   1          {
+  222   2              tim4_irq_handler();
+  223   2          }
+  224   1      }
+  225          
+  226          void TM11_IRQHandler() interrupt 24
+  227          {
+  228   1          TIM11_CLEAR_FLAG;
+  229   1      
+  230   1          if (tim11_irq_handler != NULL)
+  231   1          {
+  232   2              tim11_irq_handler();
+  233   2          }
+  234   1      }
+  235          
+  236          // #define     INT0_VECTOR             0       //0003H
+  237          // #define     TMR0_VECTOR             1       //000BH
+  238          // #define     INT1_VECTOR             2       //0013H
+  239          // #define     TMR1_VECTOR             3       //001BH
+  240          // #define     UART1_VECTOR            4       //0023H
+  241          // #define     ADC_VECTOR              5       //002BH
+  242          // #define     LVD_VECTOR              6       //0033H
+  243          // #define     PCA_VECTOR              7       //003BH
+  244          // #define     UART2_VECTOR            8       //0043H
+  245          // #define     SPI_VECTOR              9       //004BH
+  246          // #define     INT2_VECTOR             10      //0053H
+  247          // #define     INT3_VECTOR             11      //005BH
+  248          // #define     TMR2_VECTOR             12      //0063H
+  249          // #define     USER_VECTOR             13      //006BH
+  250          // #define     INT4_VECTOR             16      //0083H
+C251 COMPILER V5.60.0,  isr                                                                26/11/25  15:19:33  PAGE 5   
+
+  251          // #define     UART3_VECTOR            17      //008BH
+  252          // #define     UART4_VECTOR            18      //0093H
+  253          // #define     TMR3_VECTOR             19      //009BH
+  254          // #define     TMR4_VECTOR             20      //00A3H
+  255          // #define     CMP_VECTOR              21      //00ABH
+  256          // #define     I2C_VECTOR              24      //00C3H
+  257          // #define     USB_VECTOR              25      //00CBH
+  258          // #define     PWMA_VECTOR             26      //00D3H
+  259          // #define     PWMB_VECTOR             27      //00DBH
+  260          
+  261          // #define     RTC_VECTOR              36      //0123H
+  262          // #define     P0INT_VECTOR            37      //012BH
+  263          // #define     P1INT_VECTOR            38      //0133H
+  264          // #define     P2INT_VECTOR            39      //013BH
+  265          // #define     P3INT_VECTOR            40      //0143H
+  266          // #define     P4INT_VECTOR            41      //014BH
+  267          // #define     P5INT_VECTOR            42      //0153H
+  268          // #define     P6INT_VECTOR            43      //015BH
+  269          // #define     P7INT_VECTOR            44      //0163H
+  270          // #define     DMA_M2M_VECTOR          47      //017BH
+  271          // #define     DMA_ADC_VECTOR          48      //0183H
+  272          // #define     DMA_SPI_VECTOR          49      //018BH
+  273          // #define     DMA_UR1T_VECTOR         50      //0193H
+  274          // #define     DMA_UR1R_VECTOR         51      //019BH
+  275          // #define     DMA_UR2T_VECTOR         52      //01A3H
+  276          // #define     DMA_UR2R_VECTOR         53      //01ABH
+  277          // #define     DMA_UR3T_VECTOR         54      //01B3H
+  278          // #define     DMA_UR3R_VECTOR         55      //01BBH
+  279          // #define     DMA_UR4T_VECTOR         56      //01C3H
+  280          // #define     DMA_UR4R_VECTOR         57      //01CBH
+  281          // #define     DMA_LCM_VECTOR          58      //01D3H
+  282          // #define     LCM_VECTOR              59      //01DBH
+  283          // #define     DMA_I2CT_VECTOR         60      //01E3H
+  284          // #define     DMA_I2CR_VECTOR         61      //01EBH
+  285          // #define     I2S_VECTOR              62      //01F3H
+  286          // #define     DMA_I2ST_VECTOR         63      //01FBH
+  287          // #define     DMA_I2SR_VECTOR         64      //0203H
+  288          // #define     DMA_QSPI_VECTOR         65      //020BH
+  289          // #define     QSPI_VECTOR             66      //0213H
+  290          // #define     TMR11_VECTOR            67      //021BH
+  291          // #define     DMA_PWMAT_VECTOR        72      //0243H
+  292          // #define     DMA_PWMAR_VECTOR        73      //024BH
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =      1474     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =        11     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        36     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

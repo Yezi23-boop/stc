@@ -1,0 +1,113 @@
+C251 COMPILER V5.60.0,  motor                                                              26/11/25  15:19:34  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE motor
+OBJECT MODULE PLACED IN .\out_file\motor.obj
+COMPILER INVOKED BY: D:\Keil_v5\C251\BIN\C251.EXE ..\user\motor.c LARGE NOALIAS FLOAT64 WARNINGLEVEL(3) OPTIMIZE(0,SIZE)
+                    - BROWSE INCDIR(..\..\libraries\zf_common;..\..\libraries\zf_components;..\..\libraries\zf_device;..\..\libraries\zf_driv
+                    -er;..\user;..\code) DEBUG PRINT(.\out_file\motor.lst) TABS(2) OBJECT(.\out_file\motor.obj) 
+
+stmt  level    source
+
+    1          #include "motor.h"
+    2          
+    3          void motor_Init()
+    4          {
+    5   1        pwm_init(PWMB_CH2_P13, 17000, 0);     // 左电机PWM输出初始化，频率17kHz
+    6   1        gpio_init(IO_P14, GPO, 1, GPO_PUSH_PULL); // 左电机方向控制初始化
+    7   1        pwm_init(PWMB_CH3_P52, 17000, 0);     // 右电机PWM输出初始化，频率17kHz
+    8   1        gpio_init(IO_P53, GPO, 1, GPO_PUSH_PULL); // 右电机方向控制初始化
+    9   1      }
+   10          
+   11          void motor_output(int32 lpwm, int32 rpwm)
+   12          {
+   13   1        if (lpwm > 0)
+   14   1        {
+   15   2          P14 = 1;
+   16   2          pwm_set_duty(PWMB_CH2_P13, lpwm);
+   17   2        }
+   18   1        else if (lpwm < 0)
+   19   1        {
+   20   2          P14 = 0;
+   21   2          pwm_set_duty(PWMB_CH2_P13, -lpwm);
+   22   2        }
+   23   1        if (rpwm > 0)
+   24   1        {
+   25   2          P53 = 0;
+   26   2          pwm_set_duty(PWMB_CH3_P52, rpwm);
+   27   2        }
+   28   1        else if (rpwm < 0)
+   29   1        {
+   30   2          P53 = 1;
+   31   2          pwm_set_duty(PWMB_CH3_P52, -rpwm);
+   32   2        }
+   33   1      }
+   34          int8 lost_spto = 0;
+   35          void lost_lines()
+   36          {
+   37   1        // 中文说明：时间窗口内统计“丢线事件”次数，超过阈值则触发，否则清零
+   38   1        // 设计目的：满足“一定时间内丢线次数>100即触发，否则清零”的需求
+   39   1        // 约定：TM0 周期为 5ms，则 200 个周期≈1s，可按需调整窗口大小
+   40   1      
+   41   1        static int window_ticks = 0;      // 时间窗口计数（周期数）
+   42   1        static int loss_events = 0;       // 时间窗口内的丢线事件计数
+   43   1        const int LOST_WINDOW_TICKS = 200;    // 时间窗口大小（周期数），默认约 1s
+   44   1        const int LOST_THRESHOLD_EVENTS = 20; // 丢线事件阈值（窗口内超过该次数则触发）
+   45   1      
+   46   1        // 丢线事件判定：四路电感均低于阈值（一次满足记为一件事件）
+   47   1        if (ad1 < 3 && ad2 < 3 && ad3 < 3 && ad4 < 3)
+   48   1        {
+   49   2          if (loss_events < 30000)
+   50   2            loss_events++; // 防溢出保护
+   51   2        }
+   52   1      
+   53   1        // 累计窗口时间
+   54   1        if (window_ticks < 30000)
+   55   1          window_ticks++; // 防溢出保护
+   56   1      
+   57   1        // 窗口结束时统一判定与复位（满足需求“否则就清零”）
+C251 COMPILER V5.60.0,  motor                                                              26/11/25  15:19:34  PAGE 2   
+
+   58   1        if (window_ticks >= LOST_WINDOW_TICKS)
+   59   1        {
+   60   2          if (loss_events > LOST_THRESHOLD_EVENTS)
+   61   2          {
+   62   3            // 触发丢线：进入安全模式（在 TM0 中 lost_spto==1 会屏蔽 PID 输出）
+   63   3            lost_spto = 1;
+   64   3            motor_output(100, 100); // 低速直行，可按需调整占空比
+   65   3          }
+   66   2          else
+   67   2          {
+   68   3            // 未达到阈值：清零触发
+   69   3            lost_spto = 0;
+   70   3          }
+   71   2      
+   72   2          // 复位窗口计数与事件计数，开始下一窗口统计
+   73   2          window_ticks = 0;
+   74   2          loss_events = 0;
+   75   2        }
+   76   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       477     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =        17     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        20     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

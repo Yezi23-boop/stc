@@ -1,0 +1,51 @@
+C251 COMPILER V5.60.0,  filter                                                             26/11/25  15:19:34  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE filter
+OBJECT MODULE PLACED IN .\out_file\filter.obj
+COMPILER INVOKED BY: D:\Keil_v5\C251\BIN\C251.EXE ..\user\filter.c LARGE NOALIAS FLOAT64 WARNINGLEVEL(3) OPTIMIZE(0,SIZE
+                    -) BROWSE INCDIR(..\..\libraries\zf_common;..\..\libraries\zf_components;..\..\libraries\zf_device;..\..\libraries\zf_dri
+                    -ver;..\user;..\code) DEBUG PRINT(.\out_file\filter.lst) TABS(2) OBJECT(.\out_file\filter.obj) 
+
+stmt  level    source
+
+    1          #include "zf_common_headfile.h"
+    2          
+    3          /*********************************************
+    4           * 一阶低通滤波器
+    5           *********************************************/
+    6          void low_pass_filter_mt(LowPassFilter_t *filter, float *value, float alpha)
+    7          {
+    8   1        float out;
+    9   1      
+   10   1        // 一阶低通滤波计算：新值 = alpha * 当前值 + (1-alpha) * 上次值
+   11   1        out = alpha * (*value) + (1 - alpha) * filter->out_last;
+   12   1        filter->out_last = out;
+   13   1      
+   14   1        // 将滤波结果写回到value指向的变量
+   15   1        *value = out;
+   16   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       161     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =        16     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
