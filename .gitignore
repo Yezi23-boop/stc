@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .trae/rules/project_rules.md
 libraries/doc/version.txt
 libraries/zf_common/ai8051u_32bit.h
@@ -808,3 +809,6 @@ project/mdk/out_file/zf_driver_timer.obj
 project/mdk/out_file/zf_driver_uart.crf
 project/mdk/out_file/zf_driver_uart.lst
 project/mdk/out_file/zf_driver_uart.obj
+=======
+/project/mdk/
+>>>>>>> 5c172fd889d018ed1e7be8991d42b741ba844ca0
