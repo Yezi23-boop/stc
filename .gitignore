@@ -247,25 +247,3 @@ project/mdk/out_file/zf_driver_uart.obj
 project/code/VOFA_协议说明.md
 project/code/VOFA_数据流程详解.md
 project/code/本文件夹作用.txt
-# 精准忽略：D:\project\electromagnetism\13\project\mdk 文件夹
-project/mdk/
-
-# 额外补充：忽略该 MDK 文件夹下的所有编译产物（双重保险）
-project/mdk/*.axf
-project/mdk/*.elf
-project/mdk/*.bin
-project/mdk/*.hex
-project/mdk/*.map
-project/mdk/*.lst
-project/mdk/*.o
-project/mdk/*.d
-project/mdk/*.crf
-project/mdk/*.dep
-project/mdk/*.lnp
-project/mdk/*.sct
-project/mdk/*.uvoptx
-project/mdk/*.uvprojx
-project/mdk/Debug/
-project/mdk/Release/
-project/mdk/Objects/
-project/mdk/Listings/
