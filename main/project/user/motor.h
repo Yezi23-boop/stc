@@ -5,5 +5,6 @@
 void motor_Init();
 void motor_output(int32 lpwm, int32 rpwm);
 void lost_lines();
-extern int8 lost_spto;
+extern uint8 stop=0;
+extern uint16 dianya;   // µÁ‘¥µÁ—π£®mV£©
 #endif

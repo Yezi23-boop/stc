@@ -15,11 +15,9 @@ extern float Err; // 误差值（整数，用于位置式 PID_Direction）
 // 全局采样与标定数据（均为整数，降低 8051 浮点开销）
 extern uint16 MA[NUM];  // 标定最大值
 extern uint16 RAW[NUM]; // 原始 ADC 值
-extern uint16 dianya;   // 电源电压（mV）
 
 // 采样与处理函数声明
 void scan_track_max_value(void); // 扫描赛道，采集并更新最大值
 void read_AD(void);              // 读取 ADC，更新 RAW/MA/ad1..ad4/Err
-void dianya_adc(void);           // 采样电源电压，更新 dianya（mV）
 
 #endif

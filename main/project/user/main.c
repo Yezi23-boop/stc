@@ -1,5 +1,4 @@
 #include "zf_common_headfile.h"
-#include "vofa.h"
 #include <stdlib.h>
 
 // 打印与调试函数声明
@@ -18,7 +17,6 @@ void main()
 
 	// 初始化（wireless_uart_init 已在 int_user 中完成）
 	int_user();
-	vofa_init(); // 初始化 VOFA 通信（可选）
 
 	while (1)
 	{
@@ -59,7 +57,6 @@ void printf_date()
 	ips114_show_float(3 * 24, 18 * 1, speed_run + PID.steer.output, 3, 1);
 	ips114_show_float(3 * 24, 18 * 2, speed_run - PID.steer.output, 3, 1);
 
-	// 电压使用 mV 整数显示（dianya 已在 ADC.c 转为 mV 整数）
 	ips114_show_int32(6 * 24, 18 * 1, dianya, 5);
 }
 
@@ -121,30 +118,3 @@ void printf_butten_test()
 	ips114_show_int32(4 * 24, 18 * 5, P37, 1);
 	ips114_show_int32(4 * 24, 18 * 6, flat_statr, 2);
 }
-
-/*******************************************************************************
- * VOFA+ 使用示例
- *
- * 左轮 PID_Direction:
- *   L_KP=100!
- *   L_KI=40!
- *   L_KD=0!
- *
- * 右轮 PID_Direction:
- *   R_KP=100!
- *   R_KI=40!
- *
- * 位置式 PID_Direction:
- *   P_KP=0.3!
- *   P_KI=0.1!
- *   P_KD=4!
- *   KD_GYRO=2.5!
- *
- * 运行控制:
- *   SPEED=50!      - 设置目标速度
- *   START!         - 启动电机
- *   STOP!          - 停止电机
- *   SAVE!          - 保存参数
- *   INFO!          - 查看当前参数
- *   RESET!         - 软复位系统
- ******************************************************************************/

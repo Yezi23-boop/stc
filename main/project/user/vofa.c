@@ -1,5 +1,4 @@
 #include "zf_common_headfile.h"
-#include "vofa.h"
 #include <stdlib.h>
 
 // VOFA 数据对象
@@ -7,33 +6,6 @@ static vofa_data_struct vofa_data;
 
 // 内部函数声明
 static void vofa_parse_byte(uint8 dat);
-
-//-------------------------------------------------------------------------------------------------------------------
-// 函数简介     VOFA+ 初始化
-// 参数说明     void
-// 返回参数     void
-// 使用示例     vofa_init();
-// 备注信息     初始化 VOFA 数据结构（无需额外操作，使用系统自带 FIFO）
-//-------------------------------------------------------------------------------------------------------------------
-void vofa_init(void)
-{
-	uint8 i;
-
-	// 清空缓冲区
-	for (i = 0; i < VOFA_BUFFER_SIZE; i++)
-	{
-		vofa_data.buffer[i] = 0;
-	}
-
-	for (i = 0; i < VOFA_MAX_CMD_LEN; i++)
-	{
-		vofa_data.cmd_buffer[i] = 0;
-	}
-
-	vofa_data.index = 0;
-	vofa_data.cmd_len = 0;
-	vofa_data.state = VOFA_PARSE_IDLE;
-}
 
 //-------------------------------------------------------------------------------------------------------------------
 // 函数简介     VOFA+ FireWater 协议从 FIFO 读取并解析数据
@@ -146,97 +118,6 @@ void vofa_clear_buffer(void)
 	vofa_data.state = VOFA_PARSE_IDLE;
 }
 
-//-------------------------------------------------------------------------------------------------------------------
-// 函数简介     VOFA+ FireWater 协议命令解析示例
-// 参数说明     cmd             接收到的命令字符串
-// 返回参数     void
-// 使用示例     vofa_parse_command("PR=2.32");
-// 备注信息     示例函数，展示如何解析不同格式的命令
-//              格式1: "PR=2.32"  - 解析参数名和浮点数值
-//              格式2: "SPEED=100" - 解析参数名和整数值
-//              格式3: "START" - 单独的命令
-//-------------------------------------------------------------------------------------------------------------------
-void vofa_parse_command(char *cmd)
-{
-	char *eq_pos;
-	char param_name[16];
-	float param_value;
-	uint8 name_len;
-	uint8 i;
-
-	// 初始化变量
-	for (i = 0; i < 16; i++)
-	{
-		param_name[i] = 0;
-	}
-	param_value = 0.0;
-
-	// 查找等号位置
-	eq_pos = strchr(cmd, '=');
-
-	if (eq_pos != NULL)
-	{
-		// 有等号，说明是参数设置命令
-		name_len = (uint8)(eq_pos - cmd);
-
-		if (name_len < 16)
-		{
-			// 提取参数名
-			memcpy(param_name, cmd, name_len);
-			param_name[name_len] = '\0';
-
-			// 提取参数值
-			param_value = atof(eq_pos + 1);
-
-			// 根据参数名执行不同操作
-			if (strcmp(param_name, "PR") == 0)
-			{
-				// 处理 PR 参数
-				printf("Received PR = %.2f\n", param_value);
-				// 在这里添加你的处理代码
-			}
-			else if (strcmp(param_name, "SPEED") == 0)
-			{
-				// 处理 SPEED 参数
-				printf("Received SPEED = %.2f\n", param_value);
-			}
-			else if (strcmp(param_name, "KP") == 0)
-			{
-				// 处理 KP 参数（PID_Direction参数）
-				printf("Received KP = %.2f\n", param_value);
-			}
-			else if (strcmp(param_name, "KI") == 0)
-			{
-				// 处理 KI 参数
-				printf("Received KI = %.2f\n", param_value);
-			}
-			else if (strcmp(param_name, "KD") == 0)
-			{
-				// 处理 KD 参数
-				printf("Received KD = %.2f\n", param_value);
-			}
-		}
-	}
-	else
-	{
-		// 无等号，说明是单独的命令
-		if (strcmp(cmd, "START") == 0)
-		{
-			printf("Received START command\n");
-			// 执行启动操作
-		}
-		else if (strcmp(cmd, "STOP") == 0)
-		{
-			printf("Received STOP command\n");
-			// 执行停止操作
-		}
-		else if (strcmp(cmd, "RESET") == 0)
-		{
-			printf("Received RESET command\n");
-			// 执行复位操作
-		}
-	}
-}
 
 //-------------------------------------------------------------------------------------------------------------------
 // 函数功能     处理 VOFA+ 接收到的命令
@@ -246,17 +127,11 @@ void vofa_parse_command(char *cmd)
 //-------------------------------------------------------------------------------------------------------------------
 void handle_vofa_command(char *cmd)
 {
-	char *eq_pos;
-	char param_name[16];
-	uint8 name_len;
-	float value;
-	uint8 i;
-
-	// 初始化临时变量
-	for (i = 0; i < 16; i++)
-	{
-		param_name[i] = 0;
-	}
+    char *eq_pos;
+    char param_name[16];
+    uint8 name_len;
+    float value;
+    
 
 	eq_pos = strchr(cmd, '=');
 
@@ -265,11 +140,11 @@ void handle_vofa_command(char *cmd)
 		// ========== 处理带参数的命令 ==========
 		name_len = (uint8)(eq_pos - cmd);
 
-		if (name_len < 16)
-		{
-			// 读取参数名
-			memcpy(param_name, cmd, name_len);
-			param_name[name_len] = '\0';
+        if (name_len < 16)
+        {
+            // 读取参数名
+            memcpy(param_name, cmd, name_len);
+            param_name[name_len] = '\0';
 
 			// 读取参数值
 			value = atof(eq_pos + 1);

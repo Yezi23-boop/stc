@@ -7,9 +7,26 @@ void motor_Init()
 	pwm_init(PWMB_CH3_P52, 17000, 0);		  // 右电机PWM输出初始化，频率17kHz
 	gpio_init(IO_P53, GPO, 1, GPO_PUSH_PULL); // 右电机方向控制初始化
 }
-
+uint8 stop=0;
+uint16 dianya=0;
 void motor_output(int32 lpwm, int32 rpwm)
 {
+   //mV = ADC * 9.2 ≈ (ADC * 92) / 10
+    static int32 dianya_count = 0;
+    uint16 adc_raw = adc_convert(ADC_CH13_P05);
+    dianya = (uint16)(((uint32)adc_raw * 92u) / 10u); // mV 整数表示，避免浮点乘法
+
+    pwm_set_duty(PWMA_CH4N_P07, 0);
+    if (dianya < 7600u)
+    {
+        dianya_count++;
+    }
+    if (dianya_count > 10)
+    {
+		stop=1;
+        dianya_count = 0;
+    }
+	if(stop==0)
 	if (lpwm > 0)
 	{
 		P14 = 1;
@@ -30,18 +47,18 @@ void motor_output(int32 lpwm, int32 rpwm)
 		P53 = 1;
 		pwm_set_duty(PWMB_CH3_P52, -rpwm);
 	}
+	else
+	{
+		pwm_set_duty(PWMB_CH2_P13, 100);
+		pwm_set_duty(PWMB_CH3_P52, 100);
+	}
 }
-int8 lost_spto = 0;
 void lost_lines()
 {
-	// 中文说明：时间窗口内统计“丢线事件”次数，超过阈值则触发，否则清零
-	// 设计目的：满足“一定时间内丢线次数>100即触发，否则清零”的需求
-	// 约定：TM0 周期为 5ms，则 200 个周期≈1s，可按需调整窗口大小
-
 	static int window_ticks = 0;		  // 时间窗口计数（周期数）
 	static int loss_events = 0;			  // 时间窗口内的丢线事件计数
-	const int LOST_WINDOW_TICKS = 200;	  // 时间窗口大小（周期数），默认约 1s
-	const int LOST_THRESHOLD_EVENTS = 20; // 丢线事件阈值（窗口内超过该次数则触发）
+	const int LOST_WINDOW_TICKS = 100;	  // 时间窗口大小（周期数）
+	const int LOST_THRESHOLD_EVENTS = 10; // 丢线事件阈值（窗口内超过该次数则触发）
 
 	// 丢线事件判定：四路电感均低于阈值（一次满足记为一件事件）
 	if (ad1 < 3 && ad2 < 3 && ad3 < 3 && ad4 < 3)
@@ -59,14 +76,13 @@ void lost_lines()
 	{
 		if (loss_events > LOST_THRESHOLD_EVENTS)
 		{
-			// 触发丢线：进入安全模式（在 TM0 中 lost_spto==1 会屏蔽 PID 输出）
-			lost_spto = 1;
-			motor_output(100, 100); // 低速直行，可按需调整占空比
+			// 触发丢线：进入安全模式（在 TM0 中 stop==1 会屏蔽 PID 输出）
+			stop = 1;
 		}
 		else
 		{
 			// 未达到阈值：清零触发
-			lost_spto = 0;
+			stop = 0;
 		}
 
 		// 复位窗口计数与事件计数，开始下一窗口统计

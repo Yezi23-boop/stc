@@ -1,9 +1,5 @@
 #include "zf_common_headfile.h"
-/*
- * 测试速度阶跃序列
- * 0–500: 20，500–1000: 15，1000–2000: 18，2000–3000: -40，>=3000: 60
- * 定期调用以验证速度环与电机输出。
- */
+
 float test_speed = 0;
 void test(void)
 {
@@ -31,9 +27,8 @@ void test(void)
 	{
 		test_speed = 20;
 	}
-	// 更新速度环 PID 并将输出用于电机控制
-	pid_speed_update(&PID.left_speed, test_speed, speed_l);	 // 左轮速度环
-	pid_speed_update(&PID.right_speed, test_speed, speed_r); // 右轮速度环
+	pid_speed_update(&PID.left_speed, test_speed, speed_l);	 
+	pid_speed_update(&PID.right_speed, test_speed, speed_r);
 	motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
 	//  motor_output(-1000, -5000);
 }

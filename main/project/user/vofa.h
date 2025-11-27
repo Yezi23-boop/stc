@@ -26,11 +26,9 @@ typedef struct
 } vofa_data_struct;
 
 // 函数声明
-void vofa_init(void);
 void vofa_parse_from_fifo(void); // 从 FIFO 读取并解析数据（主循环调用）
 uint8 vofa_get_command(char *cmd_out, uint8 max_len);
 void vofa_clear_buffer(void);
-void vofa_parse_command(char *cmd);
 void handle_vofa_command(char *cmd);
 
 #endif // _VOFA_H_

@@ -135,24 +135,3 @@ void read_AD(void)
     ad4 = AD_ONE[3];
     dispose(); // 处理电感数据，计算偏差值
 }
-// 电压采样值（单位：mV），使用整数避免浮点运算
-uint16 dianya = 0;
-void dianya_adc(void)
-{
-    // 设计说明：原公式为 V = ADC * 0.0092（单位 V），改为 mV 的整数表示：mV = ADC * 9.2 ≈ (ADC * 92) / 10
-    static int32 dianya_count = 0;
-    uint16 adc_raw = adc_convert(ADC_CH13_P05);
-    dianya = (uint16)(((uint32)adc_raw * 92u) / 10u); // mV 整数表示，避免浮点乘法
-
-    pwm_set_duty(PWMA_CH4N_P07, 0);
-    // 原阈值 7.6V 改为 7600mV
-    if (dianya < 7600u)
-    {
-        dianya_count++;
-    }
-    if (dianya_count > 2000)
-    {
-        dianya_count = 0;
-        pwm_set_duty(PWMA_CH4N_P07, 3000);
-    }
-}

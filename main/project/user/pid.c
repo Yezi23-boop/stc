@@ -29,14 +29,19 @@ void pid_steer_init(PID_Steer *pid, float kp, float kd, float kd_gyro, float max
     pid->min_output = min_out;
 }
 // 编码器读取
-void Encoder_get(PID_Speed *pid_l, PID_Speed *pid_r)
+// 读取编码器并更新到 PID 结构的 speed 字段（带低通滤波）
+void Encoder_get(PID_Speed *left, PID_Speed *right)
 {
-    // 读取编码器计数值并转换为速度（乘以系数0.2调整单位）
-    pid_l->speed = encoder_get_count(TIM4_ENCOEDER) * 0.2f;  // 左轮速度
-    pid_r->speed = -encoder_get_count(TIM3_ENCOEDER) * 0.2f; // 右轮速度（负号用于方向调整）
-    low_pass_filter_mt(&encoder_l, &pid_l->speed, 0.8);
-    low_pass_filter_mt(&encoder_r, &pid_r->speed, 0.8);
-    // 清除编码器计数，准备下一次计数
+
+    // 将编码器计数转换为速度（系数需按采样周期与脉冲当量校准）
+    left->speed = encoder_get_count(TIM4_ENCOEDER) * 0.2f;   /* 左轮 */
+    right->speed = -encoder_get_count(TIM3_ENCOEDER) * 0.2f;  /* 右轮，方向取负 */
+
+    // 一阶低通滤波（就地写回）
+    low_pass_filter_mt(&encoder_l, &left->speed, 0.8f);
+    low_pass_filter_mt(&encoder_r, &right->speed, 0.8f);
+
+    // 清零计数，准备下一周期
     encoder_clear_count(TIM3_ENCOEDER);
     encoder_clear_count(TIM4_ENCOEDER);
 }
