@@ -248,7 +248,7 @@ project/code/VOFA_协议说明.md
 project/code/VOFA_数据流程详解.md
 project/code/本文件夹作用.txt
 # 精准忽略：D:\project\electromagnetism\13\project\mdk 文件夹
-project/mdk/
+project/mdk/out_file
 
 # 额外补充：忽略该 MDK 文件夹下的所有编译产物（双重保险）
 project/mdk/*.axf
@@ -269,3 +269,5 @@ project/mdk/Debug/
 project/mdk/Release/
 project/mdk/Objects/
 project/mdk/Listings/
+project/mdk/seekfree.uvgui.13196
+project/mdk/AI8051U_32_MDU32.LIB
