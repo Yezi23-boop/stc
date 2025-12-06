@@ -1,5 +1,12 @@
 #include "motor.h"
 
+MCI_Handle_t Mc =
+{
+    IDLE,            // 对应 MCI_State_t State;
+    MC_NO_FAULTS,    // 对应 uint16_t CurrentFaults;
+    MC_NO_FAULTS     // 对应 uint16_t PastFaults;
+};
+
 void motor_Init()
 {
 	pwm_init(PWMB_CH2_P13, 17000, 0);		  // 左电机PWM输出初始化，频率17kHz
@@ -72,5 +79,67 @@ void lost_lines()
 		// 复位窗口计数与事件计数，开始下一窗口统计
 		window_ticks = 0;
 		loss_events = 0;
+	}
+}
+
+/**
+  * @brief Returns the list of faults that are currently active on the target motor
+  *
+  * This function returns a bitfield that indicates faults that occured on the Motor
+  * Control subsystem for the target motor and that are still active (the conditions
+  * that triggered the faults returned are still true).
+  *
+  * Possible error codes are listed in the @ref fault_codes "Fault codes" section.
+  *
+  * @param  pHandle Pointer on the target motor drive structure.
+  */
+uint16_t MC_GetCurrentFaults(MCI_Handle_t *pHandle) //cstat !MISRAC2012-Rule-8.13
+{
+  return ((uint16_t)pHandle->CurrentFaults);
+}
+
+
+/**
+  * @brief Executes periodic Motor Control tasks
+  */
+void MC_StateMachine(void)
+{
+	if (MC_GetCurrentFaults(&Mc) == MC_NO_FAULTS)
+	{
+		switch (Mc.State)
+		{
+			case IDLE:
+			{
+				Mc.State = START;
+				break;
+			}
+			case START:
+			{
+				Mc.State = RUN;
+				break;
+			}
+			case RUN:
+			{
+				Mc.State = STOP;
+				break;				
+			}
+			case STOP:
+			{
+				Mc.State = FAULT_OVER;
+				break;				
+			}
+			case FAULT_OVER:
+			{
+				Mc.State = IDLE;
+				break;				
+			}
+			case FAULT_NOW:
+			{
+				Mc.State = FAULT_OVER;
+				break;				
+			}
+			default:
+				break;
+		}
 	}
 }
