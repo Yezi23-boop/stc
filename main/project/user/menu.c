@@ -203,7 +203,7 @@ void HandleKeystroke(int keystroke_label)
 void Keystroke_int(int *parameter, int change_unit_MIN)
 {
     int change_unit = change_unit_MIN * change_unit_multiplier;
-    ips114_show_int32(15 * 8, 0, change_unit, 3);
+    ips114_show_int32(15 * 8, 0, change_unit, 4);
 
     Keystroke_Scan();
     HandleKeystroke(keystroke_label);
@@ -226,8 +226,8 @@ void Keystroke_int(int *parameter, int change_unit_MIN)
  */
 void Keystroke_float(float *parameter, float change_unit_MIN)
 {
-    float change_unit = change_unit_MIN * change_unit_multiplier;
-    ips114_show_float(14 * 8, 0, change_unit, 3, 3);
+    float change_unit = (float)change_unit_MIN * (float)change_unit_multiplier;
+    ips114_show_float(14 * 8, 0, change_unit, 4, 2);
     Keystroke_Scan();
     HandleKeystroke(keystroke_label);
 
@@ -352,8 +352,7 @@ void Keystroke_Menu_HOME(void)
         // 显示位置式 PID_Direction 输出作为 motor
         ips114_show_float(8 * 23, 2 * 18, PID.steer.output, 3, 1);
         ips114_show_float(8 * 23, 3 * 18, phase, 3, 1);
-        // 电压使用 mV 整数显示
-        ips114_show_int32(8 * 23, 4 * 18, dianya, 5);
+        ips114_show_float(8 * 23, 4 * 18, dianya, 4,2);
         ips114_show_int32(8 * 23, 5 * 18, fuya_date, 4);
 
         ips114_show_float(7 * 15, 6 * 18, speed_run - PID.steer.output, 4, 2);
@@ -450,12 +449,12 @@ void Menu_Speed_Show(uint8 control_line)
     ips114_show_string(1 * 8, 5 * 18, "fuya_xili");  // 负压吸力
     ips114_show_string(1 * 8, 6 * 18, "pwm_filter"); // PWM 滤波
 
-    ips114_show_float(14 * 8, 1 * 18, kp_Err, 3, 3);
-    ips114_show_float(14 * 8, 2 * 18, kd_Err, 3, 3);
-    ips114_show_float(14 * 8, 3 * 18, speed_run, 3, 3);
-    ips114_show_float(14 * 8, 4 * 18, kd_gyro, 3, 3);
-    ips114_show_float(14 * 8, 5 * 18, fuya_xili, 4, 3);
-    ips114_show_float(14 * 8, 6 * 18, pwm_filter, 3, 3);
+    ips114_show_float(14 * 8, 1 * 18, kp_Err, 3, 2);
+    ips114_show_float(14 * 8, 2 * 18, kd_Err, 3, 2);
+    ips114_show_float(14 * 8, 3 * 18, speed_run, 3, 2);
+    ips114_show_float(14 * 8, 4 * 18, kd_gyro, 3, 2);
+    ips114_show_float(14 * 8, 5 * 18, fuya_xili, 4, 2);
+    ips114_show_float(14 * 8, 6 * 18, pwm_filter, 3, 2);
 
     // 显示当前编辑标识
     if (control_line == 1)
@@ -484,19 +483,19 @@ void Menu_Speed_Process(void)
 
     case 21: // 位置误差比例系数
         Menu_Speed_Show(1 * 18);
-        Keystroke_float(&kp_Err, 0.01);
+        Keystroke_float(&kp_Err, 0.01f);
         break;
     case 22: // 位置误差微分系数
         Menu_Speed_Show(2 * 18);
-        Keystroke_float(&kd_Err, 0.1);
+        Keystroke_float(&kd_Err, 0.10f);
         break;
     case 23: // 运行速度
         Menu_Speed_Show(3 * 18);
-        Keystroke_float(&speed_run, 1);
+        Keystroke_float(&speed_run, 1.00f);
         break;
     case 24: // 陀螺微分权重
         Menu_Speed_Show(4 * 18);
-        Keystroke_float(&kd_gyro, 0.01);
+        Keystroke_float(&kd_gyro, 0.01f);
         break;
     case 25: // 负压吸力
         Menu_Speed_Show(5 * 18);
@@ -504,7 +503,7 @@ void Menu_Speed_Process(void)
         break;
     case 26: // PWM 滤波
         Menu_Speed_Show(6 * 18);
-        Keystroke_float(&pwm_filter, 0.1);
+        Keystroke_float(&pwm_filter, 0.10f);
         break;
     }
 }
@@ -528,7 +527,7 @@ void Menu_Angle_Show(uint8 control_line)
     ips114_show_float(15 * 8, 3 * 18, limiting_Angle, 3, 2);
     ips114_show_float(14 * 8, 4 * 18, A_1, 3, 2);
     ips114_show_float(14 * 8, 5 * 18, B_1, 3, 2);
-    ips114_show_float(14 * 8, 6 * 18, C_l, 3, 3);
+    ips114_show_float(14 * 8, 6 * 18, C_l, 3, 2);
 
     // 显示当前编辑标识
     if (control_line == 1)
@@ -557,27 +556,27 @@ void Menu_Angle_Process(void)
 
     case 31: // 角度比例系数
         Menu_Angle_Show(1 * 18);
-        Keystroke_float(&kp_Angle, 0.01);
+        Keystroke_float(&kp_Angle, 0.01f);
         break;
     case 32: // 角度微分系数
         Menu_Angle_Show(2 * 18);
-        Keystroke_float(&kd_Angle, 0.01);
+        Keystroke_float(&kd_Angle, 0.01f);
         break;
     case 33: // 角度限幅
         Menu_Angle_Show(3 * 18);
-        Keystroke_float(&limiting_Angle, 10);
+        Keystroke_float(&limiting_Angle, 10.00f);
         break;
     case 34: // 校正 A_1
         Menu_Angle_Show(4 * 18);
-        Keystroke_float(&A_1, 0.01);
+        Keystroke_float(&A_1, 0.01f);
         break;
     case 35: // 校正 B_1
         Menu_Angle_Show(5 * 18);
-        Keystroke_float(&B_1, 0.01);
+        Keystroke_float(&B_1, 0.01f);
         break;
-    case 36: // 额外微调
+    case 36: // 校正 C_1
         Menu_Angle_Show(6 * 18);
-        Keystroke_float(&C_l, 0.01);
+        Keystroke_float(&C_l, 0.01f);
         break;
     }
 }
@@ -669,23 +668,23 @@ void Menu_Circle_Process(void)
 
     case 51: // 圆环编码器开关值
         Menu_Circle_Show(1 * 18);
-        Keystroke_float(&ring_encoder, 1);
+        Keystroke_float(&ring_encoder, 1.00f);
         break;
     case 52: // 入环前陀螺设定值
         Menu_Circle_Show(2 * 18);
-        Keystroke_float(&pre_ring_Gyro_set, 10);
+        Keystroke_float(&pre_ring_Gyro_set, 10.00f);
         break;
     case 53: // 入环陀螺 Z 轴值
         Menu_Circle_Show(3 * 18);
-        Keystroke_float(&in_ring_Gyroz, 10);
+        Keystroke_float(&in_ring_Gyroz, 10.00f);
         break;
     case 54: // 出环前陀螺设定值
         Menu_Circle_Show(4 * 18);
-        Keystroke_float(&pre_out_ring_Gyro_set, 10);
+        Keystroke_float(&pre_out_ring_Gyro_set, 10.00f);
         break;
     case 55: // 出环前陀螺 Z 值
         Menu_Circle_Show(5 * 18);
-        Keystroke_float(&pre_out_ring_Gyroz, 10);
+        Keystroke_float(&pre_out_ring_Gyroz, 10.00f);
         break;
     case 56: // 出环编码器开关值
         Menu_Circle_Show(6 * 18);

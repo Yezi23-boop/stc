@@ -39,7 +39,7 @@ void main()
 		// printf_adc();
 		// printf_imu();
 		// printf_speed_test();
-//		 Keystroke_Menu();
+		 Keystroke_Menu();
 	}
 }
 

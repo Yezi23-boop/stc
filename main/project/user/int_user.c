@@ -19,10 +19,10 @@ void int_user(void)
     fuya_Init();          // 负压系统初始化
     wireless_uart_init(); // 无线串口初始化
     // 速度环 PID 初始化（误差限幅与输出限幅）
-    pid_speed_init(&PID.left_speed, 100, 20, 0, 6000, 6000);
-    pid_speed_init(&PID.right_speed, 100, 20, 0, 6000, 6000);
+    pid_speed_init(&PID.left_speed, 100, 40, 0, 8000, 8000);
+    pid_speed_init(&PID.right_speed, 100, 40, 0, 8000, 8000);
     // 方向环 PID 初始化（误差KP/KD与陀螺KD分离）
-    pid_steer_init(&PID.steer, kp_Err, kd_Err, kd_gyro, 45, 45); // 方向环
+    pid_steer_init(&PID.steer, kp_Err, kd_Err, kd_gyro, 60, 60); // 方向环
     pid_steer_init(&PID.angle, kp_Angle, kd_Angle, 0, 45, 45); // 角度环
     ips114_init();
 }
