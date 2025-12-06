@@ -152,19 +152,19 @@ void TM0_IRQHandler() interrupt 1
 {
     TIM0_CLEAR_FLAG;
     if (!P32)
-        IAP_CONTR = 0x60;   // 判断快速烧录
+        IAP_CONTR = 0x60; // 判断快速烧录
     read_AD();              // 读取并处理电感数据
     Prepare_Data();
-    Encoder_get(&PID.left_speed, &PID.right_speed);
+ Encoder_get(&PID.left_speed, &PID.right_speed);
     pid_steer_update(&PID.steer, Err, -imu660ra_gyro_z * 0.01);                              // 更新转向（位置式）PID_Direction
     pid_speed_update(&PID.left_speed, speed_run - PID.steer.output, PID.left_speed.speed);   // 更新左轮速度环
     pid_speed_update(&PID.right_speed, speed_run + PID.steer.output, PID.right_speed.speed); // 更新右轮速度环
     if (flat_statr >= 2)
     {
-        motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
-//         motor_output(0, 0);
+ motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
+//	 motor_output(1000, 1000);
     }
-    //    test();
+//    test();
     if (tim0_irq_handler != NULL)
     {
         tim0_irq_handler();
@@ -173,9 +173,9 @@ void TM0_IRQHandler() interrupt 1
 void TM1_IRQHandler() interrupt 3
 {
     TIM1_CLEAR_FLAG;
-	scan_track_max_value(); // 获取电感最大值
+    scan_track_max_value(); // 获取电感最大值
     lost_lines();
-	dianya_jiance();
+    dianya_jiance();
     IMUupdate(&Gyr_filt, &Acc_filt, &Att_Angle);
     flat_statr_date++;
     if (P35 == 0 && flat_statr_date > 50)
@@ -185,7 +185,7 @@ void TM1_IRQHandler() interrupt 3
     }
     if (flat_statr >= 1 && start_flag == 1)
     {
-        fuya_update_simple();
+      fuya_update_simple();
     }
     if (tim1_irq_handler != NULL)
     {

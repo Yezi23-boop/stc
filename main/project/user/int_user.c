@@ -4,6 +4,9 @@
 void int_user(void)
 {
     // 系统初始化：传感器/存储/定时器/编码器/ADC/电机/无线
+    system_delay_init(); // 初始化延时模块
+    system_delay_ms(100);
+    ips114_init();
     imu660ra_init(); // 初始化 IMU660RA
     eeprom_init();
     pit_ms_init(TIM0_PIT, TIME_0);
@@ -23,8 +26,7 @@ void int_user(void)
     pid_speed_init(&PID.right_speed, 100, 40, 0, 8000, 8000);
     // 方向环 PID 初始化（误差KP/KD与陀螺KD分离）
     pid_steer_init(&PID.steer, kp_Err, kd_Err, kd_gyro, 60, 60); // 方向环
-    pid_steer_init(&PID.angle, kp_Angle, kd_Angle, 0, 45, 45); // 角度环
-    ips114_init();
+    pid_steer_init(&PID.angle, kp_Angle, kd_Angle, 0, 45, 45);   // 角度环
 }
 
 /*********************************************
@@ -44,8 +46,6 @@ void offset_init(void)
 {
     int rt = 50;
     int i;
-    imu660ra_init();     // 初始化 IMU
-    system_delay_init(); // 初始化延时模块
     for (i = 0; i < rt; i++)
     {
         imu660ra_get_gyro();
