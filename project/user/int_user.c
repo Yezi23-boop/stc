@@ -2,14 +2,30 @@
 #define TIME_0 5  // 定时器0中断周期(ms)
 #define TIME_1 20 // 定时器1中断周期(ms)
 
+/************************* 定时器初始化 *************************/
+/**
+ * @brief  检测运行时间寄存器初始化，不可被打断和关闭
+ */
+static void timer0_init(void)
+{
+    //不可屏蔽中断16位自动重装载
+    TMOD &= 0xF0;  //清T0,retain T1
+    TMOD |= 0x03;  
+    TL0 = 0x00;
+    TH0 = 0x00;
+    //开 Timer0 中断
+    ET0 = 1;  
+    TCON |= 0x10 ;
+}
+
 void int_user(void)
 {
     // 系统初始化：传感器/存储/定时器/编码器/ADC/电机/无线
     imu660ra_init(); // 初始化 IMU660RA
     eeprom_init();
-    pit_us_init(TIM2_PIT, TIME_2);
-    pit_ms_init(TIM0_PIT, TIME_0);
+    pit_ms_init(TIM3_PIT, TIME_0);
     pit_ms_init(TIM1_PIT, TIME_1);
+    pit_us_init(TIM2_PIT, TIME_500US);  
     encoder_dir_init(TIM3_ENCOEDER, IO_P46, TIM3_ENCOEDER_P04); // 编码器初始化
     encoder_dir_init(TIM4_ENCOEDER, IO_P42, TIM4_ENCOEDER_P06); // 编码器初始化
     adc_init(ADC_CH13_P05, ADC_8BIT);
@@ -26,6 +42,7 @@ void int_user(void)
     // 方向环 PID 初始化（误差KP/KD与陀螺KD分离）
     pid_steer_init(&PID.steer, kp_Err, kd_Err, kd_gyro, 45, 45); // 方向环
     ips114_init();
+    timer0_init();
 }
 
 /*********************************************

@@ -1,7 +1,7 @@
 #ifndef __MOTOR_H__
 #define __MOTOR_H__
 #include "zf_common_headfile.h"
-#include "type.h"
+
 /**
  * @anchor fault_codes
  * @name Fault codes

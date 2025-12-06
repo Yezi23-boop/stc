@@ -82,6 +82,7 @@
 //------逐飞科技产品组件层文件
 
 // 自己的
+#include "type.h"
 #include "fuya.h"
 #include "motor.h"
 #include "filter.h"
@@ -94,4 +95,5 @@
 #include "menu.h"
 #include "key.h"
 #include "vofa.h"
+
 #endif

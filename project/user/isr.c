@@ -149,8 +149,10 @@ uint32 time_0 = 0; // 时间计数器
 static int test_time = 0;
 int flat_statr = 0;
 static int flat_statr_date = 0;
+extern VOL_U8 SpillCnt; 
 void TM0_IRQHandler() interrupt 1
 {
+    SpillCnt++;
     TIM0_CLEAR_FLAG;
     if (!P32)
         IAP_CONTR = 0x60;   // 判断快速烧录

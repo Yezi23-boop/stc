@@ -1,5 +1,4 @@
 #include "zf_common_headfile.h"
-#include <type.h>
 #include "vofa.h"
 #include <stdlib.h>
 
