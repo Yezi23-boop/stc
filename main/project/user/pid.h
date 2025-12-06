@@ -42,6 +42,7 @@ void pid_steer_init(PID_Steer *pid, float kp, float kd, float kd_gyro, float max
 void Encoder_get(PID_Speed *left, PID_Speed *right);
 void pid_speed_update(PID_Speed *pid, float target, float actual);
 void pid_steer_update(PID_Steer *pid, float error, float gyro);
+void pid_angle_update(PID_Steer *pid, float error, float gyro);
 extern float speed_l, speed_r;
 extern PID_Controllers PID;
 

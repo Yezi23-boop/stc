@@ -1,6 +1,6 @@
 #include "zf_common_headfile.h"
-#define TIME_0 5  // 定时器0中断周期(ms)
-#define TIME_1 10 // 定时器1中断周期(ms)
+#define TIME_1 5  // 定时器0中断周期(ms)
+#define TIME_2 10 // 定时器1中断周期(ms)
 void int_user(void)
 {
     // 系统初始化：传感器/存储/定时器/编码器/ADC/电机/无线
@@ -9,8 +9,8 @@ void int_user(void)
     ips114_init();
     imu660ra_init(); // 初始化 IMU660RA
     eeprom_init();
-    pit_ms_init(TIM0_PIT, TIME_0);
     pit_ms_init(TIM1_PIT, TIME_1);
+    pit_ms_init(TIM2_PIT, TIME_2);
     encoder_dir_init(TIM3_ENCOEDER, IO_P46, TIM3_ENCOEDER_P04); // 编码器初始化
     encoder_dir_init(TIM4_ENCOEDER, IO_P42, TIM4_ENCOEDER_P06); // 编码器初始化
     adc_init(ADC_CH13_P05, ADC_8BIT);

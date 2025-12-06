@@ -35,7 +35,5 @@
 
 #ifndef __ISR_H_
 #define __ISR_H_
-extern unsigned long time_0;
-extern float ba;
-extern int	flat_statr;
+
 #endif

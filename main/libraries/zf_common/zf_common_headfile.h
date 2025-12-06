@@ -94,4 +94,5 @@
 #include "menu.h"
 #include "key.h"
 #include "vofa.h"
+#include "a_run.h"
 #endif

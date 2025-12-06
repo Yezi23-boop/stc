@@ -279,7 +279,6 @@ void handle_vofa_command(char *cmd)
 			{
 				PID.left_speed.Kp = value;
 				printf("Left Kp = %.2f\n", value);
-				ips114_show_float(1 * 24, 18 * 0, value, 3, 2);
 			}
 			else if (strcmp(param_name, "L_KI") == 0)
 			{
@@ -310,30 +309,20 @@ void handle_vofa_command(char *cmd)
 			}
 
 			// ========== 转向环（位置式）PID_Direction 参数 ==========
-			else if (strcmp(param_name, "P_KP") == 0)
+			else if (strcmp(param_name, "A_KP") == 0)
 			{
-				PID.steer.Kp = value;
-				kp_Err = value; // 同步到位置误差 Kp（用于菜单显示）
+				PID.angle.Kp = value;
 				printf("Position Kp = %.2f\n", value);
 			}
-			else if (strcmp(param_name, "P_KI") == 0)
+			else if (strcmp(param_name, "A_KD") == 0)
 			{
-				// 兼容旧命令：将位置式的 Ki 映射为 kd_gyro
-				kd_gyro = value;
-				PID.steer.kd_gyro = value;
-				printf("Position kd_gyro (from Ki) = %.2f\n", value);
-			}
-			else if (strcmp(param_name, "P_KD") == 0)
-			{
-				PID.steer.Kd = value;
-				kd_Err = value; // 同步到位置误差 Kd（用于菜单显示）
+				PID.angle.Kd = value;
 				printf("Position Kd = %.2f\n", value);
 			}
-			else if (strcmp(param_name, "KD_GYRO") == 0)
+			else if (strcmp(param_name, "A_GYRO") == 0)
 			{
-				kd_gyro = value;
-				PID.steer.kd_gyro = value; // 角速度微分权重系数
-				printf("Kd Gyro = %.2f\n", value);
+				PID.angle.kd_gyro = value;
+				printf("Position kd_gyro (from Ki) = %.2f\n", value);
 			}
 
 			// ========== 速度控制 ==========
@@ -347,7 +336,7 @@ void handle_vofa_command(char *cmd)
 				// 显示/调试用途：映射到位置式 PID_Direction 输出
 				PID.left_speed.output = value;
 				PID.left_speed.output = value;
-				//				PID.steer.output = value;
+				// PID.steer.output = value;
 				printf("Motor = %.2f,speed=%.2f\n", PID.left_speed.output, PID.left_speed.speed);
 			}
 			else if (strcmp(param_name, "SPEED_RUN") == 0)

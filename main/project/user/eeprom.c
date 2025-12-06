@@ -13,20 +13,20 @@ uint8 eeprom_init_time = 0;
 int16 start_flag = 1;
 int16 circle_flags = 0;
 // PID速度控制参数
-float kp_Err = 0.20f;     // 4.40f//
-float kd_Err = 5.00f;      // 7.30f//
+float kp_Err = 0.20f;       // 4.40f//
+float kd_Err = 5.00f;       // 7.30f//
 float speed_run = 35.00f;   // 55//
 float kd_gyro = 0.00f;      // 270.0//
 float fuya_xili = 2000.00f; // 60.0//
 float pwm_filter = 0.70f;   // 0.90//
 
 // PID角度控制参数
-float kp_Angle = 0.80f;          // 0.5//
-float kd_Angle = 2.60f;          // 2.2//
+float kp_Angle = 0.80f;         // 0.5//
+float kd_Angle = 2.60f;         // 2.2//
 float limiting_Angle = 130.00f; //
-float A_1 = 0.50f;             // 1.00f
-float B_1 = 1.00f;             // 0.60f
-float C_l = 0.80f;             // 0.005f
+float A_1 = 0.50f;              // 1.00f
+float B_1 = 1.00f;              // 0.60f
+float C_l = 0.60f;              // 0.005f
 
 // 圆环控制参数
 float ring_encoder = 15.00f;           // 15

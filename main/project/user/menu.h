@@ -80,36 +80,30 @@ void Keystroke_Menu_HOME(void);
  */
 void Menu_Start_Show(uint8 control_line);
 
-
 /**
  * @brief 启动配置菜单处理函数
  */
 void Menu_Start_Process(void);
-
 
 /**
  * @brief PID_Direction速度参数菜单显示函数
  */
 void Menu_Speed_Show(uint8 control_line);
 
-
 /**
  * @brief PID_Direction速度参数菜单处理函数
  */
 void Menu_Speed_Process(void);
-
 
 /**
  * @brief PID_Direction角度参数菜单显示函数
  */
 void Menu_Angle_Show(uint8 control_line);
 
-
 /**
  * @brief PID_Direction角度参数菜单处理函数
  */
 void Menu_Angle_Process(void);
-
 
 /**
  * @brief 圆环控制参数菜单显示

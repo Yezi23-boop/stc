@@ -35,7 +35,7 @@ void Encoder_get(PID_Speed *left, PID_Speed *right)
 
     // 将编码器计数转换为速度（系数需按采样周期与脉冲当量校准）
     left->speed = encoder_get_count(TIM4_ENCOEDER) * 0.2f;   /* 左轮 */
-    right->speed = -encoder_get_count(TIM3_ENCOEDER) * 0.2f;  /* 右轮，方向取负 */
+    right->speed = -encoder_get_count(TIM3_ENCOEDER) * 0.2f; /* 右轮，方向取负 */
 
     // 一阶低通滤波（就地写回）
     low_pass_filter_mt(&encoder_l, &left->speed, 0.8f);
@@ -78,6 +78,29 @@ void pid_steer_update(PID_Steer *pid, float error, float gyro)
 
     // 位置式 PID_Direction：kd_gyro 以陀螺输入项参与
     pid->output = pid->Kp * pid->error + pid->kd_gyro * gyro + pid->Kd * (pid->error - pid->prev_error);
+
+    // 输出限幅
+    if (pid->output > pid->max_output)
+    {
+        pid->output = pid->max_output;
+    }
+    else if (pid->output < -pid->min_output)
+    {
+        pid->output = -pid->min_output;
+    }
+
+    // 更新误差历史
+    pid->prev_error = pid->error;
+}
+
+// 转向环更新（位置式）
+void pid_angle_update(PID_Steer *pid, float error, float gyro)
+{
+    // 计算当前误差（直接写入结构体成员）
+    pid->error = error - gyro;
+
+    // 位置式 PID_Direction：kd_gyro 以陀螺输入项参与
+    pid->output = pid->Kp * pid->error + pid->Kd * (pid->error - pid->prev_error);
 
     // 输出限幅
     if (pid->output > pid->max_output)
