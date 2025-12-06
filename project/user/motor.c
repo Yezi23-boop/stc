@@ -1,5 +1,16 @@
 #include "motor.h"
 
+MCI_Handle_t Mci =
+{
+  {
+    .DirectCommand = MCI_NO_COMMAND,
+    .State = IDLE,
+    .CurrentFaults = MC_NO_FAULTS,
+    .PastFaults = MC_NO_FAULTS,
+  },
+
+};
+
 void motor_Init()
 {
 	pwm_init(PWMB_CH2_P13, 17000, 0);		  // 左电机PWM输出初始化，频率17kHz
@@ -74,3 +85,62 @@ void lost_lines()
 		loss_events = 0;
 	}
 }
+
+/**
+  * @brief Returns the list of faults that are currently active on the target motor
+  *
+  * This function returns a bitfield that indicates faults that occured on the Motor
+  * Control subsystem for the target motor and that are still active (the conditions
+  * that triggered the faults returned are still true).
+  *
+  * Possible error codes are listed in the @ref fault_codes "Fault codes" section.
+  *
+  * @param  pHandle Pointer on the target motor drive structure.
+  */
+_weak void MC_GetCurrentFaults(MC_Handle_t *phandle)
+{
+	return ((uint16_t)pHandle->CurrentFaults);
+}
+
+/**
+  * @brief Executes Motor Control tasks
+  */
+void mc_StaticMachine()
+{
+	if (MCI_GetCurrentFaults(&Mci) == MC_NO_FAULTS)
+	{
+		switch (Mci.State)
+		{
+			case IDLE:
+			{
+				Mci.State = START;
+				break; 
+			}
+			case START:
+			{
+				Mci.State = RUN;
+				break;
+			}
+			case RUN:
+			{
+				Mci.State;
+				break;
+			}
+			case STOP:
+			{
+				Mci.State = 
+			}
+			case FAULT_OVER:
+			{
+				Mci.State = IDLE;
+			}
+			case FAULT_NOW:
+			{
+				Mci.State = FAULT_OVER;
+			}
+			default:
+          		break;
+		}
+	}
+}
+

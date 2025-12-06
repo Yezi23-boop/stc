@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  main                                                               26/11/25  15:19:33  PAGE 1   
+C251 COMPILER V5.60.0,  main                                                               30/11/25  21:27:04  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE main
@@ -66,7 +66,7 @@ stmt  level    source
    55          };
    56          #define TASKFUNCTION(ID, Period, Cnt, Event, fn) {ID, Period, Cnt, Event, fn}
    57          struct taskconfig gTaskList[] = {
-C251 COMPILER V5.60.0,  main                                                               26/11/25  15:19:33  PAGE 2   
+C251 COMPILER V5.60.0,  main                                                               30/11/25  21:27:04  PAGE 2   
 
    58            TASKFUNCTION(1, 1,    0, 0, task1ms),
    59            TASKFUNCTION(2, 10,   1, 0, task10ms),
@@ -134,7 +134,7 @@ stmt  level    source
   121   1      }
   122          
   123          void printf_adc()
-C251 COMPILER V5.60.0,  main                                                               26/11/25  15:19:33  PAGE 3   
+C251 COMPILER V5.60.0,  main                                                               30/11/25  21:27:04  PAGE 3   
 
   124          {
   125   1        // 电感归一化值（0-100）整数显示
@@ -202,7 +202,7 @@ stmt  level    source
   187           *   L_KI=40!
   188           *   L_KD=0!
   189           *
-C251 COMPILER V5.60.0,  main                                                               26/11/25  15:19:33  PAGE 4   
+C251 COMPILER V5.60.0,  main                                                               30/11/25  21:27:04  PAGE 4   
 
   190           * 右轮 PID_Direction:
   191           *   R_KP=100!
