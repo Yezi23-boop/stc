@@ -10,7 +10,14 @@ typedef enum {
 }CodeState_t;
 extern float test_speed;
 void test(void);
+
+
 u32 GetTimeStart(void);
 u32 GetTimeEnd(void);
-u32 GetTotalTime(void);
+f32 GetTotalTime(void);
+
+
+void TimingStart(void);
+u32 TimingStopTicks(void);
+f32 TimingStopSeconds(void);
 #endif

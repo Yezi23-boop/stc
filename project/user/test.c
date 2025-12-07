@@ -1,8 +1,8 @@
 #include "zf_common_headfile.h"
 /************************* 全局变量 *************************/
 // 计时结果（单位：微秒）
-u32 gStart_us = 0; 
-u32 gEnd_us = 0; 
+u32 gStart_us = 0;
+u32 gEnd_us = 0;
 VOL_U8 SpillCnt = 0;
 CodeState_t CodeState;
 /*
@@ -44,41 +44,55 @@ void test(void)
 	//  motor_output(-1000, -5000);
 }
 
-//获取开始时间
+// 获取开始时间
 u32 GetTimeStart(void)
-{	
-	u32 TH0_Time8Bit = (u32)(TH0 << 8);
+{
 	u32 TL0_Time8Bit = TL0;
-	return TH0_Time8Bit + TH0_Time8Bit;
+	u32 TH0_Time8Bit = (u32)(TH0 << 8);
+	return TH0_Time8Bit + TL0_Time8Bit;
 }
 
 // 获取结束时间，0~65535，为一个周期，
 u32 GetTimeEnd(void)
 {
-	
+
 	if (SpillCnt)
 	{
 		//  gStart_us = GetTimeStart（）获取开始的时间
-		u32 middle_time = SpillCnt*65535-gStart_us ;
+		u32 middle_time = SpillCnt * 65536 - gStart_us;
 		// 当前 0~65535 的时间
 		u32 TH0_Time8Bit = (u32)(TH0 << 8);
 		u32 TL0_Time8Bit = TL0;
-		TF0 = 0;
-		SpillCnt = 0;
-		return TH0_Time8Bit + TL0_Time8Bit + middle_time;  
+        SpillCnt = 0;
+		return TH0_Time8Bit + TL0_Time8Bit + middle_time;
 	}
-	else
-	{
-		u32 TH0_Time8Bit = (u32)(TH0 << 8);
-		u32 TL0_Time8Bit = TL0;
-		u32 TimeEnd = TH0_Time8Bit + TH0_Time8Bit ;
-		return  TimeEnd;
-	}
-	CodeState = GetTimeEndError;
-	return 0; 
+    else
+    {
+        u32 TL0_Time8Bit = TL0;
+        u32 TH0_Time8Bit = (u32)(TH0 << 8);
+        u32 TimeEnd = TH0_Time8Bit + TL0_Time8Bit;
+        return TimeEnd - gStart_us;
+    }
 }
 // 总时间为 = MACHINE_CYCLE*（GetTimeEnd()-GetTimeStart()）
-u32 GetTotalTime(void)
+f32 GetTotalTime(void)
 {
-	return MACHINE_CYCLE*(gEnd_us - gStart_us);
+    return MACHINE_CYCLE * gEnd_us;
+}
+
+void TimingStart(void)
+{
+    gStart_us = GetTimeStart();
+}
+
+u32 TimingStopTicks(void)
+{
+    gEnd_us = GetTimeEnd();
+    return gEnd_us;
+}
+
+f32 TimingStopSeconds(void)
+{
+    gEnd_us = GetTimeEnd();
+    return MACHINE_CYCLE * (f32)gEnd_us;
 }
