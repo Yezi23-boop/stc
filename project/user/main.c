@@ -17,6 +17,7 @@ void task10ms(void)
 }
 void task100ms(void)
 {
+	#if (ENABLECOMM)
 	char vofa_cmd[32]; // VOFA 命令缓存
 	// ========== 处理 VOFA 命令 ==========
 	// 从 FIFO 读取串口数据，使用系统提供的 wireless_uart_read_buffer
@@ -38,10 +39,15 @@ void task100ms(void)
 	// printf_imu();
 	// printf_speed_test();
 //		 Keystroke_Menu();
+	#endif
 }
 void task1000ms(void)
 {
-	
+
+	if (CodeError != CodeError.ErrorDetail.NO_ERROR)
+	{
+		// 反转 IO 口，指示系统运行正常
+	}
 }
 typedef void(*pFunc)(void);
 

@@ -4,10 +4,20 @@
 // 机器周期 = 12/系统时钟 (8051 标准内核)，单位：秒
 #define MACHINE_CYCLE (12.0 / SYSTEM_CLOCK_40M)  
 
-typedef enum {
-    GetTimeError = 0,
-    GetTimeEndError = 1
-}CodeState_t;
+/*********************调试时使能，正式时关闭减少CPU运行*********************/
+#define ENABLECOMM (1)      // 是否使能通信
+
+typedef union {
+    u32 eCodeError;
+    struct {
+        u8 NO_ERROR :1;
+        u8 GetTimeError :1;
+        u8 GetTimeEndError :1;
+        // ......后续补充其他的错误
+    }ErrorDetail;
+}ErrorUnion_U;
+
+
 extern float test_speed;
 void test(void);
 u32 GetTimeStart(void);

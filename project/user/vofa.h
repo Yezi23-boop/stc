@@ -7,6 +7,7 @@
 #define VOFA_BUFFER_SIZE 64 // 接收缓冲区大小
 #define VOFA_MAX_CMD_LEN 32 // 最大命令长度
 #define ENABLE_VOFA_MAX_CMD_LEN 0 // 最大命令长度
+
 // 解析状态
 typedef enum
 {

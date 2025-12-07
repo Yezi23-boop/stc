@@ -4,7 +4,8 @@
 u32 gStart_us = 0; 
 u32 gEnd_us = 0; 
 VOL_U8 SpillCnt = 0;
-CodeState_t CodeState;
+
+ErrorUnion_U CodeError;
 /*
  * 测试速度阶跃序列
  * 0–500: 20，500–1000: 15，1000–2000: 18，2000–3000: -40，>=3000: 60
@@ -56,7 +57,7 @@ u32 GetTimeStart(void)
 u32 GetTimeEnd(void)
 {
 	
-	if (SpillCnt)
+	if (SpillCnt >= 1)
 	{
 		//  gStart_us = GetTimeStart（）获取开始的时间
 		u32 middle_time = SpillCnt*65535-gStart_us ;
@@ -74,11 +75,16 @@ u32 GetTimeEnd(void)
 		u32 TimeEnd = TH0_Time8Bit + TH0_Time8Bit ;
 		return  TimeEnd;
 	}
-	CodeState = GetTimeEndError;
+	CodeError.ErrorDetail.GetTimeEndError = true;
 	return 0; 
 }
 // 总时间为 = MACHINE_CYCLE*（GetTimeEnd()-GetTimeStart()）
 u32 GetTotalTime(void)
 {
+	if (gEnd_us < gStart_us)
+	{
+		CodeError.ErrorDetail.GetTimeError = true;
+		return 0;
+	}
 	return MACHINE_CYCLE*(gEnd_us - gStart_us);
 }
