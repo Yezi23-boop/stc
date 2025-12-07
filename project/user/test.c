@@ -4,7 +4,8 @@
 u32 gStart_us = 0;
 u32 gEnd_us = 0;
 VOL_U8 SpillCnt = 0;
-CodeState_t CodeState;
+
+ErrorUnion_U CodeError;
 /*
  * 聆彸厒僅論埲唗蹈
  * 0每500: 20ㄛ500每1000: 15ㄛ1000每2000: 18ㄛ2000每3000: -40ㄛ>=3000: 60

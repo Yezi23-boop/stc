@@ -51,6 +51,7 @@ void task10ms(void)
 }
 void task100ms(void)
 {
+	#if (ENABLECOMM)
 	char vofa_cmd[32]; // VOFA 命令缓存
 	// ========== 处理 VOFA 命令 ==========
 	// 从 FIFO 读取串口数据，使用系统提供的 wireless_uart_read_buffer
