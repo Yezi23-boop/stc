@@ -83,6 +83,7 @@ f32 GetTotalTime(void)
 
 void TimingStart(void)
 {
+    SpillCnt = 0;
     gStart_us = GetTimeStart();
 }
 

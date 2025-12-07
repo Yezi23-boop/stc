@@ -12,8 +12,8 @@ void printf_date();
 void printf_speed_test();
 void task1ms(void)
 {
-    gpio_low(IO_P33);
-    TimingStart();
+//    gpio_low(IO_P33);
+//    TimingStart();
     if (!P32)
         IAP_CONTR = 0x60;
     read_AD();
@@ -27,13 +27,14 @@ void task1ms(void)
     {
         motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
     }
-    task1ms_time_s = TimingStopSeconds();
-    gpio_high(IO_P33);
+//    task1ms_time_s = TimingStopSeconds();
+//    gpio_high(IO_P33);
 }
 void task10ms(void)
 {
 	static int flat_statr_date = 0;
 	gpio_low(IO_P34);
+	TimingStart();
 	scan_track_max_value();
 	IMUupdate(&Gyr_filt, &Acc_filt, &Att_Angle);
 	dianya_adc();
@@ -47,12 +48,13 @@ void task10ms(void)
 	{
 		fuya_update_simple();
 	}
+	task1ms_time_s = TimingStopSeconds();
 	gpio_high(IO_P34);
 }
 void task100ms(void)
 {
-	#if (ENABLECOMM)
-	char vofa_cmd[32]; // VOFA 命令缓存
+    #if (ENABLECOMM)
+    char vofa_cmd[32]; // VOFA 命令缓存
 	// ========== 处理 VOFA 命令 ==========
 	// 从 FIFO 读取串口数据，使用系统提供的 wireless_uart_read_buffer
 	vofa_parse_from_fifo();
@@ -72,11 +74,12 @@ void task100ms(void)
 	// printf_adc();
 	// printf_imu();
 	// printf_speed_test();
-	// Keystroke_Menu();
+    // Keystroke_Menu();
+    #endif
 }
 void task1000ms(void)
 {
-		ips114_show_float(3 * 24, 18 * 0, task1ms_time_s*1000, 4, 2);
+	ips114_show_float(3 * 24, 18 * 0, task1ms_time_s*1000, 4, 2);
 }
 typedef void (*pFunc)(void);
 
