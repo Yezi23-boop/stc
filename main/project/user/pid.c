@@ -93,7 +93,7 @@ void pid_steer_update(PID_Steer *pid, float error, float gyro)
     pid->prev_error = pid->error;
 }
 
-// 转向环更新（位置式）
+// 角度环更新（位置式）
 void pid_angle_update(PID_Steer *pid, float error, float gyro)
 {
     // 计算当前误差（直接写入结构体成员）

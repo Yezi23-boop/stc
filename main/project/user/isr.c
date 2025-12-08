@@ -147,6 +147,8 @@ void DMA_UART4_IRQHandler(void) interrupt 18
 void TM0_IRQHandler() interrupt 1
 {
     TIM0_CLEAR_FLAG;
+	run_time_1();
+//	 Keystroke_Scan();
     if (tim0_irq_handler != NULL)
     {
         tim0_irq_handler();
@@ -155,7 +157,7 @@ void TM0_IRQHandler() interrupt 1
 void TM1_IRQHandler() interrupt 3
 {
     TIM1_CLEAR_FLAG;
-    run_time_1();
+    run_time_2();
     if (tim1_irq_handler != NULL)
     {
         tim1_irq_handler();
@@ -164,7 +166,6 @@ void TM1_IRQHandler() interrupt 3
 void TM2_IRQHandler() interrupt 12
 {
     TIM2_CLEAR_FLAG;
-    run_time_2();
     if (tim2_irq_handler != NULL)
     {
         tim2_irq_handler();

@@ -14,7 +14,15 @@
             "defines": [
                 "_DEBUG",
                 "UNICODE",
-                "_UNICODE"
+                "_UNICODE",
+                "sbit=char",
+                "code=const",
+                "xdata=",
+                "data=",
+                "sfr=char",
+                "interrupt=",
+                "bit=u8",
+                "DMA_UR1R_STA &"
             ],
             "windowsSdkVersion": "10.0.22621.0",
             "compilerPath": "cl.exe",

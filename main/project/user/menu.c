@@ -7,6 +7,13 @@
 #define KEYSTROKE_TWO 2   // 下
 #define KEYSTROKE_THREE 3 // 确认
 #define KEYSTROKE_FOUR 4  // 返回
+// 长按事件编码（与按键模块保持一致：5..8 为 1..4 的长按）
+#define KEYSTROKE_ONE_LONG 5   // 上-长按
+#define KEYSTROKE_TWO_LONG 6   // 下-长按
+#define KEYSTROKE_THREE_LONG 7 // 确认-长按
+#define KEYSTROKE_FOUR_LONG 8  // 返回-长按
+// 按键数量（用于菜单层逻辑，如需与底层 Key_Init 对齐可在初始化时同步）
+//#define KEYSTROKE_COUNT 4
 
 // 屏幕显示相关常量
 #define ROWS_MAX 7 * 18      // 屏幕上可移动光标的最大行
@@ -216,6 +223,12 @@ void Keystroke_int(int *parameter, int change_unit_MIN)
     case KEYSTROKE_TWO:
         *parameter -= change_unit;
         break;
+    case KEYSTROKE_ONE_LONG:
+        *parameter += change_unit;
+        break;
+    case KEYSTROKE_TWO_LONG:
+        *parameter -= change_unit;
+        break;
     }
 }
 
@@ -237,6 +250,12 @@ void Keystroke_float(float *parameter, float change_unit_MIN)
         *parameter += change_unit;
         break;
     case KEYSTROKE_TWO:
+        *parameter -= change_unit;
+        break;
+    case KEYSTROKE_ONE_LONG:
+        *parameter += change_unit;
+        break;
+    case KEYSTROKE_TWO_LONG:
         *parameter -= change_unit;
         break;
     }
@@ -351,7 +370,7 @@ void Keystroke_Menu_HOME(void)
         ips114_show_float(8 * 23, 1 * 18, Err, 3, 2);
         // 显示位置式 PID_Direction 输出作为 motor
         ips114_show_float(8 * 23, 2 * 18, PID.steer.output, 3, 1);
-        ips114_show_float(8 * 23, 3 * 18, phase, 3, 1);
+        ips114_show_float(8 * 23, 3 * 18, keystroke_label, 3, 1);
         ips114_show_float(8 * 23, 4 * 18, dianya, 4, 2);
         ips114_show_int32(8 * 23, 5 * 18, fuya_date, 4);
 

@@ -9,7 +9,7 @@ void printf_speed_test();
 
 void main()
 {
-	//	char vofa_cmd[128]; // VOFA 命令缓存
+//	char vofa_cmd[64]; // VOFA 命令缓存
 
 	clock_init(SYSTEM_CLOCK_40M); // 时钟初始化
 	debug_init();				  // 调试接口初始化
@@ -22,24 +22,26 @@ void main()
 	{
 		// ========== 处理 VOFA 命令 ==========
 		// 从 FIFO 读取串口数据，使用系统提供的 wireless_uart_read_buffer
-		//		vofa_parse_from_fifo();
+//		vofa_parse_from_fifo();
 
-		//		//      // 检查是否解析到完整命令
-		//		if (vofa_get_command(vofa_cmd, 128))
-		//		{
-		//			handle_vofa_command(vofa_cmd);
-		//		}
-
+//		//      // 检查是否解析到完整命令
+//		if (vofa_get_command(vofa_cmd, 64))
+//		{
+//			handle_vofa_command(vofa_cmd);
+//		}
+// Keystroke_Scan();
 		// ========== 数据发送到 VOFA+ ==========
 		// 使用 FireWater 协议发送数据
-		//		printf("%f,%f,%f,%f\n", test_speed, PID.left_speed.speed, PID.right_speed.speed, 0.0);
-		printf("%f,%f,%f,%f\n", test_speed, PID.left_speed.speed, PID.right_speed.speed, 0.0);
-		//		ips114_show_float(6 * 24, 18 * 1, dianya, 3, 2);
+		//		printf("%f,%f,%f,%f\n", test_speed_value, PID.left_speed.speed, PID.right_speed.speed, 0.0);
+//		printf("%d,%f,%f,%f\n",keystroke_label, PID.left_speed.speed, PID.right_speed.speed, 0.0);
+//		ips114_show_int32(6 * 24, 18 * 1, keystroke_label, 3);
+//		system_delay_ms(300);
+//		ips114_show_int32(6 * 24, 18 * 2, P33, 3);
 		// ========== 显示调试功能（按需选择） ==========
-		// printf_date();
+		// printf_date();keystroke_label
 		// printf_adc();
 		// printf_imu();
-		// printf_speed_test();
+//		printf_speed_test();
 		Keystroke_Menu();
 	}
 }
@@ -101,13 +103,13 @@ void printf_imu()
 
 void printf_speed_test()
 {
-	ips114_show_float(0, 0, test_speed, 6, 1);
-	ips114_show_float(0, 15, PID.steer.output, 6, 1);
+	ips114_show_float(0, 0, test_angle_value, 6, 1);
+	ips114_show_float(0, 15, PID.angle.output, 6, 1);
 	ips114_show_float(0, 35, speed_l, 6, 1);
 	ips114_show_float(0, 55, speed_r, 6, 1);
-	ips114_show_int32(0, 75, imu660ra_gyro_z, 6);
-	ips114_show_int32(0, 95, imu660ra_gyro_z * 0.01, 6);
-	printf("%f,%f,%f,%f\n", test_speed, speed_l, speed_r, 0.0);
+	ips114_show_float(0, 75, gyro_z, 6, 2);
+	ips114_show_float(0, 95, gyro_z * 0.1, 6, 2);
+	printf("%f,%f,%f,%f\n", test_angle_value, gyro_z, gyro_z * 0.005, PID.angle.output);
 }
 
 void printf_butten_test()

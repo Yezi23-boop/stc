@@ -4,7 +4,7 @@
 #include "zf_common_typedef.h"
 
 // VOFA+ FireWater 协议缓冲区定义
-#define VOFA_BUFFER_SIZE 128 // 接收缓冲区大小，从64增大到256
+#define VOFA_BUFFER_SIZE 64 // 接收缓冲区大小，从64增大到256
 #define VOFA_MAX_CMD_LEN 32  // 最大命令长度，从32增大到128
 
 // 解析状态

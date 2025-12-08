@@ -328,8 +328,13 @@ void handle_vofa_command(char *cmd)
 			// ========== ËÙ¶È¿ØÖÆ ==========
 			else if (strcmp(param_name, "TEST_speed") == 0)
 			{
-				test_speed = value;
+				test_speed_value = value;
 				printf("TEST_speed = %.2f\n", value);
+			}
+			else if (strcmp(param_name, "TEST_angle") == 0)
+			{
+				test_angle_value = value;
+				printf("TEST_angle = %.2f\n", value);
 			}
 			else if (strcmp(param_name, "MOTOR") == 0)
 			{
@@ -403,7 +408,7 @@ void handle_vofa_command(char *cmd)
 				   PID.right_speed.Kp,
 				   PID.right_speed.Ki,
 				   PID.right_speed.Kd);
-			printf("Speed: %.2f\n", test_speed);
+			printf("Speed: %.2f\n", test_speed_value);
 		}
 		else
 		{

@@ -1,71 +1,85 @@
 #include "zf_common_headfile.h"
-
-// 定义按键引脚
 #define KEY1_PIN P33 // 上键
 #define KEY2_PIN P34 // 下键
 #define KEY3_PIN P36 // 确定键
 #define KEY4_PIN P37 // 返回键
-// 长按时间阈值(单位：次数，取决于调用扫描函数的频率)
+#define KEY_NUM 4
+// 长按时间阈值：达到阈值判定为长按
 #define LONG_PRESS_THRESHOLD 200
+// 消抖阈值：状态变化需连续 N 次稳定才确认
+#define DEBOUNCE_THRESHOLD 0
+// 长按重复周期：长按保持期间每隔 N 次扫描重复触发一次
+#define REPEAT_INTERVAL 25
+// 按键数量
+uint8 keystroke_label = 0;             // 当前产生的按键事件编码（0=无，1..4=短按，5..8=长按）
+uint8 key_last_status[KEY_NUM] = {0};  // 上一次稳定状态（0=未按，1=按下）
+uint8 key_status[KEY_NUM] = {0};       // 当前稳定状态（消抖后）
+uint16 key_press_time[KEY_NUM] = {0};  // 按下持续时间（单位：扫描次数）
+uint8 key_debounce_cnt[KEY_NUM] = {0}; // 消抖计数：状态变化时开始累计
 
-uint8 keystroke_label = 0;      // 按下的是哪个键（0=无按键，1-4=短按，5-8=长按）
-uint8 key_last_status[4] = {0}; // 上一次按键状态
-uint8 key_status[4] = {0};      // 当前按键状态
-uint8 key_flag[4] = {0};        // 按键标志位
-uint16 key_press_time[4] = {0}; // 按键按下持续时间计数
-
-/**
- * @brief 按键扫描函数
- * @details 读取4个按键的状态，判断短按和长按
- * @note 需要定期调用以实现按键检测
- */
 void Keystroke_Scan(void)
 {
     uint8 i = 0;
-    keystroke_label = 0; // 重置按键标识
+    keystroke_label = 0; // 默认本次扫描无事件
 
-    // 保存上一次按键状态
-    for (i = 0; i < 4; i++)
     {
-        key_last_status[i] = key_status[i];
-    }
+        uint8 raw[4];
+        // 按键为低电平有效：读引脚并取反，得到“按下=1，未按=0”的原始值，增加或减少按键要修改
+        raw[0] = (uint8)(!KEY1_PIN);
+        raw[1] = (uint8)(!KEY2_PIN);
+        raw[2] = (uint8)(!KEY3_PIN);
+        raw[3] = (uint8)(!KEY4_PIN);
 
-    // 读取当前按键状态（按键按下为低电平(0)，取反使按下状态在程序中用1表示）
-    key_status[0] = !KEY1_PIN; // 上键状态，按下则值为1
-    key_status[1] = !KEY2_PIN; // 下键状态，按下则值为1
-    key_status[2] = !KEY3_PIN; // 确定键状态，按下则值为1
-    key_status[3] = !KEY4_PIN; // 返回键状态，按下则值为1
-
-    // 逐个检测按键状态变化
-    for (i = 0; i < 4; i++)
-    {
-        if (key_status[i]) // 按键被按下
+        for (i = 0; i < KEY_NUM; i++)
         {
-            if (!key_last_status[i]) // 按键刚刚按下（上升沿）
+            // 原始值与稳定值不一致：进入消抖过程
+            if (raw[i] != key_status[i])
             {
-                key_press_time[i] = 0; // 重置计数器
-            }
-            else // 按键持续按下
-            {
-                key_press_time[i]++;
-
-                // 检测长按阈值
-                if (key_press_time[i] == LONG_PRESS_THRESHOLD)
+                key_debounce_cnt[i]++;
+                if (key_debounce_cnt[i] >= DEBOUNCE_THRESHOLD)
                 {
-                    keystroke_label = i + 5; // 长按对应值为5-8
-                    break;                   // 检测到长按后立即退出循环
+                    key_last_status[i] = key_status[i]; // 记录切换前的稳定值
+                    key_status[i] = raw[i];             // 更新稳定值为原始值
+                    key_debounce_cnt[i] = 0;
+                    if (key_status[i])
+                    {
+                        key_press_time[i] = 0; // 新按下开始计时
+                    }
+                    else
+                    {
+                        // 释放且未达长按阈值：短按事件
+                        if (key_last_status[i] && key_press_time[i] < LONG_PRESS_THRESHOLD)
+                        {
+                            keystroke_label = (uint8)(i + 1);
+                            break;
+                        }
+                        key_press_time[i] = 0; // 释放后清零计时
+                    }
                 }
             }
-        }
-        else // 按键未按下
-        {
-            // 如果按键释放且之前状态为按下，且未达到长按阈值，则为短按
-            if (key_last_status[i] && key_press_time[i] < LONG_PRESS_THRESHOLD)
+            else
             {
-                keystroke_label = i + 1; // 短按对应值为1-4
-                break;                   // 检测到短按后立即退出循环
+                key_debounce_cnt[i] = 0; // 无变化：清零消抖计数
             }
-            key_press_time[i] = 0; // 重置计数器
+
+            // 稳定状态为按下：累计按下时长并产生长按/重复事件
+            if (key_status[i])
+            {
+                key_press_time[i]++;
+                if (key_press_time[i] == LONG_PRESS_THRESHOLD)
+                {
+                    keystroke_label = (uint8)(i + 5);
+                    break;
+                }
+                else if (key_press_time[i] > LONG_PRESS_THRESHOLD)
+                {
+                    if (((key_press_time[i] - LONG_PRESS_THRESHOLD) % REPEAT_INTERVAL) == 0)
+                    {
+                        keystroke_label = (uint8)(i + 5);
+                        break;
+                    }
+                }
+            }
         }
     }
 }

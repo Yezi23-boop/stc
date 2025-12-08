@@ -615,6 +615,16 @@
               <FilePath>..\user\main.c</FilePath>
             </File>
             <File>
+              <FileName>a_run.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user\a_run.c</FilePath>
+            </File>
+            <File>
+              <FileName>a_run.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\user\a_run.h</FilePath>
+            </File>
+            <File>
               <FileName>eeprom.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\user\eeprom.c</FilePath>

@@ -1,5 +1,6 @@
 #include "zf_common_headfile.h"
 #include "math.h"
+float gyro_z=0;
 // 姿态融合 PI 参数（Mahony/Madgwick 思想的简化实现）
 // Kp：比例增益，越大对加速度（重力方向）校正越强，收敛快但易抖
 // Ki：积分增益，用于补偿陀螺零偏；过大易积累误差，过小收敛慢
@@ -17,7 +18,6 @@
 FLOAT_ANGLE Att_Angle; // roll/pitch/yaw（单位：度）
 FLOAT_XYZ Acc_filt;    // 滤波后的加速度
 FLOAT_XYZ Gyr_filt;    // 滤波后的角速度（单位：弧度每秒）
-
 // 说明：有些平台不提供 atan2，这里自写一个等价函数
 // 输入 (y, x)，返回区分象限的反正切角（单位：弧度）
 double my_atan2(double y, double x)
@@ -57,6 +57,7 @@ double my_atan2(double y, double x)
 // 传感器数据预处理：读取原始 IMU 数据，做单位转换与零偏校正
 // 依赖外部 API：imu660ra_get_acc / imu660ra_get_gyro / *_transition()
 // 依赖外部常量：Gyro_offset_x/y/z、DegtoRad
+LowPassFilter_t Gyr_filt_lowpass;
 void Prepare_Data(void)
 {
     // 读取一次原始数据（驱动内部会更新 imu660ra_* 全局变量）
@@ -67,7 +68,8 @@ void Prepare_Data(void)
     Gyr_filt.X = (imu660ra_gyro_transition(imu660ra_gyro_x) - Gyro_offset_x) * DegtoRad;
     Gyr_filt.Y = (imu660ra_gyro_transition(imu660ra_gyro_y) - Gyro_offset_y) * DegtoRad;
     Gyr_filt.Z = (imu660ra_gyro_transition(imu660ra_gyro_z) - Gyro_offset_z) * DegtoRad;
-
+	gyro_z=imu660ra_gyro_z;
+    low_pass_filter_mt(&Gyr_filt_lowpass, &gyro_z, 0.8);
     // 加速度（单位：按驱动转换结果，通常为 g 或 m/s^2）
     Acc_filt.X = imu660ra_acc_transition(imu660ra_acc_x) - acc_offset_x;
     Acc_filt.Y = imu660ra_acc_transition(imu660ra_acc_y) - acc_offset_y;

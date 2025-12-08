@@ -21,8 +21,8 @@ float fuya_xili = 2000.00f; // 60.0//
 float pwm_filter = 0.70f;   // 0.90//
 
 // PID角度控制参数
-float kp_Angle = 0.80f;         // 0.5//
-float kd_Angle = 2.60f;         // 2.2//
+float kp_Angle = 1.50f;         // 0.5//
+float kd_Angle = 1.30f;         // 2.2//
 float limiting_Angle = 130.00f; //
 float A_1 = 0.50f;              // 1.00f
 float B_1 = 1.00f;              // 0.60f

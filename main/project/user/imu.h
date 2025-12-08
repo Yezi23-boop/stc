@@ -1,6 +1,6 @@
 #ifndef _IMU_H_
 #define _IMU_H_
-
+extern float gyro_z;
 /*
  * 模块说明
  * - 提供 IMU 姿态解算相关的类型、常量与接口声明；
