@@ -22,25 +22,24 @@ void main()
 	{
 		// ========== 处理 VOFA 命令 ==========
 		// 从 FIFO 读取串口数据，使用系统提供的 wireless_uart_read_buffer
-//		vofa_parse_from_fifo();
+		vofa_parse_from_fifo();
 
 //		//      // 检查是否解析到完整命令
 //		if (vofa_get_command(vofa_cmd, 64))
 //		{
 //			handle_vofa_command(vofa_cmd);
 //		}
-// Keystroke_Scan();
+//			printf("%f,%f,%f,%f\n", test_angle_value, gyro_z, gyro_z * 0.082, PID.angle.output);
 		// ========== 数据发送到 VOFA+ ==========
 		// 使用 FireWater 协议发送数据
-		//		printf("%f,%f,%f,%f\n", test_speed_value, PID.left_speed.speed, PID.right_speed.speed, 0.0);
-//		printf("%d,%f,%f,%f\n",keystroke_label, PID.left_speed.speed, PID.right_speed.speed, 0.0);
+//		printf("%f,%f,%f,%f\n", test_speed_value, PID.left_speed.speed, PID.right_speed.speed, 0.0);
+//		printf("%f,%f,%f,%f\n",Err, PID.left_speed.speed, PID.right_speed.speed, 0.0);
 //		ips114_show_int32(6 * 24, 18 * 1, keystroke_label, 3);
-//		system_delay_ms(300);
 //		ips114_show_int32(6 * 24, 18 * 2, P33, 3);
 		// ========== 显示调试功能（按需选择） ==========
-		// printf_date();keystroke_label
-		// printf_adc();
-		// printf_imu();
+//      printf_date();
+//      printf_adc();
+//      printf_imu();
 //		printf_speed_test();
 		Keystroke_Menu();
 	}
@@ -109,7 +108,7 @@ void printf_speed_test()
 	ips114_show_float(0, 55, speed_r, 6, 1);
 	ips114_show_float(0, 75, gyro_z, 6, 2);
 	ips114_show_float(0, 95, gyro_z * 0.1, 6, 2);
-	printf("%f,%f,%f,%f\n", test_angle_value, gyro_z, gyro_z * 0.005, PID.angle.output);
+//	printf("%f,%f,%f,%f\n", test_angle_value, gyro_z, gyro_z * 0.005, PID.angle.output);
 }
 
 void printf_butten_test()

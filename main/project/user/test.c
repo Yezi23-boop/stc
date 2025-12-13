@@ -8,7 +8,7 @@ void test_angle_func(void)
     Prepare_Data();
     Encoder_get(&PID.left_speed, &PID.right_speed);
     // pid_steer_update(&PID.steer, Err, -gyro_z * 0.01);                // 更新转向环
-    pid_angle_update(&PID.angle, test_angle_value, gyro_z* 0.005);      // 更新角度环
+    pid_angle_update(&PID.angle, test_angle_value, gyro_z * 0.082);               // 更新角度环
     pid_speed_update(&PID.left_speed, -PID.angle.output, PID.left_speed.speed);   // 更新左轮速度环
     pid_speed_update(&PID.right_speed, +PID.angle.output, PID.right_speed.speed); // 更新右轮速度环
     motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
@@ -18,8 +18,8 @@ void test_speed_func(void)
 {
     //    int32 ff_l;
     //    int32 ff_r;
-    int lpwm;
-    int rpwm;
+//    int lpwm;
+//    int rpwm;
     //	static int test_time = 0;
     //	test_time++;
     Encoder_get(&PID.left_speed, &PID.right_speed);
@@ -52,15 +52,14 @@ void test_speed_func(void)
 
     //    lpwm = ff_l + (int32)PID.left_speed.output;
     //    rpwm = ff_r + (int32)PID.right_speed.output;
-    if (lpwm > PWM_DUTY_MAX)
-        lpwm = PWM_DUTY_MAX;
-    if (lpwm < -PWM_DUTY_MAX)
-        lpwm = -PWM_DUTY_MAX;
-    if (rpwm > PWM_DUTY_MAX)
-        rpwm = PWM_DUTY_MAX;
-    if (rpwm < -PWM_DUTY_MAX)
-        rpwm = -PWM_DUTY_MAX;
-
+    // if (lpwm > PWM_DUTY_MAX)
+    //     lpwm = PWM_DUTY_MAX;
+    // if (lpwm < -PWM_DUTY_MAX)
+    //     lpwm = -PWM_DUTY_MAX;
+    // if (rpwm > PWM_DUTY_MAX)
+    //     rpwm = PWM_DUTY_MAX;
+    // if (rpwm < -PWM_DUTY_MAX)
+    //     rpwm = -PWM_DUTY_MAX;
     //    motor_output((int32)PID.left_speed.output, (int32)PID.right_speed.output);
-    motor_output(2000, 2000);
+    motor_output((int32)PID.left_speed.output, (int32)PID.right_speed.output);
 }

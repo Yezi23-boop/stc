@@ -13,8 +13,20 @@
 #define KEYSTROKE_THREE_LONG 7 // 确认-长按
 #define KEYSTROKE_FOUR_LONG 8  // 返回-长按
 // 按键数量（用于菜单层逻辑，如需与底层 Key_Init 对齐可在初始化时同步）
-//#define KEYSTROKE_COUNT 4
-
+// #define KEYSTROKE_COUNT 4
+float quantize_0p01(float v)
+{
+    int32 t;
+    if (v >= 0.0f)
+    {
+        t = (int32)(v * 100.0f + 0.5f);
+    }
+    else
+    {
+        t = (int32)(v * 100.0f - 0.5f);
+    }
+    return (float)t / 100.0f;
+}
 // 屏幕显示相关常量
 #define ROWS_MAX 7 * 18      // 屏幕上可移动光标的最大行
 #define ROWS_MIN 1 * 18      // 屏幕上可移动光标的最小行
@@ -240,7 +252,19 @@ void Keystroke_int(int *parameter, int change_unit_MIN)
 void Keystroke_float(float *parameter, float change_unit_MIN)
 {
     float change_unit = (float)change_unit_MIN * (float)change_unit_multiplier;
-    ips114_show_float(14 * 8, 0, change_unit, 4, 2);
+    int32 base100;
+    int32 unit100;
+    ips114_show_float(14 * 8, 0, change_unit, 4, 3);
+    if (change_unit_MIN >= 0.00f)
+    {
+        base100 = (int32)(change_unit_MIN * 100.0f + 0.50f);
+    }
+    else
+    {
+        base100 = (int32)(change_unit_MIN * 100.0f - 0.50f);
+    }
+    unit100 = base100 * change_unit_multiplier;
+    change_unit = (float)unit100 / 100.0f;
     Keystroke_Scan();
     HandleKeystroke(keystroke_label);
 
@@ -351,6 +375,7 @@ void Keystroke_Menu_HOME(void)
 {
     while (menu_next_flag == 0)
     {
+        printf("%f,%f,%f,%f\n", Err, PID.left_speed.speed, PID.right_speed.speed, 0.0);
         // 显示菜单标题
         ips114_show_string(CENTER_COLUMN, 0, "MENU");
 
@@ -363,19 +388,19 @@ void Keystroke_Menu_HOME(void)
 
         // 显示实时数据标签
         ips114_show_string(7 * 15, 1 * 18, "Err");
-        ips114_show_string(7 * 15, 2 * 18, "motor");
-        ips114_show_string(7 * 15, 3 * 18, "phase");
+        ips114_show_string(7 * 15, 2 * 18, "steer");
+        ips114_show_string(7 * 15, 3 * 18, "angle");
         ips114_show_string(7 * 15, 4 * 18, "dianya");
         ips114_show_string(7 * 15, 5 * 18, "fuya_date");
         ips114_show_float(8 * 23, 1 * 18, Err, 3, 2);
         // 显示位置式 PID_Direction 输出作为 motor
         ips114_show_float(8 * 23, 2 * 18, PID.steer.output, 3, 1);
-        ips114_show_float(8 * 23, 3 * 18, keystroke_label, 3, 1);
+        ips114_show_float(8 * 23, 3 * 18, PID.angle.output, 3, 1);
         ips114_show_float(8 * 23, 4 * 18, dianya, 4, 2);
         ips114_show_int32(8 * 23, 5 * 18, fuya_date, 4);
 
-        ips114_show_float(7 * 15, 6 * 18, speed_run - PID.steer.output, 4, 2);
-        ips114_show_float(8 * 23, 6 * 18, speed_run + PID.steer.output, 4, 2);
+        ips114_show_float(7 * 15, 6 * 18, speed_run - PID.angle.output, 4, 2);
+        ips114_show_float(8 * 23, 6 * 18, speed_run + PID.angle.output, 4, 2);
         Keystroke_Scan();
         Cursor();
     }
@@ -461,19 +486,19 @@ void Menu_Speed_Show(uint8 control_line)
 {
     ips114_show_string(1 * 8, 0 * 18, "<<PID_SPEED");
 
-    ips114_show_string(1 * 8, 1 * 18, "kp_Err");     // 位置误差比例系数
-    ips114_show_string(1 * 8, 2 * 18, "kd_Err");     // 位置误差微分系数
-    ips114_show_string(1 * 8, 3 * 18, "speed_run");  // 运行速度
-    ips114_show_string(1 * 8, 4 * 18, "kd_gyro");    // 陀螺微分权重
-    ips114_show_string(1 * 8, 5 * 18, "fuya_xili");  // 负压吸力
-    ips114_show_string(1 * 8, 6 * 18, "pwm_filter"); // PWM 滤波
+    ips114_show_string(1 * 8, 1 * 18, "kp_Err");       // 位置误差比例系数
+    ips114_show_string(1 * 8, 2 * 18, "kd_Err");       // 位置误差微分系数
+    ips114_show_string(1 * 8, 3 * 18, "speed_run");    // 运行速度
+    ips114_show_string(1 * 8, 4 * 18, "limiting_Err"); // 陀螺微分权重
+    ips114_show_string(1 * 8, 5 * 18, "fuya_xili");    // 负压吸力
+    ips114_show_string(1 * 8, 6 * 18, "pwm_filter");   // PWM 滤波
 
-    ips114_show_float(14 * 8, 1 * 18, kp_Err, 3, 2);
-    ips114_show_float(14 * 8, 2 * 18, kd_Err, 3, 2);
-    ips114_show_float(14 * 8, 3 * 18, speed_run, 3, 2);
-    ips114_show_float(14 * 8, 4 * 18, kd_gyro, 3, 2);
-    ips114_show_float(14 * 8, 5 * 18, fuya_xili, 4, 2);
-    ips114_show_float(14 * 8, 6 * 18, pwm_filter, 3, 2);
+    ips114_show_float(14 * 8, 1 * 18, kp_Err, 3, 3);
+    ips114_show_float(14 * 8, 2 * 18, kd_Err, 3, 3);
+    ips114_show_float(14 * 8, 3 * 18, speed_run, 3, 3);
+    ips114_show_float(14 * 8, 4 * 18, limiting_Err, 3, 3);
+    ips114_show_float(14 * 8, 5 * 18, fuya_xili, 4, 3);
+    ips114_show_float(14 * 8, 6 * 18, pwm_filter, 3, 3);
 
     // 显示当前编辑标识
     if (control_line == 1)
@@ -514,7 +539,7 @@ void Menu_Speed_Process(void)
         break;
     case 24: // 陀螺微分权重
         Menu_Speed_Show(4 * 18);
-        Keystroke_float(&kd_gyro, 0.01f);
+        Keystroke_float(&limiting_Err, 0.01f);
         break;
     case 25: // 负压吸力
         Menu_Speed_Show(5 * 18);
@@ -608,20 +633,25 @@ void Menu_Sensor_Show(void)
     // 显示赛道的标签（依次为 ad1..ad4）
     ips114_show_string(1 * 14, 18 * 0, "ad1"); // 左前
     ips114_show_string(1 * 14, 18 * 1, "ad2"); // 左后
-    ips114_show_string(1 * 14, 18 * 3, "ad3"); // 右前
-    ips114_show_string(1 * 14, 18 * 5, "ad4"); // 右后
+    ips114_show_string(1 * 14, 18 * 2, "ad3"); // 右前
+    ips114_show_string(1 * 14, 18 * 3, "ad4"); // 右后
 
     // 显示当前值（0-100），使用整数显示
     ips114_show_int32(14 * 4, 18 * 0, ad1, 3);
     ips114_show_int32(14 * 4, 18 * 1, ad2, 3);
-    ips114_show_int32(14 * 4, 18 * 3, ad3, 3);
-    ips114_show_int32(14 * 4, 18 * 5, ad4, 3);
+    ips114_show_int32(14 * 4, 18 * 2, ad3, 3);
+    ips114_show_int32(14 * 4, 18 * 3, ad4, 3);
 
     // 显示标定最大值（整数显示供参考）
-    ips114_show_int32(14 * 8, 18 * 0, MA[0], 5); // ad1 最大值
-    ips114_show_int32(14 * 8, 18 * 1, MA[1], 5); // ad2 最大值
-    ips114_show_int32(14 * 8, 18 * 2, MA[2], 5); // ad3 最大值
-    ips114_show_int32(14 * 8, 18 * 3, MA[3], 5); // ad4 最大值
+    ips114_show_int32(14 * 8, 18 * 0, MA[0], 5);   // ad1 最大值
+    ips114_show_int32(14 * 8, 18 * 1, MA[1], 5);   // ad2 最大值
+    ips114_show_int32(14 * 8, 18 * 2, MA[2], 5);   // ad3 最大值
+    ips114_show_int32(14 * 8, 18 * 3, MA[3], 5);   // ad4 最大值
+                                                   // 显示标定
+    ips114_show_int32(14 * 12, 18 * 0, RAW[0], 5); // ad1 最大值
+    ips114_show_int32(14 * 12, 18 * 1, RAW[1], 5); // ad2 最大值
+    ips114_show_int32(14 * 12, 18 * 2, RAW[2], 5); // ad3 最大值
+    ips114_show_int32(14 * 12, 18 * 3, RAW[3], 5); // ad4 最大值
 }
 
 void Menu_Sensor_Process(void)

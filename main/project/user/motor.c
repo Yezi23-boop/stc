@@ -86,12 +86,12 @@ void dianya_jiance(void)
 	dianya = adc_raw * 0.0092;
 
 	// 电压低于 7.4V 判定为低压
-	if (dianya < 7.4)
+	if (dianya < 7.5)
 	{
 		dianya_count++;
 	}
 	// 连续 1000 次低压（防止瞬时跌落误判），触发停车
-	if (dianya_count > 1000)
+	if (dianya_count > 5000)
 	{
 		stop = 1; // 保护电池，防止过放
 	}

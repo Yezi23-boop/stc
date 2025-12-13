@@ -25,8 +25,8 @@ void int_user(void)
     pid_speed_init(&PID.left_speed, 100, 40, 0, 8000, 8000);
     pid_speed_init(&PID.right_speed, 100, 40, 0, 8000, 8000);
     // 方向环 PID 初始化（误差KP/KD与陀螺KD分离）
-    pid_steer_init(&PID.steer, kp_Err, kd_Err, kd_gyro, 60, 60); // 方向环
-    pid_steer_init(&PID.angle, kp_Angle, kd_Angle, 0, 45, 45);   // 角度环
+    pid_steer_init(&PID.steer, kp_Err, kd_Err, 0, limiting_Err, limiting_Err);         // 方向环
+    pid_steer_init(&PID.angle, kp_Angle, kd_Angle, 0, limiting_Angle, limiting_Angle); // 角度环
 }
 
 /*********************************************

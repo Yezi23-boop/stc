@@ -148,7 +148,6 @@ void TM0_IRQHandler() interrupt 1
 {
     TIM0_CLEAR_FLAG;
 	run_time_1();
-//	 Keystroke_Scan();
     if (tim0_irq_handler != NULL)
     {
         tim0_irq_handler();

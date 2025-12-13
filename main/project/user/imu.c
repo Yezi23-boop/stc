@@ -1,6 +1,6 @@
 #include "zf_common_headfile.h"
 #include "math.h"
-float gyro_z=0;
+float gyro_z = 0;
 // 姿态融合 PI 参数（Mahony/Madgwick 思想的简化实现）
 // Kp：比例增益，越大对加速度（重力方向）校正越强，收敛快但易抖
 // Ki：积分增益，用于补偿陀螺零偏；过大易积累误差，过小收敛慢
@@ -68,11 +68,11 @@ void Prepare_Data(void)
     Gyr_filt.X = (imu660ra_gyro_transition(imu660ra_gyro_x) - Gyro_offset_x) * DegtoRad;
     Gyr_filt.Y = (imu660ra_gyro_transition(imu660ra_gyro_y) - Gyro_offset_y) * DegtoRad;
     Gyr_filt.Z = (imu660ra_gyro_transition(imu660ra_gyro_z) - Gyro_offset_z) * DegtoRad;
-	gyro_z=imu660ra_gyro_z;
-    low_pass_filter_mt(&Gyr_filt_lowpass, &gyro_z, 0.8);
+    gyro_z = imu660ra_gyro_transition(imu660ra_gyro_z) - Gyro_offset_z;
+    low_pass_filter_mt(&Gyr_filt_lowpass, &gyro_z, 0.9);
     // 加速度（单位：按驱动转换结果，通常为 g 或 m/s^2）
-    Acc_filt.X = imu660ra_acc_transition(imu660ra_acc_x) - acc_offset_x;
-    Acc_filt.Y = imu660ra_acc_transition(imu660ra_acc_y) - acc_offset_y;
+    Acc_filt.X = imu660ra_acc_transition(imu660ra_acc_x);
+    Acc_filt.Y = imu660ra_acc_transition(imu660ra_acc_y);
     Acc_filt.Z = imu660ra_acc_transition(imu660ra_acc_z);
 }
 

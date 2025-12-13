@@ -18,14 +18,14 @@ typedef struct
 // 转向环 PID（位置式），字段说明
 typedef struct
 {
-  float Kp;         // 比例系数
-  float Kd;         // 微分系数
-  float kd_gyro;    // 陀螺仪微分系数（陀螺项权重）
-  float error;      // 当前误差
-  float prev_error; // 上一次误差
-  float output;     // 当前输出值
-  float max_output; // 输出限幅值
-  float min_output; // 输出限幅值
+  float Kp;           // 比例系数
+  float Kd;           // 微分系数
+  float limiting_Err; // 陀螺仪微分系数（陀螺项权重）
+  float error;        // 当前误差
+  float prev_error;   // 上一次误差
+  float output;       // 当前输出值
+  float max_output;   // 输出限幅值
+  float min_output;   // 输出限幅值
 } PID_Steer;
 // 控制器聚合：左右速度环 + 转向环
 typedef struct
@@ -38,11 +38,14 @@ typedef struct
 
 // 初始化函数：速度环（增量式）与转向环（位置式）
 void pid_speed_init(PID_Speed *pid, float kp, float ki, float kd, float max_out, float min_out);
-void pid_steer_init(PID_Steer *pid, float kp, float kd, float kd_gyro, float max_out, float min_out);
+void pid_steer_init(PID_Steer *pid, float kp, float kd, float limiting_Err, float max_out, float min_out);
 void Encoder_get(PID_Speed *left, PID_Speed *right);
 void pid_speed_update(PID_Speed *pid, float target, float actual);
 void pid_steer_update(PID_Steer *pid, float error, float gyro);
 void pid_angle_update(PID_Steer *pid, float error, float gyro);
+void Pid_Differential(float speed_run, float *left_target, float *right_target, float Scope);
+void Pure_Pursuit_Control(float speed_ref, float norm_error, float *left_target, float *right_target);
+void Pure_Pursuit_Gyro_Control(float speed_ref, float norm_error, float gyro_z, float *left_target, float *right_target);
 extern float speed_l, speed_r;
 extern PID_Controllers PID;
 

@@ -321,8 +321,8 @@ void handle_vofa_command(char *cmd)
 			}
 			else if (strcmp(param_name, "A_GYRO") == 0)
 			{
-				PID.angle.kd_gyro = value;
-				printf("Position kd_gyro (from Ki) = %.2f\n", value);
+				PID.angle.limiting_Err = value;
+				printf("Position limiting_Err (from Ki) = %.2f\n", value);
 			}
 
 			// ========== ËÙ¶È¿ØÖÆ ==========
@@ -334,7 +334,7 @@ void handle_vofa_command(char *cmd)
 			else if (strcmp(param_name, "TEST_angle") == 0)
 			{
 				test_angle_value = value;
-				printf("TEST_angle = %.2f\n", value);
+				printf("TEST_angle = %f\n", value);
 			}
 			else if (strcmp(param_name, "MOTOR") == 0)
 			{

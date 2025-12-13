@@ -13,28 +13,28 @@ uint8 eeprom_init_time = 0;
 int16 start_flag = 1;
 int16 circle_flags = 0;
 // PID速度控制参数
-float kp_Err = 0.20f;       // 4.40f//
-float kd_Err = 5.00f;       // 7.30f//
-float speed_run = 35.00f;   // 55//
-float kd_gyro = 0.00f;      // 270.0//
-float fuya_xili = 2000.00f; // 60.0//
-float pwm_filter = 0.70f;   // 0.90//
+float kp_Err = 0.68f;
+float kd_Err = 1.00f;
+float speed_run = 35.00f;
+float limiting_Err = 600.00f;
+float fuya_xili = 3000.00f;
+float pwm_filter = 0.70f;
 
 // PID角度控制参数
-float kp_Angle = 1.50f;         // 0.5//
-float kd_Angle = 1.30f;         // 2.2//
-float limiting_Angle = 130.00f; //
-float A_1 = 0.50f;              // 1.00f
-float B_1 = 1.00f;              // 0.60f
-float C_l = 0.60f;              // 0.005f
+float kp_Angle = 1.10f;
+float kd_Angle = 1.50f;
+float limiting_Angle = 40.00f;
+float A_1 = 0.50f;
+float B_1 = 1.00f;
+float C_l = 0.60f;
 
 // 圆环控制参数
-float ring_encoder = 15.00f;           // 15
-float pre_ring_Gyro_set = 210.00f;     // 200
-float in_ring_Gyroz = 220.00f;         // 230
-float pre_out_ring_Gyro_set = 170.00f; // 150
-float pre_out_ring_Gyroz = 350.00f;    // 350
-float pre_out_ring_encoder = 30.00f;   // 30
+float ring_encoder = 15.00f;
+float pre_ring_Gyro_set = 210.00f;
+float in_ring_Gyroz = 220.00f;
+float pre_out_ring_Gyro_set = 170.00f;
+float pre_out_ring_Gyroz = 350.00f;
+float pre_out_ring_encoder = 30.00f;
 /*********************************************
  * EEPROM初始化函数
  *********************************************/
@@ -64,7 +64,7 @@ void eeprom_init()
         kd_Err = read_float(6);
         pwm_filter = read_float(7);
         speed_run = read_float(8);
-        kd_gyro = read_float(9);
+        limiting_Err = read_float(9);
 
         // PID角度控制参数
         kp_Angle = read_float(10);
@@ -99,7 +99,7 @@ void eeprom_flash()
     save_float(kd_Err, 6);
     save_float(pwm_filter, 7);
     save_float(speed_run, 8);
-    save_float(kd_gyro, 9);
+    save_float(limiting_Err, 9);
 
     // PID角度控制参数
     save_float(kp_Angle, 10);

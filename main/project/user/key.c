@@ -5,11 +5,11 @@
 #define KEY4_PIN P37 // 返回键
 #define KEY_NUM 4
 // 长按时间阈值：达到阈值判定为长按
-#define LONG_PRESS_THRESHOLD 200
+#define LONG_PRESS_THRESHOLD 3
 // 消抖阈值：状态变化需连续 N 次稳定才确认
-#define DEBOUNCE_THRESHOLD 0
+#define DEBOUNCE_THRESHOLD 1
 // 长按重复周期：长按保持期间每隔 N 次扫描重复触发一次
-#define REPEAT_INTERVAL 25
+#define REPEAT_INTERVAL 1
 // 按键数量
 uint8 keystroke_label = 0;             // 当前产生的按键事件编码（0=无，1..4=短按，5..8=长按）
 uint8 key_last_status[KEY_NUM] = {0};  // 上一次稳定状态（0=未按，1=按下）
