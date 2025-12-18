@@ -13,17 +13,17 @@ uint8 eeprom_init_time = 0;
 int16 start_flag = 1;
 int16 circle_flags = 0;
 // PID速度控制参数
-float kp_Err = 0.68f;
+float kp_Err = 0.8f;
 float kd_Err = 1.00f;
-float speed_run = 35.00f;
+float speed_run = 45.00f;
 float limiting_Err = 600.00f;
 float fuya_xili = 3000.00f;
-float pwm_filter = 0.70f;
+float kp2 = 0.01f;
 
 // PID角度控制参数
-float kp_Angle = 1.10f;
+float kp_Angle = 1.15f;
 float kd_Angle = 1.50f;
-float limiting_Angle = 40.00f;
+float limiting_Angle = 60.00f;
 float A_1 = 0.50f;
 float B_1 = 1.00f;
 float C_l = 0.60f;
@@ -62,7 +62,7 @@ void eeprom_init()
         kp_Err = read_float(4);
         fuya_xili = read_float(5);
         kd_Err = read_float(6);
-        pwm_filter = read_float(7);
+        kp2 = read_float(7);
         speed_run = read_float(8);
         limiting_Err = read_float(9);
 
@@ -97,7 +97,7 @@ void eeprom_flash()
     save_float(kp_Err, 4);
     save_float(fuya_xili, 5);
     save_float(kd_Err, 6);
-    save_float(pwm_filter, 7);
+    save_float(kp2, 7);
     save_float(speed_run, 8);
     save_float(limiting_Err, 9);
 

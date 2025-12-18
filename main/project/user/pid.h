@@ -20,7 +20,7 @@ typedef struct
 {
   float Kp;           // 比例系数
   float Kd;           // 微分系数
-  float limiting_Err; // 陀螺仪微分系数（陀螺项权重）
+  float kp2; // 陀螺仪微分系数（陀螺项权重）
   float error;        // 当前误差
   float prev_error;   // 上一次误差
   float output;       // 当前输出值
@@ -41,7 +41,7 @@ void pid_speed_init(PID_Speed *pid, float kp, float ki, float kd, float max_out,
 void pid_steer_init(PID_Steer *pid, float kp, float kd, float limiting_Err, float max_out, float min_out);
 void Encoder_get(PID_Speed *left, PID_Speed *right);
 void pid_speed_update(PID_Speed *pid, float target, float actual);
-void pid_steer_update(PID_Steer *pid, float error, float gyro);
+void pid_steer_update(PID_Steer *pid, float error);
 void pid_angle_update(PID_Steer *pid, float error, float gyro);
 void Pid_Differential(float speed_run, float *left_target, float *right_target, float Scope);
 void Pure_Pursuit_Control(float speed_ref, float norm_error, float *left_target, float *right_target);

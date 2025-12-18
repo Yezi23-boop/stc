@@ -19,7 +19,7 @@ extern float limiting_Err; // 陀螺微分系数
 extern float kp_Err;       // 误差比例系数
 extern float fuya_xili;    // 负压吸力系数
 extern float kd_Err;       // 误差微分系数
-extern float pwm_filter;   // PWM 滤波系数
+extern float kp2;   // PWM 滤波系数
 extern float speed_run;    // 运行速度目标
 
 /**

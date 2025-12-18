@@ -321,7 +321,7 @@ void handle_vofa_command(char *cmd)
 			}
 			else if (strcmp(param_name, "A_GYRO") == 0)
 			{
-				PID.angle.limiting_Err = value;
+				PID.angle.kp2 = value;
 				printf("Position limiting_Err (from Ki) = %.2f\n", value);
 			}
 

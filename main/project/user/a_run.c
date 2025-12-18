@@ -15,7 +15,7 @@ void run_time_1(void)
     Encoder_get(&PID.left_speed, &PID.right_speed);
     if (time_1 == 2)
     {
-        pid_steer_update(&PID.steer, Err, gyro_z * 0.082); // 更新转向环
+        pid_steer_update(&PID.steer, Err); // 更新转向环
         time_1 = 0;
     }
     pid_angle_update(&PID.angle, PID.steer.output, gyro_z * 0.082);                          // 更新角度环
@@ -63,8 +63,8 @@ void run_time_3(void)
     read_AD(); // 读取并处理电感数据
     Prepare_Data();
     Encoder_get(&PID.left_speed, &PID.right_speed);
-    pid_steer_update(&PID.steer, Err, 0);                                   // 更新转向环，增加陀螺仪抑制甩尾
-    pid_steer_update(&PID.angle, PID.steer.output, imu660ra_gyro_z * 0.01); // 更新角度环
+    pid_steer_update(&PID.steer, Err);                                   // 更新转向环，增加陀螺仪抑制甩尾
+    pid_angle_update(&PID.angle, PID.steer.output,  gyro_z * 0.082); // 更新角度环
 
     // 方法1：使用原来的 PID 差速
     // Pid_Differential(speed_run, &left_target, &right_target, 500);

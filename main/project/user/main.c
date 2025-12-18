@@ -22,7 +22,7 @@ void main()
 	{
 		// ========== 处理 VOFA 命令 ==========
 		// 从 FIFO 读取串口数据，使用系统提供的 wireless_uart_read_buffer
-		vofa_parse_from_fifo();
+//		vofa_parse_from_fifo();
 
 //		//      // 检查是否解析到完整命令
 //		if (vofa_get_command(vofa_cmd, 64))

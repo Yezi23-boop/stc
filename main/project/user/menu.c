@@ -491,14 +491,14 @@ void Menu_Speed_Show(uint8 control_line)
     ips114_show_string(1 * 8, 3 * 18, "speed_run");    // 运行速度
     ips114_show_string(1 * 8, 4 * 18, "limiting_Err"); // 陀螺微分权重
     ips114_show_string(1 * 8, 5 * 18, "fuya_xili");    // 负压吸力
-    ips114_show_string(1 * 8, 6 * 18, "pwm_filter");   // PWM 滤波
+    ips114_show_string(1 * 8, 6 * 18, "kp2");   // PWM 滤波
 
     ips114_show_float(14 * 8, 1 * 18, kp_Err, 3, 3);
     ips114_show_float(14 * 8, 2 * 18, kd_Err, 3, 3);
     ips114_show_float(14 * 8, 3 * 18, speed_run, 3, 3);
     ips114_show_float(14 * 8, 4 * 18, limiting_Err, 3, 3);
     ips114_show_float(14 * 8, 5 * 18, fuya_xili, 4, 3);
-    ips114_show_float(14 * 8, 6 * 18, pwm_filter, 3, 3);
+    ips114_show_float(14 * 8, 6 * 18, kp2, 3, 3);
 
     // 显示当前编辑标识
     if (control_line == 1)
@@ -547,7 +547,7 @@ void Menu_Speed_Process(void)
         break;
     case 26: // PWM 滤波
         Menu_Speed_Show(6 * 18);
-        Keystroke_float(&pwm_filter, 0.10f);
+        Keystroke_float(&kp2, 0.01f);
         break;
     }
 }

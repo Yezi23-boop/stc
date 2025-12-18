@@ -17,11 +17,11 @@ void pid_speed_init(PID_Speed *pid, float kp, float ki, float kd, float max_out,
     pid->min_output = min_out;
 }
 // 转向环初始化（位置式），命名简洁
-void pid_steer_init(PID_Steer *pid, float kp, float kd, float limiting_Err, float max_out, float min_out)
+void pid_steer_init(PID_Steer *pid, float kp, float kd, float kp2, float max_out, float min_out)
 {
     pid->Kp = kp;
     pid->Kd = kd;
-    pid->limiting_Err = limiting_Err;
+    pid->kp2 = kp2;
     pid->error = 0.0f;
     pid->prev_error = 0.0f;
     pid->output = 0.0f;
@@ -71,13 +71,13 @@ void pid_speed_update(PID_Speed *pid, float target, float actual)
 }
 
 // 转向环更新（位置式）
-void pid_steer_update(PID_Steer *pid, float error, float gyro)
+void pid_steer_update(PID_Steer *pid, float error)
 {
     // 计算当前误差（直接写入结构体成员）
     pid->error = error;
 
     // 位置式 PID_Direction：limiting_Err 以陀螺输入项参与
-    pid->output = pid->Kp * pid->error + pid->limiting_Err * gyro + pid->Kd * (pid->error - pid->prev_error);
+    pid->output = pid->Kp * pid->error + pid->kp2 *error*func_abs(error)  + pid->Kd * (pid->error - pid->prev_error);
 
     // 输出限幅
     if (pid->output > pid->max_output)
@@ -196,7 +196,7 @@ void Pure_Pursuit_Gyro_Control(float speed_ref, float norm_error, float gyro_z, 
     // 反馈值：gyro_z
     // 注意：pid_steer_update 原本是 位置式 PID (Kp*Err + Kd*dErr)
     // 这里我们稍微变通一下：Err = target_omega - gyro_z
-    pid_steer_update(&PID.angle, target_omega - gyro_z, 0);
+    pid_steer_update(&PID.angle, target_omega - gyro_z);
 
     // 4. 获取 PID 输出作为差速增量
     diff_output = PID.angle.output;
