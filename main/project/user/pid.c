@@ -39,7 +39,7 @@ void Encoder_get(PID_Speed *left, PID_Speed *right)
 
     // 一阶低通滤波（就地写回）
     low_pass_filter_mt(&encoder_l, &left->speed, 0.9f);
-    low_pass_filter_mt(&encoder_r, &right->speed, 0.9f);
+    low_pass_filter_mt(&encoder_r, &right->speed, 0.7f);
 
     // 清零计数，准备下一周期
     encoder_clear_count(TIM3_ENCOEDER);
@@ -77,7 +77,7 @@ void pid_steer_update(PID_Steer *pid, float error)
     pid->error = error;
 
     // 位置式 PID_Direction：limiting_Err 以陀螺输入项参与
-    pid->output = pid->Kp * pid->error + pid->kp2 *error*func_abs(error)  + pid->Kd * (pid->error - pid->prev_error);
+    pid->output = pid->Kp * pid->error + pid->kp2 * error * func_abs(error) + pid->Kd * (pid->error - pid->prev_error);
 
     // 输出限幅
     if (pid->output > pid->max_output)
@@ -115,10 +115,9 @@ void pid_angle_update(PID_Steer *pid, float error, float gyro)
     // 更新误差历史
     pid->prev_error = pid->error;
 }
-void Pid_Differential(float speed_run, float *left_target, float *right_target, float Scope)
+void Pid_Differential(float speed_ref, float delta, float *left_target, float *right_target, float Scope)
 {
     float k;
-    float delta = PID.angle.output;
 
     // 防止除零错误
     if (Scope < 0.001f)
@@ -133,9 +132,9 @@ void Pid_Differential(float speed_run, float *left_target, float *right_target, 
         if (k > 1.0f)
             k = 1.0f; // 限幅防止反转
 
-        *left_target = speed_run * (1.0f - k);
+        *left_target = speed_ref * (1.0f - k);
 
-        *right_target = speed_run * (1.0f + k * 0.5f);
+        *right_target = speed_ref * (1.0f + k * 0.5f);
     }
     else
     {
@@ -145,8 +144,8 @@ void Pid_Differential(float speed_run, float *left_target, float *right_target, 
         if (k > 1.0f)
             k = 1.0f;
 
-        *left_target = speed_run * (1.0f + k * 0.5f);
-        *right_target = speed_run * (1.0f - k);
+        *left_target = speed_ref * (1.0f + k * 0.5f);
+        *right_target = speed_ref * (1.0f - k);
     }
 }
 
@@ -171,39 +170,52 @@ void Pure_Pursuit_Gyro_Control(float speed_ref, float norm_error, float gyro_z, 
     float look_ahead_L;
     float curvature;
     float target_omega; // 目标角速度
-    float diff_output;  // 最终差速输出
 
-    // 1. Pure Pursuit: 计算目标曲率
+    // =========================================================
+    // 第一层：路径规划 (Pure Pursuit Path Planning)
+    // =========================================================
+    // 1. 动态预瞄：速度越快，预瞄距离越长 (BASE_L + K * Speed)
+    //    作用：低速灵敏切弯，高速平滑轨迹防止震荡
     look_ahead_L = BASE_L + K_SPEED * speed_ref;
+
+    // 2. 几何解算：根据电感误差算出切回中线所需的圆弧曲率
+    //    公式：kappa = 2 * sin(alpha) / L
     curvature = (2.0f * norm_error) / look_ahead_L;
 
-    // 限幅曲率
+    // 3. 曲率限幅：防止分母过小导致数值爆炸
     if (curvature > 0.1f)
         curvature = 0.1f;
     if (curvature < -0.1f)
         curvature = -0.1f;
 
-    // 2. 将曲率转化为目标角速度 (Target Angular Velocity)
-    // Omega = V * Curvature
-    // 注意：这里 gyro_z 的单位必须和 speed_ref * curvature 的单位一致
-    // 假设 speed_ref 是 cm/s, curvature 是 1/cm, 则 Omega 是 rad/s
-    // 如果 gyro_z 是度/s，需要乘以 57.3 或者把这里算出的 Omega 乘以 57.3
-    target_omega = speed_ref * curvature * 57.3f; // 假设 gyro_z 是 度/s
+    // =========================================================
+    // 第二层：姿态控制 (Attitude Control / Gyro Loop)
+    // =========================================================
+    // 4. 将几何曲率转化为物理目标角速度 (前馈项)
+    //    公式：Omega = V * kappa
+    //    单位换算：乘以 57.3 将 rad/s 转换为 degree/s (假设 gyro_z 为度/秒)
+    target_omega = speed_ref * curvature * 57.3f;
 
-    // 3. 陀螺仪内环闭环 (PID Control)
-    // 使用现有的 PID.angle 控制器
-    // 目标值：target_omega
-    // 反馈值：gyro_z
-    // 注意：pid_steer_update 原本是 位置式 PID (Kp*Err + Kd*dErr)
-    // 这里我们稍微变通一下：Err = target_omega - gyro_z
-    pid_steer_update(&PID.angle, target_omega - gyro_z);
+    //  5. 并联 Err PID 补偿 (反馈项)
+    // 作用：Pure Pursuit 负责大局路径，PID 负责处理突变和稳态误差
+    // 特别是 D 项 (Kd_COMP)，对直角弯的瞬时响应至关重要
+    // 复用 PID.steer (原方向环) 作为补偿控制器
+    // 注意：需要在初始化时设置 PID.steer 的 Kp 和 Kd 参数
+    pid_steer_update(&PID.steer, norm_error);
 
-    // 4. 获取 PID 输出作为差速增量
-    diff_output = PID.angle.output;
+    // 叠加到目标角速度
+    target_omega += PID.steer.output;
 
-    // 5. 叠加到基础速度
-    // 注意方向：假设 target_omega > 0 为左转，diff_output > 0 代表需要左转力矩
-    // 通常左转需要：左轮减速，右轮加速
-    *left_target = speed_ref - diff_output;
-    *right_target = speed_ref + diff_output;
+    // 6. 陀螺仪闭环控制 (PID)
+    //    误差 = 理论目标角速度 - 陀螺仪实测角速度
+    //    作用：如果车轮打滑导致车头没转过来，PID 会输出修正量强制车身转动
+    pid_angle_update(&PID.angle, target_omega, gyro_z);
+
+    // =========================================================
+    // 第三层：电机执行 (Actuation / Differential Drive)
+    // =========================================================
+    // 6. 使用 Pid_Differential 进行非线性差速分配
+    //    输入：基础速度 + 角度环 PID 输出的修正量
+    //    策略：不对称加减速 (内轮减速多，外轮加速少)，稳住重心
+    Pid_Differential(speed_ref, PID.angle.output, left_target, right_target, 500.0f);
 }

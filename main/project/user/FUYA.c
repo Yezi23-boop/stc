@@ -51,8 +51,8 @@ void fuya_motor_output(int pwm)
 	// 简单限幅，避免越界
 	if (pwm < 0)
 		pwm = 0;
-	if (pwm > 3000)
-		pwm = 3000;
+	if (pwm > 6000)
+		pwm = 6000;
 	pwm_set_duty(PWMA_CH2N_P03, (uint32)pwm);
 }
 

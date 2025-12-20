@@ -86,11 +86,6 @@ int menu_have_sub[] = {
     1,
     11,
     12,
-    13,
-    14,
-    15,
-    16,
-    17, // 速度参数菜单
     2,
     21,
     22,
@@ -122,20 +117,31 @@ int menu_have_sub[] = {
 void Cursor(void)
 {
     menu_next_flag = 0;
-    switch (keystroke_label)
     {
-    case KEYSTROKE_ONE:
-        cursor_row = (cursor_row > ROWS_MIN) ? cursor_row - 1 * 18 : ROWS_MAX; // 光标上移
-        break;
-    case KEYSTROKE_TWO:
-        cursor_row = (cursor_row < ROWS_MAX) ? cursor_row + 1 * 18 : ROWS_MIN; // 光标下移
-        break;
-    case KEYSTROKE_THREE:
-        menu_next_flag = 1; // 进入子菜单
-        break;
-    case KEYSTROKE_FOUR:
-        menu_next_flag = -1; // 返回上级菜单
-        break;
+        int rows_max = ROWS_MAX;
+        if (display_codename == 0)
+        {
+            rows_max = 5 * 18;
+        }
+        else if (display_codename == 1)
+        {
+            rows_max = 2 * 18;
+        }
+        switch (keystroke_label)
+        {
+        case KEYSTROKE_ONE:
+            cursor_row = (cursor_row > ROWS_MIN) ? cursor_row - 1 * 18 : rows_max;
+            break;
+        case KEYSTROKE_TWO:
+            cursor_row = (cursor_row < rows_max) ? cursor_row + 1 * 18 : ROWS_MIN;
+            break;
+        case KEYSTROKE_THREE:
+            menu_next_flag = 1;
+            break;
+        case KEYSTROKE_FOUR:
+            menu_next_flag = -1;
+            break;
+        }
     }
 
     ips114_show_string(0, cursor_row, ">"); // 在当前位置显示箭头
@@ -375,7 +381,7 @@ void Keystroke_Menu_HOME(void)
 {
     while (menu_next_flag == 0)
     {
-        printf("%f,%f,%f,%f\n", Err, PID.left_speed.speed, PID.right_speed.speed, 0.0);
+        printf("%f,%f,%f,%f\n", Err, PID.left_speed.speed, PID.right_speed.speed, PID.angle.output);
         // 显示菜单标题
         ips114_show_string(CENTER_COLUMN, 0, "MENU");
 
@@ -435,7 +441,7 @@ void Keystroke_Menu_HOME(void)
  *********************************************/
 void Menu_Start_Show(uint8 control_line)
 {
-    ips114_show_string(4 * 8, 0 * 18, "<<STRAT");
+    ips114_show_string(1 * 8, 0 * 18, "<<STRAT");
 
     ips114_show_string(1 * 8, 1 * 18, "Start_Flag");   // 启动标志
     ips114_show_string(1 * 8, 2 * 18, "circle_flags"); // 出环方向标志
@@ -491,7 +497,7 @@ void Menu_Speed_Show(uint8 control_line)
     ips114_show_string(1 * 8, 3 * 18, "speed_run");    // 运行速度
     ips114_show_string(1 * 8, 4 * 18, "limiting_Err"); // 陀螺微分权重
     ips114_show_string(1 * 8, 5 * 18, "fuya_xili");    // 负压吸力
-    ips114_show_string(1 * 8, 6 * 18, "kp2");   // PWM 滤波
+    ips114_show_string(1 * 8, 6 * 18, "kp2");          // PWM 滤波
 
     ips114_show_float(14 * 8, 1 * 18, kp_Err, 3, 3);
     ips114_show_float(14 * 8, 2 * 18, kd_Err, 3, 3);
@@ -518,7 +524,7 @@ void Menu_Speed_Process(void)
     case 2: // PID_Direction 速度参数主菜单
         while (menu_next_flag == 0)
         {
-            Menu_Speed_Show(0);
+            Menu_Speed_Show(1);
             Keystroke_Scan();
             Cursor();
         }
