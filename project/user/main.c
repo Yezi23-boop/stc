@@ -4,6 +4,9 @@
 #include "vofa.h"
 #include <stdlib.h>
 static float task1ms_time_s = 0;
+static const u32 TICKS_PER_MS = (SYSTEM_CLOCK_40M / 12) / 1000;
+static float cpu_usage = 0;
+static u32 busy_ticks = 0;
 int flat_statr = 0;
 // 打印与调试函数声明
 void printf_adc();
@@ -12,29 +15,30 @@ void printf_date();
 void printf_speed_test();
 void task1ms(void)
 {
-//    gpio_low(IO_P33);
-//    TimingStart();
-    if (!P32)
-        IAP_CONTR = 0x60;
-    read_AD();
-    Prepare_Data();
-    lost_lines();
+	//    gpio_low(IO_P33);
+	//    TimingStart();
+	if (!P32)
+		IAP_CONTR = 0x60;
+	read_AD();
+	Prepare_Data();
+	lost_lines();
 	Encoder_get(&PID.left_speed, &PID.right_speed);
 	pid_steer_update(&PID.steer, Err, -imu660ra_gyro_z * 0.01);
 	pid_speed_update(&PID.left_speed, speed_run - PID.steer.output, PID.left_speed.speed);
 	pid_speed_update(&PID.right_speed, speed_run + PID.steer.output, PID.right_speed.speed);
 	if (flat_statr >= 2 && lost_spto == 0)
-    {
-        motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
-    }
-//    task1ms_time_s = TimingStopSeconds();
-//    gpio_high(IO_P33);
+	{
+		motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
+	}
+	//    task1ms_time_s = TimingStopSeconds();
+	//    gpio_high(IO_P33);
 }
+LocalTimingWindow win;
 void task10ms(void)
 {
 	static int flat_statr_date = 0;
 	gpio_low(IO_P34);
-	TimingStart();
+	TimingStartLocal(&win);
 	scan_track_max_value();
 	IMUupdate(&Gyr_filt, &Acc_filt, &Att_Angle);
 	dianya_adc();
@@ -48,13 +52,13 @@ void task10ms(void)
 	{
 		fuya_update_simple();
 	}
-	task1ms_time_s = TimingStopSeconds();
+	task1ms_time_s = TimingStopSecondsLocal(&win);
 	gpio_high(IO_P34);
 }
 void task100ms(void)
 {
-    #if (ENABLECOMM)
-    char vofa_cmd[32]; // VOFA 命令缓存
+#if (ENABLECOMM)
+	char vofa_cmd[32]; // VOFA 命令缓存
 	// ========== 处理 VOFA 命令 ==========
 	// 从 FIFO 读取串口数据，使用系统提供的 wireless_uart_read_buffer
 	vofa_parse_from_fifo();
@@ -64,22 +68,22 @@ void task100ms(void)
 	{
 		handle_vofa_command(vofa_cmd);
 	}
-//	ips114_show_float(3 * 24, 18 * 0, task1ms_time_s*1000, 4, 2);
+	ips114_show_float(3 * 24, 18 * 0, cpu_usage * 100, 4, 2);
 	// ========== 数据发送到 VOFA+ ==========
 	// 使用 FireWater 协议发送数据
 	// printf("%f,%f,%f,%f\n", speed_l, speed_r, test_speed, PID.steer.output);
 
-	// ========== 显示调试功能（按需选择） ==========
-	// printf_date();
-	// printf_adc();
-	// printf_imu();
-	// printf_speed_test();
-    // Keystroke_Menu();
-    #endif
+// ========== 显示调试功能（按需选择） ==========
+// printf_date();
+// printf_adc();
+// printf_imu();
+// printf_speed_test();
+// Keystroke_Menu();
+#endif
 }
 void task1000ms(void)
 {
-	ips114_show_float(3 * 24, 18 * 0, task1ms_time_s*1000, 4, 2);
+	ips114_show_float(3 * 24, 18 * 1, task1ms_time_s * 1000, 4, 2);
 }
 typedef void (*pFunc)(void);
 
@@ -136,7 +140,13 @@ void main()
 
 	while (1)
 	{
-		main_task();
+		if (gTaskStick >= MODULATE1MS)
+		{
+			TimingStart();
+			main_task();
+			busy_ticks = TimingStopTicks();
+			cpu_usage = (float)busy_ticks / (float)TICKS_PER_MS;
+		}
 	}
 }
 
