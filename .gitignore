@@ -1,0 +1,29 @@
+# 核心：忽略mdk/out_file整个文件夹（递归忽略所有内容）
+/project/mdk/out_file/
+
+# 忽略mdk下的编译产物和配置文件
+/project/mdk/*.axf
+/project/mdk/*.elf
+/project/mdk/*.bin
+/project/mdk/*.hex
+/project/mdk/*.map
+/project/mdk/*.lst
+/project/mdk/*.o
+/project/mdk/*.d
+/project/mdk/*.crf
+/project/mdk/*.dep
+/project/mdk/*.lnp
+/project/mdk/*.sct
+/project/mdk/*.uvoptx
+/project/mdk/*.uvprojx
+/project/mdk/*.uvgui*  # 匹配所有uvgui开头的配置文件（如13196/ye/TWO）
+/project/mdk/AI8051U_32_MDU32.LIB
+/project/mdk/stc_usb_cdc_32g.LIB
+
+# 忽略mdk下的Debug/Release等编译文件夹
+/project/mdk/Debug/
+/project/mdk/Release/
+/project/mdk/Objects/
+/project/mdk/Listings/
+project/mdk/seekfree.uvgui.13196
+project/mdk/seekfree.uvgui.ye
