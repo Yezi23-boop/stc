@@ -13,7 +13,7 @@ uint8 eeprom_init_time = 0;
 int16 start_flag = 1;
 int16 circle_flags = 0;
 // PID速度控制参数
-float kp_Err = 0.8f;
+float kp_Err = 1.2f;
 float kd_Err = 1.00f;
 float speed_run = 40.00f;
 float limiting_Err = 600.00f;

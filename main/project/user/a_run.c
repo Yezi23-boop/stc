@@ -26,9 +26,9 @@ void run_time_1(void)
     }
     fly_slow_update(&speed_active);
     pid_angle_update(&PID.angle, PID.steer.output, gyro_z * 0.082); // 更新角度环
-//    Pid_Differential(speed_active, PID.angle.output, &left_target, &right_target, limiting_Angle);
-    pid_speed_update(&PID.left_speed, speed_active-PID.angle.output, PID.left_speed.speed);   // 更新左轮速度环
-    pid_speed_update(&PID.right_speed, speed_active+PID.angle.output, PID.right_speed.speed); // 更新右轮速度环
+    Pid_Differential(speed_active, PID.angle.output, &left_target, &right_target, limiting_Angle);
+    pid_speed_update(&PID.left_speed, left_target, PID.left_speed.speed);   // 更新左轮速度环
+    pid_speed_update(&PID.right_speed, right_target, PID.right_speed.speed); // 更新右轮速度环
     if (flat_statr >= 2)
     {
         motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
