@@ -3,6 +3,10 @@
 int flat_statr = 0;
 static int flat_statr_date = 0;
 static int time_1;
+
+static int speed_active = 0;
+void fly_slow_update(int *speed);
+
 void run_time_1(void)
 {
     float left_target = 0.0f;
@@ -20,22 +24,19 @@ void run_time_1(void)
         pid_steer_update(&PID.steer, Err); // 更新转向环
         time_1 = 0;
     }
+    fly_slow_update(&speed_active);
     pid_angle_update(&PID.angle, PID.steer.output, gyro_z * 0.082); // 更新角度环
-
-    // 计算差速目标
-    // Pid_Differential(speed_run, PID.angle.output, &left_target, &right_target, 500.0f);
-
-    // pid_speed_update(&PID.left_speed, left_target, PID.left_speed.speed);    // 更新左轮速度环
-    // pid_speed_update(&PID.right_speed, right_target, PID.right_speed.speed); // 更新右轮速度环
-    pid_speed_update(&PID.left_speed, speed_run - PID.angle.output, PID.left_speed.speed);   // 更新左轮速度环
-    pid_speed_update(&PID.right_speed, speed_run + PID.angle.output, PID.right_speed.speed); // 更新右轮速度环
+//    Pid_Differential(speed_active, PID.angle.output, &left_target, &right_target, limiting_Angle);
+    pid_speed_update(&PID.left_speed, speed_active-PID.angle.output, PID.left_speed.speed);   // 更新左轮速度环
+    pid_speed_update(&PID.right_speed, speed_active+PID.angle.output, PID.right_speed.speed); // 更新右轮速度环
     if (flat_statr >= 2)
     {
         motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
     }
-    //      test_angle_func();
-//test_speed_func();
-//  	  motor_output(5000, 5000);
+
+//    test_angle_func();
+//    test_speed_func();
+//	  motor_output(3000, -3000);
 }
 
 void run_time_2(void)
@@ -85,5 +86,37 @@ void run_time_3(void)
     if (flat_statr >= 2)
     {
         motor_output((int)PID.left_speed.output, (int)PID.right_speed.output);
+    }
+}
+
+static int count_fly_1 = 0;
+static int count_fly_2 = 0;
+
+int flat_fly = 0;
+void fly_slow_update(int *speed)
+{
+    if (ad1 < 40 && ad2 < 15 && ad3 < 15 && ad4 < 40 && flat_fly == 0)
+    {
+        count_fly_1++;
+        if (count_fly_1 >= count_fly_time_1)
+        {
+            count_fly_1 = 0;
+            flat_fly = 1;
+        }
+    }
+    if (flat_fly == 1)
+    {
+        *speed = count_fly_speed;
+        PID.steer.output = count_fly_angle;
+        count_fly_2++;
+        if (count_fly_2 >= count_fly_time_2)
+        {
+            count_fly_2 = 0;
+            flat_fly = 0;
+        }
+    }
+    else
+    {
+        *speed = speed_run;
     }
 }

@@ -115,6 +115,8 @@ void Menu_Circle_Show(uint8 control_line);
  * @brief 圆环控制参数菜单处理
  */
 void Menu_Circle_Process(void);
+void Menu_Fly_Show(uint8 control_line);
+void Menu_Fly_Process(void);
 
 /**
  * @brief 电感数据打印菜单显示函数

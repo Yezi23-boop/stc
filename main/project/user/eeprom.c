@@ -3,7 +3,7 @@
 /*********************************************
  * EEPROM系统基础变量定义
  *********************************************/
-uint8 date_buff[400]; // eeprom数据数组
+uint8 date_buff[200]; // eeprom数据数组
 uint8 eeprom_init_time = 0;
 
 /*********************************************
@@ -15,10 +15,10 @@ int16 circle_flags = 0;
 // PID速度控制参数
 float kp_Err = 0.8f;
 float kd_Err = 1.00f;
-float speed_run = 45.00f;
+float speed_run = 40.00f;
 float limiting_Err = 600.00f;
 float fuya_xili = 3000.00f;
-float kp2 = 0.01f;
+float kp2_Err = 0.01f;
 
 // PID角度控制参数
 float kp_Angle = 1.15f;
@@ -35,6 +35,12 @@ float in_ring_Gyroz = 220.00f;
 float pre_out_ring_Gyro_set = 170.00f;
 float pre_out_ring_Gyroz = 350.00f;
 float pre_out_ring_encoder = 30.00f;
+
+int count_fly_speed = 15;
+int count_fly_time_1 = 3;
+int count_fly_time_2 = 50;
+int count_fly_angle = 0;
+float chasu = 0.5f;
 /*********************************************
  * EEPROM初始化函数
  *********************************************/
@@ -42,7 +48,7 @@ void eeprom_init()
 {
     iap_init(); // 初始化EEPROM
 
-    iap_read_buff(0x00, date_buff, 400); // 从EEPROM中读取数据
+    iap_read_buff(0x00, date_buff, sizeof(date_buff)); // 从EEPROM中读取数据
 
     eeprom_init_time = read_int(0); // eeprom没有被填充，则会读到垃圾值
 
@@ -62,7 +68,7 @@ void eeprom_init()
         kp_Err = read_float(4);
         fuya_xili = read_float(5);
         kd_Err = read_float(6);
-        kp2 = read_float(7);
+        kp2_Err = read_float(7);
         speed_run = read_float(8);
         limiting_Err = read_float(9);
 
@@ -81,6 +87,11 @@ void eeprom_init()
         pre_out_ring_Gyro_set = read_float(19);
         pre_out_ring_Gyroz = read_float(20);
         pre_out_ring_encoder = read_float(21);
+        count_fly_speed = read_int(22);
+        count_fly_time_1 = read_int(23);
+        count_fly_time_2 = read_int(24);
+        count_fly_angle = read_int(25);
+        chasu = read_float(26);
     }
 }
 
@@ -97,7 +108,7 @@ void eeprom_flash()
     save_float(kp_Err, 4);
     save_float(fuya_xili, 5);
     save_float(kd_Err, 6);
-    save_float(kp2, 7);
+    save_float(kp2_Err, 7);
     save_float(speed_run, 8);
     save_float(limiting_Err, 9);
 
@@ -116,6 +127,11 @@ void eeprom_flash()
     save_float(pre_out_ring_Gyro_set, 19);
     save_float(pre_out_ring_Gyroz, 20);
     save_float(pre_out_ring_encoder, 21);
+    save_int(count_fly_speed, 22);
+    save_int(count_fly_time_1, 23);
+    save_int(count_fly_time_2, 24);
+    save_int(count_fly_angle, 25);
+    save_float(chasu, 26);
 }
 
 /*********************************************
@@ -131,7 +147,7 @@ void save_int(int32 input, uint8 value_bit)
     {
         date_buff[begin++] = *(p + i);
     }
-    extern_iap_write_buff(0x00, date_buff, 400);
+    extern_iap_write_buff(0x00, date_buff, sizeof(date_buff));
 }
 
 int32 read_int(uint8 value_bit)
@@ -158,7 +174,7 @@ void save_float(float input, uint8 value_bit)
     {
         date_buff[begin++] = *(p + i);
     }
-    extern_iap_write_buff(0x00, date_buff, 400);
+    extern_iap_write_buff(0x00, date_buff, sizeof(date_buff));
 }
 
 float read_float(uint8 value_bit)

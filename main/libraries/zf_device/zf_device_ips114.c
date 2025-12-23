@@ -450,43 +450,80 @@ void ips114_show_int32(uint16 x, uint16 y, int32 dat, uint8 num)
 //-------------------------------------------------------------------------------------------------------------------
 void ips114_show_float(uint16 x, uint16 y, double dat, uint8 num, uint8 pointnum)
 {
-    // zf_assert(x < ips114_x_max);
-    // zf_assert(y < ips114_y_max);
-
-    uint8 length;
+    uint8 i;
+    uint8 pos = 0;
     int8 buff[34];
-    int8 start, end, point;
+    uint8 int_len = 0;
+    int8 int_digits[12];
+    int8 frac_digits[6];
+    int32 scale = 1;
+    int32 scaled;
+    int32 ipart;
+    uint32 fpart;
 
-    if (6 < pointnum)
+    if (pointnum > 6)
         pointnum = 6;
-    if (10 < num)
+    if (num > 10)
         num = 10;
 
-    if (0 > dat)
-        length = zf_sprintf(&buff[0], (const int8 *)"%f", dat); // 负数
+    for (i = 0; i < pointnum; i++)
+        scale *= 10;
+
+    if (dat >= 0.0)
+        scaled = (int32)(dat * (double)scale + 0.5);
     else
+        scaled = (int32)(dat * (double)scale - 0.5);
+
+    ipart = scaled / scale;
+    fpart = (uint32)((scaled < 0) ? -(scaled % scale) : (scaled % scale));
+
     {
-        length = zf_sprintf(&buff[1], (const int8 *)"%f", dat);
-        length++;
+        int32 tmp = (ipart < 0) ? -ipart : ipart;
+        if (tmp == 0)
+        {
+            int_digits[int_len++] = '0';
+        }
+        else
+        {
+            while (tmp)
+            {
+                int_digits[int_len++] = (int8)('0' + (tmp % 10));
+                tmp /= 10;
+            }
+        }
+        buff[pos++] = (scaled < 0) ? '-' : ' ';
+        {
+            uint8 k = int_len;
+            while (k)
+            {
+                buff[pos++] = int_digits[k - 1];
+                k--;
+            }
+        }
     }
-    point = length - 7;         // 计算小数点位置
-    start = point - num - 1;    // 计算起始位
-    end = point + pointnum + 1; // 计算结束位
-    while (0 > start)           // 整数位不够  末尾应该填充空格
+
+    if (pointnum)
     {
-        buff[end] = ' ';
-        end++;
-        start++;
+        buff[pos++] = '.';
+        for (i = 0; i < pointnum; i++)
+        {
+            frac_digits[pointnum - 1 - i] = (int8)('0' + (fpart % 10));
+            fpart /= 10;
+        }
+        for (i = 0; i < pointnum; i++)
+        {
+            buff[pos++] = frac_digits[i];
+        }
     }
-
-    if (0 > dat)
-        buff[start] = '-';
-    else
-        buff[start] = ' ';
-
-    buff[end] = '\0';
-
-    ips114_show_string(x, y, (const char *)buff); // 显示数字
+    {
+        uint8 pad = (num > int_len) ? (uint8)(num - int_len) : 0;
+        while (pad--)
+        {
+            buff[pos++] = ' ';
+        }
+    }
+    buff[pos] = '\0';
+    ips114_show_string(x, y, (const char *)buff);
 }
 
 //-------------------------------------------------------------------------------------------------------------------

@@ -133,8 +133,7 @@ void Pid_Differential(float speed_ref, float delta, float *left_target, float *r
             k = 1.0f; // ÏŞ·ù·ÀÖ¹·´×ª
 
         *left_target = speed_ref * (1.0f - k);
-
-        *right_target = speed_ref * (1.0f + k * 0.5f);
+        *right_target = speed_ref * (1.0f + k * chasu);
     }
     else
     {
@@ -144,7 +143,7 @@ void Pid_Differential(float speed_ref, float delta, float *left_target, float *r
         if (k > 1.0f)
             k = 1.0f;
 
-        *left_target = speed_ref * (1.0f + k * 0.5f);
+        *left_target = speed_ref * (1.0f + k * chasu);
         *right_target = speed_ref * (1.0f - k);
     }
 }

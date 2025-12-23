@@ -19,8 +19,9 @@ void main()
 
 	while (1)
 	{
-//      vofa();
+//    vofa();
 	  Keystroke_Menu();
+//    printf("%f,%f,%f,%f\n",gyro_z * 0.082, PID.angle.output, Err, 0.0);
 	}
 }
 void vofa(void)
@@ -33,7 +34,8 @@ void vofa(void)
 		handle_vofa_command(vofa_cmd);
 	}
 //	printf("%f,%f,%f,%f\n", test_angle_value, gyro_z, gyro_z * 0.082, PID.angle.output);
-	printf("%f,%f,%f,%f\n",test_speed_value, PID.left_speed.speed, PID.right_speed.speed, 0.0);
+//	printf("%f,%f,%f,%f\n",test_speed_value, PID.left_speed.speed, PID.right_speed.speed, 0.0);
+	printf("%f,%f,%f,%f\n",gyro_z, PID.left_speed.speed, PID.right_speed.speed, 0.0);
 }
 // 原有的数据显示函数（已部分调整）
 void printf_date()
@@ -98,7 +100,6 @@ void printf_speed_test()
 	ips114_show_float(0, 55, speed_r, 6, 1);
 	ips114_show_float(0, 75, gyro_z, 6, 2);
 	ips114_show_float(0, 95, gyro_z * 0.1, 6, 2);
-//	printf("%f,%f,%f,%f\n", test_angle_value, gyro_z, gyro_z * 0.005, PID.angle.output);
 }
 
 void printf_butten_test()

@@ -4,7 +4,7 @@
 /**
  * EEPROM 参数声明
  */
-extern uint8 date_buff[400]; // EEPROM 数据缓存
+extern uint8 date_buff[200]; // EEPROM 数据缓存
 
 /**
  * 运行状态标志
@@ -19,8 +19,9 @@ extern float limiting_Err; // 陀螺微分系数
 extern float kp_Err;       // 误差比例系数
 extern float fuya_xili;    // 负压吸力系数
 extern float kd_Err;       // 误差微分系数
-extern float kp2;   // PWM 滤波系数
+extern float kp2_Err;      // PWM 滤波系数
 extern float speed_run;    // 运行速度目标
+extern float chasu;        // 差速系数
 
 /**
  * 角度环 PID
@@ -56,5 +57,9 @@ int32 read_int(uint8 value_bit);             // 读取指定地址位的 int 值
 
 void save_float(float input, uint8 value_bit); // 保存 float 值到指定地址位
 float read_float(uint8 value_bit);             // 读取指定地址位的 float 值
+extern int count_fly_speed;
+extern int count_fly_time_1;
+extern int count_fly_time_2;
+extern int count_fly_angle;
 
 #endif

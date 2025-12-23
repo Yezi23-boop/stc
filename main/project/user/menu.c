@@ -2,7 +2,7 @@
 /*********************************************
  * 菜单与菜单系统说明
  *********************************************/
-// 按键值定义
+// 按键值定义（与底层按键模块保持一致）
 #define KEYSTROKE_ONE 1   // 上
 #define KEYSTROKE_TWO 2   // 下
 #define KEYSTROKE_THREE 3 // 确认
@@ -14,34 +14,20 @@
 #define KEYSTROKE_FOUR_LONG 8  // 返回-长按
 // 按键数量（用于菜单层逻辑，如需与底层 Key_Init 对齐可在初始化时同步）
 // #define KEYSTROKE_COUNT 4
-float quantize_0p01(float v)
-{
-    int32 t;
-    if (v >= 0.0f)
-    {
-        t = (int32)(v * 100.0f + 0.5f);
-    }
-    else
-    {
-        t = (int32)(v * 100.0f - 0.5f);
-    }
-    return (float)t / 100.0f;
-}
-// 屏幕显示相关常量
+
+// 屏幕显示相关常量（IPS114 行高 18、列宽 8）
 #define ROWS_MAX 7 * 18      // 屏幕上可移动光标的最大行
 #define ROWS_MIN 1 * 18      // 屏幕上可移动光标的最小行
 #define CENTER_COLUMN 12 * 8 // 居中列位置
 #define EEPROM_MODE 1        // EEPROM 读写模式设为 1
 
-/**
- * 全局状态变量
- */
+/** 全局状态变量 */
 int display_codename = 0;       // 当前显示页面编码
 int cursor_row = 2 * 18;        // 当前光标所在行
 int previous_cursor_row = -1;   // 上一次光标所在行
 int menu_next_flag = 0;         // 菜单导航标志位（进入/返回）
 float change_unit = 0;          // 参数修改的步进单位值
-int change_unit_multiplier = 1; // 修改单位倍数
+int change_unit_multiplier = 1; // 步进倍数（确认键循环 1/10/100）
 int keystroke_three_count = 0;  // 统计 KEYSTROKE_THREE 的触发次数（防抖/长按）
 int Have_Sub_Menu(int menu_id);
 void Keystroke_Menu_HOME(void);
@@ -50,9 +36,9 @@ void Menu_Speed_Process(void);
 void Menu_Angle_Process(void);
 void Menu_Sensor_Process(void);
 void Menu_Circle_Process(void);
-// 菜单标题“负压”的点阵数据
+// 提示文字点阵数据（用于刷写完成提示）
 const uint8 chinese_data[] = {
-    // "猥"
+    // 字模 1
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x12, 0x00, 0x20,
     0x10, 0x3B, 0xFF, 0xF0, 0x0C, 0x33, 0x0C, 0x30, 0x06, 0x63, 0x0C, 0x30, 0x03, 0xC3, 0x0C, 0x30,
     0x01, 0x83, 0x0C, 0x30, 0x01, 0x83, 0xFF, 0xF0, 0x02, 0x83, 0x0C, 0x30, 0x04, 0xC3, 0x0C, 0x30,
@@ -61,7 +47,7 @@ const uint8 chinese_data[] = {
     0x04, 0x61, 0x88, 0x10, 0x08, 0x61, 0x88, 0x38, 0x10, 0x61, 0x8C, 0x70, 0x20, 0x61, 0x85, 0x80,
     0x40, 0x61, 0x86, 0x00, 0x00, 0x61, 0x83, 0x00, 0x00, 0x61, 0x89, 0xC0, 0x00, 0xC1, 0xB0, 0xE0,
     0x0F, 0xC1, 0xC0, 0x7E, 0x03, 0x83, 0x80, 0x18, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    // "琐"
+    // 字模 2
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x0C, 0x00,
     0x00, 0x03, 0x0C, 0x30, 0x00, 0x31, 0x8C, 0x30, 0x3F, 0xF8, 0xCC, 0x60, 0x01, 0x00, 0xCC, 0x80,
     0x01, 0x00, 0xCD, 0x00, 0x01, 0x02, 0x0D, 0x00, 0x01, 0x03, 0xFF, 0xF8, 0x01, 0x03, 0x00, 0x30,
@@ -70,7 +56,7 @@ const uint8 chinese_data[] = {
     0x01, 0x03, 0x08, 0x30, 0x01, 0x03, 0x08, 0x30, 0x01, 0x03, 0x18, 0x30, 0x01, 0x1F, 0x18, 0x30,
     0x01, 0xE2, 0x18, 0x00, 0x0F, 0x00, 0x36, 0x00, 0x3C, 0x00, 0x31, 0xC0, 0x30, 0x00, 0x60, 0xF0,
     0x00, 0x00, 0xC0, 0x38, 0x00, 0x03, 0x00, 0x1C, 0x00, 0x0C, 0x00, 0x0C, 0x00, 0x30, 0x00, 0x00,
-    // "车"
+    // 字模 3
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00,
     0x00, 0x0E, 0x00, 0x00, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x1C, 0x00, 0x60, 0x0F, 0xFF, 0xFF, 0xF0,
     0x00, 0x18, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 0x00, 0x31, 0xC0, 0x00, 0x00, 0x61, 0x80, 0x00,
@@ -80,19 +66,21 @@ const uint8 chinese_data[] = {
     0x00, 0x01, 0x80, 0x00, 0x00, 0x01, 0x80, 0x00, 0x00, 0x01, 0x80, 0x00, 0x00, 0x01, 0x80, 0x00,
     0x00, 0x01, 0x80, 0x00, 0x00, 0x01, 0x80, 0x00, 0x00, 0x01, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-// 可进入的菜单页编码列表（用于防止光标进入不存在的菜单）
+// 可进入的菜单页编码列表（删除/新增页面时务必同步维护）
 int menu_have_sub[] = {
     0, // 主菜单
     1,
     11,
     12,
+    13,
+    14,
+    15,
     2,
     21,
     22,
     23,
     24,
-    25,
-    26, // PID_Direction 速度参数菜单
+    25, // PID_Direction 速度参数菜单
     3,
     31,
     32,
@@ -108,6 +96,11 @@ int menu_have_sub[] = {
     54,
     55,
     56, // 圆环控制参数菜单
+    6,
+    61,
+    62,
+    63,
+    64, // FLY 控制参数菜单
 };
 
 /**
@@ -117,31 +110,20 @@ int menu_have_sub[] = {
 void Cursor(void)
 {
     menu_next_flag = 0;
+    switch (keystroke_label)
     {
-        int rows_max = ROWS_MAX;
-        if (display_codename == 0)
-        {
-            rows_max = 5 * 18;
-        }
-        else if (display_codename == 1)
-        {
-            rows_max = 2 * 18;
-        }
-        switch (keystroke_label)
-        {
-        case KEYSTROKE_ONE:
-            cursor_row = (cursor_row > ROWS_MIN) ? cursor_row - 1 * 18 : rows_max;
-            break;
-        case KEYSTROKE_TWO:
-            cursor_row = (cursor_row < rows_max) ? cursor_row + 1 * 18 : ROWS_MIN;
-            break;
-        case KEYSTROKE_THREE:
-            menu_next_flag = 1;
-            break;
-        case KEYSTROKE_FOUR:
-            menu_next_flag = -1;
-            break;
-        }
+    case KEYSTROKE_ONE:
+        cursor_row = (cursor_row > ROWS_MIN) ? cursor_row - 1 * 18 : ROWS_MAX; // 光标上移
+        break;
+    case KEYSTROKE_TWO:
+        cursor_row = (cursor_row < ROWS_MAX) ? cursor_row + 1 * 18 : ROWS_MIN; // 光标下移
+        break;
+    case KEYSTROKE_THREE:
+        menu_next_flag = 1; // 进入子菜单
+        break;
+    case KEYSTROKE_FOUR:
+        menu_next_flag = -1; // 返回上级菜单
+        break;
     }
 
     ips114_show_string(0, cursor_row, ">"); // 在当前位置显示箭头
@@ -212,6 +194,7 @@ void HandleKeystroke(int keystroke_label)
         break;
     case KEYSTROKE_THREE:
         keystroke_three_count++;
+        // 确认键用于切换步进倍数：1 → 10 → 100 循环
         change_unit_multiplier = (keystroke_three_count % 3 == 0) ? 1 : (keystroke_three_count % 3 == 1) ? 10
                                                                                                          : 100;
         if (keystroke_three_count >= 3)
@@ -228,6 +211,7 @@ void HandleKeystroke(int keystroke_label)
 void Keystroke_int(int *parameter, int change_unit_MIN)
 {
     int change_unit = change_unit_MIN * change_unit_multiplier;
+    // 显示当前步进值（整数）
     ips114_show_int32(15 * 8, 0, change_unit, 4);
 
     Keystroke_Scan();
@@ -258,19 +242,21 @@ void Keystroke_int(int *parameter, int change_unit_MIN)
 void Keystroke_float(float *parameter, float change_unit_MIN)
 {
     float change_unit = (float)change_unit_MIN * (float)change_unit_multiplier;
-    int32 base100;
-    int32 unit100;
-    ips114_show_float(14 * 8, 0, change_unit, 4, 3);
-    if (change_unit_MIN >= 0.00f)
-    {
-        base100 = (int32)(change_unit_MIN * 100.0f + 0.50f);
-    }
+    int32 scale = 1;
+    int32 base;
+    int32 unit;
+    if (change_unit_MIN >= 1.0f)
+        scale = 1;
+    else if (change_unit_MIN >= 0.1f)
+        scale = 10;
+    else if (change_unit_MIN >= 0.01f)
+        scale = 100;
     else
-    {
-        base100 = (int32)(change_unit_MIN * 100.0f - 0.50f);
-    }
-    unit100 = base100 * change_unit_multiplier;
-    change_unit = (float)unit100 / 100.0f;
+        scale = 1000;
+    ips114_show_float(14 * 8, 0, change_unit, 4, 3);
+    base = (int32)(change_unit_MIN * (float)scale);
+    unit = base * change_unit_multiplier;
+    change_unit = (float)unit / (float)scale;
     Keystroke_Scan();
     HandleKeystroke(keystroke_label);
 
@@ -324,14 +310,12 @@ void Keystroke_Menu(void)
         Keystroke_Menu_HOME();
         break;
 
-    case 1: // 速度参数菜单
+    case 1: // 启动配置菜单
     case 11:
     case 12:
     case 13:
     case 14:
     case 15:
-    case 16:
-    case 17:
         Menu_Start_Process();
         break;
 
@@ -368,6 +352,13 @@ void Keystroke_Menu(void)
     case 56:
         Menu_Circle_Process();
         break;
+    case 6: // FLY 控制参数菜单
+    case 61:
+    case 62:
+    case 63:
+    case 64:
+        Menu_Fly_Process();
+        break;
 
     default:
         break;
@@ -381,29 +372,30 @@ void Keystroke_Menu_HOME(void)
 {
     while (menu_next_flag == 0)
     {
-        printf("%f,%f,%f,%f\n", Err, PID.left_speed.speed, PID.right_speed.speed, PID.angle.output);
-        // 显示菜单标题
+        printf("%f,%f,%f,%f\n", Err, PID.left_speed.speed, PID.right_speed.speed, 0.0);
+        // 显示一级菜单标题
         ips114_show_string(CENTER_COLUMN, 0, "MENU");
 
-        // 显示菜单项
+        // 显示一级菜单项
         ips114_show_string(8 * 2, 1 * 18, "STRAT");  // 启动设置
         ips114_show_string(8 * 2, 2 * 18, "PID_1");  // PID_Direction 速度参数
         ips114_show_string(8 * 2, 3 * 18, "PID_2");  // PID_Direction 角度参数
         ips114_show_string(8 * 2, 4 * 18, "PRINTF"); // 调试数据显示
         ips114_show_string(8 * 2, 5 * 18, "RING");   // 圆环控制参数
+        ips114_show_string(8 * 2, 6 * 18, "FLY");
 
         // 显示实时数据标签
         ips114_show_string(7 * 15, 1 * 18, "Err");
         ips114_show_string(7 * 15, 2 * 18, "steer");
         ips114_show_string(7 * 15, 3 * 18, "angle");
         ips114_show_string(7 * 15, 4 * 18, "dianya");
-        ips114_show_string(7 * 15, 5 * 18, "fuya_date");
+        ips114_show_string(7 * 15, 5 * 18, "stop");
+
         ips114_show_float(8 * 23, 1 * 18, Err, 3, 2);
-        // 显示位置式 PID_Direction 输出作为 motor
         ips114_show_float(8 * 23, 2 * 18, PID.steer.output, 3, 1);
         ips114_show_float(8 * 23, 3 * 18, PID.angle.output, 3, 1);
         ips114_show_float(8 * 23, 4 * 18, dianya, 4, 2);
-        ips114_show_int32(8 * 23, 5 * 18, fuya_date, 4);
+        ips114_show_float(8 * 23, 5 * 18, stop, 4, 2);
 
         ips114_show_float(7 * 15, 6 * 18, speed_run - PID.angle.output, 4, 2);
         ips114_show_float(8 * 23, 6 * 18, speed_run + PID.angle.output, 4, 2);
@@ -437,17 +429,21 @@ void Keystroke_Menu_HOME(void)
 }
 
 /*********************************************
- * 速度参数菜单（子菜单 1）
+ * 启动配置菜单（子菜单 1）
  *********************************************/
 void Menu_Start_Show(uint8 control_line)
 {
-    ips114_show_string(1 * 8, 0 * 18, "<<STRAT");
+    ips114_show_string(4 * 8, 0 * 18, "<<STRAT");
 
     ips114_show_string(1 * 8, 1 * 18, "Start_Flag");   // 启动标志
     ips114_show_string(1 * 8, 2 * 18, "circle_flags"); // 出环方向标志
+    ips114_show_string(1 * 8, 3 * 18, "fuya_xili");    // 负压吸力
+    ips114_show_string(1 * 8, 4 * 18, "chasu");        // 差速系数
 
     ips114_show_int32(14 * 8, 1 * 18, start_flag, 3);
     ips114_show_int32(14 * 8, 2 * 18, circle_flags, 3);
+    ips114_show_float(14 * 8, 3 * 18, fuya_xili, 4, 3);
+    ips114_show_float(14 * 8, 4 * 18, chasu, 4, 3);
 
     // 显示当前编辑标识
     if (control_line == 1)
@@ -464,7 +460,7 @@ void Menu_Start_Process(void)
 {
     switch (display_codename)
     {
-    case 1: // 速度参数主菜单
+    case 1: // 启动配置主菜单
         while (menu_next_flag == 0)
         {
             Menu_Start_Show(1);
@@ -482,6 +478,14 @@ void Menu_Start_Process(void)
         Menu_Start_Show(2 * 18);
         Keystroke_Special_Value(&circle_flags);
         break;
+    case 13: // 负压吸力
+        Menu_Start_Show(3 * 18);
+        Keystroke_float(&fuya_xili, 100);
+	    break;
+    case 14: // 负压吸力
+        Menu_Start_Show(4 * 18);
+        Keystroke_float(&chasu, 0.01);
+        break;
     }
 }
 
@@ -495,16 +499,14 @@ void Menu_Speed_Show(uint8 control_line)
     ips114_show_string(1 * 8, 1 * 18, "kp_Err");       // 位置误差比例系数
     ips114_show_string(1 * 8, 2 * 18, "kd_Err");       // 位置误差微分系数
     ips114_show_string(1 * 8, 3 * 18, "speed_run");    // 运行速度
-    ips114_show_string(1 * 8, 4 * 18, "limiting_Err"); // 陀螺微分权重
-    ips114_show_string(1 * 8, 5 * 18, "fuya_xili");    // 负压吸力
-    ips114_show_string(1 * 8, 6 * 18, "kp2");          // PWM 滤波
+    ips114_show_string(1 * 8, 4 * 18, "limiting_Err"); // 限幅
+    ips114_show_string(1 * 8, 5 * 18, "kp2_Err");      // 位置误差比例平方系数
 
     ips114_show_float(14 * 8, 1 * 18, kp_Err, 3, 3);
     ips114_show_float(14 * 8, 2 * 18, kd_Err, 3, 3);
     ips114_show_float(14 * 8, 3 * 18, speed_run, 3, 3);
     ips114_show_float(14 * 8, 4 * 18, limiting_Err, 3, 3);
-    ips114_show_float(14 * 8, 5 * 18, fuya_xili, 4, 3);
-    ips114_show_float(14 * 8, 6 * 18, kp2, 3, 3);
+    ips114_show_float(14 * 8, 5 * 18, kp2_Err, 3, 3);
 
     // 显示当前编辑标识
     if (control_line == 1)
@@ -524,7 +526,7 @@ void Menu_Speed_Process(void)
     case 2: // PID_Direction 速度参数主菜单
         while (menu_next_flag == 0)
         {
-            Menu_Speed_Show(1);
+            Menu_Speed_Show(0);
             Keystroke_Scan();
             Cursor();
         }
@@ -537,7 +539,7 @@ void Menu_Speed_Process(void)
         break;
     case 22: // 位置误差微分系数
         Menu_Speed_Show(2 * 18);
-        Keystroke_float(&kd_Err, 0.10f);
+        Keystroke_float(&kd_Err, 0.01f);
         break;
     case 23: // 运行速度
         Menu_Speed_Show(3 * 18);
@@ -547,13 +549,9 @@ void Menu_Speed_Process(void)
         Menu_Speed_Show(4 * 18);
         Keystroke_float(&limiting_Err, 0.01f);
         break;
-    case 25: // 负压吸力
+    case 25: // 位置误差比例平方系数
         Menu_Speed_Show(5 * 18);
-        Keystroke_float(&fuya_xili, 100);
-        break;
-    case 26: // PWM 滤波
-        Menu_Speed_Show(6 * 18);
-        Keystroke_float(&kp2, 0.01f);
+        Keystroke_float(&kp2_Err, 0.001f);
         break;
     }
 }
@@ -624,7 +622,7 @@ void Menu_Angle_Process(void)
         Menu_Angle_Show(5 * 18);
         Keystroke_float(&B_1, 0.01f);
         break;
-    case 36: // 校正 C_1
+    case 36: // 校正 C_l
         Menu_Angle_Show(6 * 18);
         Keystroke_float(&C_l, 0.01f);
         break;
@@ -636,7 +634,7 @@ void Menu_Angle_Process(void)
  *********************************************/
 void Menu_Sensor_Show(void)
 {
-    // 显示赛道的标签（依次为 ad1..ad4）
+    // 显示赛道传感器标签（依次为 ad1..ad4）
     ips114_show_string(1 * 14, 18 * 0, "ad1"); // 左前
     ips114_show_string(1 * 14, 18 * 1, "ad2"); // 左后
     ips114_show_string(1 * 14, 18 * 2, "ad3"); // 右前
@@ -648,12 +646,12 @@ void Menu_Sensor_Show(void)
     ips114_show_int32(14 * 4, 18 * 2, ad3, 3);
     ips114_show_int32(14 * 4, 18 * 3, ad4, 3);
 
-    // 显示标定最大值（整数显示供参考）
+    // 显示标定最大值 MA[]（整数显示供参考）
     ips114_show_int32(14 * 8, 18 * 0, MA[0], 5);   // ad1 最大值
     ips114_show_int32(14 * 8, 18 * 1, MA[1], 5);   // ad2 最大值
     ips114_show_int32(14 * 8, 18 * 2, MA[2], 5);   // ad3 最大值
     ips114_show_int32(14 * 8, 18 * 3, MA[3], 5);   // ad4 最大值
-                                                   // 显示标定
+                                                   // 显示原始值 RAW[]
     ips114_show_int32(14 * 12, 18 * 0, RAW[0], 5); // ad1 最大值
     ips114_show_int32(14 * 12, 18 * 1, RAW[1], 5); // ad2 最大值
     ips114_show_int32(14 * 12, 18 * 2, RAW[2], 5); // ad3 最大值
@@ -744,6 +742,57 @@ void Menu_Circle_Process(void)
     case 56: // 出环编码器开关值
         Menu_Circle_Show(6 * 18);
         Keystroke_float(&pre_out_ring_encoder, 1);
+        break;
+    }
+}
+void Menu_Fly_Show(uint8 control_line)
+{
+    ips114_show_string(1 * 8, 0 * 18, "<<FLY_CTRL");
+    ips114_show_string(1 * 8, 1 * 18, "fly_speed");  // 慢速速度
+    ips114_show_string(1 * 8, 2 * 18, "fly_time_1"); // 连续触发帧数
+    ips114_show_string(1 * 8, 3 * 18, "fly_time_2"); // 维持慢速帧数
+    ips114_show_string(1 * 8, 4 * 18, "fly_angle");  // 慢速期间方向输出
+    ips114_show_int32(14 * 8, 1 * 18, count_fly_speed, 4);
+    ips114_show_int32(14 * 8, 2 * 18, count_fly_time_1, 4);
+    ips114_show_int32(14 * 8, 3 * 18, count_fly_time_2, 4);
+    ips114_show_int32(14 * 8, 4 * 18, count_fly_angle, 4);
+    if (control_line == 1)
+    {
+        ips114_show_string(0, control_line, " ");
+    }
+    else
+    {
+        ips114_show_string(0, control_line, "&");
+    }
+}
+void Menu_Fly_Process(void)
+{
+    switch (display_codename)
+    {
+    case 6:
+        while (menu_next_flag == 0)
+        {
+            Menu_Fly_Show(1);
+            Keystroke_Scan();
+            Cursor();
+        }
+        Menu_Next_Back();
+        break;
+    case 61:
+        Menu_Fly_Show(1 * 18);
+        Keystroke_int(&count_fly_speed, 1);
+        break;
+    case 62:
+        Menu_Fly_Show(2 * 18);
+        Keystroke_int(&count_fly_time_1, 1);
+        break;
+    case 63:
+        Menu_Fly_Show(3 * 18);
+        Keystroke_int(&count_fly_time_2, 1);
+        break;
+    case 64:
+        Menu_Fly_Show(4 * 18);
+        Keystroke_int(&count_fly_angle, 1);
         break;
     }
 }
