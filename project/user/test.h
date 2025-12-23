@@ -36,7 +36,7 @@ typedef struct {
     CarState_t current_state;   // 当前状态
     CarState_t last_state;      // 上次状态
     uint32_t state_start_time;  // 状态开始时间
-    uint32_t timeout;     // 状态超时时间(ms)
+    u16 timeout;     // 状态超时时间(ms)
 } StateMachine_t;
 
 // 状态转移表

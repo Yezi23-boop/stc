@@ -210,7 +210,7 @@ void state_cross(void)
 void state_yaw(void)
 {
 #define YAWTIMEOUT 5000  //5S
-    static StopCnt = 1000;  // 停止1S
+    static u16 StopCnt = 1000;  // 停止1S
     // 速度环输出0，希望小车1S内停在原地
     if (StopCnt > 0) {
         PID.steer.output = 0;  
@@ -257,11 +257,13 @@ void state_error(void)
     // 等待恢复信号（例如按下复位按钮）
     // if (button_pressed()) {
     //     state_machine_process_event(EV_RECOVER);
+        // g_state_machine.timeout = 0;
     // }
 
     // 超时，关闭所有外设
     g_state_machine.timeout++;
     if (g_state_machine.timeout > 5000) {
+        g_state_machine.timeout = 5000;
         g_motor_driver.set_pwm(0,0);
         // 关闭其他外设
         return;
@@ -281,7 +283,7 @@ void state_machine_init(void)
     g_state_machine.current_state = STATE_IDLE;
     g_state_machine.last_state = STATE_IDLE;
     g_state_machine.state_start_time = 0;
-    g_state_machine.state_timeout = 0;
+    g_state_machine.timeout = 0;
     
     // printf("State machine initialized to IDLE\n");
 }
