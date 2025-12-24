@@ -1,6 +1,81 @@
 #ifndef __MOTOR_H__
 #define __MOTOR_H__
 #include "zf_common_headfile.h"
+// 常用任务创建宏
+#define CREATE_TASK(func, ctx, prio, period, name) \
+    g_task_scheduler.create_task(func, ctx, prio, period, name)
+// 任务优先级（数值越小优先级越高）
+typedef enum {
+    PRIORITY_CRITICAL = 0,   // 关键任务（故障处理等）
+    PRIORITY_HIGH = 1,       // 高优先级（控制算法等）
+    PRIORITY_NORMAL = 2,     // 普通优先级（传感器读取等）
+    PRIORITY_LOW = 3,        // 低优先级（日志记录等）
+    PRIORITY_IDLE = 4        // 空闲任务
+} TaskPriority_t;
+
+// 任务状态
+typedef enum {
+    TASK_READY,              // 就绪
+    TASK_RUNNING,            // 运行中
+    TASK_WAITING,            // 等待中
+    TASK_SUSPENDED,          // 挂起
+    TASK_COMPLETED           // 完成
+} TaskState_t;
+
+// 任务函数指针类型
+typedef void (*TaskFunction_t)(void* context);
+
+// 任务描述符
+typedef struct {
+    TaskFunction_t function;  // 任务函数
+    void* context;           // 任务上下文
+    TaskPriority_t priority; // 任务优先级
+    TaskState_t state;       // 任务状态
+    
+    uint32_t period_ms;      // 执行周期（0表示单次任务）
+    uint32_t last_run_time;  // 上次运行时间
+    uint32_t deadline_ms;    // 截止时间（相对period）
+    
+    const char* name;        // 任务名称（调试用）
+    uint32_t run_count;      // 运行次数统计
+    uint32_t max_run_time;   // 最长运行时间（用于性能监控）
+} TaskDescriptor_t;
+
+// 调度器统计
+typedef struct {
+    uint32_t total_tasks;     // 总任务数
+    uint32_t executed_tasks;  // 已执行任务数
+    uint32_t missed_deadlines;// 错过截止时间的任务数
+    uint32_t cpu_usage;       // CPU使用率（百分比）
+    uint32_t idle_time;       // 空闲时间
+} SchedulerStats_t;
+
+// 调度器接口
+typedef struct {
+    // 初始化
+    void (*init)(void);
+    
+    // 任务管理
+    TaskDescriptor_t* (*create_task)(TaskFunction_t func, void* ctx, 
+                                     TaskPriority_t prio, uint32_t period_ms,
+                                     const char* name);
+    bool (*add_task)(TaskDescriptor_t* task);
+    bool (*remove_task)(TaskDescriptor_t* task);
+    bool (*suspend_task)(TaskDescriptor_t* task);
+    bool (*resume_task)(TaskDescriptor_t* task);
+    
+    // 调度器控制
+    void (*start)(void);
+    void (*stop)(void);
+    void (*run)(void);        // 在主循环中调用
+    
+    // 状态获取
+    SchedulerStats_t (*get_stats)(void);
+    uint32_t (*get_tick_count)(void);
+    
+    // 系统空闲回调（可选）
+    void (*set_idle_callback)(void (*callback)(void));
+} TaskScheduler_t;
 
 
 // 电机配置结构
@@ -67,8 +142,17 @@ typedef struct {
 extern MotorDriver g_motor_driver;
 extern EncoderDriver g_encoder_driver;
 
+// 全局调度器实例
+extern TaskScheduler_t g_task_scheduler;
 
+void task_sensor_update(void* context);
+void task_control_algorithm(void* context);
+void task_state_machine(void* context);
+void task_system_monitor(void* context);
+void task_communication(void* context);
+void task_data_logging(void* context);
 void hal_motor_Init(void);
+void system_idle_callback(void);
 void motor_output(int32 lpwm, int32 rpwm);
 void lost_lines(void);
 void state_turn(void);

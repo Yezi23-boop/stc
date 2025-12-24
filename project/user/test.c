@@ -260,12 +260,11 @@ void state_error(void)
         // g_state_machine.timeout = 0;
     // }
 
-    // 超时，关闭所有外设
+    // 超时，跳到空闲
     g_state_machine.timeout++;
     if (g_state_machine.timeout > 5000) {
         g_state_machine.timeout = 5000;
-        g_motor_driver.set_pwm(0,0);
-        // 关闭其他外设
+        state_machine_process_event(STATE_IDLE);
         return;
     }
     // 速度环输出0，希望小车停在原地

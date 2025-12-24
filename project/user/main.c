@@ -12,7 +12,7 @@ void task1ms(void)
 //    gpio_low(IO_P33);
 //    TimingStart();
     if (!P32)  IAP_CONTR = 0x60;
-      
+      scheduler_private.system_tick++;
 	// 1. 更新传感器数据
     read_AD();
     Prepare_Data();
@@ -150,7 +150,8 @@ void main()
 	while (1)
 	{
 		u32 StartTime = GetTimeStart();
-		main_task();
+		 main_task();
+		g_task_scheduler.run();
 		u32 EndTime   = GetTimeEnd();
 		cpu_usage = (EndTime - StartTime)*10000 / (SYSTEM_CLOCK_40M/12);
 	}

@@ -39,6 +39,42 @@ void int_user(void)
 	gpio_init(IO_P33, GPO, 1, GPO_PUSH_PULL);
 	gpio_init(IO_P34, GPO, 1, GPO_PUSH_PULL);
     state_machine_init();
+    // 5. 初始化任务调度器
+    g_task_scheduler.init();
+    g_task_scheduler.set_idle_callback(system_idle_callback);
+    // 6. 创建并添加所有任务
+    // 传感器更新：100Hz（最高优先级）
+    TaskDescriptor_t* task_sensor = CREATE_TASK(
+        task_sensor_update, NULL, PRIORITY_HIGH, 10, "Sensor Update");
+    g_task_scheduler.add_task(task_sensor);
+    
+    // 控制算法：50Hz
+    TaskDescriptor_t* task_control = CREATE_TASK(
+        task_control_algorithm, NULL, PRIORITY_HIGH, 20, "Control Algorithm");
+    g_task_scheduler.add_task(task_control);
+    
+    // 状态机处理：20Hz
+    TaskDescriptor_t* task_state = CREATE_TASK(
+        task_state_machine, NULL, PRIORITY_NORMAL, 50, "State Machine");
+    g_task_scheduler.add_task(task_state);
+    
+    // 系统监控：2Hz
+    TaskDescriptor_t* task_monitor = CREATE_TASK(
+        task_system_monitor, NULL, PRIORITY_LOW, 500, "System Monitor");
+    g_task_scheduler.add_task(task_monitor);
+    
+    // 通信处理：10Hz
+    TaskDescriptor_t* task_comm = CREATE_TASK(
+        task_communication, NULL, PRIORITY_NORMAL, 100, "Communication");
+    g_task_scheduler.add_task(task_comm);
+    
+    // 数据记录：1Hz
+    TaskDescriptor_t* task_log = CREATE_TASK(
+        task_data_logging, NULL, PRIORITY_IDLE, 1000, "Data Logging");
+    g_task_scheduler.add_task(task_log);
+    
+    // 7. 启动调度器
+    g_task_scheduler.start();
 	timer0_init();
 }
 
