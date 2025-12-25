@@ -89,7 +89,7 @@
 #include "adc.h"
 #include "pid.h"
 #include "imu.h"
-#include "int_user.h"
+#include "init_user.h"
 #include "test.h"
 #include "eeprom.h"
 #include "menu.h"

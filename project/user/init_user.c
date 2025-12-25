@@ -1,10 +1,10 @@
 #include "zf_common_headfile.h"
 #define TIME_0 500 // 定时器0中断周期(ms)
 #define TIME_1 500 // 定时器1中断周期(ms)
-
+// 定时器T0初始化函数
 static void timer0_init(void)
 {
-    //不可屏蔽中断16位自动重装载
+    // 不可屏蔽中断16位自动重装载
     TMOD &= 0xF0;  //清T0,retain T1
     TMOD |= 0x01;  
     T0x12 = 0;
@@ -14,7 +14,8 @@ static void timer0_init(void)
     ET0 = 1;  
     TCON |= 0x10 ;
 }
-void int_user(void)
+// 用户的初始化
+void init_user(void)
 {
     // 系统初始化：传感器/存储/定时器/编码器/ADC/电机/无线
     imu660ra_init(); // 初始化 IMU660RA
@@ -73,7 +74,7 @@ void int_user(void)
         task_data_logging, NULL, PRIORITY_IDLE, 1000, "Data Logging");
     g_task_scheduler.add_task(task_log);
     
-    // 7. 启动调度器
+    // 启动调度器
     g_task_scheduler.start();
 	timer0_init();
 }

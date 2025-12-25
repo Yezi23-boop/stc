@@ -31,7 +31,7 @@ extern float Err; // 误差值（整数，用于位置式 PID_Direction）
 extern uint16 MA[NUM];  // 标定最大值
 extern uint16 RAW[NUM]; // 原始 ADC 值
 extern uint16 dianya;   // 电源电压（mV）
-
+extern InductorDriver g_ADC_Driver;
 // 采样与处理函数声明
 void scan_track_max_value(void); // 扫描赛道，采集并更新最大值
 void read_AD(void);              // 读取 ADC，更新 RAW/MA/ad1..ad4/Err
