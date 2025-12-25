@@ -8,8 +8,8 @@ static void timer0_init(void)
     TMOD &= 0xF0;  //清T0,retain T1
     TMOD |= 0x01;  
     T0x12 = 0;
-    TL0 = 0x00;
-    TH0 = 0x00;
+    TL0 = 0xFB;  // 配置成9999us≈1MS
+    TH0 = 0xF2;
     //开 Timer0 中断
     ET0 = 1;  
     TCON |= 0x10 ;
@@ -28,7 +28,7 @@ void int_user(void)
     g_ADC_Driver.init(ADC_CH8_P00, ADC_12BIT);
     g_ADC_Driver.init(ADC_CH9_P01, ADC_12BIT);
     g_motor_driver.init(&MotorInit);
-    fuya_Init();          // 负压系统初始化
+    SuctionPressure_Init();          // 负压系统初始化
     wireless_uart_init(); // 无线串口初始化
     // 速度环 PID 初始化（误差限幅与输出限幅）
     pid_speed_init(&PID.left_speed, 100, 40, 0, 8000, 8000);
@@ -43,19 +43,19 @@ void int_user(void)
     g_task_scheduler.init();
     g_task_scheduler.set_idle_callback(system_idle_callback);
     // 6. 创建并添加所有任务
-    // 传感器更新：100Hz（最高优先级）
+    // 传感器更新：1000Hz（最高优先级）
     TaskDescriptor_t* task_sensor = CREATE_TASK(
-        task_sensor_update, NULL, PRIORITY_HIGH, 10, "Sensor Update");
+        task_sensor_update, NULL, PRIORITY_NORMAL, 1, "Sensor Update");
     g_task_scheduler.add_task(task_sensor);
     
-    // 控制算法：50Hz
+    // 控制算法：200Hz
     TaskDescriptor_t* task_control = CREATE_TASK(
-        task_control_algorithm, NULL, PRIORITY_HIGH, 20, "Control Algorithm");
+        task_control_algorithm, NULL, PRIORITY_HIGH, 5, "Control Algorithm");
     g_task_scheduler.add_task(task_control);
     
-    // 状态机处理：20Hz
+    // 状态机处理：200Hz
     TaskDescriptor_t* task_state = CREATE_TASK(
-        task_state_machine, NULL, PRIORITY_NORMAL, 50, "State Machine");
+        task_state_machine, NULL, PRIORITY_HIGH, 5, "State Machine");
     g_task_scheduler.add_task(task_state);
     
     // 系统监控：2Hz

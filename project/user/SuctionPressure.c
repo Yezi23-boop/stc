@@ -36,7 +36,7 @@ float DUTY_BOTTOM = 0;			 // 下切点（平地）基准
 /**
  * @brief 负压吸附系统初始化函数
  */
-void fuya_Init(void)
+void SuctionPressure_Init(void)
 {
 	pwm_init(PWMA_CH2N_P03, 17000, 0); // 初始化风扇PWM（40kHz）
 }
@@ -223,7 +223,7 @@ static float get_alpha_by_phase(uint8 phase)
  *       阶段 4：右墙 → 平地（vzc:0→1，vxc:1→0）
  *       同时根据前向优待策略，在非平地场景对目标负压做微调
  */
-void fuya_update_simple(void)
+void SuctionPressure_update_simple(void)
 {
 	float vzc, vxc, vyc;
 	float base_duty;

@@ -1,6 +1,8 @@
 #include "motor.h"
 
 int8 lost_spto = 0;
+int flat_statr = 0;
+float task1ms_time_s = 0;
 // ==================== 私有数据 ====================
 
 #define MAX_TASKS 16          // 最大任务数（可根据需要调整）
@@ -43,11 +45,9 @@ static struct {
 
 // ==================== 私有函数 ====================
 
-// 获取当前时间（毫秒）
+// 获取当前时间（毫秒）,最大的时间49.71 天
 static uint32_t get_current_time(void)
 {
-    // 这里应该使用硬件定时器
-    // 简单实现：返回系统滴答计数
     return scheduler_private.system_tick;
 }
 // 查找就绪的最高优先级任务
@@ -121,13 +121,13 @@ static void update_scheduler_stats(void)
 // 初始化调度器
 static void scheduler_init(void)
 {
-    // // printf("Initializing task scheduler...\n");
+    // printf("Initializing task scheduler...\n");
     
     memset(&scheduler_private, 0, sizeof(scheduler_private));
     scheduler_private.system_tick = 0;
     scheduler_private.last_stats_time = get_current_time();
     scheduler_private.is_running = false;
-    scheduler_private.idle_callback = NULL;
+    scheduler_private.idle_callback = scheduler_set_idle_callback;
     
     // // printf("Task scheduler initialized (max tasks: %d)\n", MAX_TASKS);
 }
@@ -243,7 +243,6 @@ static void scheduler_run(void)
     }
     
     // 更新时间滴答（应该由硬件定时器中断更新）
-    scheduler_private.system_tick++;
     
     // 1. 查找并执行就绪的最高优先级任务
     TaskDescriptor_t* task_to_run = find_highest_priority_ready_task();
@@ -321,24 +320,53 @@ void task_sensor_update(void* context)
     (void)context;  // 未使用参数
     
     // 更新所有传感器数据
-    g_sensor_service.update();
-    
+    // g_sensor_service.update();
+    // 1. 更新传感器数据
+    read_AD();
+    Prepare_Data();
+    lost_lines();
+	Encoder_get(&PID.left_speed, &PID.right_speed);
     // 生成传感器事件（触发状态机）
-    const SensorData_t* data = g_sensor_service.get_data();
+    // const SensorData_t* data = g_sensor_service.get_data();
     
-    if (data->line_tracking.line_lost) {
-        // 触发丢线事件
-        state_machine_process_event(EV_LINE_LOST);
-    }
+    // if (data->line_tracking.line_lost) {
+    //     // 触发丢线事件
+    //     state_machine_process_event(EV_LINE_LOST);
+    // }
     
-    if (data->line_tracking.intersection) {
-        // 触发交叉口事件
-        state_machine_process_event(EV_CROSS_DETECT);
-    }
+    // if (data->line_tracking.intersection) {
+    //     // 触发交叉口事件
+    //     state_machine_process_event(EV_CROSS_DETECT);
+    // }
+    
 }
 
 // ==================== 任务2：控制算法任务 ====================
 void task_control_algorithm(void* context)
+{
+    static int flat_statr_date = 0;
+	gpio_low(IO_P34);
+	TimingStart();
+	scan_track_max_value();
+	IMUupdate(&Gyr_filt, &Acc_filt, &Att_Angle);
+	voltage_adc();
+	flat_statr_date++;
+	if (P35 == 0 && flat_statr_date > 50)
+	{
+		flat_statr++;
+		flat_statr_date = 0;
+	}
+	if (flat_statr >= 1 && lost_spto == 0 && start_flag == 1)
+	{
+		SuctionPressure_update_simple();
+	}
+	task1ms_time_s = TimingStopSeconds();
+	gpio_high(IO_P34);
+    (void)context;
+}
+
+// ==================== 任务3：状态机处理任务 ====================
+void task_state_machine(void* context)
 {
     (void)context;
     
@@ -366,15 +394,6 @@ void task_control_algorithm(void* context)
 		default:
 			break:
 	}
-}
-
-// ==================== 任务3：状态机处理任务 ====================
-void task_state_machine(void* context)
-{
-    (void)context;
-    
-    // 更新状态机
-    state_machine_update();
     
     // 调试输出当前状态
     static uint32_t last_print = 0;
@@ -390,6 +409,7 @@ void task_state_machine(void* context)
 void task_system_monitor(void* context)
 {
     (void)context;
+    if (!P32)  IAP_CONTR = 0x60;
     
     // 监控电池电压
     const SensorData_t* data = g_sensor_service.get_data();
@@ -415,7 +435,19 @@ void task_system_monitor(void* context)
 void task_communication(void* context)
 {
     (void)context;
-    
+#if (ENABLECOMM)
+    char vofa_cmd[32]; // VOFA 命令缓存
+	// ========== 处理 VOFA 命令 ==========
+	// 从 FIFO 读取串口数据，使用系统提供的 wireless_uart_read_buffer
+	vofa_parse_from_fifo();
+
+	//       检查是否解析到完整命令
+	if (vofa_get_command(vofa_cmd, 32))
+	{
+		handle_vofa_command(vofa_cmd);
+	}
+    ips114_show_float(3 * 24, 18 * 0, task1ms_time_s*1000, 4, 2);
+#endif
     // 检查是否收到遥控命令
     // if (receive_remote_command()) {
     //     handle_remote_command();
