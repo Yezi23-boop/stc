@@ -655,16 +655,6 @@
               <FilePath>..\user\filter.h</FilePath>
             </File>
             <File>
-              <FileName>FUYA.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\user\FUYA.c</FilePath>
-            </File>
-            <File>
-              <FileName>FUYA.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\user\FUYA.h</FilePath>
-            </File>
-            <File>
               <FileName>imu.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\user\imu.c</FilePath>
@@ -758,6 +748,16 @@
               <FileName>type.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\user\type.h</FilePath>
+            </File>
+            <File>
+              <FileName>SuctionPressure.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user\SuctionPressure.c</FilePath>
+            </File>
+            <File>
+              <FileName>SuctionPressure.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\user\SuctionPressure.h</FilePath>
             </File>
           </Files>
         </Group>

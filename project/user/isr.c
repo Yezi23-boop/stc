@@ -151,7 +151,7 @@ void TM0_IRQHandler() interrupt 1
 {
     TIM0_CLEAR_FLAG;
     SpillCnt++;
-    scheduler_private.system_tick++;
+    scheduler_on_tick();
     if (tim0_irq_handler != NULL)
     {
         tim0_irq_handler();

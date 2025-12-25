@@ -83,7 +83,7 @@
 
 // ×Ô¼ºµÄ
 #include "type.h"
-#include "fuya.h"
+#include "SuctionPressure.h"
 #include "motor.h"
 #include "filter.h"
 #include "adc.h"

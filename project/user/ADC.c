@@ -26,10 +26,7 @@ static const uint16 MAX[NUM] = {AD_VAL_MAX, AD_VAL_MAX, AD_VAL_MAX, AD_VAL_MAX};
 uint16 MA[NUM] = {0};                                                            // 扫描记录的最大值（整数）
 float Err = 0;                                                                   // 当前偏差值（整数，供 PID_Direction 使用）
 static const int limit = 100;                                                    // 偏差限幅（整数）
-InductorDriver g_ADC_Driver = {
-    .init = adc_init,
-    .read = adc_convert
-};
+InductorDriver g_ADC_Driver = { adc_init, adc_convert };
 void dispose(void)
 {
     float denom = 0;
