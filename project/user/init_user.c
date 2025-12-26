@@ -5,18 +5,24 @@
 static void timer0_init(void)
 {
     // 不可屏蔽中断16位自动重装载
-    TMOD &= 0xF0;  //清T0,retain T1
-    TMOD |= 0x01;  
+    TMOD &= 0xF0; // 清T0,retain T1
+    TMOD |= 0x01;
     T0x12 = 0;
-    TL0 = 0xFB;  // 配置成9999us≈1MS
+    TL0 = 0xFB; // 配置成9999us≈1MS
     TH0 = 0xF2;
-    //开 Timer0 中断
-    ET0 = 1;  
-    TCON |= 0x10 ;
+    // 开 Timer0 中断
+    ET0 = 1;
+    TCON |= 0x10;
 }
 // 用户的初始化
 void init_user(void)
 {
+    TaskDescriptor_t *task_sensor;
+    TaskDescriptor_t *task_control;
+    TaskDescriptor_t *task_state;
+    TaskDescriptor_t *task_monitor;
+    TaskDescriptor_t *task_comm;
+    TaskDescriptor_t *task_log;
     // 系统初始化：传感器/存储/定时器/编码器/ADC/电机/无线
     imu660ra_init(); // 初始化 IMU660RA
     eeprom_init();
@@ -29,54 +35,54 @@ void init_user(void)
     g_ADC_Driver.init(ADC_CH8_P00, ADC_12BIT);
     g_ADC_Driver.init(ADC_CH9_P01, ADC_12BIT);
     g_motor_driver.init(&MotorInit);
-    SuctionPressure_Init();          // 负压系统初始化
-    wireless_uart_init(); // 无线串口初始化
+    SuctionPressure_Init(); // 负压系统初始化
+    wireless_uart_init();   // 无线串口初始化
     // 速度环 PID 初始化（误差限幅与输出限幅）
     pid_speed_init(&PID.left_speed, 100, 40, 0, 8000, 8000);
     pid_speed_init(&PID.right_speed, 100, 40, 0, 8000, 8000);
     // 方向环 PID 初始化（误差KP/KD与陀螺KD分离）
     pid_steer_init(&PID.steer, kp_Err, kd_Err, kd_gyro, 45, 45); // 方向环
     ips114_init();
-	gpio_init(IO_P33, GPO, 1, GPO_PUSH_PULL);
-	gpio_init(IO_P34, GPO, 1, GPO_PUSH_PULL);
+    gpio_init(IO_P33, GPO, 1, GPO_PUSH_PULL);
+    gpio_init(IO_P34, GPO, 1, GPO_PUSH_PULL);
     state_machine_init();
     // 5. 初始化任务调度器
     g_task_scheduler.init();
     g_task_scheduler.set_idle_callback(system_idle_callback);
     // 6. 创建并添加所有任务
     // 传感器更新：1000Hz（最高优先级）
-    TaskDescriptor_t* task_sensor = CREATE_TASK(
+    task_sensor = CREATE_TASK(
         task_sensor_update, NULL, PRIORITY_NORMAL, 1, "Sensor Update");
     g_task_scheduler.add_task(task_sensor);
-    
+
     // 控制算法：200Hz
-    TaskDescriptor_t* task_control = CREATE_TASK(
+    task_control = CREATE_TASK(
         task_control_algorithm, NULL, PRIORITY_HIGH, 5, "Control Algorithm");
     g_task_scheduler.add_task(task_control);
-    
+
     // 状态机处理：200Hz
-    TaskDescriptor_t* task_state = CREATE_TASK(
+    task_state = CREATE_TASK(
         task_state_machine, NULL, PRIORITY_HIGH, 5, "State Machine");
     g_task_scheduler.add_task(task_state);
-    
+
     // 系统监控：2Hz
-    TaskDescriptor_t* task_monitor = CREATE_TASK(
+    task_monitor = CREATE_TASK(
         task_system_monitor, NULL, PRIORITY_LOW, 500, "System Monitor");
     g_task_scheduler.add_task(task_monitor);
-    
+
     // 通信处理：10Hz
-    TaskDescriptor_t* task_comm = CREATE_TASK(
+    task_comm = CREATE_TASK(
         task_communication, NULL, PRIORITY_NORMAL, 100, "Communication");
     g_task_scheduler.add_task(task_comm);
-    
+
     // 数据记录：1Hz
-    TaskDescriptor_t* task_log = CREATE_TASK(
+    task_log = CREATE_TASK(
         task_data_logging, NULL, PRIORITY_IDLE, 1000, "Data Logging");
     g_task_scheduler.add_task(task_log);
     
     // 启动调度器
     g_task_scheduler.start();
-	timer0_init();
+    timer0_init();
 }
 
 /*********************************************
