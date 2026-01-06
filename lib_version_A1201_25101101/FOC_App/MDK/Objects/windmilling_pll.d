@@ -1,0 +1,17 @@
+.\objects\windmilling_pll.o: ..\User\FOCLIB\src\windmilling_pll.c
+.\objects\windmilling_pll.o: ..\User\FOCLIB\inc\windmilling_pll.h
+.\objects\windmilling_pll.o: ..\User\NovosnsMotorMath\inc\mm_lib.h
+.\objects\windmilling_pll.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\windmilling_pll.o: ..\User\NovosnsMotorMath\inc\nvsns_type_def.h
+.\objects\windmilling_pll.o: ..\User\NovosnsMotorMath\inc\gcf_lib.h
+.\objects\windmilling_pll.o: ..\User\NovosnsMotorMath\inc\amc_lib.h
+.\objects\windmilling_pll.o: ..\User\NovosnsMotorMath\inc\gmc_lib.h
+.\objects\windmilling_pll.o: ..\User\NovosnsFoc\inc\foc_paras.h
+.\objects\windmilling_pll.o: ..\User\FOCLIB\inc\pll_pi.h
+.\objects\windmilling_pll.o: ..\..\common\System\typedef.h
+.\objects\windmilling_pll.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\windmilling_pll.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\windmilling_pll.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\windmilling_pll.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\windmilling_pll.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\windmilling_pll.o: ..\User\NovosnsMtrAdvance\inc\windmilling.h

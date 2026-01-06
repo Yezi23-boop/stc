@@ -1,0 +1,37 @@
+{
+  "hss_oscilloscope": {
+    "time_window": 10.0,
+    "channels": [
+      {
+        "id": "tHfiCtrl.f16Theta",
+        "name": "tHfiCtrl.f16Theta",
+        "color": "#FF0000",
+        "visible": true,
+        "line_width": 2.0,
+        "scale_factor": 1.0,
+        "offset": 0.0,
+        "metadata": {
+          "address": 536871482,
+          "var_type": "INT16",
+          "byte_size": 2,
+          "description": ""
+        }
+      },
+      {
+        "id": "tHfiCtrl.eState",
+        "name": "tHfiCtrl.eState",
+        "color": "#00FF00",
+        "visible": true,
+        "line_width": 2.0,
+        "scale_factor": 1.0,
+        "offset": 0.0,
+        "metadata": {
+          "address": 536871480,
+          "var_type": "UINT8",
+          "byte_size": 1,
+          "description": ""
+        }
+      }
+    ]
+  }
+}

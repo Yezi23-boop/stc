@@ -1,0 +1,26 @@
+2025-09-13 12:27:05.912 | CRITICAL | exception_handler:exception_hook:80 - 未处理的异常：
+崩溃时间: 
+    2025-09-13 12:27:04
+操作系统:
+    Windows-10-10.0.18362-SP0
+版本:
+    ECULab
+进程名:
+    ECULab_Pro.exe
+CPU使用率:
+    6.2%
+内存使用率:
+    4.562188380958608%
+运行时间:
+    0:02:28
+错误信息: 
+    Traceback (most recent call last):
+  File "Flexi_CAN_LIN_Bus\jlink_debug_tools\hss_variable_table_widgt.py", line 548, in on_item_changed
+ValueError: could not convert string to float: ''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "Flexi_CAN_LIN_Bus\jlink_debug_tools\hss_variable_table_widgt.py", line 557, in on_item_changed
+AttributeError: 'HSSVariableInfo' object has no attribute 'value'
+

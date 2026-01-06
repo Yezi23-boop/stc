@@ -1,0 +1,15 @@
+.\objects\motor_data_calc.o: ..\User\FOCLIB\src\motor_data_calc.c
+.\objects\motor_data_calc.o: ..\User\FOCLIB\inc\motor_data_calc.h
+.\objects\motor_data_calc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\motor_data_calc.o: ..\User\NovosnsMotorMath\inc\mm_lib.h
+.\objects\motor_data_calc.o: ..\User\NovosnsMotorMath\inc\gcf_lib.h
+.\objects\motor_data_calc.o: ..\User\NovosnsMotorMath\inc\nvsns_type_def.h
+.\objects\motor_data_calc.o: ..\User\NovosnsMotorMath\inc\gmc_lib.h
+.\objects\motor_data_calc.o: ..\..\common\System\typedef.h
+.\objects\motor_data_calc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\motor_data_calc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\motor_data_calc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\motor_data_calc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\motor_data_calc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\motor_data_calc.o: ..\User\NovosnsFoc\inc\foc_config.h
+.\objects\motor_data_calc.o: ..\User\NovosnsFoc\inc\foc_paras.h

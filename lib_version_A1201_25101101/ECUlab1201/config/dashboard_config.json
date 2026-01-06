@@ -1,0 +1,19 @@
+{
+  "layout": {
+    "type": "adaptive",
+    "grid_cols": 3
+  },
+  "widgets": [
+    {
+      "type": "DashToggle",
+      "config": {
+        "variable": "",
+        "title": "Widget",
+        "min": 0,
+        "max": 100,
+        "unit": "",
+        "mode": "Read/Write"
+      }
+    }
+  ]
+}

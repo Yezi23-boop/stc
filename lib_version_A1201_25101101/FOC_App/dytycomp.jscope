@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<JScopeProject>
+    <FileVersion major="1" minor="1" />
+    <Project>
+        <Configuration>
+            <JLink>
+                <Options Connection="1" IsRTTSession="0" IsRTTWithTimeStamp="0" SamplingPeriod="10" SerialNo="0" JTAG_IRPre="0" JTAG_DRPre="0" IP="" TargetDevice="Cortex-M3" TargetInterface="SWD" InterfaceSpeed="4000" />
+            </JLink>
+            <ElfFile Name="E:\µçÄÔkeilÇ¨ÒÆ\20250909_DPWM\lib_version_MVIM_DPWM\FOC_App\MDK\Objects\NSUC1602_Eval.axf" />
+            <Scope>
+                <Options TimeResolutionUs="1000000" />
+            </Scope>
+        </Configuration>
+        <Windows>
+            <Graph Show="1" />
+            <Watch Show="1" />
+        </Windows>
+        <SelectedSymbols>
+            <Symbol>
+                <Options Name="f16Arg1" Address="0x2000024C" Type="short" TypeID="11" Size="2" GraphColorRed="255" GraphColorGreen="0" GraphColorBlue="0" YMinSampled="0" YMaxSampled="0" YAvgSampled="0" Offset="4" ShowInGraph="1" ACCoupling="0" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="32767" File="" Scope="1" DrawStyle="0" />
+            </Symbol>
+            <Symbol>
+                <Options Name="f16Arg1" Address="0x200003BE" Type="short" TypeID="11" Size="2" GraphColorRed="0" GraphColorGreen="0" GraphColorBlue="255" YMinSampled="0" YMaxSampled="19660" YAvgSampled="19659.4" Offset="6" ShowInGraph="1" ACCoupling="0" YOffset="0" IsAutoConfig="0" YResolution="10000" MaxValue="32767" File="" Scope="1" DrawStyle="0" />
+            </Symbol>
+        </SelectedSymbols>
+    </Project>
+</JScopeProject>

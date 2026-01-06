@@ -1,0 +1,13 @@
+{
+    "tabs": [
+        {
+            "name": "示波器 1",
+            "oscilloscope_config": {
+                "hss_oscilloscope": {
+                    "time_window": 10.0,
+                    "channels": []
+                }
+            }
+        }
+    ]
+}

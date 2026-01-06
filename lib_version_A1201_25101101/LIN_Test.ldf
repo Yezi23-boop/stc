@@ -1,0 +1,381 @@
+
+
+LIN_description_file;
+LIN_protocol_version = "2.1";
+LIN_language_version = "2.1";
+LIN_speed = 19.2 kbps;
+
+Nodes {
+  Master: LIN_Master, 1 ms, 0 ms ;
+  Slaves: Slave_1 ;
+}
+
+Signals {
+  NMeaRotCFM: 16, 0, Slave_1, LIN_Master ;
+  TempCFM: 16, 0, Slave_1, LIN_Master ;
+  SWVer: 8, 0, Slave_1, LIN_Master ;
+  DCVolCFM: 8, 0, Slave_1, LIN_Master ;
+  DCCurCFM: 16, 0, Slave_1, LIN_Master ;
+  NTagRotCFM: 16, 0, LIN_Master, Slave_1 ;
+  DCTagPWMCFM: 8, 0, LIN_Master, Slave_1 ;
+  CMDCFMAction: 8, 0, LIN_Master, Slave_1 ;
+  CONTROLLER_TYPE: 8, 0, Slave_1, LIN_Master ;
+  CONTROLLER_TYPE1: 8, 0, Slave_1, LIN_Master ;
+  HW_VER: 8, 0, Slave_1, LIN_Master ;
+  SW_VER: 8, 0, Slave_1, LIN_Master ;
+  SOFTVER_YEAR: 8, 0, Slave_1, LIN_Master ;
+  SOFTVER_MONTH: 8, 0, Slave_1, LIN_Master ;
+  MCU_TYPE: 8, 0, Slave_1 ;
+  SOFTVER_DAY: 8, 0, Slave_1, LIN_Master ;
+  MCU_TYPE1: 8, 0, Slave_1, LIN_Master ;
+  VBUS_HOV: 1, 0, Slave_1, LIN_Master ;
+  VBUS_HUV: 1, 0, Slave_1, LIN_Master ;
+  VBUS_SOV: 1, 0, Slave_1, LIN_Master ;
+  VBUS_SPREOV: 1, 0, Slave_1, LIN_Master ;
+  VBUS_SUV: 1, 0, Slave_1, LIN_Master ;
+  VBUS_SPREUV: 1, 0, Slave_1, LIN_Master ;
+  MOT_STALL_LOCK: 1, 0, Slave_1, LIN_Master ;
+  MOT_STALL: 1, 0, Slave_1, LIN_Master ;
+  MOT_HOC: 1, 0, Slave_1, LIN_Master ;
+  MOT_SOC: 1, 0, Slave_1, LIN_Master ;
+  ECU_HOT: 1, 0, Slave_1, LIN_Master ;
+  ECU_SOT: 1, 0, Slave_1, LIN_Master ;
+  ECU_SOTST: 1, 0, Slave_1, LIN_Master ;
+  ECU_OT_SENS_OPEN: 1, 0, Slave_1, LIN_Master ;
+  ECU_OT_SENS_SHRT: 1, 0, Slave_1, LIN_Master ;
+  CP_OV: 1, 0, Slave_1, LIN_Master ;
+  CP_UV: 1, 0, Slave_1, LIN_Master ;
+  BSW_COIL_SHRT_GND: 1, 0, Slave_1, LIN_Master ;
+  TSW_COIL_SHRT_BAT: 1, 0, Slave_1, LIN_Master ;
+  BSW_COIL_OPEN: 1, 0, Slave_1, LIN_Master ;
+  TSW_OPEN_COIL_SHRT: 1, 0, Slave_1, LIN_Master ;
+  ECU_LACK_PHASE: 1, 0, Slave_1, LIN_Master ;
+  ECU_DRV_SHORT: 1, 0, Slave_1, LIN_Master ;
+  ECU_SUT: 1, 0, Slave_1, LIN_Master ;
+  _reserved: 8, 0, Slave_1, LIN_Master ;
+}
+
+Diagnostic_signals {
+  MasterReqB0: 8, 0 ;
+  MasterReqB1: 8, 0 ;
+  MasterReqB2: 8, 0 ;
+  MasterReqB3: 8, 0 ;
+  MasterReqB4: 8, 0 ;
+  MasterReqB5: 8, 0 ;
+  MasterReqB6: 8, 0 ;
+  MasterReqB7: 8, 0 ;
+  SlaveRespB0: 8, 0 ;
+  SlaveRespB1: 8, 0 ;
+  SlaveRespB2: 8, 0 ;
+  SlaveRespB3: 8, 0 ;
+  SlaveRespB4: 8, 0 ;
+  SlaveRespB5: 8, 0 ;
+  SlaveRespB6: 8, 0 ;
+  SlaveRespB7: 8, 0 ;
+}
+
+
+
+Frames {
+  Upate: 2, Slave_1, 8 {
+    NMeaRotCFM, 0 ;
+    TempCFM, 16 ;
+    SWVer, 32 ;
+    DCVolCFM, 40 ;
+    DCCurCFM, 48 ;
+  }
+  LIN_Crol: 3, LIN_Master, 8 {
+    NTagRotCFM, 0 ;
+    DCTagPWMCFM, 16 ;
+    CMDCFMAction, 24 ;
+  }
+  Version: 59, Slave_1, 8 {
+    CONTROLLER_TYPE, 0 ;
+    CONTROLLER_TYPE1, 8 ;
+    HW_VER, 16 ;
+    SW_VER, 24 ;
+    SOFTVER_YEAR, 32 ;
+    SOFTVER_MONTH, 40 ;
+    SOFTVER_DAY, 48 ;
+    MCU_TYPE1, 56 ;
+  }
+  FaultMode: 48, Slave_1, 8 {
+    VBUS_HOV, 0 ;
+    VBUS_HUV, 1 ;
+    VBUS_SOV, 2 ;
+    VBUS_SPREOV, 3 ;
+    VBUS_SUV, 4 ;
+    VBUS_SPREUV, 5 ;
+    MOT_STALL_LOCK, 6 ;
+    MOT_STALL, 7 ;
+    MOT_HOC, 8 ;
+    MOT_SOC, 9 ;
+    ECU_HOT, 10 ;
+    ECU_SOT, 11 ;
+    ECU_SOTST, 12 ;
+    ECU_OT_SENS_OPEN, 13 ;
+    ECU_OT_SENS_SHRT, 14 ;
+    CP_OV, 16 ;
+    CP_UV, 17 ;
+    BSW_COIL_SHRT_GND, 18 ;
+    TSW_COIL_SHRT_BAT, 19 ;
+    BSW_COIL_OPEN, 20 ;
+    TSW_OPEN_COIL_SHRT, 21 ;
+    ECU_LACK_PHASE, 22 ;
+    ECU_DRV_SHORT, 23 ;
+    ECU_SUT, 15 ;
+    _reserved, 24 ;
+  }
+}
+
+
+
+Diagnostic_frames {
+  MasterReq: 0x3c {
+    MasterReqB0, 0 ;
+    MasterReqB1, 8 ;
+    MasterReqB2, 16 ;
+    MasterReqB3, 24 ;
+    MasterReqB4, 32 ;
+    MasterReqB5, 40 ;
+    MasterReqB6, 48 ;
+    MasterReqB7, 56 ;
+  }
+  SlaveResp: 0x3d {
+    SlaveRespB0, 0 ;
+    SlaveRespB1, 8 ;
+    SlaveRespB2, 16 ;
+    SlaveRespB3, 24 ;
+    SlaveRespB4, 32 ;
+    SlaveRespB5, 40 ;
+    SlaveRespB6, 48 ;
+    SlaveRespB7, 56 ;
+  }
+}
+
+Node_attributes {
+  Slave_1{
+    LIN_protocol = "2.1" ;
+    configured_NAD = 0xFF ;
+    initial_NAD = 0xFF ;
+    product_id = 0x0, 0x0, 255 ;
+    P2_min = 50 ms ;
+    ST_min = 0 ms ;
+    N_As_timeout = 1000 ms ;
+    N_Cr_timeout = 1000 ms ;
+    configurable_frames {
+      Upate ;
+      LIN_Crol ;
+      Version ;
+      FaultMode ;
+    }
+  }
+}
+
+Schedule_tables {
+ Test_Table1 {
+    LIN_Crol delay 10 ms ;
+    Upate delay 10 ms ;
+    Version delay 10 ms ;
+    FaultMode delay 10 ms ;
+  }
+}
+
+
+Signal_encoding_types {
+  BSW_COIL_OPEN_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  BSW_COIL_SHRT_GND_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  CONTROLLER_TYPE1_Encoding {
+    physical_value, 0, 32767, 1, 0 ;
+  }
+  CONTROLLER_TYPE_Encoding {
+    physical_value, 0, 32767, 1, 0 ;
+  }
+  CP_OV_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  CP_UV_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  DCCurCFM_Encoding {
+    physical_value, 0, 0, 0.1, 0 ;
+  }
+  DCTagPWMCFM_Encoding {
+    physical_value, 0, 0, 1, 0 ;
+  }
+  DCVolCFM_Encoding {
+    physical_value, 0, 256, 0.2, 0 ;
+  }
+  ECU_DRV_SHORT_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  ECU_HOT_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  ECU_LACK_PHASE_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  ECU_OT_SENS_OPEN_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  ECU_OT_SENS_SHRT_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  ECU_SOTST_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  ECU_SOT_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  ECU_SUT_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  HW_VER_Encoding {
+    physical_value, 0, 32767, 1, 0 ;
+  }
+  MCU_TYPE_Encoding {
+    physical_value, 0, 32767, 1, 0 ;
+  }
+  MCU_TYPE_Encoding_1 {
+    physical_value, 0, 32767, 1, 0 ;
+  }
+  MOT_HOC_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  MOT_SOC_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  MOT_STALL_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  MOT_STALL_LOCK_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  NMeaRotCFM_Encoding_2 {
+    physical_value, 0, 32767, 1, 0 ;
+  }
+  NTagRotCFM_Encoding {
+    physical_value, 0, 32767, 1, 0, "RPM" ;
+  }
+  PWMOutDutyCFM_Encoding_1 {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  SOFTVER_DAY_Encoding {
+    physical_value, 0, 32767, 1, 0 ;
+  }
+  SOFTVER_MONTH_Encoding {
+    physical_value, 0, 32767, 1, 0 ;
+  }
+  SOFTVER_YEAR_Encoding_1 {
+    physical_value, 0, 32767, 1, 2000 ;
+  }
+  SW_VER_Encoding {
+    physical_value, 0, 32767, 1, 0 ;
+  }
+  TSW_COIL_SHRT_BAT_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  TSW_OPEN_COIL_SHRT_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  TempCFM_Encoding_1 {
+    physical_value, 0, 32767, 0.1, -40 ;
+  }
+  VBUS_HOV_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  VBUS_HUV_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  VBUS_SOV_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  VBUS_SPREOV_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  VBUS_SPREUV_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  VBUS_SUV_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+  }
+  _reserved_Encoding {
+    physical_value, 0, 255, 1, 0 ;
+  }
+  CMDPumpAction_Encoding {
+    physical_value, 0, 255, 1, 0 ;
+    logical_value, 0, "??" ;
+    logical_value, 64, "??" ;
+    logical_value, 255, "??" ;
+  }
+  LIN_Crol_Signal_error_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+    logical_value, 0, "????" ;
+    logical_value, 1, "????" ;
+  }
+  PWMOutDutyCFM_Encoding {
+    physical_value, 0, 1, 1, 0 ;
+    logical_value, 0, "????" ;
+    logical_value, 1, "????" ;
+  }
+  NMeaRotCFM_Encoding {
+    physical_value, 0, 0, 1, 0 ;
+  }
+  NMeaRotCFM_Encoding_1 {
+    physical_value, 0, 0, 1, 0 ;
+  }
+  SOFTVER_YEAR_Encoding {
+    physical_value, 0, 32767, 1, 0 ;
+  }
+  TempCFM_Encoding {
+    physical_value, 0, 0, 1, 0 ;
+  }
+}
+
+Signal_representation {
+  BSW_COIL_OPEN_Encoding: BSW_COIL_OPEN ;
+  BSW_COIL_SHRT_GND_Encoding: BSW_COIL_SHRT_GND ;
+  CONTROLLER_TYPE1_Encoding: CONTROLLER_TYPE1 ;
+  CONTROLLER_TYPE_Encoding: CONTROLLER_TYPE ;
+  CP_OV_Encoding: CP_OV ;
+  CP_UV_Encoding: CP_UV ;
+  DCCurCFM_Encoding: DCCurCFM ;
+  DCTagPWMCFM_Encoding: DCTagPWMCFM ;
+  DCVolCFM_Encoding: DCVolCFM ;
+  ECU_DRV_SHORT_Encoding: ECU_DRV_SHORT ;
+  ECU_HOT_Encoding: ECU_HOT ;
+  ECU_LACK_PHASE_Encoding: ECU_LACK_PHASE ;
+  ECU_OT_SENS_OPEN_Encoding: ECU_OT_SENS_OPEN ;
+  ECU_OT_SENS_SHRT_Encoding: ECU_OT_SENS_SHRT ;
+  ECU_SOTST_Encoding: ECU_SOTST ;
+  ECU_SOT_Encoding: ECU_SOT ;
+  ECU_SUT_Encoding: ECU_SUT ;
+  HW_VER_Encoding: HW_VER ;
+  MCU_TYPE_Encoding: MCU_TYPE ;
+  MCU_TYPE_Encoding_1: MCU_TYPE1 ;
+  MOT_HOC_Encoding: MOT_HOC ;
+  MOT_SOC_Encoding: MOT_SOC ;
+  MOT_STALL_Encoding: MOT_STALL ;
+  MOT_STALL_LOCK_Encoding: MOT_STALL_LOCK ;
+  NMeaRotCFM_Encoding_2: NMeaRotCFM ;
+  NTagRotCFM_Encoding: NTagRotCFM ;
+  PWMOutDutyCFM_Encoding_1: SWVer ;
+  SOFTVER_DAY_Encoding: SOFTVER_DAY ;
+  SOFTVER_MONTH_Encoding: SOFTVER_MONTH ;
+  SOFTVER_YEAR_Encoding_1: SOFTVER_YEAR ;
+  SW_VER_Encoding: SW_VER ;
+  TSW_COIL_SHRT_BAT_Encoding: TSW_COIL_SHRT_BAT ;
+  TSW_OPEN_COIL_SHRT_Encoding: TSW_OPEN_COIL_SHRT ;
+  TempCFM_Encoding_1: TempCFM ;
+  VBUS_HOV_Encoding: VBUS_HOV ;
+  VBUS_HUV_Encoding: VBUS_HUV ;
+  VBUS_SOV_Encoding: VBUS_SOV ;
+  VBUS_SPREOV_Encoding: VBUS_SPREOV ;
+  VBUS_SPREUV_Encoding: VBUS_SPREUV ;
+  VBUS_SUV_Encoding: VBUS_SUV ;
+  _reserved_Encoding: _reserved ;
+}

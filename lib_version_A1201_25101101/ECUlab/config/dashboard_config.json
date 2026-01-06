@@ -1,0 +1,65 @@
+{
+  "layout": {
+    "type": "smart_mixed",
+    "grid_cols": 2,
+    "grid_constraint": "rows",
+    "grid_rows": 2
+  },
+  "widgets": [
+    {
+      "type": "DashGauge",
+      "config": {
+        "variable": "实际转速",
+        "title": "实际转速",
+        "min": 0.0,
+        "max": 4000.0,
+        "unit": "RPM",
+        "mode": "Read Only"
+      }
+    },
+    {
+      "type": "DashSlider",
+      "config": {
+        "variable": "转速指令",
+        "title": "转速指令",
+        "min": 0.0,
+        "max": 4000.0,
+        "unit": "RPM",
+        "mode": "Write Only"
+      }
+    },
+    {
+      "type": "DashLabel",
+      "config": {
+        "variable": "电压",
+        "title": "电压",
+        "min": 0.0,
+        "max": 50.0,
+        "unit": "V",
+        "mode": "Read Only"
+      }
+    },
+    {
+      "type": "DashLabel",
+      "config": {
+        "variable": "MOS温度",
+        "title": "MOS温度",
+        "min": 0.0,
+        "max": 150.0,
+        "unit": "℃",
+        "mode": "Read Only"
+      }
+    },
+    {
+      "type": "DashToggle",
+      "config": {
+        "variable": "",
+        "title": "Widget",
+        "min": 0,
+        "max": 100,
+        "unit": "",
+        "mode": "Read/Write"
+      }
+    }
+  ]
+}

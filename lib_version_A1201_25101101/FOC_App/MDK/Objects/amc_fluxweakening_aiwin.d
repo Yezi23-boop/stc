@@ -1,0 +1,9 @@
+.\objects\amc_fluxweakening_aiwin.o: ..\User\FOCLIB\src\amc_fluxweakening_aiwin.c
+.\objects\amc_fluxweakening_aiwin.o: ..\User\FOCLIB\inc\amc_fluxweakening_aiwin.h
+.\objects\amc_fluxweakening_aiwin.o: ..\User\NovosnsMotorMath\inc\amc_lib.h
+.\objects\amc_fluxweakening_aiwin.o: ..\User\NovosnsMotorMath\inc\gcf_lib.h
+.\objects\amc_fluxweakening_aiwin.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\amc_fluxweakening_aiwin.o: ..\User\NovosnsMotorMath\inc\mm_lib.h
+.\objects\amc_fluxweakening_aiwin.o: ..\User\NovosnsMotorMath\inc\gmc_lib.h
+.\objects\amc_fluxweakening_aiwin.o: ..\User\NovosnsMotorMath\inc\nvsns_type_def.h
+.\objects\amc_fluxweakening_aiwin.o: ..\User\NovosnsMtrAdvance\inc\amc_fluxweakening.h

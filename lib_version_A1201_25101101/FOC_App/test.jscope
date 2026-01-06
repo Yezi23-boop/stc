@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<JScopeProject>
+    <FileVersion major="1" minor="1" />
+    <Project>
+        <Configuration>
+            <JLink>
+                <Options Connection="1" IsRTTSession="0" IsRTTWithTimeStamp="0" SamplingPeriod="100" SerialNo="0" JTAG_IRPre="0" JTAG_DRPre="0" IP="" TargetDevice="Cortex-M3" TargetInterface="SWD" InterfaceSpeed="4000" />
+            </JLink>
+            <ElfFile Name="C:\Code\¹²ÏíÎÄ¼þ¼Ð\BBL1\paramid\04_20250918\lib_version\FOC_App\MDK\Objects\NSUC1602_Eval.axf" />
+            <Scope>
+                <Options TimeResolutionUs="1000000" />
+            </Scope>
+        </Configuration>
+        <Windows>
+            <Graph Show="1" />
+            <Watch Show="1" />
+        </Windows>
+        <SelectedSymbols>
+            <Symbol>
+                <Options Name="g_f16TriWave" Address="0x200000BE" Type="ushort" TypeID="7" Size="2" GraphColorRed="255" GraphColorGreen="0" GraphColorBlue="0" YMinSampled="67" YMaxSampled="65468" YAvgSampled="32771.3" Offset="4" ShowInGraph="1" YOffset="0" IsAutoConfig="0" YResolution="50000" MaxValue="65535" File="..\User\NovosnsFoc\src\nvsns_foc.c" Scope="0" DrawStyle="0" NameWithParents="g_f16TriWave" />
+            </Symbol>
+            <Symbol>
+                <Options Name="g_u16TriDuty" Address="0x200000C2" Type="ushort" TypeID="7" Size="2" GraphColorRed="0" GraphColorGreen="0" GraphColorBlue="255" YMinSampled="32767" YMaxSampled="32769" YAvgSampled="32768" Offset="6" ShowInGraph="1" YOffset="0" IsAutoConfig="0" YResolution="20000" MaxValue="65535" File="..\User\NovosnsFoc\src\nvsns_foc.c" Scope="0" DrawStyle="0" NameWithParents="g_u16TriDuty" />
+            </Symbol>
+        </SelectedSymbols>
+    </Project>
+</JScopeProject>

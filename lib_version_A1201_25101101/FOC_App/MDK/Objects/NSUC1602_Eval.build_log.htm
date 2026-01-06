@@ -1,0 +1,191 @@
+<html>
+<body>
+<pre>
+<h1>�Vision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ��Vision V5.25.2.0
+Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 1, 1, LIC=8VRJ7-EIM91-CXSU6-DKBNP-TJ5CA-QT6DS
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.25.2.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.25.2.0
+Dialog DLL:      DCM.DLL V1.17.1.0
+Target DLL:      Segger\JL2CM3.dll V2.99.29.0
+Dialog DLL:      TCM.DLL V1.35.1.0
+ 
+<h2>Project:</h2>
+C:\Code\SHAREFOLDER\project\volvo\20251231\trunk\lib_version_A1201_25101101\FOC_App\MDK\NSUC1602_FOC.uvprojx
+Project File Date:  12/13/2025
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+Build target 'NSUC1602'
+compiling main.c...
+..\User\Include\config.h(33): warning:  #47-D: incompatible redefinition of macro "PWM_MAX_RPM"  (declared at line 71 of "..\User\NovosnsFoc\inc\foc_paras.h")
+  #define PWM_MAX_RPM 3000
+..\user\main.c(262): warning:  #111-D: statement is unreachable
+      return 0;
+..\user\main.c: 2 warnings, 0 errors
+compiling lin_appl.c...
+..\User\Include\config.h(33): warning:  #47-D: incompatible redefinition of macro "PWM_MAX_RPM"  (declared at line 71 of "..\User\NovosnsFoc\inc\foc_paras.h")
+  #define PWM_MAX_RPM 3000
+..\User\lin_appl.c(273): warning:  #186-D: pointless comparison of unsigned integer with zero
+      } else if (tmpVar < 0) {
+..\User\lin_appl.c(302): warning:  #177-D: function "wait_ms"  was declared but never referenced
+  static void wait_ms(int n)
+..\User\lin_appl.c: 3 warnings, 0 errors
+compiling pwm_appl.c...
+..\User\Include\config.h(33): warning:  #47-D: incompatible redefinition of macro "PWM_MAX_RPM"  (declared at line 71 of "..\User\NovosnsFoc\inc\foc_paras.h")
+  #define PWM_MAX_RPM 3000
+..\User\pwm_appl.c(107): warning:  #9-D: nested comment is not allowed
+   /*
+..\User\pwm_appl.c(108): warning:  #9-D: nested comment is not allowed
+  /*
+..\User\pwm_appl.c(98): warning:  #550-D: variable "g_u32LowDutyOffCounter"  was set but never used
+  static uint32_t g_u32LowDutyOffCounter = 0;    // 低占空比关机计数�?
+..\User\pwm_appl.c(99): warning:  #550-D: variable "g_u32HighDutyOffCounter"  was set but never used
+  static uint32_t g_u32HighDutyOffCounter = 0;   // 高占空比关机计数�?
+..\User\pwm_appl.c: 5 warnings, 0 errors
+compiling motor_state_ctrl.c...
+..\User\Include\config.h(33): warning:  #47-D: incompatible redefinition of macro "PWM_MAX_RPM"  (declared at line 71 of "..\User\NovosnsFoc\inc\foc_paras.h")
+  #define PWM_MAX_RPM 3000
+..\User\Source\motor_state_ctrl.c(84): warning:  #177-D: variable "lastF16CmdTagSpeed"  was declared but never referenced
+      static Frac16_t lastF16CmdTagSpeed = 0;
+..\User\Source\motor_state_ctrl.c(165): warning:  #188-D: enumerated type mixed with another type
+              bool bIsRunning = (f16AbsSpeed > FRAC16(100.0 / MAX_RPM)); // 100 RPM 作为运行阈�?
+..\User\Source\motor_state_ctrl.c: 3 warnings, 0 errors
+compiling derating_control.c...
+..\User\Include\config.h(33): warning:  #47-D: incompatible redefinition of macro "PWM_MAX_RPM"  (declared at line 71 of "..\User\NovosnsFoc\inc\foc_paras.h")
+  #define PWM_MAX_RPM 3000
+..\User\Source\derating_control.c(156): warning:  #177-D: variable "rpm_limit_temp"  was declared but never referenced
+      uint16_t rpm_limit_temp = controller->config->default_max_rpm;
+..\User\Source\derating_control.c(157): warning:  #177-D: variable "rpm_limit_volt"  was declared but never referenced
+      uint16_t rpm_limit_volt =  max_volt_rpm_last;  // 初始值设置为上一次计算电压降额后的最大允许RPM
+..\User\Source\derating_control.c: 3 warnings, 0 errors
+compiling NTCdrive.c...
+..\User\Include\config.h(33): warning:  #47-D: incompatible redefinition of macro "PWM_MAX_RPM"  (declared at line 71 of "..\User\NovosnsFoc\inc\foc_paras.h")
+  #define PWM_MAX_RPM 3000
+..\User\NTCdrive.c: 1 warning, 0 errors
+compiling testFun.c...
+..\User\Include\config.h(33): warning:  #47-D: incompatible redefinition of macro "PWM_MAX_RPM"  (declared at line 71 of "..\User\NovosnsFoc\inc\foc_paras.h")
+  #define PWM_MAX_RPM 3000
+..\User\Source\testFun.c: 1 warning, 0 errors
+compiling sleep_control.c...
+..\User\Include\config.h(33): warning:  #47-D: incompatible redefinition of macro "PWM_MAX_RPM"  (declared at line 71 of "..\User\NovosnsFoc\inc\foc_paras.h")
+  #define PWM_MAX_RPM 3000
+..\User\Source\sleep_control.c: 1 warning, 0 errors
+compiling mtr_adv_init.c...
+compiling foc_init.c...
+compiling foc_paras.c...
+compiling nvsns_foc.c...
+..\User\NovosnsMtrAdvance\inc\smart_align.h(20): warning:  #1295-D: Deprecated declaration SmartAlgnInit - give arg types
+  void SmartAlgnInit();
+..\User\NovosnsMtrAdvance\inc\smart_align.h(31): warning:  #1295-D: Deprecated declaration SmartAlign - give arg types
+  int16_t SmartAlign();
+..\User\NovosnsFoc\src\nvsns_foc.c(122): warning:  #1295-D: Deprecated declaration FocFastLoop - give arg types
+  static bool FocFastLoop();
+..\User\NovosnsFoc\src\nvsns_foc.c(123): warning:  #1295-D: Deprecated declaration FocSlowLoop - give arg types
+  static bool FocSlowLoop();
+..\User\NovosnsFoc\src\nvsns_foc.c(126): warning:  #1295-D: Deprecated declaration EnableOutput - give arg types
+  void EnableOutput();
+..\User\NovosnsFoc\src\nvsns_foc.c(172): warning:  #185-D: dynamic initialization in unreachable code
+      uint16_t Tead = 1;
+..\User\NovosnsFoc\src\nvsns_foc.c(375): warning:  #223-D: function "Timer_Start" declared implicitly
+          uint32_t time_start = Timer_Start();
+..\User\NovosnsFoc\src\nvsns_foc.c(656): warning:  #223-D: function "Timer_GetFASTTime" declared implicitly
+          fasttime = Timer_GetFASTTime(time_start);
+..\User\NovosnsFoc\src\nvsns_foc.c(1344): warning:  #177-D: variable "f16IqReqFinal"  was declared but never referenced
+          Frac16_t f16IqReqFinal = tDrvFoc.tIDQReq.f16Arg2;
+..\User\NovosnsFoc\src\nvsns_foc.c(1480): warning:  #177-D: variable "f16PwrIqReq"  was declared but never referenced
+      static Frac16_t f16PwrIqReq;
+..\User\NovosnsFoc\src\nvsns_foc.c(1481): warning:  #177-D: variable "f16OpenStateCnt"  was declared but never referenced
+      static Frac16_t f16OpenStateCnt = 0;
+..\User\NovosnsFoc\src\nvsns_foc.c(1486): warning:  #177-D: variable "idcRaw"  was declared but never referenced
+      int32_t idcRaw;
+..\User\NovosnsFoc\src\nvsns_foc.c(1874): warning:  #550-D: variable "stateRunStatus"  was set but never used
+      static bool stateRunStatus;
+..\User\NovosnsFoc\src\nvsns_foc.c(2322): warning:  #177-D: variable "f16TargetRatio"  was declared but never referenced
+      Frac16_t f16TargetRatio = FRAC16(1.0);  // 目标限制比例
+..\User\NovosnsFoc\src\nvsns_foc.c(2778): warning:  #188-D: enumerated type mixed with another type
+      tCurrAuxInfo.useMeasureVector = USE_MEASURE_VECTOR;
+..\User\NovosnsFoc\src\nvsns_foc.c(32): warning:  #177-D: variable "g_bPredictCurrentsPending"  was declared but never referenced
+  static bool g_bPredictCurrentsPending = false;
+..\User\NovosnsFoc\src\nvsns_foc.c(38): warning:  #550-D: variable "ePrevPosModeSlowLoop"  was set but never used
+  static PosMode_t ePrevPosModeSlowLoop = FORCE;
+..\User\NovosnsFoc\src\nvsns_foc.c(124): warning:  #177-D: function "ReconstructPhaseCurrent"  was declared but never referenced
+  static void ReconstructPhaseCurrent(void);
+..\User\NovosnsFoc\src\nvsns_foc.c(1226): warning:  #177-D: function "GetThetaCompFromSpeed"  was declared but never referenced
+  static Frac16_t GetThetaCompFromSpeed(Frac16_t f16SpeedAbs)
+..\User\NovosnsFoc\src\nvsns_foc.c: 19 warnings, 0 errors
+compiling state_machine.c...
+compiling fault_diagnose.c...
+..\User\FaultDiagnosis\src\fault_diagnose.c(224): warning:  #177-D: variable "startupCnt"  was declared but never referenced
+      static int16_t startupCnt = 0;
+..\User\FaultDiagnosis\src\fault_diagnose.c: 1 warning, 0 errors
+compiling fault_init.c...
+compiling foclib_init.c...
+..\User\FOCLIB\src\foclib_init.c(70): warning:  #69-D: integer conversion resulted in truncation
+      Frac16_t bandwidth_factor = 571 * ((uint16_t)FOC_EPWM_FREQUENCY); //571 = 6.28 * 1000 / 11
+..\User\FOCLIB\src\foclib_init.c(452): warning:  #188-D: enumerated type mixed with another type
+      pParamId->bFluxDragSpeedStable = 0;
+..\User\FOCLIB\src\foclib_init.c: 2 warnings, 0 errors
+linking...
+Program Size: Code=20172 RO-data=1220 RW-data=724 ZI-data=3188  
+FromELF: creating hex file...
+After Build - User command #1: KeilOoutput.bat .\Objects\NSUC1602_Eval.axf C:\Code\SHAREFOLDER\project\volvo\20251231\trunk\lib_version_A1201_25101101\FOC_App\MDK\Objects\NSUC1602_Eval
+Error: Q0120E: No input file specified.
+Finished: 0 information, 0 warning and 1 error messages.
+Files generated successfully!
+After Build - User command #2: python.exe "C:\Code\SHAREFOLDER\project\volvo\20251231\trunk\lib_version_A1201_25101101\FOC_App\MDK\\" "../User/Include/global.h" C:\Code\SHAREFOLDER\project\volvo\20251231\trunk\lib_version_A1201_25101101\FOC_App\MDK\Objects\NSUC1602_Eval.axf "Objects"
+=== Keil Output Files Processor ===
+Using project root: C:\Code\SHAREFOLDER\project\volvo\20251231\trunk\lib_version_A1201_25101101\FOC_App\MDK
+Using target prefix: NSUC1602_Eval
+Using global.h at: C:\Code\SHAREFOLDER\project\volvo\20251231\trunk\lib_version_A1201_25101101\FOC_App\User\Include\global.h
+Using output directory: C:\Code\SHAREFOLDER\project\volvo\20251231\trunk\lib_version_A1201_25101101\FOC_App\MDK\Objects
+Successfully read file with encoding: utf-8
+Extracted version information:
+ controller_num: BBL1
+         hw_ver: 102
+         sw_ver: 102
+           year: 25
+          month: 7
+            day: 12
+Found 3 files to process:
+- NSUC1602_Eval.axf
+- NSUC1602_Eval.bin
+- NSUC1602_Eval.hex
+Processing files...
+Cleaning up old version files with prefix: BBL1H1.02250712S1.02
+Deleted old version file: BBL1H1.02250712S1.02_1527.bin
+Deleted old version file: BBL1H1.02250712S1.02_38D2.axf
+Deleted old version file: BBL1H1.02250712S1.02_59BC.hex
+Deleted 3 old version files
+Created: NSUC1602_Eval.axf -> BBL1H1.02250712S1.02_9829.axf [CRC: 9829]
+Created: NSUC1602_Eval.bin -> BBL1H1.02250712S1.02_EC8D.bin [CRC: EC8D]
+Created: NSUC1602_Eval.hex -> BBL1H1.02250712S1.02_2FC8.hex [CRC: 2FC8]
+Successfully processed 3 files.
+".\Objects\NSUC1602_Eval.axf" - 0 Error(s), 41 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: Novosns
+                
+                Novosns.NSUC1602.1.0.0
+                NSUC1602 ARM Cortex-M3 Device Family Pack
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_NSUC1602
+  C:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+Build Time Elapsed:  00:00:15
+</pre>
+</body>
+</html>

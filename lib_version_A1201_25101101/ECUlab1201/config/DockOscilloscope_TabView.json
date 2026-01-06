@@ -1,0 +1,133 @@
+{
+    "tabs": [
+        {
+            "name": "示波器 3",
+            "oscilloscope_config": {
+                "hss_oscilloscope": {
+                    "time_window": 10.0,
+                    "channels": [
+                        {
+                            "id": "tDrvFoc.tIabcFbck.f16Arg1",
+                            "name": "tDrvFoc.tIabcFbck.f16Arg1",
+                            "color": "#FF0000",
+                            "visible": true,
+                            "line_width": 2.0,
+                            "scale_factor": 0.00211,
+                            "offset": 0.0,
+                            "metadata": {
+                                "address": 536871766,
+                                "var_type": "INT16",
+                                "byte_size": 2,
+                                "description": ""
+                            }
+                        },
+                        {
+                            "id": "tDrvFoc.tIDQFbck.f16Arg2",
+                            "name": "tDrvFoc.tIDQFbck.f16Arg2",
+                            "color": "#00FF00",
+                            "visible": true,
+                            "line_width": 2.0,
+                            "scale_factor": 1.0,
+                            "offset": 0.0,
+                            "metadata": {
+                                "address": 536871726,
+                                "var_type": "INT16",
+                                "byte_size": 2,
+                                "description": ""
+                            }
+                        },
+                        {
+                            "id": "tDrvFoc.tIDQFbck.f16Arg1",
+                            "name": "tDrvFoc.tIDQFbck.f16Arg1",
+                            "color": "#0000FF",
+                            "visible": true,
+                            "line_width": 2.0,
+                            "scale_factor": 1.0,
+                            "offset": 0.0,
+                            "metadata": {
+                                "address": 536871724,
+                                "var_type": "INT16",
+                                "byte_size": 2,
+                                "description": ""
+                            }
+                        }
+                    ],
+                    "y_padding": 0.5,
+                    "min_relative_y_range": 0.3
+                }
+            }
+        },
+        {
+            "name": "示波器 2",
+            "oscilloscope_config": {
+                "hss_oscilloscope": {
+                    "time_window": 10.0,
+                    "channels": [
+                        {
+                            "id": "tDrvFoc.tPospeControl.f16wRotE1",
+                            "name": "tDrvFoc.tPospeControl.f16wRotE1",
+                            "color": "#FF0000",
+                            "visible": true,
+                            "line_width": 2.0,
+                            "scale_factor": 0.122,
+                            "offset": 0.0,
+                            "metadata": {
+                                "address": 536871878,
+                                "var_type": "INT16",
+                                "byte_size": 2,
+                                "description": ""
+                            }
+                        },
+                        {
+                            "id": "g_f16IqCompVal",
+                            "name": "g_f16IqCompVal",
+                            "color": "#00FF00",
+                            "visible": true,
+                            "line_width": 2.0,
+                            "scale_factor": 1.0,
+                            "offset": 0.0,
+                            "metadata": {
+                                "address": 536871232,
+                                "var_type": "INT16",
+                                "byte_size": 2,
+                                "description": ""
+                            }
+                        },
+                        {
+                            "id": "f16ThetaMech",
+                            "name": "f16ThetaMech",
+                            "color": "#0000FF",
+                            "visible": true,
+                            "line_width": 2.0,
+                            "scale_factor": 1.0,
+                            "offset": 0.0,
+                            "metadata": {
+                                "address": 536871252,
+                                "var_type": "INT16",
+                                "byte_size": 2,
+                                "description": ""
+                            }
+                        },
+                        {
+                            "id": "tDrvFoc.tIDQFbck.f16Arg2",
+                            "name": "tDrvFoc.tIDQFbck.f16Arg2",
+                            "color": "#FFFF00",
+                            "visible": true,
+                            "line_width": 2.0,
+                            "scale_factor": 1.0,
+                            "offset": 0.0,
+                            "metadata": {
+                                "address": 536871738,
+                                "var_type": "INT16",
+                                "byte_size": 2,
+                                "description": ""
+                            }
+                        }
+                    ],
+                    "y_padding": 0.5,
+                    "min_relative_y_range": 0.3
+                }
+            }
+        }
+    ]
+}

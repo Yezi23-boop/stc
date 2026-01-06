@@ -1,0 +1,97 @@
+{
+  "hss_oscilloscope": {
+    "time_window": 10.0,
+    "channels": [
+      {
+        "id": "tHfiCtrl.f16DeltaTheta",
+        "name": "tHfiCtrl.f16DeltaTheta",
+        "color": "#FF0000",
+        "visible": true,
+        "line_width": 2.0,
+        "scale_factor": 1.0,
+        "offset": 0.0,
+        "metadata": {
+          "address": 536871490,
+          "var_type": "INT16",
+          "byte_size": 2,
+          "description": ""
+        }
+      },
+      {
+        "id": "tHfiCtrl.f16Theta",
+        "name": "tHfiCtrl.f16Theta",
+        "color": "#00FF00",
+        "visible": true,
+        "line_width": 2.0,
+        "scale_factor": 1.0,
+        "offset": 0.0,
+        "metadata": {
+          "address": 536871482,
+          "var_type": "INT16",
+          "byte_size": 2,
+          "description": ""
+        }
+      },
+      {
+        "id": "tHfiCtrl.tIAlBeHfi.f16Arg1",
+        "name": "tHfiCtrl.tIAlBeHfi.f16Arg1",
+        "color": "#0000FF",
+        "visible": true,
+        "line_width": 2.0,
+        "scale_factor": 1.0,
+        "offset": 0.0,
+        "metadata": {
+          "address": 536871530,
+          "var_type": "INT16",
+          "byte_size": 2,
+          "description": ""
+        }
+      },
+      {
+        "id": "tHfiCtrl.tIAlBeHfi.f16Arg2",
+        "name": "tHfiCtrl.tIAlBeHfi.f16Arg2",
+        "color": "#FFFF00",
+        "visible": true,
+        "line_width": 2.0,
+        "scale_factor": 1.0,
+        "offset": 0.0,
+        "metadata": {
+          "address": 536871532,
+          "var_type": "INT16",
+          "byte_size": 2,
+          "description": ""
+        }
+      },
+      {
+        "id": "tHfiCtrl.tHFIUdqReq.f16Arg1",
+        "name": "tHfiCtrl.tHFIUdqReq.f16Arg1",
+        "color": "#FF00FF",
+        "visible": true,
+        "line_width": 2.0,
+        "scale_factor": 1.0,
+        "offset": 0.0,
+        "metadata": {
+          "address": 536871560,
+          "var_type": "INT16",
+          "byte_size": 2,
+          "description": ""
+        }
+      },
+      {
+        "id": "tHfiCtrl.tHFIUdqReq.f16Arg2",
+        "name": "tHfiCtrl.tHFIUdqReq.f16Arg2",
+        "color": "#00FFFF",
+        "visible": true,
+        "line_width": 2.0,
+        "scale_factor": 1.0,
+        "offset": 0.0,
+        "metadata": {
+          "address": 536871562,
+          "var_type": "INT16",
+          "byte_size": 2,
+          "description": ""
+        }
+      }
+    ]
+  }
+}

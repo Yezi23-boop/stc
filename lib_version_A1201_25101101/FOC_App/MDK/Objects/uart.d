@@ -1,0 +1,10 @@
+.\objects\uart.o: ..\..\common\Driver\src\uart.c
+.\objects\uart.o: ..\..\common\Driver\inc\uart.h
+.\objects\uart.o: ..\..\common\System\include.h
+.\objects\uart.o: ..\..\common\System\nsuc1602.h
+.\objects\uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\uart.o: ..\..\common\System\CMSIS\core_cm3.h
+.\objects\uart.o: ..\..\common\System\CMSIS\core_cmInstr.h
+.\objects\uart.o: ..\..\common\System\CMSIS\core_cmFunc.h
+.\objects\uart.o: ..\..\common\System\CMSIS\core_cm3.h
+.\objects\uart.o: ..\..\common\Driver\inc\uart.h

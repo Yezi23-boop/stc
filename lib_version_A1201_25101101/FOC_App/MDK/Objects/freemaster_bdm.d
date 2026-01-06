@@ -1,0 +1,17 @@
+.\objects\freemaster_bdm.o: ..\User\DebugTools\src\freemaster_bdm.c
+.\objects\freemaster_bdm.o: ..\User\DebugTools\inc\freemaster.h
+.\objects\freemaster_bdm.o: ..\User\DebugTools\inc\freemaster_defcfg.h
+.\objects\freemaster_bdm.o: ..\User\DebugTools\inc\freemaster_cfg.h
+.\objects\freemaster_bdm.o: ..\..\common\Driver\inc\uart.h
+.\objects\freemaster_bdm.o: ..\..\common\System\include.h
+.\objects\freemaster_bdm.o: ..\..\common\System\nsuc1602.h
+.\objects\freemaster_bdm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\freemaster_bdm.o: ..\..\common\System\CMSIS\core_cm3.h
+.\objects\freemaster_bdm.o: ..\..\common\System\CMSIS\core_cmInstr.h
+.\objects\freemaster_bdm.o: ..\..\common\System\CMSIS\core_cmFunc.h
+.\objects\freemaster_bdm.o: ..\..\common\System\CMSIS\core_cm3.h
+.\objects\freemaster_bdm.o: ..\..\common\Driver\inc\uart.h
+.\objects\freemaster_bdm.o: ..\User\DebugTools\inc\freemaster_tsa.h
+.\objects\freemaster_bdm.o: ..\User\DebugTools\inc\freemaster_private.h
+.\objects\freemaster_bdm.o: ..\User\DebugTools\inc\freemaster_Kxx.h
+.\objects\freemaster_bdm.o: ..\User\DebugTools\inc\freemaster_protocol.h

@@ -1,0 +1,24 @@
+{
+  "geometry": "AdnQywADAAAAAAAAAAAAAAAABZIAAANSAAAAAAAAAAAAAAWSAAADUgAAAAAAAAAABdUAAAAAAAAAAAAABZIAAANS",
+  "state": "AAAA/wAAAAD9AAAAAgAAAAIAAAWTAAACW/wBAAAAAvsAAAAiAG0AZQBzAHMAYQBnAGUAXwBkAGkAcwBwAGwAYQB5AF8AMQAAAAAAAAAFkwAAAAAAAAAA+wAAABwAbwBzAGMAaQBsAGwAbwBzAGMAbwBwAGUAXwAxAQAAAAAAAAWTAAABlgD///8AAAADAAAFkwAAAMj8AQAAAAL7AAAAIABtAGUAcwBzAGEAZwBlAF8AcwBlAG4AZABlAHIAXwAyAAAAAAAAAAWTAAAAAAAAAAD7AAAAIABqAGwAaQBuAGsAXwB2AGEAcgBpAGEAYgBsAGUAXwAyAQAAAAAAAAWTAAABLAD///8AAAWTAAAAAAAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAAB/////wEAAAAA/////wAAAAAAAAAA",
+  "dockWidgets": {
+    "oscilloscope_1": {
+      "type": "oscilloscope",
+      "title": "示波器",
+      "visible": true,
+      "floating": false,
+      "geometry": null,
+      "dockArea": 4,
+      "tabified": false
+    },
+    "jlink_variable_2": {
+      "type": "jlink_variable",
+      "title": "变量读写",
+      "visible": true,
+      "floating": false,
+      "geometry": null,
+      "dockArea": 8,
+      "tabified": false
+    }
+  }
+}

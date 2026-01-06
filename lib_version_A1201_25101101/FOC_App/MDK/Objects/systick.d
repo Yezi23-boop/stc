@@ -1,0 +1,9 @@
+.\objects\systick.o: ..\..\common\Driver\src\SysTick.c
+.\objects\systick.o: ..\..\common\System\nsuc1602.h
+.\objects\systick.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\systick.o: ..\..\common\System\CMSIS\core_cm3.h
+.\objects\systick.o: ..\..\common\System\CMSIS\core_cmInstr.h
+.\objects\systick.o: ..\..\common\System\CMSIS\core_cmFunc.h
+.\objects\systick.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\systick.o: ..\..\common\Driver\inc\SysTick.h
+.\objects\systick.o: ..\..\common\Driver\inc\SysTick_isr.h

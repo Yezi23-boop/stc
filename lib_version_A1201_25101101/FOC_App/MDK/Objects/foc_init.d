@@ -1,0 +1,11 @@
+.\objects\foc_init.o: ..\User\NovosnsFoc\src\foc_init.c
+.\objects\foc_init.o: ..\User\NovosnsFoc\inc\foc_init.h
+.\objects\foc_init.o: ..\..\common\System\nsuc1602.h
+.\objects\foc_init.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\foc_init.o: ..\..\common\System\CMSIS\core_cm3.h
+.\objects\foc_init.o: ..\..\common\System\CMSIS\core_cmInstr.h
+.\objects\foc_init.o: ..\..\common\System\CMSIS\core_cmFunc.h
+.\objects\foc_init.o: ..\User\NovosnsFoc\inc\foc_config.h
+.\objects\foc_init.o: ..\User\NovosnsFoc\inc\foc_paras.h
+.\objects\foc_init.o: ..\User\NovosnsMotorMath\inc\mm_lib.h
+.\objects\foc_init.o: ..\User\FaultDiagnosis\inc\fault_hw_config.h

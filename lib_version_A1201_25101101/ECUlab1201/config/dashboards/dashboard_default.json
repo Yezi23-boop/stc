@@ -1,0 +1,21 @@
+{
+  "layout": {
+    "type": "smart_mixed",
+    "grid_cols": 3,
+    "grid_rows": 3,
+    "grid_constraint": "cols"
+  },
+  "widgets": [
+    {
+      "type": "DashLabel",
+      "config": {
+        "variable": "电感-LD",
+        "title": "电感-LD",
+        "min": 0.0,
+        "max": 10000.0,
+        "unit": "mh",
+        "mode": "Read Only"
+      }
+    }
+  ]
+}

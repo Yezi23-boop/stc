@@ -1,0 +1,10 @@
+.\objects\variable_pi.o: ..\User\FOCLIB\src\variable_pi.c
+.\objects\variable_pi.o: ..\User\FOCLIB\inc\variable_pi.h
+.\objects\variable_pi.o: ..\User\NovosnsMotorMath\inc\mm_lib.h
+.\objects\variable_pi.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\variable_pi.o: ..\..\common\System\typedef.h
+.\objects\variable_pi.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\variable_pi.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\variable_pi.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\variable_pi.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\variable_pi.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

@@ -1,0 +1,64 @@
+{
+    "variables": [
+        {
+            "name": "tDrvFoc.tAppState.tEvent",
+            "address": 536871717,
+            "var_type": "UINT8",
+            "byte_size": 1,
+            "post_process": "NONE",
+            "scale_factor": 1.0,
+            "offset_value": 0.0,
+            "enabled": true,
+            "display_name": "",
+            "description": "",
+            "writable": true,
+            "is_enum": true,
+            "enum_values": {
+                "E_FAULT": 0,
+                "E_FAULT_CLEAR": 1,
+                "E_INIT": 2,
+                "E_INIT_DONE": 3,
+                "E_READY": 4,
+                "E_APP_ON": 5,
+                "E_CALIB": 6,
+                "E_CALIB_DONE": 7,
+                "E_ALIGN": 8,
+                "E_ALIGN_DONE": 9,
+                "E_RUN": 10,
+                "E_APP_OFF": 11,
+                "E_RESET": 12,
+                "E_RESET_DONE": 13
+            }
+        },
+        {
+            "name": "f16CmdTagSpeed",
+            "address": 536871038,
+            "var_type": "INT16",
+            "byte_size": 2,
+            "post_process": "SCALE",
+            "scale_factor": 0.122,
+            "offset_value": 0.0,
+            "enabled": true,
+            "display_name": "",
+            "description": "",
+            "writable": true,
+            "is_enum": false,
+            "enum_values": {}
+        },
+        {
+            "name": "tDrvFoc.f16DcBusFilt",
+            "address": 536871750,
+            "var_type": "INT16",
+            "byte_size": 2,
+            "post_process": "SCALE",
+            "scale_factor": 0.00152,
+            "offset_value": 0.0,
+            "enabled": true,
+            "display_name": "",
+            "description": "",
+            "writable": false,
+            "is_enum": false,
+            "enum_values": {}
+        }
+    ]
+}

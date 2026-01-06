@@ -1,0 +1,283 @@
+2025-09-13 12:24:36.398 | INFO     | __main__:<module>:53 - 指定了.eculabprj项目文件: E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\debug.eculabprj
+2025-09-13 12:24:36.399 | INFO     | __main__:<module>:54 - 项目所在目录: E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab
+2025-09-13 12:24:36.399 | INFO     | __main__:<module>:65 - 已保存项目文件夹路径到注册表: E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab
+2025-09-13 12:24:36.399 | WARNING  | views.widgets.configurable_manager:_load_last_project_path:125 - 应用程序信息未设置，使用默认组织名称和应用程序名称
+2025-09-13 12:24:36.400 | DEBUG    | views.widgets.configurable_manager:_load_last_project_path:129 - QSettings文件路径: \HKEY_CURRENT_USER\Software\WinAi\ECULab_Pro
+2025-09-13 12:24:36.400 | INFO     | views.widgets.configurable_manager:_load_last_project_path:155 - 从注册表加载了上次使用的项目: debug 路径: E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab
+2025-09-13 12:24:36.724 | INFO     | __main__:main:105 - ECULab 启动
+2025-09-13 12:24:36.867 | INFO     | views.main_window:initChannelManager:215 - 正在初始化通道管理器...
+2025-09-13 12:24:36.867 | INFO     | views.main_window:initChannelManager:217 - 通道管理器初始化完成
+2025-09-13 12:24:36.867 | INFO     | views.main_window:initDeviceManager:226 - 正在初始化设备控制器...
+2025-09-13 12:24:36.867 | INFO     | views.main_window:initDeviceManager:230 - 正在连接设备控制器信号...
+2025-09-13 12:24:36.867 | INFO     | views.main_window:initDeviceManager:240 - 正在刷新设备列表...
+2025-09-13 12:24:36.867 | DEBUG    | controllers.device_controller:refresh_devices:72 - 刷新设备列表...
+2025-09-13 12:24:36.867 | DEBUG    | controllers.device_controller:refresh_devices:73 - 当前活动设备: dict_keys([])
+2025-09-13 12:24:36.879 | DEBUG    | views.main_window:onDeviceListUpdated:733 - MainWindow: 设备列表已更新，共 0 个通道
+2025-09-13 12:24:36.879 | INFO     | views.main_window:initDeviceManager:243 - 找到 0 个可用通道
+2025-09-13 12:24:37.051 | DEBUG    | views.widgets.fixed_side_panel:_show_hardware_page:795 - _show_hardware_page: 开始切换到硬件设备页面
+2025-09-13 12:24:37.057 | DEBUG    | views.widgets.fixed_side_panel:_show_hardware_page:807 - _show_hardware_page: 硬件设备页面已显示
+2025-09-13 12:24:37.068 | DEBUG    | views.widgets.fixed_side_panel:update_device_list:1016 - 正在获取可用的CAN通道设备...
+2025-09-13 12:24:37.071 | DEBUG    | views.widgets.fixed_side_panel:update_device_list:1025 - 找到 0 个CAN通道
+2025-09-13 12:24:37.072 | DEBUG    | views.widgets.fixed_side_panel:update_device_list:1051 - 找到 0 个通道，其中 0 个有效CAN通道
+2025-09-13 12:24:37.102 | DEBUG    | views.widgets.mdi_window.window_factory:register_window_class:31 - 注册窗口类: SampleMdiWindow
+2025-09-13 12:24:37.105 | DEBUG    | views.widgets.mdi_window.window_factory:register_window_class:31 - 注册窗口类: DBCViewerWindow
+2025-09-13 12:24:37.108 | DEBUG    | views.widgets.mdi_window.window_factory:register_window_class:31 - 注册窗口类: CANMessageWindow
+2025-09-13 12:24:37.110 | DEBUG    | views.widgets.mdi_window.window_factory:register_window_class:31 - 注册窗口类: LINMessageWindow
+2025-09-13 12:24:37.149 | DEBUG    | views.widgets.configurable_widget:set_project_path:58 - 为 示波器 设置项目路径: E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab
+2025-09-13 12:24:37.150 | DEBUG    | views.widgets.configurable_manager:register_widget:193 - 已注册可配置窗口: 示波器
+2025-09-13 12:24:37.150 | DEBUG    | views.widgets.configurable_manager:__init_wrapper__:54 - 通过装饰器注册了可配置窗口: 示波器
+2025-09-13 12:24:37.156 | DEBUG    | views.widgets.dock_window.jlink_variable_dock:applyStyleSheet:45 - 尝试加载 QSS 路径: :/ECULab/qss/light/jlink_variable_dock.qss
+2025-09-13 12:24:37.157 | DEBUG    | views.widgets.dock_window.jlink_variable_dock:applyStyleSheet:48 - QSS 文件 :/ECULab/qss/light/jlink_variable_dock.qss 存在
+2025-09-13 12:24:37.159 | DEBUG    | views.widgets.dock_window.jlink_variable_dock:load_config:147 - 已从 E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\config\jlink_variable_table_widget.json 加载变量表配置
+2025-09-13 12:24:37.160 | DEBUG    | views.widgets.configurable_widget:load_config_from_file:128 - 已加载 HSSVariableDock 的配置从 E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\config\HSSVariableDock.json
+2025-09-13 12:24:37.160 | DEBUG    | views.widgets.configurable_widget:set_project_path:58 - 为 HSSVariableDock 设置项目路径: E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab
+2025-09-13 12:24:37.161 | DEBUG    | views.widgets.configurable_manager:register_widget:193 - 已注册可配置窗口: HSSVariableDock
+2025-09-13 12:24:37.161 | DEBUG    | views.widgets.configurable_manager:__init_wrapper__:54 - 通过装饰器注册了可配置窗口: HSSVariableDock
+2025-09-13 12:24:37.168 | DEBUG    | views.widgets.dock_window.dock_interface:load_config_from_file:281 - 已加载 DockInterface 的配置
+2025-09-13 12:24:37.169 | DEBUG    | views.widgets.configurable_manager:register_widget_isNotConfigurableWidget:213 - 已注册非ConfigurableWidget可配置窗口: DockInterface
+2025-09-13 12:24:37.376 | DEBUG    | views.main_window:applyStyleSheet:190 - 尝试加载主窗口样式表: :/ECULab/qss/light/main_window.qss
+2025-09-13 12:24:37.454 | DEBUG    | views.main_window:applyStyleSheet:198 - 已应用主窗口样式表
+2025-09-13 12:24:37.454 | DEBUG    | views.widgets.configurable_widget:set_project_path:58 - 为 MdiInterface 设置项目路径: E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab
+2025-09-13 12:24:37.455 | DEBUG    | views.widgets.configurable_manager:register_widget:193 - 已注册可配置窗口: MdiInterface
+2025-09-13 12:24:37.799 | INFO     | app_bootstrap:_on_step_changed:153 - 启动步骤: 正在加载配置... 
+2025-09-13 12:24:37.800 | INFO     | app_bootstrap:_load_config:272 - 正在加载配置...
+2025-09-13 12:24:37.802 | INFO     | app_bootstrap:_load_config:305 - 正在加载调试工具变量管理器配置: E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\config\debug_tool_var_manager.json
+2025-09-13 12:24:37.802 | INFO     | app_bootstrap:_load_config:321 - 正在加载调试工具内存管理器配置: E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\config\debug_tools_var_memory_manager.json
+2025-09-13 12:24:37.803 | INFO     | app_bootstrap:_load_config:338 - 正在加载调试工具设置配置: E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\config\debug_tool_settings.json
+2025-09-13 12:24:37.803 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.basic_select:import_from_json:379 - AXF文件签名不匹配: 保存的=1757736494.0, 当前=1757737432.0
+2025-09-13 12:24:37.803 | INFO     | views.main_window:_on_axf_file_modified_safe:168 - 启动期间检测到AXF文件变化，已缓存: NSUC1602_Eval.axf
+2025-09-13 12:24:37.808 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.basic_select:import_from_json:387 - 添加文件监控: E:/电脑keil迁移/20250913/lib_version_MVIM_DPWM_HFI/FOC_App/MDK/Objects/NSUC1602_Eval.axf
+2025-09-13 12:24:37.810 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.basic_select:import_from_json:397 - DebugToolSettings设置已成功从 E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\config\debug_tool_settings.json 导入
+2025-09-13 12:24:37.810 | INFO     | app_bootstrap:_load_config:342 - 配置加载完成
+2025-09-13 12:24:37.812 | INFO     | app_bootstrap:_on_step_changed:153 - 启动步骤: 正在检查资源文件... 
+2025-09-13 12:24:37.812 | INFO     | app_bootstrap:_check_resources:350 - 正在检查资源文件...
+2025-09-13 12:24:37.812 | DEBUG    | app_bootstrap:_check_resources:367 - 样式表文件存在: :/ECULab/qss/light/main_window.qss
+2025-09-13 12:24:37.812 | DEBUG    | app_bootstrap:_check_resources:367 - 样式表文件存在: :/ECULab/qss/light/device_channel_card.qss
+2025-09-13 12:24:37.812 | INFO     | app_bootstrap:_check_resources:369 - 资源文件检查完成
+2025-09-13 12:24:37.813 | INFO     | app_bootstrap:_on_step_changed:153 - 启动步骤: 正在设置主题... 
+2025-09-13 12:24:37.813 | INFO     | app_bootstrap:_setup_theme:377 - 正在设置主题...
+2025-09-13 12:24:37.813 | INFO     | app_bootstrap:_setup_theme:383 - 从配置中读取主题: LIGHT
+2025-09-13 12:24:37.989 | INFO     | app_bootstrap:_setup_theme:398 - 主题设置完成
+2025-09-13 12:24:37.991 | INFO     | app_bootstrap:_on_step_changed:153 - 启动步骤: 正在初始化设备... 
+2025-09-13 12:24:37.991 | INFO     | app_bootstrap:_init_devices:406 - 正在初始化设备...
+2025-09-13 12:24:37.991 | INFO     | app_bootstrap:_init_devices:414 - 设备初始化完成
+2025-09-13 12:24:37.994 | INFO     | app_bootstrap:_on_step_changed:153 - 启动步骤: 正在完成启动... 
+2025-09-13 12:24:37.994 | INFO     | app_bootstrap:_finalize_bootstrap:422 - 正在完成启动...
+2025-09-13 12:24:37.994 | INFO     | app_bootstrap:load_config:429 - 已加载所有窗口配置
+2025-09-13 12:24:37.995 | INFO     | app_bootstrap:_finalize_bootstrap:438 - 启动流程完成
+2025-09-13 12:24:37.995 | INFO     | app_bootstrap:_run_bootstrap_process:255 - 自检完成，但小于最短时间，等待 0.49 秒...
+2025-09-13 12:24:38.073 | INFO     | views.widgets.fixed_side_panel:load_device_config:1833 - 正在加载设备连接配置...
+2025-09-13 12:24:38.083 | DEBUG    | views.widgets.fixed_side_panel:_get_hardware_channels_from_device_manager:874 - 从设备管理器获取到 0 个有效CAN通道
+2025-09-13 12:24:38.084 | WARNING  | views.widgets.fixed_side_panel:load_device_config:1861 - 未找到硬件通道: 同星:3F068C4B28D9F924_CAN1，无法恢复绑定
+2025-09-13 12:24:38.487 | INFO     | app_bootstrap:_on_bootstrap_completed:159 - 应用程序启动完成
+2025-09-13 12:24:38.624 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:connect_to_hss_data:127 - HSS示波器已连接到数据流
+2025-09-13 12:24:38.742 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:connect_to_hss_data:127 - HSS示波器已连接到数据流
+2025-09-13 12:24:38.743 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:_apply_render_state:298 - HSS示波器<DockOscilloscope_HSSOscilloscope_示波器 1> 渲染状态: 暂停
+2025-09-13 12:24:38.743 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:applyStyleSheet:69 - 尝试加载 QSS 路径: :/ECULab/qss/light/hss_oscilloscope.qss
+2025-09-13 12:24:38.743 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:applyStyleSheet:72 - QSS 文件 :/ECULab/qss/light/hss_oscilloscope.qss 存在
+2025-09-13 12:24:38.745 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:_set_oscilloscope_background_color:108 - 设置单图模式背景色为: #ffffff
+2025-09-13 12:24:38.745 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:_set_oscilloscope_background_color:118 - 设置当前视图背景色为: #ffffff
+2025-09-13 12:24:38.745 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:load_config:155 - 加载HSS示波器 DockOscilloscope_HSSOscilloscope_示波器 1 配置
+2025-09-13 12:24:38.745 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:set_time_window:247 - 已设置时间窗口: 10.0秒
+2025-09-13 12:24:38.787 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:_restore_channels_config:220 - 已恢复 6 个通道配置
+2025-09-13 12:24:38.851 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:_apply_render_state:298 - HSS示波器<DockOscilloscope_HSSOscilloscope_示波器 1> 渲染状态: 启用
+2025-09-13 12:24:38.860 | DEBUG    | views.widgets.configurable_widget:set_project_path:58 - 为 DockOscilloscope_HSSOscilloscope_示波器 1 设置项目路径: E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab
+2025-09-13 12:24:38.860 | DEBUG    | views.widgets.configurable_manager:register_widget:193 - 已注册可配置窗口: DockOscilloscope_HSSOscilloscope_示波器 1
+2025-09-13 12:24:38.967 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:connect_to_hss_data:127 - HSS示波器已连接到数据流
+2025-09-13 12:24:39.068 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:connect_to_hss_data:127 - HSS示波器已连接到数据流
+2025-09-13 12:24:39.068 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:_apply_render_state:298 - HSS示波器<DockOscilloscope_HSSOscilloscope_示波器 2> 渲染状态: 暂停
+2025-09-13 12:24:39.068 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:applyStyleSheet:69 - 尝试加载 QSS 路径: :/ECULab/qss/light/hss_oscilloscope.qss
+2025-09-13 12:24:39.069 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:applyStyleSheet:72 - QSS 文件 :/ECULab/qss/light/hss_oscilloscope.qss 存在
+2025-09-13 12:24:39.069 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:_set_oscilloscope_background_color:108 - 设置单图模式背景色为: #ffffff
+2025-09-13 12:24:39.069 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:_set_oscilloscope_background_color:118 - 设置当前视图背景色为: #ffffff
+2025-09-13 12:24:39.069 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:load_config:155 - 加载HSS示波器 DockOscilloscope_HSSOscilloscope_示波器 2 配置
+2025-09-13 12:24:39.069 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:set_time_window:247 - 已设置时间窗口: 10.0秒
+2025-09-13 12:24:39.076 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:_restore_channels_config:220 - 已恢复 1 个通道配置
+2025-09-13 12:24:39.126 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:_apply_render_state:298 - HSS示波器<DockOscilloscope_HSSOscilloscope_示波器 1> 渲染状态: 暂停
+2025-09-13 12:24:39.134 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:_apply_render_state:298 - HSS示波器<DockOscilloscope_HSSOscilloscope_示波器 2> 渲染状态: 启用
+2025-09-13 12:24:39.137 | DEBUG    | views.widgets.configurable_widget:set_project_path:58 - 为 DockOscilloscope_HSSOscilloscope_示波器 2 设置项目路径: E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab
+2025-09-13 12:24:39.137 | DEBUG    | views.widgets.configurable_manager:register_widget:193 - 已注册可配置窗口: DockOscilloscope_HSSOscilloscope_示波器 2
+2025-09-13 12:24:39.532 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:connect_to_hss_data:127 - HSS示波器已连接到数据流
+2025-09-13 12:24:39.636 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:connect_to_hss_data:127 - HSS示波器已连接到数据流
+2025-09-13 12:24:39.637 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:_apply_render_state:298 - HSS示波器<Main_HSSOscilloscope_示波器 1> 渲染状态: 暂停
+2025-09-13 12:24:39.637 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:applyStyleSheet:69 - 尝试加载 QSS 路径: :/ECULab/qss/light/hss_oscilloscope.qss
+2025-09-13 12:24:39.638 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:applyStyleSheet:72 - QSS 文件 :/ECULab/qss/light/hss_oscilloscope.qss 存在
+2025-09-13 12:24:39.638 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:_set_oscilloscope_background_color:108 - 设置单图模式背景色为: #ffffff
+2025-09-13 12:24:39.638 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:_set_oscilloscope_background_color:118 - 设置当前视图背景色为: #ffffff
+2025-09-13 12:24:39.695 | DEBUG    | views.widgets.configurable_widget:set_project_path:58 - 为 Main_HSSOscilloscope_示波器 1 设置项目路径: E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab
+2025-09-13 12:24:39.696 | DEBUG    | views.widgets.configurable_manager:register_widget:193 - 已注册可配置窗口: Main_HSSOscilloscope_示波器 1
+2025-09-13 12:24:39.696 | INFO     | views.main_window:onBootstrapCompleted:150 - 应用程序自检流程完成
+2025-09-13 12:24:39.696 | INFO     | views.main_window:onBootstrapCompleted:154 - 处理启动期间积累的AXF文件修改事件
+2025-09-13 12:24:40.196 | INFO     | views.main_window:_on_axf_file_modified:623 - 检测到AXF文件变化: NSUC1602_Eval.axf
+2025-09-13 12:24:41.681 | INFO     | views.main_window:_reparse_variables_after_axf_change:665 - 开始重新解析变量...
+2025-09-13 12:24:41.748 | INFO     | views.main_window:<lambda>:673 - 开始解析变量管理器 1 中的 6 个变量...
+2025-09-13 12:24:41.749 | INFO     | views.main_window:<lambda>:673 - 批量解析第 1 批，共 6 个变量...
+2025-09-13 12:24:42.055 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.axf_parser_core:_ensure_enum_index:1030 - 【性能】已为 NSUC1602_Eval.axf 建立枚举索引，数量=35
+2025-09-13 12:24:42.991 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.axf_parser_core:_parse_struct_member_fast:417 - 成功解析成员 tHfiCtrl.f16DeltaTheta: 基地址=0x20000238, 偏移=10, 实际地址=0x20000242
+2025-09-13 12:24:42.991 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.axf_parser_core:_parse_struct_member_fast:417 - 成功解析成员 tHfiCtrl.f16Theta: 基地址=0x20000238, 偏移=2, 实际地址=0x2000023a
+2025-09-13 12:24:42.991 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.axf_parser_core:_parse_struct_member_fast:417 - 成功解析成员 tHfiCtrl.tIAlBeHfi.f16Arg1: 基地址=0x20000238, 偏移=50, 实际地址=0x2000026a
+2025-09-13 12:24:42.991 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.axf_parser_core:_parse_struct_member_fast:417 - 成功解析成员 tHfiCtrl.tIAlBeHfi.f16Arg2: 基地址=0x20000238, 偏移=52, 实际地址=0x2000026c
+2025-09-13 12:24:42.991 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.axf_parser_core:_parse_struct_member_fast:417 - 成功解析成员 tHfiCtrl.tHFIUdqReq.f16Arg1: 基地址=0x20000238, 偏移=80, 实际地址=0x20000288
+2025-09-13 12:24:42.991 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.axf_parser_core:_parse_struct_member_fast:417 - 成功解析成员 tHfiCtrl.tHFIUdqReq.f16Arg2: 基地址=0x20000238, 偏移=82, 实际地址=0x2000028a
+2025-09-13 12:24:42.992 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.hssSampler:run:644 - 批量解析结果: {'tHfiCtrl.f16DeltaTheta': {'variable': 'tHfiCtrl.f16DeltaTheta', 'status': 'success', 'address': '0x20000242', 'size': '2', 'type': 'short', 'raw_type': 'short', 'offset': 10, 'base_address': '0x20000238'}, 'tHfiCtrl.f16Theta': {'variable': 'tHfiCtrl.f16Theta', 'status': 'success', 'address': '0x2000023a', 'size': '2', 'type': 'short', 'raw_type': 'short', 'offset': 2, 'base_address': '0x20000238'}, 'tHfiCtrl.tIAlBeHfi.f16Arg1': {'variable': 'tHfiCtrl.tIAlBeHfi.f16Arg1', 'status': 'success', 'address': '0x2000026a', 'size': '2', 'type': 'short', 'raw_type': 'short', 'offset': 50, 'base_address': '0x20000238'}, 'tHfiCtrl.tIAlBeHfi.f16Arg2': {'variable': 'tHfiCtrl.tIAlBeHfi.f16Arg2', 'status': 'success', 'address': '0x2000026c', 'size': '2', 'type': 'short', 'raw_type': 'short', 'offset': 52, 'base_address': '0x20000238'}, 'tHfiCtrl.tHFIUdqReq.f16Arg1': {'variable': 'tHfiCtrl.tHFIUdqReq.f16Arg1', 'status': 'success', 'address': '0x20000288', 'size': '2', 'type': 'short', 'raw_type': 'short', 'offset': 80, 'base_address': '0x20000238'}, 'tHfiCtrl.tHFIUdqReq.f16Arg2': {'variable': 'tHfiCtrl.tHFIUdqReq.f16Arg2', 'status': 'success', 'address': '0x2000028a', 'size': '2', 'type': 'short', 'raw_type': 'short', 'offset': 82, 'base_address': '0x20000238'}}
+2025-09-13 12:24:42.992 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.hssSampler:run:644 - 批量解析结果: {'f16CmdTagSpeed': {'variable': 'f16CmdTagSpeed', 'status': 'success', 'address': '0x2000007e', 'size': '2', 'type': 'short', 'raw_type': 'short'}}
+2025-09-13 12:24:43.029 | INFO     | views.main_window:<lambda>:673 - 变量管理器 1 的变量解析完成: 成功=6, 失败=0
+2025-09-13 12:24:43.029 | INFO     | views.main_window:<lambda>:673 - 开始解析变量管理器 2 中的 1 个变量...
+2025-09-13 12:24:43.029 | INFO     | views.main_window:<lambda>:673 - 批量解析第 1 批，共 1 个变量...
+2025-09-13 12:24:43.029 | INFO     | views.main_window:<lambda>:673 - 变量管理器 2 的变量解析完成: 成功=1, 失败=0
+2025-09-13 12:24:43.029 | INFO     | views.main_window:<lambda>:673 - 所有变量管理器的变量解析完成
+2025-09-13 12:24:43.030 | INFO     | views.main_window:_on_reparse_finished:685 - 变量重新解析完成: 成功=7, 失败=0
+2025-09-13 12:24:48.560 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:24:48.561 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:24:48.561 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:24:48.561 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:24:48.561 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:24:48.561 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:24:48.583 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:_calculate_timestamp:243 - 初始化HSS时间参考点: HSS=0.000757秒, 绝对=1757737488.5833478
+2025-09-13 12:24:48.583 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:_calculate_timestamp:243 - 初始化HSS时间参考点: HSS=0.000757秒, 绝对=1757737488.5838485
+2025-09-13 12:24:50.968 | DEBUG    | views.widgets.dock_window.jlink_variable_dock:on_variable_write_requested:84 - 变量 f16CmdTagSpeed 写入成功
+2025-09-13 12:24:53.267 | DEBUG    | views.widgets.dock_window.jlink_variable_dock:on_variable_write_requested:84 - 变量 f16CmdTagSpeed 写入成功
+2025-09-13 12:26:12.274 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.basic_select:_on_file_changed:169 - 文件已修改: 旧=PyQt5.QtCore.QDateTime(2025, 9, 13, 12, 23, 52), 新=PyQt5.QtCore.QDateTime(2025, 9, 13, 12, 26, 12)
+2025-09-13 12:26:12.275 | INFO     | views.main_window:_on_axf_file_modified:623 - 检测到AXF文件变化: NSUC1602_Eval.axf
+2025-09-13 12:26:12.282 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.basic_select:_on_file_changed:138 - 文件修改处理中，忽略重复事件
+2025-09-13 12:26:21.412 | INFO     | views.main_window:_reparse_variables_after_axf_change:656 - 暂停采样以重新解析变量...
+2025-09-13 12:26:21.450 | INFO     | views.main_window:_reparse_variables_after_axf_change:665 - 开始重新解析变量...
+2025-09-13 12:26:22.486 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.axf_parser_core:_ensure_enum_index:1030 - 【性能】已为 NSUC1602_Eval.axf 建立枚举索引，数量=35
+2025-09-13 12:26:23.602 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.axf_parser_core:_parse_struct_member_fast:417 - 成功解析成员 tHfiCtrl.f16DeltaTheta: 基地址=0x20000238, 偏移=10, 实际地址=0x20000242
+2025-09-13 12:26:23.609 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.axf_parser_core:_parse_struct_member_fast:417 - 成功解析成员 tHfiCtrl.f16Theta: 基地址=0x20000238, 偏移=2, 实际地址=0x2000023a
+2025-09-13 12:26:23.611 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.axf_parser_core:_parse_struct_member_fast:417 - 成功解析成员 tHfiCtrl.tIAlBeHfi.f16Arg1: 基地址=0x20000238, 偏移=50, 实际地址=0x2000026a
+2025-09-13 12:26:23.612 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.axf_parser_core:_parse_struct_member_fast:417 - 成功解析成员 tHfiCtrl.tIAlBeHfi.f16Arg2: 基地址=0x20000238, 偏移=52, 实际地址=0x2000026c
+2025-09-13 12:26:23.612 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.axf_parser_core:_parse_struct_member_fast:417 - 成功解析成员 tHfiCtrl.tHFIUdqReq.f16Arg1: 基地址=0x20000238, 偏移=80, 实际地址=0x20000288
+2025-09-13 12:26:23.613 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.axf_parser_core:_parse_struct_member_fast:417 - 成功解析成员 tHfiCtrl.tHFIUdqReq.f16Arg2: 基地址=0x20000238, 偏移=82, 实际地址=0x2000028a
+2025-09-13 12:26:23.618 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.hssSampler:run:644 - 批量解析结果: {'tHfiCtrl.f16DeltaTheta': {'variable': 'tHfiCtrl.f16DeltaTheta', 'status': 'success', 'address': '0x20000242', 'size': '2', 'type': 'short', 'raw_type': 'short', 'offset': 10, 'base_address': '0x20000238'}, 'tHfiCtrl.f16Theta': {'variable': 'tHfiCtrl.f16Theta', 'status': 'success', 'address': '0x2000023a', 'size': '2', 'type': 'short', 'raw_type': 'short', 'offset': 2, 'base_address': '0x20000238'}, 'tHfiCtrl.tIAlBeHfi.f16Arg1': {'variable': 'tHfiCtrl.tIAlBeHfi.f16Arg1', 'status': 'success', 'address': '0x2000026a', 'size': '2', 'type': 'short', 'raw_type': 'short', 'offset': 50, 'base_address': '0x20000238'}, 'tHfiCtrl.tIAlBeHfi.f16Arg2': {'variable': 'tHfiCtrl.tIAlBeHfi.f16Arg2', 'status': 'success', 'address': '0x2000026c', 'size': '2', 'type': 'short', 'raw_type': 'short', 'offset': 52, 'base_address': '0x20000238'}, 'tHfiCtrl.tHFIUdqReq.f16Arg1': {'variable': 'tHfiCtrl.tHFIUdqReq.f16Arg1', 'status': 'success', 'address': '0x20000288', 'size': '2', 'type': 'short', 'raw_type': 'short', 'offset': 80, 'base_address': '0x20000238'}, 'tHfiCtrl.tHFIUdqReq.f16Arg2': {'variable': 'tHfiCtrl.tHFIUdqReq.f16Arg2', 'status': 'success', 'address': '0x2000028a', 'size': '2', 'type': 'short', 'raw_type': 'short', 'offset': 82, 'base_address': '0x20000238'}}
+2025-09-13 12:26:23.625 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.hssSampler:run:644 - 批量解析结果: {'f16CmdTagSpeed': {'variable': 'f16CmdTagSpeed', 'status': 'success', 'address': '0x2000007e', 'size': '2', 'type': 'short', 'raw_type': 'short'}}
+2025-09-13 12:26:23.758 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:26:23.759 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:26:23.759 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:26:23.759 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:26:23.759 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:26:23.759 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:26:23.759 | INFO     | views.main_window:<lambda>:673 - 开始解析变量管理器 1 中的 6 个变量...
+2025-09-13 12:26:23.759 | INFO     | views.main_window:<lambda>:673 - 批量解析第 1 批，共 6 个变量...
+2025-09-13 12:26:23.760 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.basic_select:_on_file_changed:177 - 更新文件监控: E:/电脑keil迁移/20250913/lib_version_MVIM_DPWM_HFI/FOC_App/MDK/Objects/NSUC1602_Eval.axf
+2025-09-13 12:26:23.760 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.basic_select:_on_file_changed:184 - 当前监控的文件: ['E:/电脑keil迁移/20250913/lib_version_MVIM_DPWM_HFI/FOC_App/MDK/Objects/NSUC1602_Eval.axf']
+2025-09-13 12:26:23.760 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.basic_select:_on_file_changed:185 - 当前监控的目录: []
+2025-09-13 12:26:24.419 | INFO     | views.main_window:<lambda>:673 - 变量管理器 1 的变量解析完成: 成功=6, 失败=0
+2025-09-13 12:26:24.419 | INFO     | views.main_window:<lambda>:673 - 开始解析变量管理器 2 中的 1 个变量...
+2025-09-13 12:26:24.420 | INFO     | views.main_window:<lambda>:673 - 批量解析第 1 批，共 1 个变量...
+2025-09-13 12:26:24.420 | INFO     | views.main_window:<lambda>:673 - 变量管理器 2 的变量解析完成: 成功=1, 失败=0
+2025-09-13 12:26:24.420 | INFO     | views.main_window:<lambda>:673 - 所有变量管理器的变量解析完成
+2025-09-13 12:26:24.420 | INFO     | views.main_window:_on_reparse_finished:685 - 变量重新解析完成: 成功=7, 失败=0
+2025-09-13 12:26:34.684 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:26:34.685 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:26:34.685 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:26:34.685 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:26:34.686 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:26:34.686 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:26:34.689 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:_calculate_timestamp:243 - 初始化HSS时间参考点: HSS=0.000758秒, 绝对=1757737594.689441
+2025-09-13 12:26:34.690 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:_calculate_timestamp:243 - 初始化HSS时间参考点: HSS=0.000758秒, 绝对=1757737594.6899414
+2025-09-13 12:26:39.082 | DEBUG    | views.widgets.dock_window.jlink_variable_dock:on_variable_write_requested:84 - 变量 f16CmdTagSpeed 写入成功
+2025-09-13 12:27:04.905 | ERROR    | exception_handler:exception_hook:44 - 未处理的异常：
+Traceback (most recent call last):
+  File "Flexi_CAN_LIN_Bus\jlink_debug_tools\hss_variable_table_widgt.py", line 548, in on_item_changed
+ValueError: could not convert string to float: ''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "Flexi_CAN_LIN_Bus\jlink_debug_tools\hss_variable_table_widgt.py", line 557, in on_item_changed
+AttributeError: 'HSSVariableInfo' object has no attribute 'value'
+
+2025-09-13 12:27:05.912 | CRITICAL | exception_handler:exception_hook:80 - 未处理的异常：
+崩溃时间: 
+    2025-09-13 12:27:04
+操作系统:
+    Windows-10-10.0.18362-SP0
+版本:
+    ECULab
+进程名:
+    ECULab_Pro.exe
+CPU使用率:
+    6.2%
+内存使用率:
+    4.562188380958608%
+运行时间:
+    0:02:28
+错误信息: 
+    Traceback (most recent call last):
+  File "Flexi_CAN_LIN_Bus\jlink_debug_tools\hss_variable_table_widgt.py", line 548, in on_item_changed
+ValueError: could not convert string to float: ''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "Flexi_CAN_LIN_Bus\jlink_debug_tools\hss_variable_table_widgt.py", line 557, in on_item_changed
+AttributeError: 'HSSVariableInfo' object has no attribute 'value'
+
+2025-09-13 12:27:05.913 | ERROR    | exception_handler:exception_hook:81 - 'HSSVariableInfo' object has no attribute 'value'
+NoneType: None
+2025-09-13 12:27:11.581 | INFO     | app_shutdown:start_shutdown:136 - 开始应用程序关闭流程...
+2025-09-13 12:27:12.574 | INFO     | app_shutdown:_on_step_changed:80 - 关闭步骤: 正在保存用户配置... 
+2025-09-13 12:27:12.576 | INFO     | app_shutdown:_save_user_configs:243 - 正在保存用户配置...
+2025-09-13 12:27:12.581 | INFO     | app_shutdown:_save_user_configs:248 - 已保存ini用户系统参数配置
+2025-09-13 12:27:12.612 | DEBUG    | Flexi_CAN_LIN_Bus.jlink_debug_tools.basic_select:export_to_json:366 - 设置已成功导出到 E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\config\debug_tool_settings.json
+2025-09-13 12:27:12.612 | INFO     | views.widgets.configurable_manager:save_all_configs:474 - 已保存debug_tool_settings调试工具设置
+2025-09-13 12:27:12.616 | INFO     | views.widgets.configurable_manager:save_all_configs:491 - 已保存debug_tool_var_manager变量管理器配置
+2025-09-13 12:27:12.619 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:save_config:133 - 保存HSS示波器 DockOscilloscope_HSSOscilloscope_示波器 1 配置
+2025-09-13 12:27:12.619 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:save_config:133 - 保存HSS示波器 DockOscilloscope_HSSOscilloscope_示波器 2 配置
+2025-09-13 12:27:12.621 | INFO     | views.widgets.configurable_manager:save_all_configs:510 - 已保存窗口 示波器 配置
+2025-09-13 12:27:12.626 | DEBUG    | views.widgets.dock_window.jlink_variable_dock:save_config:118 - 已保存变量表配置到 E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\config\jlink_variable_table_widget.json
+2025-09-13 12:27:12.629 | DEBUG    | views.widgets.configurable_widget:save_config_to_file:116 - 已保存 HSSVariableDock 的配置到 E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\config\HSSVariableDock.json
+2025-09-13 12:27:12.629 | INFO     | views.widgets.configurable_manager:save_all_configs:510 - 已保存窗口 HSSVariableDock 配置
+2025-09-13 12:27:12.629 | DEBUG    | views.widgets.dock_window.dock_interface:save_config:467 - 保存 DockInterface 的配置: {'geometry': 'AdnQywADAAAAAAAAAAAAAAAABZIAAANSAAAAAAAAAAAAAAWSAAADUgAAAAAAAAAABdUAAAAAAAAAAAAABZIAAANS', 'state': 'AAAA/wAAAAD9AAAAAgAAAAIAAAWTAAACB/wBAAAAAvsAAAAiAG0AZQBzAHMAYQBnAGUAXwBkAGkAcwBwAGwAYQB5AF8AMQAAAAAAAAAFkwAAAAAAAAAA+wAAABwAbwBzAGMAaQBsAGwAbwBzAGMAbwBwAGUAXwAxAQAAAAAAAAWTAAABiQD///8AAAADAAAFkwAAARz8AQAAAAL7AAAAIABtAGUAcwBzAGEAZwBlAF8AcwBlAG4AZABlAHIAXwAyAAAAAAAAAAWTAAAAAAAAAAD7AAAAIABqAGwAaQBuAGsAXwB2AGEAcgBpAGEAYgBsAGUAXwAyAQAAAAAAAAWTAAABLAD///8AAAWTAAAAAAAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAAB/////wEAAAAA/////wAAAAAAAAAA', 'dockWidgets': {'oscilloscope_1': {'type': 'oscilloscope', 'title': '示波器', 'visible': True, 'floating': False, 'geometry': None, 'dockArea': 4, 'tabified': False}, 'jlink_variable_2': {'type': 'jlink_variable', 'title': '变量读写', 'visible': True, 'floating': False, 'geometry': None, 'dockArea': 8, 'tabified': False}}}
+2025-09-13 12:27:12.645 | DEBUG    | views.widgets.dock_window.dock_interface:save_config_to_file:259 - 已保存 DockInterface 的配置到 E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\config\DockInterface.json
+2025-09-13 12:27:12.645 | INFO     | views.widgets.configurable_manager:save_all_configs:510 - 已保存窗口 DockInterface 配置
+2025-09-13 12:27:12.648 | DEBUG    | views.widgets.configurable_widget:save_config_to_file:116 - 已保存 MdiInterface 的配置到 E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\config\MdiInterface.json
+2025-09-13 12:27:12.648 | INFO     | views.widgets.configurable_manager:save_all_configs:510 - 已保存窗口 MdiInterface 配置
+2025-09-13 12:27:12.648 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:save_config:133 - 保存HSS示波器 DockOscilloscope_HSSOscilloscope_示波器 1 配置
+2025-09-13 12:27:12.651 | DEBUG    | views.widgets.configurable_widget:save_config_to_file:116 - 已保存 DockOscilloscope_HSSOscilloscope_示波器 1 的配置到 E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\config\DockOscilloscope_HSSOscilloscope_示波器 1.json
+2025-09-13 12:27:12.651 | INFO     | views.widgets.configurable_manager:save_all_configs:510 - 已保存窗口 DockOscilloscope_HSSOscilloscope_示波器 1 配置
+2025-09-13 12:27:12.651 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:save_config:133 - 保存HSS示波器 DockOscilloscope_HSSOscilloscope_示波器 2 配置
+2025-09-13 12:27:12.653 | DEBUG    | views.widgets.configurable_widget:save_config_to_file:116 - 已保存 DockOscilloscope_HSSOscilloscope_示波器 2 的配置到 E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\config\DockOscilloscope_HSSOscilloscope_示波器 2.json
+2025-09-13 12:27:12.653 | INFO     | views.widgets.configurable_manager:save_all_configs:510 - 已保存窗口 DockOscilloscope_HSSOscilloscope_示波器 2 配置
+2025-09-13 12:27:12.654 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:save_config:133 - 保存HSS示波器 Main_HSSOscilloscope_示波器 1 配置
+2025-09-13 12:27:12.656 | DEBUG    | views.widgets.configurable_widget:save_config_to_file:116 - 已保存 Main_HSSOscilloscope_示波器 1 的配置到 E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\config\Main_HSSOscilloscope_示波器 1.json
+2025-09-13 12:27:12.656 | INFO     | views.widgets.configurable_manager:save_all_configs:510 - 已保存窗口 Main_HSSOscilloscope_示波器 1 配置
+2025-09-13 12:27:12.657 | INFO     | views.widgets.configurable_manager:save_project:433 - 已保存项目: debug 到 E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab\debug.eculabprj
+2025-09-13 12:27:12.657 | INFO     | views.main_window:_on_project_saved:943 - 项目已保存: debug
+2025-09-13 12:27:12.663 | INFO     | app_shutdown:_save_user_configs:308 - 已保存项目配置: debug
+2025-09-13 12:27:12.663 | INFO     | app_shutdown:_save_user_configs:323 - 已保存当前项目路径到注册表: E:\电脑keil迁移\20250913\lib_version_MVIM_DPWM_HFI\FOC_App\ECUlab
+2025-09-13 12:27:12.663 | INFO     | app_shutdown:_on_step_changed:80 - 关闭步骤: 正在保存Dock窗口... 
+2025-09-13 12:27:12.665 | INFO     | app_shutdown:_save_dock_window:338 - 正在保存Dock窗口...
+2025-09-13 12:27:12.665 | INFO     | app_shutdown:_on_step_changed:80 - 关闭步骤: 正在保存设备配置... 
+2025-09-13 12:27:12.666 | INFO     | app_shutdown:_save_device_configs:373 - 正在保存设备配置...
+2025-09-13 12:27:12.666 | INFO     | views.widgets.fixed_side_panel:save_device_config:1912 - 正在保存设备连接配置...
+2025-09-13 12:27:12.667 | INFO     | app_shutdown:_save_device_configs:379 - 已保存设备面板配置
+2025-09-13 12:27:12.667 | INFO     | app_shutdown:_on_step_changed:80 - 关闭步骤: 正在断开设备连接... 
+2025-09-13 12:27:12.668 | INFO     | app_shutdown:_disconnect_devices:392 - 正在断开设备连接...
+2025-09-13 12:27:12.668 | INFO     | app_shutdown:_disconnect_devices:398 - 已断开所有设备连接
+2025-09-13 12:27:12.698 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:27:12.699 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:27:12.699 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:27:12.699 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:27:12.699 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:27:12.699 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:27:12.699 | INFO     | app_shutdown:_disconnect_devices:406 - 已关闭HSS采样器
+2025-09-13 12:27:12.699 | INFO     | app_shutdown:_on_step_changed:80 - 关闭步骤: 正在清理资源... 
+2025-09-13 12:27:12.701 | INFO     | app_shutdown:_cleanup_resources:417 - 正在清理资源...
+2025-09-13 12:27:12.701 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:save_config:133 - 保存HSS示波器 Main_HSSOscilloscope_示波器 1 配置
+2025-09-13 12:27:12.718 | INFO     | app_shutdown:_cleanup_resources:425 - 已清理示波器资源
+2025-09-13 12:27:12.718 | INFO     | app_shutdown:_cleanup_resources:433 - 已清理侧边栏资源
+2025-09-13 12:27:12.718 | INFO     | app_shutdown:_on_step_changed:80 - 关闭步骤: 正在完成关闭... 
+2025-09-13 12:27:12.721 | INFO     | app_shutdown:_finalize_shutdown:446 - 正在完成关闭流程...
+2025-09-13 12:27:12.721 | INFO     | app_shutdown:_finalize_shutdown:454 - 关闭流程已完成
+2025-09-13 12:27:12.721 | INFO     | app_shutdown:_on_shutdown_completed:111 - 应用程序已完成关闭流程
+2025-09-13 12:27:12.723 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:_calculate_timestamp:243 - 初始化HSS时间参考点: HSS=36.914155秒, 绝对=1757737632.723113
+2025-09-13 12:27:12.724 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:_calculate_timestamp:243 - 初始化HSS时间参考点: HSS=36.914155秒, 绝对=1757737632.724106
+2025-09-13 12:27:13.819 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:27:13.819 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:27:13.819 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:27:13.819 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:27:13.819 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:27:13.819 | DEBUG    | Flexi_CAN_LIN_Bus.oscilloscope.hss_oscilloscope_widget:reset_time_stamp:98 - HSS示波器时间戳已重置
+2025-09-13 12:27:13.889 | DEBUG    | views.widgets.canaio_hss_oscilloscope_widget:_apply_render_state:298 - HSS示波器<DockOscilloscope_HSSOscilloscope_示波器 2> 渲染状态: 暂停

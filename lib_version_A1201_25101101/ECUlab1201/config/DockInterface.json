@@ -1,0 +1,288 @@
+{
+  "geometry": "AdnQywADAAAAAAAAAAAAAAAABzYAAAPCAAAAAAAAAAAAAAc2AAADwgAAAAAAAAAAB4AAAAAAAAAAAAAABzYAAAPC",
+  "state": "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",
+  "dockWidgets": {
+    "oscilloscope_1": {
+      "type": "oscilloscope",
+      "title": "示波器",
+      "visible": true,
+      "floating": false,
+      "geometry": null,
+      "dockArea": 4,
+      "tabified": false,
+      "content_config": {
+        "tabs": [
+          {
+            "name": "示波器 3",
+            "oscilloscope_config": {
+              "hss_oscilloscope": {
+                "time_window": 10.0,
+                "channels": [
+                  {
+                    "id": "tDrvFoc.tIabcFbck.f16Arg1",
+                    "name": "tDrvFoc.tIabcFbck.f16Arg1",
+                    "color": "#FF0000",
+                    "visible": true,
+                    "line_width": 2.0,
+                    "scale_factor": 0.00211,
+                    "offset": 0.0,
+                    "metadata": {
+                      "address": 536871766,
+                      "var_type": "INT16",
+                      "byte_size": 2,
+                      "description": ""
+                    }
+                  },
+                  {
+                    "id": "tDrvFoc.tIDQFbck.f16Arg2",
+                    "name": "tDrvFoc.tIDQFbck.f16Arg2",
+                    "color": "#00FF00",
+                    "visible": true,
+                    "line_width": 2.0,
+                    "scale_factor": 1.0,
+                    "offset": 0.0,
+                    "metadata": {
+                      "address": 536871726,
+                      "var_type": "INT16",
+                      "byte_size": 2,
+                      "description": ""
+                    }
+                  },
+                  {
+                    "id": "tDrvFoc.tIDQFbck.f16Arg1",
+                    "name": "tDrvFoc.tIDQFbck.f16Arg1",
+                    "color": "#0000FF",
+                    "visible": true,
+                    "line_width": 2.0,
+                    "scale_factor": 1.0,
+                    "offset": 0.0,
+                    "metadata": {
+                      "address": 536871724,
+                      "var_type": "INT16",
+                      "byte_size": 2,
+                      "description": ""
+                    }
+                  }
+                ],
+                "y_padding": 0.5,
+                "min_relative_y_range": 0.3
+              }
+            }
+          },
+          {
+            "name": "示波器 2",
+            "oscilloscope_config": {
+              "hss_oscilloscope": {
+                "time_window": 10.0,
+                "channels": [
+                  {
+                    "id": "tDrvFoc.tPospeControl.f16wRotE1",
+                    "name": "tDrvFoc.tPospeControl.f16wRotE1",
+                    "color": "#FF0000",
+                    "visible": true,
+                    "line_width": 2.0,
+                    "scale_factor": 0.122,
+                    "offset": 0.0,
+                    "metadata": {
+                      "address": 536871878,
+                      "var_type": "INT16",
+                      "byte_size": 2,
+                      "description": ""
+                    }
+                  },
+                  {
+                    "id": "g_f16IqCompVal",
+                    "name": "g_f16IqCompVal",
+                    "color": "#00FF00",
+                    "visible": true,
+                    "line_width": 2.0,
+                    "scale_factor": 1.0,
+                    "offset": 0.0,
+                    "metadata": {
+                      "address": 536871232,
+                      "var_type": "INT16",
+                      "byte_size": 2,
+                      "description": ""
+                    }
+                  },
+                  {
+                    "id": "f16ThetaMech",
+                    "name": "f16ThetaMech",
+                    "color": "#0000FF",
+                    "visible": true,
+                    "line_width": 2.0,
+                    "scale_factor": 1.0,
+                    "offset": 0.0,
+                    "metadata": {
+                      "address": 536871252,
+                      "var_type": "INT16",
+                      "byte_size": 2,
+                      "description": ""
+                    }
+                  },
+                  {
+                    "id": "tDrvFoc.tIDQFbck.f16Arg2",
+                    "name": "tDrvFoc.tIDQFbck.f16Arg2",
+                    "color": "#FFFF00",
+                    "visible": true,
+                    "line_width": 2.0,
+                    "scale_factor": 1.0,
+                    "offset": 0.0,
+                    "metadata": {
+                      "address": 536871738,
+                      "var_type": "INT16",
+                      "byte_size": 2,
+                      "description": ""
+                    }
+                  }
+                ],
+                "y_padding": 0.5,
+                "min_relative_y_range": 0.3
+              }
+            }
+          }
+        ]
+      },
+      "metadata": {}
+    },
+    "jlink_variable_2": {
+      "type": "jlink_variable",
+      "title": "变量读写",
+      "visible": true,
+      "floating": false,
+      "geometry": null,
+      "dockArea": 8,
+      "tabified": false,
+      "content_config": {
+        "status": "saved",
+        "path": "//192.168.93.1/共享文件夹/44_RD/alg/02_branches/99_TEST_PRJ/03_VOLV/lib_version_A1201_25101101/ECUlab1201\\config\\jlink_variable_table_widget.json"
+      },
+      "metadata": {}
+    },
+    "system_variable_3": {
+      "type": "system_variable",
+      "title": "系统变量",
+      "visible": true,
+      "floating": false,
+      "geometry": null,
+      "dockArea": 4,
+      "tabified": true,
+      "content_config": {},
+      "metadata": {}
+    },
+    "system_dashboard_4": {
+      "type": "system_dashboard",
+      "title": "系统控制",
+      "visible": true,
+      "floating": false,
+      "geometry": null,
+      "dockArea": 4,
+      "tabified": true,
+      "content_config": {
+        "layout": {
+          "type": "smart_mixed",
+          "grid_cols": 3,
+          "grid_rows": 3,
+          "grid_constraint": "cols"
+        },
+        "widgets": [
+          {
+            "type": "DashGauge",
+            "config": {
+              "variable": "实际转速",
+              "title": "实际转速",
+              "min": -4000.0,
+              "max": 4000.0,
+              "unit": "RPM",
+              "mode": "Read Only"
+            }
+          },
+          {
+            "type": "DashLabel",
+            "config": {
+              "variable": "电压",
+              "title": "电压",
+              "min": 0.0,
+              "max": 50.0,
+              "unit": "V",
+              "mode": "Read Only"
+            }
+          },
+          {
+            "type": "DashLabel",
+            "config": {
+              "variable": "MOS温度",
+              "title": "MOS温度",
+              "min": 0.0,
+              "max": 200.0,
+              "unit": "℃",
+              "mode": "Read Only"
+            }
+          },
+          {
+            "type": "DashSlider",
+            "config": {
+              "variable": "转速指令",
+              "title": "转速指令",
+              "min": -4000.0,
+              "max": 4000.0,
+              "unit": "RPM",
+              "mode": "Write Only"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "created_at": "7f9f2785-3624-45aa-a5fe-e5153f733e05",
+        "config_name": "system_dashboard::514b53f876c842cc9694a427a2774e81",
+        "dashboard_title": "系统控制"
+      }
+    },
+    "system_dashboard_5": {
+      "type": "system_dashboard",
+      "title": "参数辨识",
+      "visible": true,
+      "floating": false,
+      "geometry": null,
+      "dockArea": 4,
+      "tabified": true,
+      "content_config": {
+        "layout": {
+          "type": "flow",
+          "grid_cols": 3,
+          "grid_rows": 3,
+          "grid_constraint": "cols"
+        },
+        "widgets": [
+          {
+            "type": "DashLabel",
+            "config": {
+              "variable": "电感-LD",
+              "title": "电感-LD",
+              "min": 0.0,
+              "max": 10000.0,
+              "unit": "uh",
+              "mode": "Read Only"
+            }
+          },
+          {
+            "type": "DashLabel",
+            "config": {
+              "variable": "电感-LQ",
+              "title": "电感-LQ",
+              "min": 0.0,
+              "max": 10000.0,
+              "unit": "uh",
+              "mode": "Read Only"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "created_at": "00a726e7-119d-4ad8-8cf1-fd171590c115",
+        "config_name": "system_dashboard::bb9a54eb401d47a29d1f46b0d76f1f5a",
+        "dashboard_title": "参数辨识"
+      }
+    }
+  }
+}

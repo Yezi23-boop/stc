@@ -1,0 +1,9 @@
+{
+    "axf_file_path": "E:/电脑keil迁移/20250913/lib_version_MVIM_DPWM_HFI/FOC_App/MDK/Objects/NSUC1602_Eval.axf",
+    "debug_interface": "SWD",
+    "device_family": "Cortex-M3",
+    "device_speed": 4000,
+    "serial_number": null,
+    "sampling_rate": 100.0,
+    "current_signature": "1757756536.0"
+}

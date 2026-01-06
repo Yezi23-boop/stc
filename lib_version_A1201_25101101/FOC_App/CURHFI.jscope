@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<JScopeProject>
+    <FileVersion major="1" minor="1" />
+    <Project>
+        <Configuration>
+            <JLink>
+                <Options Connection="1" IsRTTSession="0" IsRTTWithTimeStamp="0" SamplingPeriod="10" SerialNo="0" JTAG_IRPre="0" JTAG_DRPre="0" IP="" TargetDevice="Cortex-M3" TargetInterface="SWD" InterfaceSpeed="6000" />
+            </JLink>
+            <ElfFile Name="E:\电脑keil迁移\20250915\lib_version_MVIM_DPWM_HFI_0914_随机注入_分频注入优化\FOC_App\MDK\Objects\NSUC1602_Eval.axf" />
+            <Scope>
+                <Options TimeResolutionUs="1000000" />
+            </Scope>
+        </Configuration>
+        <Windows>
+            <Graph Show="1" />
+            <Watch Show="1" />
+        </Windows>
+        <SelectedSymbols>
+            <Symbol>
+                <Options Name="f16Arg1" Address="0x200003AE" Type="short" TypeID="11" Size="2" GraphColorRed="255" GraphColorGreen="0" GraphColorBlue="0" YMinSampled="-2280" YMaxSampled="2344" YAvgSampled="177.923" Offset="4" ShowInGraph="1" ACCoupling="0" YOffset="0" IsAutoConfig="0" YResolution="1000" MaxValue="32767" File="" Scope="1" DrawStyle="0" />
+            </Symbol>
+        </SelectedSymbols>
+    </Project>
+</JScopeProject>

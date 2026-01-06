@@ -1,0 +1,10 @@
+.\objects\iq_filter.o: ..\User\FOCLIB\src\iq_filter.c
+.\objects\iq_filter.o: ..\User\FOCLIB\inc\iq_filter.h
+.\objects\iq_filter.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\iq_filter.o: ..\..\common\System\typedef.h
+.\objects\iq_filter.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\iq_filter.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\iq_filter.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\iq_filter.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\iq_filter.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\iq_filter.o: ..\User\NovosnsMotorMath\inc\mm_lib.h

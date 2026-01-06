@@ -1,0 +1,812 @@
+Dependencies for Project 'NSUC1602_FOC', Target 'NSUC1602': (DO NOT MODIFY !)
+F (..\..\common\System\startup_NSUC1602.s)(0x693D2C6E)(--cpu Cortex-M3 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 525"--list .\listings\startup_nsuc1602.lst --xref -o .\objects\startup_nsuc1602.o --depend .\objects\startup_nsuc1602.d)
+F (..\user\main.c)(0x693E9737)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
+I (..\User\NovosnsFoc\inc\nvsns_foc.h)(0x695A095D)
+I (..\User\NovosnsMotorMath\inc\amc_lib.h)(0x6954E4CF)
+I (..\User\NovosnsMotorMath\inc\gcf_lib.h)(0x6954DF89)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+I (..\User\NovosnsMotorMath\inc\gmc_lib.h)(0x6954E365)
+I (..\User\NovosnsMotorMath\inc\nvsns_type_def.h)(0x6954DEE3)
+I (..\User\NovosnsFoc\inc\state_machine.h)(0x6954EC50)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\..\common\System\typedef.h)(0x693D2C6F)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599ECD2E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\User\NovosnsMtrAdvance\inc\windmilling.h)(0x6954E8EA)
+I (..\User\NovosnsMtrAdvance\inc\amc_fluxweakening.h)(0x6954E517)
+I (..\User\Include\Module_Define.h)(0x693D2C89)
+I (..\User\NovosnsFoc\inc\foc_init.h)(0x693D2C95)
+I (..\User\FaultDiagnosis\inc\fault_diagnose.h)(0x693D2C94)
+I (..\User\FaultDiagnosis\inc\fault_init.h)(0x693D2C94)
+I (..\User\FaultDiagnosis\inc\fault_handler.h)(0x693D2C94)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\LIN\lin_define.h)(0x693D2C8B)
+I (..\User\LIN\lin_api.h)(0x693D2C8A)
+I (..\User\LIN\lin_api_appl.h)(0x693E9CC7)
+I (..\User\LIN\lin_config.h)(0x693D2C8B)
+I (..\User\LIN\lin_nvr.h)(0x693D2C8C)
+I (..\User\LIN\lin_identification_and_configuration.h)(0x693D2C8B)
+I (..\User\NovosnsMtrAdvance\inc\curr_sample_1rps.h)(0x6954E562)
+I (..\User\NovosnsFoc\inc\foc_config.h)(0x695A19B1)
+I (..\..\common\Driver\inc\SysTick.h)(0x693D2C8C)
+I (..\..\common\Driver\inc\SysTick_isr.h)(0x693D2C8C)
+I (..\User\Include\config.h)(0x693E9CAB)
+I (..\User\Include\global.h)(0x693F733C)
+I (..\User\Include\derating_control.h)(0x693D2C8A)
+I (..\User\Include\motor_state_ctrl.h)(0x693D2C8A)
+I (..\User\Include\NTCdrive.h)(0x693D2C89)
+I (..\User\Include\sleep_control.h)(0x693D2C8A)
+I (..\User\Include\testFun.h)(0x693D2C8A)
+I (..\User\FOCLIB\inc\hfi_lib.h)(0x693D2C91)
+I (..\User\FOCLIB\inc\pll_pi.h)(0x693D2C92)
+F (..\User\lin_appl.c)(0x693E9CDF)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\lin_appl.o --omf_browse .\objects\lin_appl.crf --depend .\objects\lin_appl.d)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
+I (..\User\NovosnsFoc\inc\nvsns_foc.h)(0x695A095D)
+I (..\User\NovosnsMotorMath\inc\amc_lib.h)(0x6954E4CF)
+I (..\User\NovosnsMotorMath\inc\gcf_lib.h)(0x6954DF89)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+I (..\User\NovosnsMotorMath\inc\gmc_lib.h)(0x6954E365)
+I (..\User\NovosnsMotorMath\inc\nvsns_type_def.h)(0x6954DEE3)
+I (..\User\NovosnsFoc\inc\state_machine.h)(0x6954EC50)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\..\common\System\typedef.h)(0x693D2C6F)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599ECD2E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\User\NovosnsMtrAdvance\inc\windmilling.h)(0x6954E8EA)
+I (..\User\NovosnsMtrAdvance\inc\amc_fluxweakening.h)(0x6954E517)
+I (..\User\NovosnsFoc\inc\foc_init.h)(0x693D2C95)
+I (..\User\FaultDiagnosis\inc\fault_diagnose.h)(0x693D2C94)
+I (..\User\FaultDiagnosis\inc\fault_init.h)(0x693D2C94)
+I (..\User\FaultDiagnosis\inc\fault_handler.h)(0x693D2C94)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\LIN\lin_define.h)(0x693D2C8B)
+I (..\User\LIN\lin_api.h)(0x693D2C8A)
+I (..\User\LIN\lin_api_appl.h)(0x693E9CC7)
+I (..\User\LIN\lin_config.h)(0x693D2C8B)
+I (..\User\LIN\lin_nvr.h)(0x693D2C8C)
+I (..\User\LIN\lin_identification_and_configuration.h)(0x693D2C8B)
+I (..\User\NovosnsMtrAdvance\inc\curr_sample_1rps.h)(0x6954E562)
+I (..\User\NovosnsFoc\inc\foc_config.h)(0x695A19B1)
+I (..\..\common\Driver\inc\SysTick.h)(0x693D2C8C)
+I (..\User\Include\config.h)(0x693E9CAB)
+I (..\User\Include\global.h)(0x693F733C)
+F (..\User\pwm_appl.c)(0x693D2C6E)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\pwm_appl.o --omf_browse .\objects\pwm_appl.crf --depend .\objects\pwm_appl.d)
+I (..\User\Include\Module_Define.h)(0x693D2C89)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
+I (..\User\NovosnsFoc\inc\nvsns_foc.h)(0x695A095D)
+I (..\User\NovosnsMotorMath\inc\amc_lib.h)(0x6954E4CF)
+I (..\User\NovosnsMotorMath\inc\gcf_lib.h)(0x6954DF89)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+I (..\User\NovosnsMotorMath\inc\gmc_lib.h)(0x6954E365)
+I (..\User\NovosnsMotorMath\inc\nvsns_type_def.h)(0x6954DEE3)
+I (..\User\NovosnsFoc\inc\state_machine.h)(0x6954EC50)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\..\common\System\typedef.h)(0x693D2C6F)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599ECD2E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\User\NovosnsMtrAdvance\inc\windmilling.h)(0x6954E8EA)
+I (..\User\NovosnsMtrAdvance\inc\amc_fluxweakening.h)(0x6954E517)
+I (..\User\NovosnsFoc\inc\foc_init.h)(0x693D2C95)
+I (..\User\FaultDiagnosis\inc\fault_diagnose.h)(0x693D2C94)
+I (..\User\FaultDiagnosis\inc\fault_init.h)(0x693D2C94)
+I (..\User\FaultDiagnosis\inc\fault_handler.h)(0x693D2C94)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\LIN\lin_define.h)(0x693D2C8B)
+I (..\User\LIN\lin_api.h)(0x693D2C8A)
+I (..\User\LIN\lin_api_appl.h)(0x693E9CC7)
+I (..\User\LIN\lin_config.h)(0x693D2C8B)
+I (..\User\LIN\lin_nvr.h)(0x693D2C8C)
+I (..\User\LIN\lin_identification_and_configuration.h)(0x693D2C8B)
+I (..\User\NovosnsMtrAdvance\inc\curr_sample_1rps.h)(0x6954E562)
+I (..\User\NovosnsFoc\inc\foc_config.h)(0x695A19B1)
+I (..\..\common\Driver\inc\SysTick.h)(0x693D2C8C)
+I (..\..\common\Driver\inc\SysTick_isr.h)(0x693D2C8C)
+I (..\User\Include\config.h)(0x693E9CAB)
+I (..\User\Include\global.h)(0x693F733C)
+I (..\User\Include\derating_control.h)(0x693D2C8A)
+I (..\User\Include\motor_state_ctrl.h)(0x693D2C8A)
+I (..\User\Include\NTCdrive.h)(0x693D2C89)
+F (..\User\Source\motor_state_ctrl.c)(0x693E9D64)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\motor_state_ctrl.o --omf_browse .\objects\motor_state_ctrl.crf --depend .\objects\motor_state_ctrl.d)
+I (..\User\Include\Module_Define.h)(0x693D2C89)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
+I (..\User\NovosnsFoc\inc\nvsns_foc.h)(0x695A095D)
+I (..\User\NovosnsMotorMath\inc\amc_lib.h)(0x6954E4CF)
+I (..\User\NovosnsMotorMath\inc\gcf_lib.h)(0x6954DF89)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+I (..\User\NovosnsMotorMath\inc\gmc_lib.h)(0x6954E365)
+I (..\User\NovosnsMotorMath\inc\nvsns_type_def.h)(0x6954DEE3)
+I (..\User\NovosnsFoc\inc\state_machine.h)(0x6954EC50)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\..\common\System\typedef.h)(0x693D2C6F)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599ECD2E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\User\NovosnsMtrAdvance\inc\windmilling.h)(0x6954E8EA)
+I (..\User\NovosnsMtrAdvance\inc\amc_fluxweakening.h)(0x6954E517)
+I (..\User\NovosnsFoc\inc\foc_init.h)(0x693D2C95)
+I (..\User\FaultDiagnosis\inc\fault_diagnose.h)(0x693D2C94)
+I (..\User\FaultDiagnosis\inc\fault_init.h)(0x693D2C94)
+I (..\User\FaultDiagnosis\inc\fault_handler.h)(0x693D2C94)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\LIN\lin_define.h)(0x693D2C8B)
+I (..\User\LIN\lin_api.h)(0x693D2C8A)
+I (..\User\LIN\lin_api_appl.h)(0x693E9CC7)
+I (..\User\LIN\lin_config.h)(0x693D2C8B)
+I (..\User\LIN\lin_nvr.h)(0x693D2C8C)
+I (..\User\LIN\lin_identification_and_configuration.h)(0x693D2C8B)
+I (..\User\NovosnsMtrAdvance\inc\curr_sample_1rps.h)(0x6954E562)
+I (..\User\NovosnsFoc\inc\foc_config.h)(0x695A19B1)
+I (..\..\common\Driver\inc\SysTick.h)(0x693D2C8C)
+I (..\..\common\Driver\inc\SysTick_isr.h)(0x693D2C8C)
+I (..\User\Include\config.h)(0x693E9CAB)
+I (..\User\Include\global.h)(0x693F733C)
+I (..\User\Include\derating_control.h)(0x693D2C8A)
+I (..\User\Include\motor_state_ctrl.h)(0x693D2C8A)
+I (..\User\Include\NTCdrive.h)(0x693D2C89)
+I (..\User\Include\testFun.h)(0x693D2C8A)
+F (..\User\Source\derating_control.c)(0x693D2C8C)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\derating_control.o --omf_browse .\objects\derating_control.crf --depend .\objects\derating_control.d)
+I (..\User\Include\derating_control.h)(0x693D2C8A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+I (..\User\NovosnsFoc\inc\nvsns_foc.h)(0x695A095D)
+I (..\User\NovosnsMotorMath\inc\amc_lib.h)(0x6954E4CF)
+I (..\User\NovosnsMotorMath\inc\gcf_lib.h)(0x6954DF89)
+I (..\User\NovosnsMotorMath\inc\gmc_lib.h)(0x6954E365)
+I (..\User\NovosnsMotorMath\inc\nvsns_type_def.h)(0x6954DEE3)
+I (..\User\NovosnsFoc\inc\state_machine.h)(0x6954EC50)
+I (..\..\common\System\typedef.h)(0x693D2C6F)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599ECD2E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\User\NovosnsMtrAdvance\inc\windmilling.h)(0x6954E8EA)
+I (..\User\NovosnsMtrAdvance\inc\amc_fluxweakening.h)(0x6954E517)
+I (..\User\Include\config.h)(0x693E9CAB)
+F (..\User\NTCdrive.c)(0x693D2C6E)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\ntcdrive.o --omf_browse .\objects\ntcdrive.crf --depend .\objects\ntcdrive.d)
+I (..\User\Include\Module_Define.h)(0x693D2C89)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
+I (..\User\NovosnsFoc\inc\nvsns_foc.h)(0x695A095D)
+I (..\User\NovosnsMotorMath\inc\amc_lib.h)(0x6954E4CF)
+I (..\User\NovosnsMotorMath\inc\gcf_lib.h)(0x6954DF89)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+I (..\User\NovosnsMotorMath\inc\gmc_lib.h)(0x6954E365)
+I (..\User\NovosnsMotorMath\inc\nvsns_type_def.h)(0x6954DEE3)
+I (..\User\NovosnsFoc\inc\state_machine.h)(0x6954EC50)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\..\common\System\typedef.h)(0x693D2C6F)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599ECD2E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\User\NovosnsMtrAdvance\inc\windmilling.h)(0x6954E8EA)
+I (..\User\NovosnsMtrAdvance\inc\amc_fluxweakening.h)(0x6954E517)
+I (..\User\NovosnsFoc\inc\foc_init.h)(0x693D2C95)
+I (..\User\FaultDiagnosis\inc\fault_diagnose.h)(0x693D2C94)
+I (..\User\FaultDiagnosis\inc\fault_init.h)(0x693D2C94)
+I (..\User\FaultDiagnosis\inc\fault_handler.h)(0x693D2C94)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\LIN\lin_define.h)(0x693D2C8B)
+I (..\User\LIN\lin_api.h)(0x693D2C8A)
+I (..\User\LIN\lin_api_appl.h)(0x693E9CC7)
+I (..\User\LIN\lin_config.h)(0x693D2C8B)
+I (..\User\LIN\lin_nvr.h)(0x693D2C8C)
+I (..\User\LIN\lin_identification_and_configuration.h)(0x693D2C8B)
+I (..\User\NovosnsMtrAdvance\inc\curr_sample_1rps.h)(0x6954E562)
+I (..\User\NovosnsFoc\inc\foc_config.h)(0x695A19B1)
+I (..\..\common\Driver\inc\SysTick.h)(0x693D2C8C)
+I (..\..\common\Driver\inc\SysTick_isr.h)(0x693D2C8C)
+I (..\User\Include\config.h)(0x693E9CAB)
+I (..\User\Include\global.h)(0x693F733C)
+I (..\User\Include\derating_control.h)(0x693D2C8A)
+I (..\User\Include\motor_state_ctrl.h)(0x693D2C8A)
+I (..\User\Include\NTCdrive.h)(0x693D2C89)
+F (..\User\Source\testFun.c)(0x693D2C8C)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\testfun.o --omf_browse .\objects\testfun.crf --depend .\objects\testfun.d)
+I (..\User\Include\testFun.h)(0x693D2C8A)
+I (..\User\NovosnsFoc\inc\nvsns_foc.h)(0x695A095D)
+I (..\User\NovosnsMotorMath\inc\amc_lib.h)(0x6954E4CF)
+I (..\User\NovosnsMotorMath\inc\gcf_lib.h)(0x6954DF89)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+I (..\User\NovosnsMotorMath\inc\gmc_lib.h)(0x6954E365)
+I (..\User\NovosnsMotorMath\inc\nvsns_type_def.h)(0x6954DEE3)
+I (..\User\NovosnsFoc\inc\state_machine.h)(0x6954EC50)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\..\common\System\typedef.h)(0x693D2C6F)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599ECD2E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\User\NovosnsMtrAdvance\inc\windmilling.h)(0x6954E8EA)
+I (..\User\NovosnsMtrAdvance\inc\amc_fluxweakening.h)(0x6954E517)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (..\User\Include\global.h)(0x693F733C)
+I (..\User\FaultDiagnosis\inc\fault_diagnose.h)(0x693D2C94)
+I (..\User\Include\config.h)(0x693E9CAB)
+F (..\User\Source\sleep_control.c)(0x693D2C8C)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\sleep_control.o --omf_browse .\objects\sleep_control.crf --depend .\objects\sleep_control.d)
+I (..\User\Include\Module_Define.h)(0x693D2C89)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
+I (..\User\NovosnsFoc\inc\nvsns_foc.h)(0x695A095D)
+I (..\User\NovosnsMotorMath\inc\amc_lib.h)(0x6954E4CF)
+I (..\User\NovosnsMotorMath\inc\gcf_lib.h)(0x6954DF89)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+I (..\User\NovosnsMotorMath\inc\gmc_lib.h)(0x6954E365)
+I (..\User\NovosnsMotorMath\inc\nvsns_type_def.h)(0x6954DEE3)
+I (..\User\NovosnsFoc\inc\state_machine.h)(0x6954EC50)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\..\common\System\typedef.h)(0x693D2C6F)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599ECD2E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\User\NovosnsMtrAdvance\inc\windmilling.h)(0x6954E8EA)
+I (..\User\NovosnsMtrAdvance\inc\amc_fluxweakening.h)(0x6954E517)
+I (..\User\NovosnsFoc\inc\foc_init.h)(0x693D2C95)
+I (..\User\FaultDiagnosis\inc\fault_diagnose.h)(0x693D2C94)
+I (..\User\FaultDiagnosis\inc\fault_init.h)(0x693D2C94)
+I (..\User\FaultDiagnosis\inc\fault_handler.h)(0x693D2C94)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\LIN\lin_define.h)(0x693D2C8B)
+I (..\User\LIN\lin_api.h)(0x693D2C8A)
+I (..\User\LIN\lin_api_appl.h)(0x693E9CC7)
+I (..\User\LIN\lin_config.h)(0x693D2C8B)
+I (..\User\LIN\lin_nvr.h)(0x693D2C8C)
+I (..\User\LIN\lin_identification_and_configuration.h)(0x693D2C8B)
+I (..\User\NovosnsMtrAdvance\inc\curr_sample_1rps.h)(0x6954E562)
+I (..\User\NovosnsFoc\inc\foc_config.h)(0x695A19B1)
+I (..\..\common\Driver\inc\SysTick.h)(0x693D2C8C)
+I (..\..\common\Driver\inc\SysTick_isr.h)(0x693D2C8C)
+I (..\User\Include\config.h)(0x693E9CAB)
+I (..\User\Include\global.h)(0x693F733C)
+I (..\User\Include\derating_control.h)(0x693D2C8A)
+I (..\User\Include\motor_state_ctrl.h)(0x693D2C8A)
+I (..\User\Include\NTCdrive.h)(0x693D2C89)
+I (..\User\Include\sleep_control.h)(0x693D2C8A)
+F (..\..\common\System\handler.c)(0x693D2C6E)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\handler.o --omf_browse .\objects\handler.crf --depend .\objects\handler.d)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\..\common\Driver\inc\Systick.h)(0x693D2C8C)
+F (..\..\common\System\Retarget.c)(0x693D2C6E)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\retarget.o --omf_browse .\objects\retarget.crf --depend .\objects\retarget.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
+I (..\..\common\System\NSUC1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+F (..\..\common\System\sysport.c)(0x693D2C6F)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\sysport.o --omf_browse .\objects\sysport.crf --depend .\objects\sysport.d)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+F (..\..\common\System\system.c)(0x693D2C6F)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\system.o --omf_browse .\objects\system.crf --depend .\objects\system.d)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+F (..\..\common\Driver\src\SysTick.c)(0x693D2C8D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\systick.o --omf_browse .\objects\systick.crf --depend .\objects\systick.d)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\..\common\Driver\inc\SysTick.h)(0x693D2C8C)
+I (..\..\common\Driver\inc\SysTick_isr.h)(0x693D2C8C)
+F (..\..\common\Driver\src\uart.c)(0x693D2C8D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\uart.o --omf_browse .\objects\uart.crf --depend .\objects\uart.d)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+F (..\..\common\Driver\src\SysTick_isr.c)(0x693D2C8D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\systick_isr.o --omf_browse .\objects\systick_isr.crf --depend .\objects\systick_isr.d)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\..\common\Driver\inc\SysTick.h)(0x693D2C8C)
+F (..\User\NovosnsMotorMath\src\NSUC1602_Motor_Math.lib)(0x693D2C97)()
+F (..\User\NovosnsMtrAdvance\src\mtr_adv_init.c)(0x693D2C98)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\mtr_adv_init.o --omf_browse .\objects\mtr_adv_init.crf --depend .\objects\mtr_adv_init.d)
+I (..\User\NovosnsMtrAdvance\inc\mtr_adv_init.h)(0x6954E7EB)
+I (..\User\NovosnsMtrAdvance\inc\windmilling.h)(0x6954E8EA)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\User\NovosnsMotorMath\inc\nvsns_type_def.h)(0x6954DEE3)
+I (..\User\NovosnsMotorMath\inc\gcf_lib.h)(0x6954DF89)
+I (..\User\NovosnsMotorMath\inc\amc_lib.h)(0x6954E4CF)
+I (..\User\NovosnsMotorMath\inc\gmc_lib.h)(0x6954E365)
+I (..\User\NovosnsMtrAdvance\inc\amc_fluxweakening.h)(0x6954E517)
+I (..\User\NovosnsMtrAdvance\inc\stall_detection.h)(0x6954E8BE)
+I (..\User\NovosnsFoc\inc\nvsns_foc.h)(0x695A095D)
+I (..\User\NovosnsFoc\inc\state_machine.h)(0x6954EC50)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\..\common\System\typedef.h)(0x693D2C6F)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599ECD2E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+F (..\User\NovosnsFoc\src\foc_init.c)(0x695A4F4E)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\foc_init.o --omf_browse .\objects\foc_init.crf --depend .\objects\foc_init.d)
+I (..\User\NovosnsFoc\inc\foc_init.h)(0x693D2C95)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\User\NovosnsFoc\inc\foc_config.h)(0x695A19B1)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+I (..\User\FaultDiagnosis\inc\fault_hw_config.h)(0x693D2C94)
+F (..\User\NovosnsFoc\src\foc_paras.c)(0x695B2FA7)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\foc_paras.o --omf_browse .\objects\foc_paras.crf --depend .\objects\foc_paras.d)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\User\FaultDiagnosis\inc\fault_hw_config.h)(0x693D2C94)
+F (..\User\NovosnsFoc\src\nvsns_foc.c)(0x695B2EFE)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\nvsns_foc.o --omf_browse .\objects\nvsns_foc.crf --depend .\objects\nvsns_foc.d)
+I (..\User\NovosnsFoc\inc\nvsns_foc.h)(0x695A095D)
+I (..\User\NovosnsMotorMath\inc\amc_lib.h)(0x6954E4CF)
+I (..\User\NovosnsMotorMath\inc\gcf_lib.h)(0x6954DF89)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+I (..\User\NovosnsMotorMath\inc\gmc_lib.h)(0x6954E365)
+I (..\User\NovosnsMotorMath\inc\nvsns_type_def.h)(0x6954DEE3)
+I (..\User\NovosnsFoc\inc\state_machine.h)(0x6954EC50)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\..\common\System\typedef.h)(0x693D2C6F)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599ECD2E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\User\NovosnsMtrAdvance\inc\windmilling.h)(0x6954E8EA)
+I (..\User\NovosnsMtrAdvance\inc\amc_fluxweakening.h)(0x6954E517)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\User\NovosnsFoc\inc\foc_config.h)(0x695A19B1)
+I (..\User\FaultDiagnosis\inc\fault_diagnose.h)(0x693D2C94)
+I (..\User\NovosnsMtrAdvance\inc\mtr_adv_init.h)(0x6954E7EB)
+I (..\User\NovosnsMtrAdvance\inc\stall_detection.h)(0x6954E8BE)
+I (..\User\NovosnsMtrAdvance\inc\deadtime_comp.h)(0x6954E624)
+I (..\User\NovosnsMtrAdvance\inc\smart_align.h)(0x6954E811)
+I (..\User\NovosnsMtrAdvance\inc\current_limit.h)(0x693D2C97)
+I (..\User\FaultDiagnosis\inc\fault_hw_config.h)(0x693D2C94)
+I (..\User\FOCLIB\inc\motor_data_calc.h)(0x693D2C92)
+I (..\..\common\Driver\inc\SysTick.h)(0x693D2C8C)
+I (..\User\FOCLIB\inc\transform.h)(0x693D2C93)
+I (..\User\FOCLIB\inc\svm_lib.h)(0x693D2C93)
+I (..\User\FOCLIB\inc\bus_comp.h)(0x693D2C91)
+I (..\User\FOCLIB\inc\curr_sample_1rps_aiwin.h)(0x693D2C91)
+I (..\User\NovosnsMtrAdvance\inc\curr_sample_1rps.h)(0x6954E562)
+I (..\User\FOCLIB\inc\hfi_lib.h)(0x693D2C91)
+I (..\User\FOCLIB\inc\pll_pi.h)(0x693D2C92)
+I (..\User\FOCLIB\inc\motor_param_id.h)(0x693D2C92)
+I (..\User\FOCLIB\inc\dq_dual_space_switch.h)(0x693D2C91)
+I (..\User\FOCLIB\inc\sensorlessObs.h)(0x693D2C93)
+I (..\User\FOCLIB\inc\amc_fluxweakening_aiwin.h)(0x693D2C91)
+I (..\User\FOCLIB\inc\iq_filter.h)(0x693D2C91)
+I (..\User\FOCLIB\inc\qpr_fixed.h)(0x6959D6C5)
+I (..\User\FOCLIB\inc\stallDetection.h)(0x693D2C93)
+I (..\User\FOCLIB\inc\variable_pi.h)(0x693D2C93)
+I (..\User\FOCLIB\inc\pi.h)(0x693D2C92)
+I (..\User\FOCLIB\inc\windmilling_pll.h)(0x693D2C93)
+F (..\User\NovosnsFoc\src\state_machine.c)(0x693D2C96)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\state_machine.o --omf_browse .\objects\state_machine.crf --depend .\objects\state_machine.d)
+I (..\User\NovosnsFoc\inc\state_machine.h)(0x6954EC50)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+F (..\User\DebugTools\src\freemaster_appcmd.c)(0x693D2C8F)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\freemaster_appcmd.o --omf_browse .\objects\freemaster_appcmd.crf --depend .\objects\freemaster_appcmd.d)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_private.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_Kxx.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_protocol.h)(0x693D2C8F)
+F (..\User\DebugTools\src\freemaster_bdm.c)(0x693D2C8F)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\freemaster_bdm.o --omf_browse .\objects\freemaster_bdm.crf --depend .\objects\freemaster_bdm.d)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_private.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_Kxx.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_protocol.h)(0x693D2C8F)
+F (..\User\DebugTools\src\freemaster_can.c)(0x693D2C8F)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\freemaster_can.o --omf_browse .\objects\freemaster_can.crf --depend .\objects\freemaster_can.d)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_private.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_Kxx.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_protocol.h)(0x693D2C8F)
+F (..\User\DebugTools\src\freemaster_Kxx.c)(0x693D2C8F)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\freemaster_kxx.o --omf_browse .\objects\freemaster_kxx.crf --depend .\objects\freemaster_kxx.d)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_private.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_Kxx.h)(0x693D2C8E)
+F (..\User\DebugTools\src\freemaster_lin.c)(0x693D2C90)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\freemaster_lin.o --omf_browse .\objects\freemaster_lin.crf --depend .\objects\freemaster_lin.d)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_private.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_Kxx.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_protocol.h)(0x693D2C8F)
+F (..\User\DebugTools\src\freemaster_pipes.c)(0x693D2C90)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\freemaster_pipes.o --omf_browse .\objects\freemaster_pipes.crf --depend .\objects\freemaster_pipes.d)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_private.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_Kxx.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_protocol.h)(0x693D2C8F)
+F (..\User\DebugTools\src\freemaster_protocol.c)(0x693D2C90)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\freemaster_protocol.o --omf_browse .\objects\freemaster_protocol.crf --depend .\objects\freemaster_protocol.d)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_private.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_Kxx.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_protocol.h)(0x693D2C8F)
+F (..\User\DebugTools\src\freemaster_rec.c)(0x693D2C90)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\freemaster_rec.o --omf_browse .\objects\freemaster_rec.crf --depend .\objects\freemaster_rec.d)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_private.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_Kxx.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_protocol.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_rec.h)(0x693D2C8F)
+F (..\User\DebugTools\src\freemaster_scope.c)(0x693D2C90)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\freemaster_scope.o --omf_browse .\objects\freemaster_scope.crf --depend .\objects\freemaster_scope.d)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_private.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_Kxx.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_protocol.h)(0x693D2C8F)
+F (..\User\DebugTools\src\freemaster_serial.c)(0x693D2C90)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\freemaster_serial.o --omf_browse .\objects\freemaster_serial.crf --depend .\objects\freemaster_serial.d)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_private.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_Kxx.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_protocol.h)(0x693D2C8F)
+F (..\User\DebugTools\src\freemaster_sfio.c)(0x693D2C90)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\freemaster_sfio.o --omf_browse .\objects\freemaster_sfio.crf --depend .\objects\freemaster_sfio.d)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_private.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_Kxx.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_protocol.h)(0x693D2C8F)
+F (..\User\DebugTools\src\freemaster_tsa.c)(0x693D2C91)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\freemaster_tsa.o --omf_browse .\objects\freemaster_tsa.crf --depend .\objects\freemaster_tsa.d)
+I (..\User\DebugTools\inc\freemaster.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_defcfg.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_cfg.h)(0x693D2C8E)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\User\DebugTools\inc\freemaster_tsa.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_private.h)(0x693D2C8F)
+I (..\User\DebugTools\inc\freemaster_Kxx.h)(0x693D2C8E)
+I (..\User\DebugTools\inc\freemaster_protocol.h)(0x693D2C8F)
+F (..\User\LIN\lin_api_appl.c)(0x693E9CBF)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\lin_api_appl.o --omf_browse .\objects\lin_api_appl.crf --depend .\objects\lin_api_appl.d)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\User\LIN\lin_define.h)(0x693D2C8B)
+I (..\User\LIN\lin_api.h)(0x693D2C8A)
+I (..\User\LIN\lin_api_appl.h)(0x693E9CC7)
+I (..\User\LIN\lin_config.h)(0x693D2C8B)
+I (..\User\Include\global.h)(0x693F733C)
+F (..\User\LIN\lin_config.c)(0x693D2C8B)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\lin_config.o --omf_browse .\objects\lin_config.crf --depend .\objects\lin_config.d)
+I (..\User\LIN\lin_define.h)(0x693D2C8B)
+I (..\User\LIN\lin_config.h)(0x693D2C8B)
+I (..\User\LIN\lin_api.h)(0x693D2C8A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+F (..\User\LIN\lin_identification_and_configuration.c)(0x693D2C8B)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\lin_identification_and_configuration.o --omf_browse .\objects\lin_identification_and_configuration.crf --depend .\objects\lin_identification_and_configuration.d)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\User\LIN\lin_define.h)(0x693D2C8B)
+I (..\User\LIN\lin_api.h)(0x693D2C8A)
+I (..\User\LIN\lin_api_appl.h)(0x693E9CC7)
+I (..\User\LIN\lin_config.h)(0x693D2C8B)
+I (..\User\LIN\lin_identification_and_configuration.h)(0x693D2C8B)
+I (..\User\LIN\lin_nvr.h)(0x693D2C8C)
+F (..\User\LIN\lin_nvr.c)(0x693D2C8C)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\lin_nvr.o --omf_browse .\objects\lin_nvr.crf --depend .\objects\lin_nvr.d)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\User\LIN\lin_define.h)(0x693D2C8B)
+I (..\User\LIN\lin_api.h)(0x693D2C8A)
+I (..\User\LIN\lin_api_appl.h)(0x693E9CC7)
+I (..\User\LIN\lin_config.h)(0x693D2C8B)
+I (..\User\LIN\lin_identification_and_configuration.h)(0x693D2C8B)
+I (..\User\LIN\lin_nvr.h)(0x693D2C8C)
+F (..\User\LIN\lin_api.lib)(0x693D2C8A)()
+F (..\User\LIN\lin_init.c)(0x693D2C8B)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\lin_init.o --omf_browse .\objects\lin_init.crf --depend .\objects\lin_init.d)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\User\LIN\lin_define.h)(0x693D2C8B)
+I (..\User\LIN\lin_api.h)(0x693D2C8A)
+I (..\User\LIN\lin_api_appl.h)(0x693E9CC7)
+I (..\User\LIN\lin_config.h)(0x693D2C8B)
+I (..\User\LIN\lin_identification_and_configuration.h)(0x693D2C8B)
+I (..\User\LIN\lin_nvr.h)(0x693D2C8C)
+I (..\User\LIN\lin_init.h)(0x693D2C8B)
+F (..\User\FaultDiagnosis\src\fault_diagnose.c)(0x6959DBA7)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\fault_diagnose.o --omf_browse .\objects\fault_diagnose.crf --depend .\objects\fault_diagnose.d)
+I (..\User\FaultDiagnosis\inc\fault_diagnose.h)(0x693D2C94)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\User\FaultDiagnosis\inc\fault_hw_config.h)(0x693D2C94)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\User\NovosnsFoc\inc\foc_config.h)(0x695A19B1)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+I (..\User\NovosnsFoc\inc\nvsns_foc.h)(0x695A095D)
+I (..\User\NovosnsMotorMath\inc\amc_lib.h)(0x6954E4CF)
+I (..\User\NovosnsMotorMath\inc\gcf_lib.h)(0x6954DF89)
+I (..\User\NovosnsMotorMath\inc\gmc_lib.h)(0x6954E365)
+I (..\User\NovosnsMotorMath\inc\nvsns_type_def.h)(0x6954DEE3)
+I (..\User\NovosnsFoc\inc\state_machine.h)(0x6954EC50)
+I (..\..\common\System\typedef.h)(0x693D2C6F)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599ECD2E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\User\NovosnsMtrAdvance\inc\windmilling.h)(0x6954E8EA)
+I (..\User\NovosnsMtrAdvance\inc\amc_fluxweakening.h)(0x6954E517)
+F (..\User\FaultDiagnosis\src\fault_handler.c)(0x693D2C94)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\fault_handler.o --omf_browse .\objects\fault_handler.crf --depend .\objects\fault_handler.d)
+I (..\User\FaultDiagnosis\inc\fault_handler.h)(0x693D2C94)
+I (..\User\FaultDiagnosis\inc\fault_diagnose.h)(0x693D2C94)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+F (..\User\FaultDiagnosis\src\fault_init.c)(0x693D2C95)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\fault_init.o --omf_browse .\objects\fault_init.crf --depend .\objects\fault_init.d)
+I (..\User\FaultDiagnosis\inc\fault_init.h)(0x693D2C94)
+I (..\..\common\System\include.h)(0x693D2C6E)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+I (..\..\common\Driver\inc\uart.h)(0x693D2C8D)
+I (..\User\FaultDiagnosis\inc\fault_diagnose.h)(0x693D2C94)
+I (..\User\FaultDiagnosis\inc\fault_hw_config.h)(0x693D2C94)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+F (..\User\FOCLIB\src\foclib_init.c)(0x693D2C94)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O1 --apcs=interwork --split_sections -I .\source -I ..\system -I ..\driver\inc -I ..\system\CMSIS -I ..\..\common\System\CMSIS -I ..\..\common\Driver\inc -I ..\..\common\System -I ..\User\NovosnsFoc\inc -I ..\User -I ..\User\NovosnsMotorMath\inc -I ..\User\DebugTools\inc -I ..\User\LIN -I ..\User\FaultDiagnosis\inc -I ..\User\NovosnsMtrAdvance\inc -I ..\..\common\Driver\inc -I ..\User\Include -I ..\User\FOCLIB\inc --diag_suppress=1-I.\RTE\_NSUC1602-IC:\Keil_v5\ARM\PACK\Novosns\NSUC1602\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DARM_MATH_CM3-o .\objects\foclib_init.o --omf_browse .\objects\foclib_init.crf --depend .\objects\foclib_init.d)
+I (..\User\FOCLIB\inc\foclib_init.h)(0x693D2C91)
+I (..\User\FOCLIB\inc\amc_fluxweakening_aiwin.h)(0x693D2C91)
+I (..\User\NovosnsMotorMath\inc\amc_lib.h)(0x6954E4CF)
+I (..\User\NovosnsMotorMath\inc\gcf_lib.h)(0x6954DF89)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\User\NovosnsMotorMath\inc\mm_lib.h)(0x693D2C97)
+I (..\User\NovosnsMotorMath\inc\gmc_lib.h)(0x6954E365)
+I (..\User\NovosnsMotorMath\inc\nvsns_type_def.h)(0x6954DEE3)
+I (..\User\NovosnsMtrAdvance\inc\amc_fluxweakening.h)(0x6954E517)
+I (..\User\FOCLIB\inc\bus_comp.h)(0x693D2C91)
+I (..\User\FOCLIB\inc\curr_sample_1rps_aiwin.h)(0x693D2C91)
+I (..\User\NovosnsMtrAdvance\inc\curr_sample_1rps.h)(0x6954E562)
+I (..\..\common\System\typedef.h)(0x693D2C6F)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599ECD2E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (..\User\FOCLIB\inc\dq_dual_space_switch.h)(0x693D2C91)
+I (..\User\NovosnsFoc\inc\nvsns_foc.h)(0x695A095D)
+I (..\User\NovosnsFoc\inc\state_machine.h)(0x6954EC50)
+I (..\User\NovosnsFoc\inc\foc_paras.h)(0x695B300E)
+I (..\User\NovosnsMtrAdvance\inc\windmilling.h)(0x6954E8EA)
+I (..\User\FOCLIB\inc\transform.h)(0x693D2C93)
+I (..\User\FOCLIB\inc\hfi_lib.h)(0x693D2C91)
+I (..\User\FOCLIB\inc\pll_pi.h)(0x693D2C92)
+I (..\User\FOCLIB\inc\motor_param_id.h)(0x693D2C92)
+I (..\User\FOCLIB\inc\sensorlessObs.h)(0x693D2C93)
+I (..\User\FOCLIB\inc\stallDetection.h)(0x693D2C93)
+I (..\User\FOCLIB\inc\windmilling_pll.h)(0x693D2C93)
+I (..\User\NovosnsFoc\inc\foc_config.h)(0x695A19B1)
+I (..\..\common\System\nsuc1602.h)(0x693D2C6E)
+I (..\..\common\System\CMSIS\core_cm3.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmInstr.h)(0x693D2C8D)
+I (..\..\common\System\CMSIS\core_cmFunc.h)(0x693D2C8D)
+F (..\User\FOCLIB\src\FOCLIB_VOLV_251209.lib)(0x693D2C94)()

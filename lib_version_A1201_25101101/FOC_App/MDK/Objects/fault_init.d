@@ -1,0 +1,15 @@
+.\objects\fault_init.o: ..\User\FaultDiagnosis\src\fault_init.c
+.\objects\fault_init.o: ..\User\FaultDiagnosis\inc\fault_init.h
+.\objects\fault_init.o: ..\..\common\System\include.h
+.\objects\fault_init.o: ..\..\common\System\nsuc1602.h
+.\objects\fault_init.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\fault_init.o: ..\..\common\System\CMSIS\core_cm3.h
+.\objects\fault_init.o: ..\..\common\System\CMSIS\core_cmInstr.h
+.\objects\fault_init.o: ..\..\common\System\CMSIS\core_cmFunc.h
+.\objects\fault_init.o: ..\..\common\System\CMSIS\core_cm3.h
+.\objects\fault_init.o: ..\..\common\Driver\inc\uart.h
+.\objects\fault_init.o: ..\..\common\System\include.h
+.\objects\fault_init.o: ..\User\FaultDiagnosis\inc\fault_diagnose.h
+.\objects\fault_init.o: ..\User\FaultDiagnosis\inc\fault_hw_config.h
+.\objects\fault_init.o: ..\User\NovosnsFoc\inc\foc_paras.h
+.\objects\fault_init.o: ..\User\NovosnsMotorMath\inc\mm_lib.h

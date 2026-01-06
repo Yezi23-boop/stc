@@ -1,0 +1,9 @@
+{
+    "axf_file_path": "//192.168.93.1/共享文件夹/44_RD/alg/02_branches/99_TEST_PRJ/03_VOLV/lib_version_A1201_25101101/FOC_App/MDK/Objects/NSUC1602_Eval.axf",
+    "debug_interface": "SWD",
+    "device_family": "Cortex-M3",
+    "device_speed": 12000,
+    "serial_number": 175070248,
+    "sampling_rate": 1.0,
+    "current_signature": "1764414069.3906033"
+}

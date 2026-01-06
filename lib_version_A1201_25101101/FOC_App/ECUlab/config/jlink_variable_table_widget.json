@@ -1,0 +1,21 @@
+{
+    "table_variables": [
+        {
+            "name": "f16CmdTagSpeed",
+            "address": 536871038,
+            "var_type": "INT16",
+            "byte_size": 2,
+            "post_process": "SCALE",
+            "scale_factor": 0.12207,
+            "offset_value": 0.0,
+            "enabled": true,
+            "display_name": "",
+            "description": "",
+            "writable": true,
+            "is_enum": false,
+            "enum_values": {},
+            "period": 1000,
+            "unit": ""
+        }
+    ]
+}

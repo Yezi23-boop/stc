@@ -1,0 +1,10 @@
+.\objects\sysport.o: ..\..\common\System\sysport.c
+.\objects\sysport.o: ..\..\common\System\include.h
+.\objects\sysport.o: ..\..\common\System\nsuc1602.h
+.\objects\sysport.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\sysport.o: ..\..\common\System\CMSIS\core_cm3.h
+.\objects\sysport.o: ..\..\common\System\CMSIS\core_cmInstr.h
+.\objects\sysport.o: ..\..\common\System\CMSIS\core_cmFunc.h
+.\objects\sysport.o: ..\..\common\System\CMSIS\core_cm3.h
+.\objects\sysport.o: ..\..\common\Driver\inc\uart.h
+.\objects\sysport.o: ..\..\common\System\include.h

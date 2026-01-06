@@ -312,7 +312,18 @@ static void scheduler_run(void)
     update_scheduler_stats();
 }
 
-TaskScheduler_t g_task_scheduler = {scheduler_init, scheduler_create_task, scheduler_add_task, NULL, NULL, NULL, scheduler_start, scheduler_stop, scheduler_run, scheduler_get_stats, scheduler_get_tick_count, scheduler_set_idle_callback};
+TaskScheduler_t g_task_scheduler = {
+    scheduler_init, 
+    scheduler_create_task, 
+    scheduler_add_task, 
+    NULL, NULL, NULL,
+    scheduler_start,
+    scheduler_stop,
+    scheduler_run,
+    scheduler_get_stats, 
+    scheduler_get_tick_count,
+    scheduler_set_idle_callback
+};
 void scheduler_on_tick(void)
 {
     scheduler_private.system_tick++;

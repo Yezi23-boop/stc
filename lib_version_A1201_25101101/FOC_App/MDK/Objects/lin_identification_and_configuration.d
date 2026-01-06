@@ -1,0 +1,17 @@
+.\objects\lin_identification_and_configuration.o: ..\User\LIN\lin_identification_and_configuration.c
+.\objects\lin_identification_and_configuration.o: ..\..\common\System\include.h
+.\objects\lin_identification_and_configuration.o: ..\..\common\System\nsuc1602.h
+.\objects\lin_identification_and_configuration.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\lin_identification_and_configuration.o: ..\..\common\System\CMSIS\core_cm3.h
+.\objects\lin_identification_and_configuration.o: ..\..\common\System\CMSIS\core_cmInstr.h
+.\objects\lin_identification_and_configuration.o: ..\..\common\System\CMSIS\core_cmFunc.h
+.\objects\lin_identification_and_configuration.o: ..\..\common\System\CMSIS\core_cm3.h
+.\objects\lin_identification_and_configuration.o: ..\..\common\Driver\inc\uart.h
+.\objects\lin_identification_and_configuration.o: ..\..\common\System\include.h
+.\objects\lin_identification_and_configuration.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\lin_identification_and_configuration.o: ..\User\LIN\lin_define.h
+.\objects\lin_identification_and_configuration.o: ..\User\LIN\lin_api.h
+.\objects\lin_identification_and_configuration.o: ..\User\LIN\lin_api_appl.h
+.\objects\lin_identification_and_configuration.o: ..\User\LIN\lin_config.h
+.\objects\lin_identification_and_configuration.o: ..\User\LIN\lin_identification_and_configuration.h
+.\objects\lin_identification_and_configuration.o: ..\User\LIN\lin_nvr.h

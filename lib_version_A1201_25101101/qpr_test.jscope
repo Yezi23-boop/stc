@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<JScopeProject>
+    <FileVersion major="1" minor="1" />
+    <Project>
+        <Configuration>
+            <JLink>
+                <Options Connection="1" IsRTTSession="0" IsRTTWithTimeStamp="0" SamplingPeriod="100" SerialNo="0" JTAG_IRPre="0" JTAG_DRPre="0" IP="" TargetDevice="Cortex-M3" TargetInterface="SWD" InterfaceSpeed="4000" />
+            </JLink>
+            <ElfFile Name="C:\Code\¹²ÏíÎÄ¼þ¼Ð\44_RD\alg\02_branches\99_TEST_PRJ\03_VOLV\lib_version_A1201_25101101\FOC_App\MDK\Objects\NSUC1602_Eval.axf" />
+            <Scope>
+                <Options TimeResolutionUs="1000000" />
+            </Scope>
+        </Configuration>
+        <Windows>
+            <Graph Show="1" />
+            <Watch Show="1" />
+        </Windows>
+        <SelectedSymbols>
+            <Symbol>
+                <Options Name="g_qpr_test_e_q15" Address="0x200001FA" Type="ushort" TypeID="7" Size="2" GraphColorRed="255" GraphColorGreen="0" GraphColorBlue="0" YMinSampled="1.79769e+308" YMaxSampled="-1.79769e+308" YAvgSampled="0" Offset="0" ShowInGraph="1" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="65535" File="..\User\FOCLIB\src\qpr_fixed.c" Scope="0" DrawStyle="0" NameWithParents="g_qpr_test_e_q15" />
+            </Symbol>
+            <Symbol>
+                <Options Name="g_qpr_test_y_q15" Address="0x200001FC" Type="ushort" TypeID="7" Size="2" GraphColorRed="0" GraphColorGreen="0" GraphColorBlue="255" YMinSampled="1.79769e+308" YMaxSampled="-1.79769e+308" YAvgSampled="0" Offset="0" ShowInGraph="1" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="65535" File="..\User\FOCLIB\src\qpr_fixed.c" Scope="0" DrawStyle="0" NameWithParents="g_qpr_test_y_q15" />
+            </Symbol>
+        </SelectedSymbols>
+    </Project>
+</JScopeProject>
